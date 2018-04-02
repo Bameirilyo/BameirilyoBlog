@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Bameirilyo&#39;s Blog</title>
   
-  
+  <subtitle>纵有疾风起，人生不言弃</subtitle>
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-01T15:50:22.104Z</updated>
+  <updated>2018-04-02T13:41:56.444Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello,My Blog</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/02/Hello-My-Blog/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/02/Hello-My-Blog/</id>
+    <published>2018-04-02T13:17:30.000Z</published>
+    <updated>2018-04-02T13:41:56.444Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><b>纵有疾风起，人生不言弃<b></b></b></p></blockquote><p>花了一天半的时间终于开通了自己的博客。参照网上教程从下载Node.js、Hexo到下载博客模板、调试、配置成自己想要的样子，以及学这个Markdown语法，中间也遇到了一些小小的Bug，有些百度出来了，有的自己解决了，有的还没解决就只能小小的掩盖一下，以后慢慢学习，不断进步，慢慢解决吧。</p><p>虽然是借用了Hexo的模板，并挂在Github上的免费博客，但还是希望自己以后能坚持写下去，能将学习过程中的点点滴滴都能记录下来！纵有疾风起，人生不言弃！</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;b&gt;纵有疾风起，人生不言弃&lt;b&gt;&lt;/b&gt;&lt;/b&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;花了一天半的时间终于开通了自己的博客。参照网上教程从下载Node.js、Hexo到下载博客模板、调试、配置成自己想要的样子，以及学这个Markdown语法
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
