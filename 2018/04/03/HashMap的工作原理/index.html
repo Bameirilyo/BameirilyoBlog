@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="“你用过HashMap吗？” “什么是HashMap？你为什么用到它？”几乎每个人都会回答“是的”，然后回答HashMap的一些特性，譬如HashMap可以接受null键值和值，而Hashtable则不能；HashMap是非synchronized;HashMap很快；以及HashMap储存的是键值对等等。这显示出你已经用过HashMap，而且对它相当的熟悉。但是面试官来个急转直下，从此刻开始问出">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-03T10:55:19.042Z">
+<meta property="og:updated_time" content="2018-04-03T10:58:40.324Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap的工作原理">
 <meta name="twitter:description" content="“你用过HashMap吗？” “什么是HashMap？你为什么用到它？”几乎每个人都会回答“是的”，然后回答HashMap的一些特性，譬如HashMap可以接受null键值和值，而Hashtable则不能；HashMap是非synchronized;HashMap很快；以及HashMap储存的是键值对等等。这显示出你已经用过HashMap，而且对它相当的熟悉。但是面试官来个急转直下，从此刻开始问出">
@@ -221,6 +221,7 @@
 <p><strong>HashMap的工作原理</strong></p>
 <p>HashMap基于hashing原理，我们通过put()和get()方法储存和获取对象。当我们将键值对传递给put()方法时，它调用键对象的hashCode()方法来计算hashcode，让后找到bucket位置来储存值对象。当获取对象时，通过键对象的equals()方法找到正确的键值对，然后返回值对象。HashMap使用链表来解决碰撞问题，当发生碰撞了，对象将会储存在链表的下一个节点中。 HashMap在每个链表节点中储存键值对对象。</p>
 <p>当两个不同的键对象的hashcode相同时会发生什么？ 它们会储存在同一个bucket位置的链表中。键对象的equals()方法用来找到键值对。</p>
+<p>转载自：<a href="http://www.importnew.com/7010.html" target="_blank" rel="noopener">http://www.importnew.com/7010.html</a></p>
 
         </div>
 
