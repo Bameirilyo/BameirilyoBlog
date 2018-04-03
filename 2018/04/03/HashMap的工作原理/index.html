@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="“你用过HashMap吗？” “什么是HashMap？你为什么用到它？”几乎每个人都会回答“是的”，然后回答HashMap的一些特性，譬如HashMap可以接受null键值和值，而Hashtable则不能；HashMap是非synchronized;HashMap很快；以及HashMap储存的是键值对等等。这显示出你已经用过HashMap，而且对它相当的熟悉。但是面试官来个急转直下，从此刻开始问出">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-03T10:58:40.324Z">
+<meta property="og:updated_time" content="2018-04-03T13:03:58.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap的工作原理">
 <meta name="twitter:description" content="“你用过HashMap吗？” “什么是HashMap？你为什么用到它？”几乎每个人都会回答“是的”，然后回答HashMap的一些特性，譬如HashMap可以接受null键值和值，而Hashtable则不能；HashMap是非synchronized;HashMap很快；以及HashMap储存的是键值对等等。这显示出你已经用过HashMap，而且对它相当的熟悉。但是面试官来个急转直下，从此刻开始问出">
@@ -166,7 +166,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#“你用过HashMap吗？”-“什么是HashMap？你为什么用到它？”"><span class="post-toc-number">1.</span> <span class="post-toc-text">“你用过HashMap吗？” “什么是HashMap？你为什么用到它？”</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#“你知道HashMap的工作原理吗？”-“你知道HashMap的get-方法的工作原理吗？”"><span class="post-toc-number">2.</span> <span class="post-toc-text">“你知道HashMap的工作原理吗？” “你知道HashMap的get()方法的工作原理吗？”</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#“当两个对象的hashcode相同会发生什么？”"><span class="post-toc-number">3.</span> <span class="post-toc-text">“当两个对象的hashcode相同会发生什么？”</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#“如果两个键的hashcode相同，你如何获取值对象？”"><span class="post-toc-number">4.</span> <span class="post-toc-text">“如果两个键的hashcode相同，你如何获取值对象？”</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#“如果HashMap的大小超过了负载因子-loadfactor-定义的容量，怎么办？”"><span class="post-toc-number">5.</span> <span class="post-toc-text">“如果HashMap的大小超过了负载因子(loadfactor)定义的容量，怎么办？”</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#“你了解重新调整HashMap大小存在什么问题吗？”"><span class="post-toc-number">6.</span> <span class="post-toc-text">“你了解重新调整HashMap大小存在什么问题吗？”</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#“你用过HashMap吗？”-“什么是HashMap？你为什么用到它？”"><span class="post-toc-number">1.</span> <span class="post-toc-text">“你用过HashMap吗？” “什么是HashMap？你为什么用到它？”</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#“你知道HashMap的工作原理吗？”-“你知道HashMap的get-方法的工作原理吗？”"><span class="post-toc-number">2.</span> <span class="post-toc-text">“你知道HashMap的工作原理吗？” “你知道HashMap的get()方法的工作原理吗？”</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#“当两个对象的hashcode相同会发生什么？”"><span class="post-toc-number">3.</span> <span class="post-toc-text">“当两个对象的hashcode相同会发生什么？”</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#“如果两个键的hashcode相同，你如何获取值对象？”"><span class="post-toc-number">4.</span> <span class="post-toc-text">“如果两个键的hashcode相同，你如何获取值对象？”</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#“如果HashMap的大小超过了负载因子-loadfactor-定义的容量，怎么办？”"><span class="post-toc-number">5.</span> <span class="post-toc-text">“如果HashMap的大小超过了负载因子(loadfactor)定义的容量，怎么办？”</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#“你了解重新调整HashMap大小存在什么问题吗？”"><span class="post-toc-number">6.</span> <span class="post-toc-text">“你了解重新调整HashMap大小存在什么问题吗？”</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">7.</span> <span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
 
@@ -217,11 +217,18 @@
 <li><strong>HashMap多线程的条件竞争</strong></li>
 <li><strong>重新调整HashMap的大小</strong></li>
 </ul>
-<p><strong>总结</strong></p>
-<p><strong>HashMap的工作原理</strong></p>
-<p>HashMap基于hashing原理，我们通过put()和get()方法储存和获取对象。当我们将键值对传递给put()方法时，它调用键对象的hashCode()方法来计算hashcode，让后找到bucket位置来储存值对象。当获取对象时，通过键对象的equals()方法找到正确的键值对，然后返回值对象。HashMap使用链表来解决碰撞问题，当发生碰撞了，对象将会储存在链表的下一个节点中。 HashMap在每个链表节点中储存键值对对象。</p>
-<p>当两个不同的键对象的hashcode相同时会发生什么？ 它们会储存在同一个bucket位置的链表中。键对象的equals()方法用来找到键值对。</p>
-<p>转载自：<a href="http://www.importnew.com/7010.html" target="_blank" rel="noopener">http://www.importnew.com/7010.html</a></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h1><p><strong>1. 什么时候会使用HashMap？它有什么特点？</strong></p>
+<p>是基于Map接口的实现，存储键值对时，它可以接收null的键值，是非同步的，HashMap存储着Entry(hash, key, value, next)对象。</p>
+<p><strong>2.HashMap的工作原理 </strong> </p>
+<p>HashMap基于hashing原理，我们通过put()和get()方法储存和获取对象。当我们将键值对传递给put()方法时，它调用键对象的hashCode()方法来计算hashcode，然后找到bucket位置来储存值对象，HashMap会根据当前bucket的占用情况自动调整容量(超过Load Facotr则resize为原来的2倍)。获取对象时，我们将Key传给get()方法，它调用hashCode计算hash从而得到bucket位置，并进一步调用equals()方法确定键值对，然后返回值对象。HashMap使用链表来解决碰撞问题，当发生碰撞了，对象将会储存在链表的下一个节点中，在Java 8中，如果一个bucket中碰撞冲突的元素超过某个限制(默认是8)，则使用红黑树来替换链表，从而提高速度。HashMap在每个链表节点中储存键值对对象。</p>
+<p><strong>3. 你知道get和put的原理吗？equals()和hashCode()的都有什么作用？HashMap中解决碰撞的方法</strong></p>
+<p>通过对key的hashCode()进行hashing，并计算下标( n-1 &amp; hash)，从而获得buckets的位置。如果产生碰撞，则利用key.equals()方法去链表或树中去查找对应的节点。</p>
+<p>在Java 8之前的实现中是用链表解决冲突的，在产生碰撞的情况下，进行get时，两步的时间复杂度是O(1)+O(n)。因此，当碰撞很厉害的时候n很大，O(n)的速度显然是影响速度的。因此在Java 8中，利用红黑树替换链表，这样复杂度就变成了O(1)+O(logn)了，这样在n很大的时候，能够比较理想的解决这个问题。</p>
+<p><strong>4. 你知道hash的实现吗？为什么要这样实现？</strong><br>在Java 1.8的实现中，是通过hashCode()的高16位异或低16位实现的：<code>(h = k.hashCode()) ^ (h &gt;&gt;&gt; 16)</code>，主要是从速度、功效、质量来考虑的，这么做可以在bucket的n比较小的时候，也能保证考虑到高低bit都参与到hash的计算中，同时不会有太大的开销。</p>
+<p><strong>5. 如果HashMap的大小超过了负载因子(load factor)定义的容量，怎么办？</strong><br>如果超过了负载因子(默认0.75)，则会重新resize一个原来长度两倍的HashMap，并且重新调用hash方法计算index，把节点再放到新的bucket中。</p>
+<p><strong>6.当两个不同的键对象的hashcode相同时会发生什么？</strong> </p>
+<p>它们会储存在同一个bucket位置的链表中。键对象的equals()方法用来找到键值对。</p>
+<p>转载自：<a href="http://www.importnew.com/10620.html" target="_blank" rel="noopener">http://www.importnew.com/10620.html</a></p>
 
         </div>
 
