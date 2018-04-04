@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-04T13:23:03.108Z</updated>
+  <updated>2018-04-04T13:42:58.722Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>悲观锁与乐观锁</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/%E6%82%B2%E8%A7%82%E9%94%81%E4%B8%8E%E4%B9%90%E8%A7%82%E9%94%81/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/悲观锁与乐观锁/</id>
+    <published>2018-04-04T13:34:13.000Z</published>
+    <updated>2018-04-04T13:42:58.722Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>1.悲观锁：即很悲观，每次拿数据的时候都觉得数据会被人更改，所以拿数据的时候就把这条记录锁掉，这样别人就没法改这条数据了，一直到你的锁释放。</p><p>2.乐观锁：即很乐观，查询数据的时候总觉得不会有人更改数据，等到更新的时候再判断这个数据有没有被人更改，有人更改了则本次更新失败。</p><h1 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h1><h2 id="悲观锁："><a href="#悲观锁：" class="headerlink" title="悲观锁："></a>悲观锁：</h2><p>悲观锁的实现采用的数据库内部的锁机制，一个典型的倚赖数据库的悲观锁调用：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">account</span> <span class="keyword">where</span> <span class="keyword">name</span>=<span class="string">"张三"</span> <span class="keyword">for</span> <span class="keyword">update</span>;</span><br></pre></td></tr></table></figure><p>  这条sql 语句锁定了account 表中所有符合检索条件（name=”张三”）的记录。本次事务提交之前（事务提交时会释放事务过程中的锁），外界无法修改这些记录。也就是我们可以在查询数据的时候先用for update把这条数据锁住，然后更改完这条数据再提交。这样别的线程没法更新这条数据，也就保证了不会丢失更新。</p><p>悲观锁带来的性能问题。我们试想一个场景：如一个金融系统，当某个操作员读取用户的数据，并在读出的用户数据的基础上进行修改时（如更改用户帐户余额），如果采用悲观锁机制，也就意味着整个操作过程中（从操作员读出数据、开始修改直至提交修改结果的全过程），数据库记录始终处于加锁状态，可以想见，如果面对几百上千个并发，这样的情况将导致怎样的后果？所以我们这个时候可以使用乐观锁。</p><p><strong>优点与不足</strong></p><p>悲观并发控制实际上是“先取锁再访问”的保守策略，为数据处理的安全提供了保证。但是在效率方面，处理加锁的机制会让数据库产生额外的开销，还有增加产生死锁的机会；另外，在只读型事务处理中由于不会产生冲突，也没必要使用锁，这样做只能增加系统负载；还有会降低了并行性，一个事务如果锁定了某行数据，其他事务就必须等待该事务处理完才可以处理那行数</p><h2 id="乐观锁："><a href="#乐观锁：" class="headerlink" title="乐观锁："></a>乐观锁：</h2><p>乐观锁的实现可以通过在表里面加一个版本号的形式，每个人更新的时候都会判断当前的版本号是否跟我查询出来得到的版本号是否一致，不一致就更新失败，一致就更新这条记录并更改版本号。</p><p><strong>优点与不足</strong></p><p>乐观并发控制相信事务之间的数据竞争(data race)的概率是比较小的，因此尽可能直接做下去，直到提交的时候才去锁定，所以不会产生任何锁和死锁。但如果直接简单这么做，还是有可能会遇到不可预期的结果，例如两个事务都读取了数据库的某一行，经过修改以后写回数据库，这时就遇到了问题。</p><h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><p>像乐观锁适用于写比较少的情况下，即冲突真的很少发生的时候，这样可以省去了锁的开销，加大了系统的整个吞吐量。但如果经常产生冲突，上层应用会不断的进行retry，这样反倒是降低了性能，所以这种情况下用悲观锁就比较合适。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h1&gt;&lt;p&gt;1.悲观锁：即很悲观，每次拿数据的时候都觉得数据会被人更改，所以拿数据的时候就把这条记录锁掉，这样别人就没法改这条数据了，一直到你的锁释放。
+      
+    
+    </summary>
+    
+      <category term="数据库" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="数据库" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title>synchronized与Lock的区别</title>
