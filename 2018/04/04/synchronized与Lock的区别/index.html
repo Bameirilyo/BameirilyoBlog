@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>synchronized与Lock的区别 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java基础">
+    <meta name="description" content="类别 synchronized Lock     存在层次 Java的关键字，在jvm层面上 是一个类   锁的释放 1、已获取锁的线程执行完同步代码会释放锁  2、线程执行发生异常，jvm会让线程释放锁 需在finally中手工释放锁（unlock()方法释放锁），不然容易造成线程死锁   锁的获取 假设A线程获得锁，B线程等待。如果A线程阻塞，B线程会一直等待 分情况而定，如果尝试获取不">
+<meta name="keywords" content="Java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="synchronized与Lock的区别">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/synchronized与Lock的区别/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="类别 synchronized Lock     存在层次 Java的关键字，在jvm层面上 是一个类   锁的释放 1、已获取锁的线程执行完同步代码会释放锁  2、线程执行发生异常，jvm会让线程释放锁 需在finally中手工释放锁（unlock()方法释放锁），不然容易造成线程死锁   锁的获取 假设A线程获得锁，B线程等待。如果A线程阻塞，B线程会一直等待 分情况而定，如果尝试获取不">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-04T13:23:03.108Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="synchronized与Lock的区别">
+<meta name="twitter:description" content="类别 synchronized Lock     存在层次 Java的关键字，在jvm层面上 是一个类   锁的释放 1、已获取锁的线程执行完同步代码会释放锁  2、线程执行发生异常，jvm会让线程释放锁 需在finally中手工释放锁（unlock()方法释放锁），不然容易造成线程死锁   锁的获取 假设A线程获得锁，B线程等待。如果A线程阻塞，B线程会一直等待 分情况而定，如果尝试获取不">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">synchronized与Lock的区别</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">synchronized与Lock的区别</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-04T13:07:54.000Z" itemprop="datePublished" class="page-time">
+  2018年04月04日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java/">Java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-synchronized与Lock的区别"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">synchronized与Lock的区别</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年04月04日 21:07:54" datetime="2018-04-04T13:07:54.000Z"  itemprop="datePublished">2018年04月04日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java/">Java</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <table>
+<thead>
+<tr>
+<th style="text-align:center">类别</th>
+<th style="text-align:center">synchronized</th>
+<th style="text-align:center">Lock</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">存在层次</td>
+<td style="text-align:center">Java的关键字，在jvm层面上</td>
+<td style="text-align:center">是一个类</td>
+</tr>
+<tr>
+<td style="text-align:center">锁的释放</td>
+<td style="text-align:center">1、已获取锁的线程执行完同步代码会释放锁  2、线程执行发生异常，jvm会让线程释放锁</td>
+<td style="text-align:center">需在finally中手工释放锁（unlock()方法释放锁），不然容易造成线程死锁</td>
+</tr>
+<tr>
+<td style="text-align:center">锁的获取</td>
+<td style="text-align:center">假设A线程获得锁，B线程等待。如果A线程阻塞，B线程会一直等待</td>
+<td style="text-align:center">分情况而定，如果尝试获取不到锁，线程可以不用一直等待</td>
+</tr>
+<tr>
+<td style="text-align:center">锁状态</td>
+<td style="text-align:center">无法判断是否获取到锁</td>
+<td style="text-align:center">可以判断是否获取到锁</td>
+</tr>
+<tr>
+<td style="text-align:center">锁类型</td>
+<td style="text-align:center">可重入 不可中断  非公平</td>
+<td style="text-align:center">可重入 可判断 可公平（两者皆可）</td>
+</tr>
+<tr>
+<td style="text-align:center">性能</td>
+<td style="text-align:center">适合代码少量的同步问题</td>
+<td style="text-align:center">适合代码大量的同步问题</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两种锁的底层实现方式： </strong></p>
+<p> <strong>synchronized：</strong></p>
+<p>我们知道java是用字节码指令来控制程序（这里不包括热点代码编译成机器码）。在字节指令中，存在有synchronized所包含的代码块，那么会形成2段流程的执行。 </p>
+<p>其实synchronized映射成字节码指令就是增加来两个指令：monitorenter和monitorexit。当一条线程进行执行的遇到monitorenter指令的时候，它会去尝试获得锁，如果获得锁那么锁计数+1（为什么会加一呢，因为它是一个可重入锁，所以需要用这个锁计数判断锁的情况），如果没有获得锁，那么阻塞。当它遇到monitorexit的时候，锁计数器-1，当计数器为0，那么就释放锁。</p>
+<p><strong>那有两个monitorexit呀？</strong>synchronized锁释放有两种机制，一种就是执行完释放；另外一种就是发送异常，虚拟机释放。第二个monitorexit就是发生异常时执行的流程，这就是我开头说的“会有2个流程存在“。</p>
+<p><strong>Lock：</strong></p>
+<p>Lock实现和synchronized不一样，后者是一种悲观锁，它胆子很小，它很怕有人和它抢吃的，所以它每次吃东西前都把自己关起来。而Lock底层其实是CAS乐观锁的体现，它无所谓，别人抢了它吃的，它重新去拿吃的就好啦，所以它很乐观。底层主要靠volatile和CAS操作实现的。</p>
+<p><strong>尽可能去使用synchronized而不要去使用LOCK</strong></p>
+<p>转载自：<a href="https://blog.csdn.net/u012403290/article/details/64910926?locationNum=11&amp;fps=1" target="_blank" rel="noopener">https://blog.csdn.net/u012403290/article/details/64910926?locationNum=11&amp;fps=1</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/Java基础/">Java基础</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/synchronized与Lock的区别/&title=《synchronized与Lock的区别》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/synchronized与Lock的区别/&title=《synchronized与Lock的区别》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/synchronized与Lock的区别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《synchronized与Lock的区别》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/synchronized与Lock的区别/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/synchronized与Lock的区别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/04/04/List接口的实现类-ArrayList、LinkedList、Vector之间的区别/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">List接口的实现类--ArrayList、LinkedList、Vector之间的区别</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/synchronized与Lock的区别/&title=《synchronized与Lock的区别》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/synchronized与Lock的区别/&title=《synchronized与Lock的区别》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/synchronized与Lock的区别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《synchronized与Lock的区别》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/synchronized与Lock的区别/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/synchronized与Lock的区别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsklEQVR42u3aQW7jMBAEQP//08l1gUTabo4mcYDSKZAcmcUDOe7h6xVfH1+u+/v/Pr16z9fPXL356m2PXXh4eHjjod8zkqHk9yeTcj9mPDw8vG3e1YqaL8r370mmJpnifMx4eHh4f5eXk9pSHg8PD++v8/KCOGEnUQUeHh7e7/LycjZfss82gPtvXMxa8PDw8GJeu9y/w98r/T08PDy8cVc9b4bNC+ikJVaPFg8PD2+B10a0bZs/CRrOYtxinHh4eHiP8ibDnRwaSCYrP2h1WXzj4eHhrfHaYwH5EYH2nRN8sZvh4eHhjXltFpqA2+low4gIjIeHh7fGmzT4k/I3L4jzA1vR9OHh4eGt8SaF72RjaBf6PNq4zFrw8PDwxrwkwM0H3W4GLaOdLDw8PLw9XrI0ty38STMsb3Ql04GHh4f3LK8d7lmIMAl58wMK39zBw8PDW+PlC24+9GTi2lCjbsjh4eHh/TivLZcnTyeBchTd4uHh4T3KS642qG0DhZxRFPd4eHh4C7ynCuWWlBfc+RREbTA8PDy8Ma9d0PMINS+R29ZX/hQPDw9vj5f/1C9eXR4CyAPcItTAw8PDW+Yl/9YOrg0R8hCkOHSFh4eHt8abN6Laxn9+vz10VeTBeHh4eCUvP9h0FhO0m0fb+oomGg8PD2+Nl5etyYA2WmKHwTEeHh7eGm9+iOqsUG7L9PrYKx4eHt4aL/nZPymIJ2V3u1Xg4eHh7fEm20C7iJ+FEXnp/81TPDw8vAVefj310qcaYO02hoeHh/cs76zYzePd9sjC2SZ0+e14eHh4a7xkEPmSnYcRr/H1nwgDDw8P72147RKfB8HJRBRTg4eHh/cGvLZxNQkUzsJlPDw8vJ/hnR2rahtXZyHvWTsNDw8Pb483/8GfHzI468idHQvDw8PDW+B9AviWK/A0ipzSAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

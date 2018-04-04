@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-04T12:27:02.009Z</updated>
+  <updated>2018-04-04T13:23:03.108Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>synchronized与Lock的区别</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/synchronized%E4%B8%8ELock%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/synchronized与Lock的区别/</id>
+    <published>2018-04-04T13:07:54.000Z</published>
+    <updated>2018-04-04T13:23:03.108Z</updated>
+    
+    <content type="html"><![CDATA[<table><thead><tr><th style="text-align:center">类别</th><th style="text-align:center">synchronized</th><th style="text-align:center">Lock</th></tr></thead><tbody><tr><td style="text-align:center">存在层次</td><td style="text-align:center">Java的关键字，在jvm层面上</td><td style="text-align:center">是一个类</td></tr><tr><td style="text-align:center">锁的释放</td><td style="text-align:center">1、已获取锁的线程执行完同步代码会释放锁  2、线程执行发生异常，jvm会让线程释放锁</td><td style="text-align:center">需在finally中手工释放锁（unlock()方法释放锁），不然容易造成线程死锁</td></tr><tr><td style="text-align:center">锁的获取</td><td style="text-align:center">假设A线程获得锁，B线程等待。如果A线程阻塞，B线程会一直等待</td><td style="text-align:center">分情况而定，如果尝试获取不到锁，线程可以不用一直等待</td></tr><tr><td style="text-align:center">锁状态</td><td style="text-align:center">无法判断是否获取到锁</td><td style="text-align:center">可以判断是否获取到锁</td></tr><tr><td style="text-align:center">锁类型</td><td style="text-align:center">可重入 不可中断  非公平</td><td style="text-align:center">可重入 可判断 可公平（两者皆可）</td></tr><tr><td style="text-align:center">性能</td><td style="text-align:center">适合代码少量的同步问题</td><td style="text-align:center">适合代码大量的同步问题</td></tr></tbody></table><p><strong>两种锁的底层实现方式： </strong></p><p> <strong>synchronized：</strong></p><p>我们知道java是用字节码指令来控制程序（这里不包括热点代码编译成机器码）。在字节指令中，存在有synchronized所包含的代码块，那么会形成2段流程的执行。 </p><p>其实synchronized映射成字节码指令就是增加来两个指令：monitorenter和monitorexit。当一条线程进行执行的遇到monitorenter指令的时候，它会去尝试获得锁，如果获得锁那么锁计数+1（为什么会加一呢，因为它是一个可重入锁，所以需要用这个锁计数判断锁的情况），如果没有获得锁，那么阻塞。当它遇到monitorexit的时候，锁计数器-1，当计数器为0，那么就释放锁。</p><p><strong>那有两个monitorexit呀？</strong>synchronized锁释放有两种机制，一种就是执行完释放；另外一种就是发送异常，虚拟机释放。第二个monitorexit就是发生异常时执行的流程，这就是我开头说的“会有2个流程存在“。</p><p><strong>Lock：</strong></p><p>Lock实现和synchronized不一样，后者是一种悲观锁，它胆子很小，它很怕有人和它抢吃的，所以它每次吃东西前都把自己关起来。而Lock底层其实是CAS乐观锁的体现，它无所谓，别人抢了它吃的，它重新去拿吃的就好啦，所以它很乐观。底层主要靠volatile和CAS操作实现的。</p><p><strong>尽可能去使用synchronized而不要去使用LOCK</strong></p><p>转载自：<a href="https://blog.csdn.net/u012403290/article/details/64910926?locationNum=11&amp;fps=1" target="_blank" rel="noopener">https://blog.csdn.net/u012403290/article/details/64910926?locationNum=11&amp;fps=1</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;类别&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;synchronized&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;Loc
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/Java/"/>
+    
+    
+      <category term="Java基础" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/Java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>List接口的实现类--ArrayList、LinkedList、Vector之间的区别</title>
