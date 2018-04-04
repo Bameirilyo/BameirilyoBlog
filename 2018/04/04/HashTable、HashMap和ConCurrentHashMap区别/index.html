@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="HashMap和HashTable的对比 1.HashMap是非线程安全的，HashTable是线程安全的。 Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放之后才能再次获得同步锁更新Hashtable）；而HashMap中的方法在">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-04T08:24:13.149Z">
+<meta property="og:updated_time" content="2018-04-04T10:57:35.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashTable、HashMap和ConCurrentHashMap区别">
 <meta name="twitter:description" content="HashMap和HashTable的对比 1.HashMap是非线程安全的，HashTable是线程安全的。 Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放之后才能再次获得同步锁更新Hashtable）；而HashMap中的方法在">
@@ -209,7 +209,7 @@
 <p>8.是否提供contains方法</p>
 <p>HashMap把Hashtable的contains方法去掉了，改成containsValue和containsKey，因为contains方法容易让人引起误解。</p>
 <p>Hashtable则保留了contains，containsValue和containsKey三个方法，其中contains和containsValue功能相同。</p>
-<h1 id="HashTable和ConCurrentHashMap的对比"><a href="#HashTable和ConCurrentHashMap的对比" class="headerlink" title="HashTable和ConCurrentHashMap的对比"></a>HashTable和ConCurrentHashMap的对比</h1><p>ConcurrentHashMap引入了分割(Segment)，上面代码中的最后一行其实就可以理解为把一个大的Map拆分成N个小的HashTable，在put方法中，会根据hash(paramK.hashCode())来决定具体存放进哪个Segment，如果查看Segment的put操作，我们会发现内部使用的同步机制是基于lock操作的，这样就可以对Map的一部分（Segment）进行上锁，这样影响的只是将要放入同一个Segment的元素的put操作，保证同步的时候，锁住的不是整个Map（HashTable就是这么做的），相对于HashTable提高了多线程环境下的性能，因此HashTable已经被淘汰了。</p>
+<h1 id="HashTable和ConCurrentHashMap的对比"><a href="#HashTable和ConCurrentHashMap的对比" class="headerlink" title="HashTable和ConCurrentHashMap的对比"></a>HashTable和ConCurrentHashMap的对比</h1><p>ConcurrentHashMap引入了分割(Segment)，把一个大的Map拆分成N个小的HashTable，在put方法中，会根据hash(paramK.hashCode())来决定具体存放进哪个Segment，如果查看Segment的put操作，我们会发现内部使用的同步机制是基于lock操作的，这样就可以对Map的一部分（Segment）进行上锁，这样影响的只是将要放入同一个Segment的元素的put操作，保证同步的时候，锁住的不是整个Map（HashTable就是这么做的），相对于HashTable提高了多线程环境下的性能，因此HashTable已经被淘汰了。</p>
 <h1 id="HashMap和ConCurrentHashMap的对比"><a href="#HashMap和ConCurrentHashMap的对比" class="headerlink" title="HashMap和ConCurrentHashMap的对比"></a>HashMap和ConCurrentHashMap的对比</h1><p>（1）ConcurrentHashMap对整个桶数组进行了分割分段(Segment)，然后在每一个分段上都用lock锁进行保护，相对于HashTable的syn关键字锁的粒度更精细了一些，并发性能更好，而HashMap没有锁机制，不是线程安全的。</p>
 <p>（2）HashMap的键值对允许有null，但是ConCurrentHashMap都不允许。</p>
 

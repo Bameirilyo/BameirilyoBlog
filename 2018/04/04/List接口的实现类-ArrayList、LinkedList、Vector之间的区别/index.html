@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>List接口的实现类--ArrayList、LinkedList、Vector之间的区别 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java基础">
+    <meta name="description" content="概述Collection├List│├LinkedList│├ArrayList│└Vector│　└Stack└Set ArrayList是基于数组实现的，是一个动态数组，其容量能自动增长。 ArrayList不是线程安全的，只能用在单线程环境下。 允许元素为null 实现了Serializable接口，因此它支持序列化，能够通过序列化传输； 实现了RandomAccess接口，支持快速随机访问">
+<meta name="keywords" content="Java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="List接口的实现类--ArrayList、LinkedList、Vector之间的区别">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/List接口的实现类-ArrayList、LinkedList、Vector之间的区别/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="概述Collection├List│├LinkedList│├ArrayList│└Vector│　└Stack└Set ArrayList是基于数组实现的，是一个动态数组，其容量能自动增长。 ArrayList不是线程安全的，只能用在单线程环境下。 允许元素为null 实现了Serializable接口，因此它支持序列化，能够通过序列化传输； 实现了RandomAccess接口，支持快速随机访问">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-04T12:18:16.421Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="List接口的实现类--ArrayList、LinkedList、Vector之间的区别">
+<meta name="twitter:description" content="概述Collection├List│├LinkedList│├ArrayList│└Vector│　└Stack└Set ArrayList是基于数组实现的，是一个动态数组，其容量能自动增长。 ArrayList不是线程安全的，只能用在单线程环境下。 允许元素为null 实现了Serializable接口，因此它支持序列化，能够通过序列化传输； 实现了RandomAccess接口，支持快速随机访问">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">List接口的实现类--ArrayList、LinkedList、Vector之间的区别</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">List接口的实现类--ArrayList、LinkedList、Vector之间的区别</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-04T11:54:20.000Z" itemprop="datePublished" class="page-time">
+  2018年04月04日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java/">Java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#概述"><span class="post-toc-number">1.</span> <span class="post-toc-text">概述</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ArrayList的扩容机制"><span class="post-toc-number">2.</span> <span class="post-toc-text">ArrayList的扩容机制</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ArrayList、LinkedList与List的不同（什么情况下你会使用ArrayList？什么时候你会选择LinkedList？）"><span class="post-toc-number">3.</span> <span class="post-toc-text">ArrayList、LinkedList与List的不同（什么情况下你会使用ArrayList？什么时候你会选择LinkedList？）</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ArrayList和LinkedList的时间复杂度"><span class="post-toc-number">4.</span> <span class="post-toc-text">ArrayList和LinkedList的时间复杂度</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#如何复制某个ArrayList到另一个ArrayList中去？"><span class="post-toc-number">5.</span> <span class="post-toc-text">如何复制某个ArrayList到另一个ArrayList中去？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ArrayList为什么是线程不安全的？"><span class="post-toc-number">6.</span> <span class="post-toc-text">ArrayList为什么是线程不安全的？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ArrayList和Vector的区别？"><span class="post-toc-number">7.</span> <span class="post-toc-text">ArrayList和Vector的区别？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#stack"><span class="post-toc-number">8.</span> <span class="post-toc-text">stack</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-List接口的实现类-ArrayList、LinkedList、Vector之间的区别"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">List接口的实现类--ArrayList、LinkedList、Vector之间的区别</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年04月04日 19:54:20" datetime="2018-04-04T11:54:20.000Z"  itemprop="datePublished">2018年04月04日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java/">Java</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Collection<br>├List<br>│├LinkedList<br>│├ArrayList<br>│└Vector<br>│　└Stack<br>└Set</p>
+<p>ArrayList是基于数组实现的，是一个动态数组，其容量能自动增长。</p>
+<p>ArrayList不是线程安全的，只能用在单线程环境下。</p>
+<p>允许元素为null</p>
+<p>实现了Serializable接口，因此它支持序列化，能够通过序列化传输；</p>
+<p>实现了RandomAccess接口，支持快速随机访问，可以以O(1)的时间复杂度去根据下标访问元素，实际上就是通过下标序号进行快速访问；</p>
+<p>实现了Cloneable接口，能被克隆。</p>
+<p>因其底层数据结构是数组，它<strong>占据了一块连续的内存空间</strong>（容量就是数组的length），所以它也有数组的缺点，<strong>空间效率不高</strong>。</p>
+<p>由于数组的内存连续，可以根据下标以O(1)的时间<strong>读写(改查)</strong>元素，因此<strong>时间效率很高</strong>。</p>
+<h1 id="ArrayList的扩容机制"><a href="#ArrayList的扩容机制" class="headerlink" title="ArrayList的扩容机制"></a>ArrayList的扩容机制</h1><p>使用无参构造方法时系统会默认提供默认参数10，而使用有参构造函数时我们会指定大小。在arraylist中增加一个对象的时候，Java会去检查arraylist，以确保已存在的数组中有足够的容量来存储这个新的对象。如果没有足够容量的话，那么就会新建一个长度更长的数组（通常为原数组的1.5倍），旧的数组就会使用Arrays.copyOf方法被复制到新的数组中去，现有的数组指向了新的数组。</p>
+<p>扩容操作也是ArrayList 的一个性能消耗比较大的地方，所以若<strong>我们可以提前预知数据的规模</strong>，应该通过public ArrayList(int initialCapacity) {}构造方法，指定集合的大小，去构建ArrayList实例<strong>，以减少扩容次数，提高效率</strong>。</p>
+<p>或者在需要扩容的时候，手动调用public void ensureCapacity(intminCapacity) {}方法扩容。 </p>
+<p>不过该方法是ArrayList的API，不是List接口里的，所以使用时需要强转: </p>
+<p>((ArrayList)list).ensureCapacity(30);</p>
+<h1 id="ArrayList、LinkedList与List的不同（什么情况下你会使用ArrayList？什么时候你会选择LinkedList？）"><a href="#ArrayList、LinkedList与List的不同（什么情况下你会使用ArrayList？什么时候你会选择LinkedList？）" class="headerlink" title="ArrayList、LinkedList与List的不同（什么情况下你会使用ArrayList？什么时候你会选择LinkedList？）"></a>ArrayList、LinkedList与List的不同（什么情况下你会使用ArrayList？什么时候你会选择LinkedList？）</h1><p>1.List是接口类，ArrayList和LinkedList是List的实现类。</p>
+<p>2.ArrayList是动态数组（顺序表）的数据结构。顺序表的存储地址是连续的，所以在查找比较快，但是在插入和删除时，由于需要把其它的元素顺序向后移动（或向前移动），所以比较耗时。</p>
+<p>3.LinkedList是链表的数据结构。链表的存储地址是不连续的，每个存储地址通过指针指向，在查找时需要进行通过指针遍历元素，所以在查找时比较慢。由于链表插入时不需移动其它元素，所以在插入和删除时比较快。</p>
+<p>对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。</p>
+<p>对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList要移动数据。</p>
+<p>在ArrayList中增加或者删除某个元素，通常会调用System.arraycopy方法，这是一种极为消耗资源的操作，因此，在频繁的插入或者是删除元素的情况下，LinkedList的性能会更加好一点。</p>
+<h1 id="ArrayList和LinkedList的时间复杂度"><a href="#ArrayList和LinkedList的时间复杂度" class="headerlink" title="ArrayList和LinkedList的时间复杂度"></a>ArrayList和LinkedList的时间复杂度</h1><p>ArrayList 是线性表（数组）</p>
+<p>get()：直接读取第几个下标，复杂度 O(1)</p>
+<p>add(E) ：添加元素，直接在后面添加，复杂度O（1）</p>
+<p>add(index, E) ：添加元素，在第几个元素后面插入，后面的元素需要向后移动，复杂度O（n）</p>
+<p>remove（）：删除元素，后面的元素需要逐个移动，复杂度O（n）</p>
+<p>LinkedList 是链表的操作</p>
+<p>get()：获取第几个元素，依次遍历，复杂度O(n)</p>
+<p>add(E) ：添加到末尾，复杂度O(1)</p>
+<p>add(index, E) ：添加第几个元素后，需要先查找到第几个元素，直接指针指向操作，复杂度O(n)</p>
+<p>remove（）：删除元素，直接指针指向操作，复杂度O(1)</p>
+<h1 id="如何复制某个ArrayList到另一个ArrayList中去？"><a href="#如何复制某个ArrayList到另一个ArrayList中去？" class="headerlink" title="如何复制某个ArrayList到另一个ArrayList中去？"></a>如何复制某个ArrayList到另一个ArrayList中去？</h1><p>1.使用clone()方法，比如ArrayList newArray = oldArray.clone();</p>
+<p>2.使用ArrayList构造方法，比如：ArrayList myObject = new ArrayList(myTempObject);</p>
+<p>3.使用Collections的copy方法。</p>
+<p>注意1和2是浅拷贝(shallowcopy)。</p>
+<h1 id="ArrayList为什么是线程不安全的？"><a href="#ArrayList为什么是线程不安全的？" class="headerlink" title="ArrayList为什么是线程不安全的？"></a>ArrayList为什么是线程不安全的？</h1><p>ArrayList在添加一个元素的时候，它可能会有两步来完成：</p>
+<ol>
+<li>在 Items[Size] 的位置存放此元素；</li>
+<li>增大 Size 的值。</li>
+</ol>
+<p>在单线程运行的情况下，如果 Size = 0，添加一个元素后，此元素在位置 0，而且 Size=1；而如果是在多线程情况下，比如有两个线程，线程 A 先将元素存放在位置 0。但是此时 CPU 调度线程A暂停，线程 B 得到运行的机会。线程B也向此ArrayList 添加元素，因为此时 Size 仍然等于 0（注意哦，我们假设的是添加一个元素是要两个步骤哦，而线程A仅仅完成了步骤1），所以线程B也将元素存放在位置0。然后线程A和线程B都继续运行，都增加 Size 的值。那好，现在我们来看看 ArrayList 的情况，元素实际上只有一个，存放在位置 0，而 Size 却等于 2。这就是“线程不安全”了。</p>
+<p>用Collections.synchronizedList可以把一个普通ArrayList包装成一个线程安全版本的数组容器，原理同Vector是一样的，就是给所有的方法套上一层synchronized。</p>
+<h1 id="ArrayList和Vector的区别？"><a href="#ArrayList和Vector的区别？" class="headerlink" title="ArrayList和Vector的区别？"></a>ArrayList和Vector的区别？</h1><p>ArrayList和Vector都实现了list接口，都是数组实现；</p>
+<p>区别在于Vector在API上都加了synchronized所以它是线程安全的，以及Vector扩容时，是扩容100%，而ArrayList是扩容50%。如果在集合中使用数据量比较大的数据，用vector有一定的优势。</p>
+<h1 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h1><p> Stack继承自Vector，实现一个后进先出的堆栈。Stack提供5个额外的方法使得Vector得以被当作堆栈使用。基本的push和pop 方法，还有peek方法得到栈顶的元素，empty方法测试堆栈是否为空，search方法检测一个元素在堆栈中的位置。Stack刚创建后是空栈。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/Java基础/">Java基础</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/List接口的实现类-ArrayList、LinkedList、Vector之间的区别/&title=《List接口的实现类--ArrayList、LinkedList、Vector之间的区别》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/List接口的实现类-ArrayList、LinkedList、Vector之间的区别/&title=《List接口的实现类--ArrayList、LinkedList、Vector之间的区别》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/List接口的实现类-ArrayList、LinkedList、Vector之间的区别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《List接口的实现类--ArrayList、LinkedList、Vector之间的区别》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/List接口的实现类-ArrayList、LinkedList、Vector之间的区别/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/List接口的实现类-ArrayList、LinkedList、Vector之间的区别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/04/04/Java代码执行顺序/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Java代码执行顺序</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/List接口的实现类-ArrayList、LinkedList、Vector之间的区别/&title=《List接口的实现类--ArrayList、LinkedList、Vector之间的区别》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/List接口的实现类-ArrayList、LinkedList、Vector之间的区别/&title=《List接口的实现类--ArrayList、LinkedList、Vector之间的区别》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/List接口的实现类-ArrayList、LinkedList、Vector之间的区别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《List接口的实现类--ArrayList、LinkedList、Vector之间的区别》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/List接口的实现类-ArrayList、LinkedList、Vector之间的区别/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/List接口的实现类-ArrayList、LinkedList、Vector之间的区别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEgklEQVR42u3a0W4bMQwEwPz/T6evBVI7u6SCWs7ck+FcdbpxAVIkPz7i6/Ov6+v3+TdfP3+9v93JozW/Xo92eOzChAkTJkwvyZQv3W7o+Z35TpLX29wZ7RATJkyYMF3O1D44D8xtUG8TkeS1W1BMmDBhwoTpcLgNfoz9C7c/DyZMmDBhwtSWgPO/JivvD96YMGHChOn3MOXLtZ/znyR/1TyNeL7Cj9TCMWHChAnTizHNDrTv8fnwhQkTJkyYXozps7zyo2kSyGd35qXb9sD88K0xYcKECdO1TKeKrW3j8BRHftw9UFzGhAkTJkwXMiXtvdnYzaxwnNyf/DUv9UaUmDBhwoTpWqbZMM1myKa9sw3teWF3lihgwoQJE6a7mNpQvWdtA3xeUM7TlzwVeFgLx4QJEyZMlzDt24qzcNsWeU+1S/MDPyZMmDBheg+mn0gI9k3HWQszv6duwWLChAkTpmuZ8kxhViTdv94mRUiwZgkQJkyYMGG6hakthm5Cb5IQ5CXgoiC7OFRjwoQJE6Z3Ypq1DNvW5qmB0dlPOEwRMGHChAnT5Ux5aE+Cd14wPZVe5OsPn4gJEyZMmN6OafPg/Djahv82IWgbmQ8/Y8KECROmy5l+IjDPyrvtC7fH7+EYECZMmDBhupbpbKg+9vhFWpAPAG32hgkTJkyYbmFqh2xa6PabWYH4bJivj76YMGHChOmFmc4G7DzJ2Dwr4Zvt8Jv/IpgwYcKE6XKm/Ynvs7xmYXvT/nz+rOgAjAkTJkyYrmLKNzQLybN12iNxmwTkz8KECRMmTLczJc3LtgTctiGTIJ3vs9158SxMmDBhwnQt06x028IVm4iPrG1KURd29xVuTJgwYcL0X5na0ucs9LaI+yP05r0wYcKECdN7M+Wlz3aApthWkEzkReq2vfqP7zFhwoQJ07VMsyJv21CcDQbNjqzPV5vdiQkTJkyY3okpoWmblO3QTH4kbo/Hq6IwJkyYMGG6lulUqM4LuHn5ddPUzMvNmDBhwoTpNzDlIXPW7Mzbn3lQP5tMRPdgwoQJE6armNpgPGtYzkZ5NhE5p4zK2ZgwYcKE6Vqm/B/k7cnZoM+pMZ32eJw3cTFhwoQJ041MdVAMDrRtIJ8lJZvXTq5/5E2YMGHChOlCpk2LcVZabZ846y3++PgOJkyYMGG6linHysdx8jGg2Q/TtjDz/wTfwGHChAkTppdnmo3UJHzt9NDm9fLRnDatwYQJEyZM78Q0C+r5cXFz576RmawZ1cIxYcKECdNVTPmhN29Jtq/0sbiSAu7+KZgwYcKE6V6m2ThLG4Zn3G17crZmdHjGhAkTJkzXMu1j4ixu5gXfWVt0Vlw+kEBgwoQJE6aXZNoUc/fpQj4S1JZ9zyYKmDBhwoTpdqY2iCahNFm5TUfaQZz8id/sHxMmTJgw/Rqm/J68aNu+8OxHmpWeMWHChAnTb2PaND7bhmJLOSsHRy1MTJgwYcJ0OdO+MHp25RY0b68m669q4ZgwYcKE6cWY2sGX5Jt9SJ4RtFgHZpowYcKECdPrMv0Bh3Zig+/oW3MAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
