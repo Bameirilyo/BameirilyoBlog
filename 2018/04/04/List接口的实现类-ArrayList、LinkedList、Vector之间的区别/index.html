@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="概述Collection├List│├LinkedList│├ArrayList│└Vector│　└Stack└Set ArrayList是基于数组实现的，是一个动态数组，其容量能自动增长。 ArrayList不是线程安全的，只能用在单线程环境下。 允许元素为null 实现了Serializable接口，因此它支持序列化，能够通过序列化传输； 实现了RandomAccess接口，支持快速随机访问">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-04T12:18:16.421Z">
+<meta property="og:updated_time" content="2018-04-04T12:27:02.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="List接口的实现类--ArrayList、LinkedList、Vector之间的区别">
 <meta name="twitter:description" content="概述Collection├List│├LinkedList│├ArrayList│└Vector│　└Stack└Set ArrayList是基于数组实现的，是一个动态数组，其容量能自动增长。 ArrayList不是线程安全的，只能用在单线程环境下。 允许元素为null 实现了Serializable接口，因此它支持序列化，能够通过序列化传输； 实现了RandomAccess接口，支持快速随机访问">
@@ -201,7 +201,14 @@
 <p>实现了Cloneable接口，能被克隆。</p>
 <p>因其底层数据结构是数组，它<strong>占据了一块连续的内存空间</strong>（容量就是数组的length），所以它也有数组的缺点，<strong>空间效率不高</strong>。</p>
 <p>由于数组的内存连续，可以根据下标以O(1)的时间<strong>读写(改查)</strong>元素，因此<strong>时间效率很高</strong>。</p>
-<h1 id="ArrayList的扩容机制"><a href="#ArrayList的扩容机制" class="headerlink" title="ArrayList的扩容机制"></a>ArrayList的扩容机制</h1><p>使用无参构造方法时系统会默认提供默认参数10，而使用有参构造函数时我们会指定大小。在arraylist中增加一个对象的时候，Java会去检查arraylist，以确保已存在的数组中有足够的容量来存储这个新的对象。如果没有足够容量的话，那么就会新建一个长度更长的数组（通常为原数组的1.5倍），旧的数组就会使用Arrays.copyOf方法被复制到新的数组中去，现有的数组指向了新的数组。</p>
+<p><strong>初始化</strong></p>
+<p>首先有三种方式来初始化：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>默认的构造器，将会以默认的大小来初始化内部的数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(Collection&lt;? extends E&gt; c)</span></span></span><br></pre></td></tr></table></figure>
+<p>用一个ICollection对象来构造，并将该集合的元素添加到ArrayList</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="ArrayList的扩容机制"><a href="#ArrayList的扩容机制" class="headerlink" title="ArrayList的扩容机制"></a>ArrayList的扩容机制</h1><p>使用无参构造方法时系统会默认提供默认参数10，而使用有参构造函数时我们会指定大小。在arraylist中增加一个对象的时候，Java会去检查arraylist，以确保已存在的数组中有足够的容量来存储这个新的对象。如果没有足够容量的话，那么就会新建一个长度更长的数组（通常为原数组的1.5倍）（当第一次插入元素时分配10个对象空间。假如有20个数据需要添加，那么会分别在第一次的时候，将ArrayList的容量变为10；之后扩容会按照1.5倍增长。也就是当添加第11个数据的时候，Arraylist继续扩容变为10 <em> 1.5=15，当添加第16个数据时，继续扩容变为15 </em> 1.5 =22个），旧的数组就会使用Arrays.copyOf方法被复制到新的数组中去，现有的数组指向了新的数组。</p>
 <p>扩容操作也是ArrayList 的一个性能消耗比较大的地方，所以若<strong>我们可以提前预知数据的规模</strong>，应该通过public ArrayList(int initialCapacity) {}构造方法，指定集合的大小，去构建ArrayList实例<strong>，以减少扩容次数，提高效率</strong>。</p>
 <p>或者在需要扩容的时候，手动调用public void ensureCapacity(intminCapacity) {}方法扩容。 </p>
 <p>不过该方法是ArrayList的API，不是List接口里的，所以使用时需要强转: </p>

@@ -20,18 +20,18 @@
     
     
     <meta name="keywords" content="Java基础">
-    <meta name="description" content="HashMap和HashTable的对比 1.HashMap是非线程安全的，HashTable是线程安全的。 Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放之后才能再次获得同步锁更新Hashtable）；而HashMap中的方法在">
+    <meta name="description" content="Map├Hashtable├HashMap└WeakHashMap HashMap和HashTable的对比 1.HashMap是非线程安全的，HashTable是线程安全的。 Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放之后才">
 <meta name="keywords" content="Java基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HashTable、HashMap和ConCurrentHashMap区别">
 <meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/HashTable、HashMap和ConCurrentHashMap区别/index.html">
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
-<meta property="og:description" content="HashMap和HashTable的对比 1.HashMap是非线程安全的，HashTable是线程安全的。 Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放之后才能再次获得同步锁更新Hashtable）；而HashMap中的方法在">
+<meta property="og:description" content="Map├Hashtable├HashMap└WeakHashMap HashMap和HashTable的对比 1.HashMap是非线程安全的，HashTable是线程安全的。 Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放之后才">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-04T10:57:35.889Z">
+<meta property="og:updated_time" content="2018-04-04T12:27:49.017Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashTable、HashMap和ConCurrentHashMap区别">
-<meta name="twitter:description" content="HashMap和HashTable的对比 1.HashMap是非线程安全的，HashTable是线程安全的。 Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放之后才能再次获得同步锁更新Hashtable）；而HashMap中的方法在">
+<meta name="twitter:description" content="Map├Hashtable├HashMap└WeakHashMap HashMap和HashTable的对比 1.HashMap是非线程安全的，HashTable是线程安全的。 Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放之后才">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
     
@@ -192,7 +192,8 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="HashMap和HashTable的对比"><a href="#HashMap和HashTable的对比" class="headerlink" title="HashMap和HashTable的对比"></a>HashMap和HashTable的对比</h1><p> <strong>1.HashMap是非线程安全的，HashTable是线程安全的。</strong></p>
+            <p>Map<br>├Hashtable<br>├HashMap<br>└WeakHashMap</p>
+<h1 id="HashMap和HashTable的对比"><a href="#HashMap和HashTable的对比" class="headerlink" title="HashMap和HashTable的对比"></a>HashMap和HashTable的对比</h1><p> <strong>1.HashMap是非线程安全的，HashTable是线程安全的。</strong></p>
 <p>Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放之后才能再次获得同步锁更新Hashtable）；而HashMap中的方法在缺省情况下是非Synchronize的。所以在单线程环境下Hashtable比HashMap要慢。如果你不需要同步，只需要单一线程，那么使用HashMap性能要好过Hashtable。</p>
 <p>在多线程并发的环境下，可以直接使用Hashtable，不需要自己为它的方法实现同步，但使用HashMap时就必须要自己增加同步处理：</p>
 <p>Map m =Collections.synchronizedMap(new HashMap(…))。</p>

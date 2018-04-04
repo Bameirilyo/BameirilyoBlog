@@ -285,8 +285,9 @@ ArrayList不是线程安全的，只能用在单线程环境下。
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        HashMap和HashTable的对比 1.HashMap是非线程安全的，HashTable是线程安全的。
-Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放之后才能再次获得同步锁更新Hashtable）；而HashMap中的...
+        Map├Hashtable├HashMap└WeakHashMap
+HashMap和HashTable的对比 1.HashMap是非线程安全的，HashTable是线程安全的。
+Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放...
     
 
         <a href="/BameirilyoBlog/2018/04/04/HashTable、HashMap和ConCurrentHashMap区别/" class="post-more waves-effect waves-button">
