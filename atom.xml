@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-04T08:24:13.149Z</updated>
+  <updated>2018-04-04T08:56:57.835Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java代码执行顺序</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/Java%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/Java代码执行顺序/</id>
+    <published>2018-04-04T08:41:44.000Z</published>
+    <updated>2018-04-04T08:56:57.835Z</updated>
+    
+    <content type="html"><![CDATA[<p>实例：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行Person静态代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行Person构造代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行Person无参构造方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行Person构造方法"</span>+ name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行Student静态代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行Student构造代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">        System.out.println(<span class="string">"执行Student构造方法"</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        System.out.println(<span class="string">"执行Student无参构造方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExtendsStaticConstruct</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        Student student1 = <span class="keyword">new</span> Student(<span class="string">"ABC"</span>);</span><br><span class="line">        System.out.println(<span class="string">"--------------------"</span>);</span><br><span class="line">        Student student2 = <span class="keyword">new</span> Student();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行结果：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">执行Person静态代码块</span><br><span class="line">执行Student静态代码块</span><br><span class="line">执行Person构造代码块</span><br><span class="line">执行Person构造方法ABC</span><br><span class="line">执行Student构造代码块</span><br><span class="line">执行Student构造方法ABC</span><br><span class="line">--------------------</span><br><span class="line">执行Person构造代码块</span><br><span class="line">执行Person无参构造方法</span><br><span class="line">执行Student构造代码块</span><br><span class="line">执行Student无参构造方法</span><br></pre></td></tr></table></figure><p>说明：<br>一般的类里面包含：<br>1、静态代码块（静态区、静态变量等）<br>2、构造代码块（{ }中间的内容）<br>3、构造方法</p><p>其执行顺序也是1、2、3先后执行，这里需要注意的是：考虑继承特性。<br>子类与父类的执行顺序是：<br>1、先执行父类的静态代码块（父1）<br>2、子类的静态代码块（子1）<br>3、父类构造代码块（父2）<br>4、父类构造方法（父3）<br>5、子类构造代码块（子2）<br>6、子类构造方法（子3）</p><p>当一个类从被JVM装载开始，各种代码的执行顺序大致如下：</p><p>被JVM装载-&gt;<br>执行父类的相关代码-&gt;<br>如果有静态初始化，先执行静态初始化，且只执行一次，以后即使有该类实例化，也不会再执行-&gt;<br>如果有静态代码块，以与静态初始化一样的方式执行-&gt;<br>如果有new语句带来的实例化，先为成员变量分配空间，并绑定参数列表，隐式或显式执行super()，即父类的构造方法-&gt;<br>执行非静态代码块-&gt;<br>执行本类的构造函数-&gt;<br>执行其他代码。</p><p>这里的执行顺序同子类构造中有一个默认的父类构造super()无关，不是执行到隐藏的super()才开始初始化父类的，类的初始化是分层初始化，即先初始化父类，再初始化子类，初始化每个类的过程中，进行类的初始化工作，先进性成员变量的初始化，成员变量的初始化顺序是：默认初始化，即int为0这种－&gt;显示初始化，例如给int型显示初始化了值－&gt;构造方法初始化，所以是这里执行到了构造方法。</p><p>但是一定要注意，父类初始化选择的构造方法却和子类中super 选择的构造相关。</p><p>转载自：<a href="https://blog.csdn.net/wuhaiwei002/article/details/55226155" target="_blank" rel="noopener">https://blog.csdn.net/wuhaiwei002/article/details/55226155</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;实例：&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/Java/"/>
+    
+    
+      <category term="Java基础" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/Java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>HashTable、HashMap和ConCurrentHashMap区别</title>
