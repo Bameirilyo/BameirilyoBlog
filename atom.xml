@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-04T13:42:58.722Z</updated>
+  <updated>2018-04-05T13:27:44.605Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java中基本类型的取值范围</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/05/Java%E4%B8%ADint%E7%9A%84%E5%8F%96%E5%80%BC%E8%8C%83%E5%9B%B4/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/05/Java中int的取值范围/</id>
+    <published>2018-04-05T13:03:09.000Z</published>
+    <updated>2018-04-05T13:27:44.605Z</updated>
+    
+    <content type="html"><![CDATA[<table><thead><tr><th style="text-align:center">类型</th><th style="text-align:center">占内存大小</th><th style="text-align:center">取值范围</th><th style="text-align:center">数值范围</th><th style="text-align:center">默认值</th></tr></thead><tbody><tr><td style="text-align:center">byte</td><td style="text-align:center">1个字节 (8bit)</td><td style="text-align:center">-2<sup>7</sup>~2<sup>7</sup>-1</td><td style="text-align:center">-128~127</td><td style="text-align:center">0</td></tr><tr><td style="text-align:center">short</td><td style="text-align:center">2个字节 (16bit)</td><td style="text-align:center">-2<sup>15</sup>~2<sup>15</sup>-1</td><td style="text-align:center">-32768~32767</td><td style="text-align:center">0</td></tr><tr><td style="text-align:center"><strong>int</strong></td><td style="text-align:center"><strong>4个字节 (32bit) </strong></td><td style="text-align:center"><strong> -2<sup>31</sup>~2<sup>31</sup>-1</strong></td><td style="text-align:center"><strong>-2147483648~2147483647</strong></td><td style="text-align:center">0</td></tr><tr><td style="text-align:center">long</td><td style="text-align:center">8个字节 (64bit)</td><td style="text-align:center">-2<sup>63</sup>~2<sup>63</sup>-1</td><td style="text-align:center">-9223372036854774808~9223372036854774807</td><td style="text-align:center">0</td></tr><tr><td style="text-align:center">boolean</td><td style="text-align:center">1个字节 (8bit)</td><td style="text-align:center">ture，false</td><td style="text-align:center"></td><td style="text-align:center">false</td></tr><tr><td style="text-align:center">char</td><td style="text-align:center">2个字节 (16bit)</td><td style="text-align:center">0~2<sup>16</sup>-1</td><td style="text-align:center"></td><td style="text-align:center">‘\u0000’</td></tr><tr><td style="text-align:center">float</td><td style="text-align:center">4个字节 (32bit)</td><td style="text-align:center">2<sup>-149</sup>~2<sup>128</sup>-1</td><td style="text-align:center">1.4013E-45~3.4028E+38</td><td style="text-align:center">0.0F</td></tr><tr><td style="text-align:center">double</td><td style="text-align:center">8个字节 (64bit)</td><td style="text-align:center">2<sup>-1074</sup>~2<sup>1024</sup>-1</td><td style="text-align:center">4.9E-324~1.7977E+308</td><td style="text-align:center">0.0D</td></tr></tbody></table><p>int包装类为：java.lang.Integer。其余类型类似，均为类型大写首字母</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;类型&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;占内存大小&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;取值范围&lt;/th&gt;
+
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/Java/"/>
+    
+    
+      <category term="Java基础" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/Java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>悲观锁与乐观锁</title>
