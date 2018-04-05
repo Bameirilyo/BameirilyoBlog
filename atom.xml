@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-05T13:27:44.605Z</updated>
+  <updated>2018-04-05T13:50:43.167Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>字符和字节的区别</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/05/%E5%AD%97%E7%AC%A6%E5%92%8C%E5%AD%97%E8%8A%82%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/05/字符和字节的区别/</id>
+    <published>2018-04-05T13:42:35.000Z</published>
+    <updated>2018-04-05T13:50:43.167Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="“字节”的定义"><a href="#“字节”的定义" class="headerlink" title="“字节”的定义"></a>“字节”的定义</h1><p>字节（Byte）是一种计量单位，表示数据量多少，它是计算机信息技术用于计量存储容量的一种计量单位。</p><h1 id="“字符”的定义"><a href="#“字符”的定义" class="headerlink" title="“字符”的定义"></a>“字符”的定义</h1><p>字符是指计算机中使用的文字和符号，比如1、2、3、A、B、C、~！·#￥%……—*（）——+、等等。</p><h1 id="“字节”与“字符”"><a href="#“字节”与“字符”" class="headerlink" title="“字节”与“字符”"></a>“字节”与“字符”</h1><p>它们完全不是一个位面的概念，所以两者之间没有“区别”这个说法。不同编码里，字符和字节的对应关系不同：</p><p>①ASCII码中，一个英文字母（不分大小写）占一个字节的空间，一个中文汉字占两个字节的空间。一个二进制数字序列，在计算机中作为一个数字单元，一般为8位二进制数，换算为十进制。最小值0，最大值255。</p><p>②UTF-8编码中，一个英文字符等于一个字节，一个中文（含繁体）等于三个字节。</p><p>③Unicode编码中，一个英文等于两个字节，一个中文（含繁体）等于两个字节。<br>符号：英文标点占一个字节，中文标点占两个字节。举例：英文句号“.”占1个字节的大小，中文句号“。”占2个字节的大小。</p><p>④UTF-16编码中，一个英文字母字符或一个汉字字符存储都需要2个字节（Unicode扩展区的一些汉字存储需要4个字节）。</p><p>⑤UTF-32编码中，世界上任何字符的存储都需要4个字节</p><p>⑥通常在读取非文本文件时（如图片，声音，可执行文件）需要用字节数组来保存文件的内容，在下载文件时，也是用byte数组作临时的缓冲器接收文件内容。所以说byte在文件操作时是必不可少的。不管是对文件写入还是读取都要用到。byte在java中是一种是数据类型，代表一个字节，一个字节包含8个位，所以，byte类型的取值范围是-128到127。在某些程序中（尤其是和硬件有关的程序）会将某些数据存储到字节类型的变量中，比如00110010,其中每个位都代表一个参数，然后以位运算的方式对参数进行取值和赋值操作。</p><p>机器只知道字节，而字符却是语义上的单位，它是有编码的，一个字符可能编码成1个2个甚至3个4个字节。这跟字符集编码有关系，英文字母和数字是单字节，但汉字这些自然语言中的字符是多字节的。一个字节只能表示255个字符，不可能用于全球那么多种自然语言的处理，因此肯定需要多字节的存储方式。而InputStream, OutputStream它们是处理字节流的，就是说假设所有东西都是二进制的字节，而 Reader, Writer 则是字符流，它涉及到字符集的问题；按照ANSI编码标准，标点符号、数字、大小写字母都占一个字节，汉字占2个字节。按照UNICODE标准所有字符都占2个字节。</p><p>本文整理转载自网络</p><p>​                    </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;“字节”的定义&quot;&gt;&lt;a href=&quot;#“字节”的定义&quot; class=&quot;headerlink&quot; title=&quot;“字节”的定义&quot;&gt;&lt;/a&gt;“字节”的定义&lt;/h1&gt;&lt;p&gt;字节（Byte）是一种计量单位，表示数据量多少，它是计算机信息技术用于计量存储容量的一种计量单位。&lt;
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/Java/"/>
+    
+    
+      <category term="Java基础" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/Java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中基本类型的取值范围</title>
