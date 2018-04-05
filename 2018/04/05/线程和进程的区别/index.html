@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>线程和进程的区别 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="操作系统">
+    <meta name="description" content="引入进程之前–多道程序设计概述多道程序设计技术是操作系统最早引入的技术，它的设计思想是允多个程序同时进入内存并运行，其目的是为了CPU的利用率，进而提高系统效率。 特点多道程序设计技术引入之前，多个程序串行执行。只存在一个程序计数器（PC, program counter）,一个程序执行完毕之后，才会执行下一个程序。而多道程序设计技术允许多个程序同时进入内存并运行，那就要每个程序分配程序计数器。如">
+<meta name="keywords" content="操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程和进程的区别">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/05/线程和进程的区别/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="引入进程之前–多道程序设计概述多道程序设计技术是操作系统最早引入的技术，它的设计思想是允多个程序同时进入内存并运行，其目的是为了CPU的利用率，进而提高系统效率。 特点多道程序设计技术引入之前，多个程序串行执行。只存在一个程序计数器（PC, program counter）,一个程序执行完毕之后，才会执行下一个程序。而多道程序设计技术允许多个程序同时进入内存并运行，那就要每个程序分配程序计数器。如">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-05T14:47:44.235Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线程和进程的区别">
+<meta name="twitter:description" content="引入进程之前–多道程序设计概述多道程序设计技术是操作系统最早引入的技术，它的设计思想是允多个程序同时进入内存并运行，其目的是为了CPU的利用率，进而提高系统效率。 特点多道程序设计技术引入之前，多个程序串行执行。只存在一个程序计数器（PC, program counter）,一个程序执行完毕之后，才会执行下一个程序。而多道程序设计技术允许多个程序同时进入内存并运行，那就要每个程序分配程序计数器。如">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">线程和进程的区别</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">线程和进程的区别</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-05T14:27:48.000Z" itemprop="datePublished" class="page-time">
+  2018年04月05日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/操作系统/">操作系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#引入进程之前–多道程序设计"><span class="post-toc-number">1.</span> <span class="post-toc-text">引入进程之前–多道程序设计</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#特点"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">特点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新技术带来的问题"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">新技术带来的问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#进程（Process）"><span class="post-toc-number">2.</span> <span class="post-toc-text">进程（Process）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#特点-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">特点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么引入线程？"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">为什么引入线程？</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#线程-Thread"><span class="post-toc-number">3.</span> <span class="post-toc-text">线程(Thread)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义-1"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#属性"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">属性</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#进程与线程区别"><span class="post-toc-number">4.</span> <span class="post-toc-text">进程与线程区别</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Read-more"><span class="post-toc-number">5.</span> <span class="post-toc-text">Read more</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-线程和进程的区别"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">线程和进程的区别</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年04月05日 22:27:48" datetime="2018-04-05T14:27:48.000Z"  itemprop="datePublished">2018年04月05日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/操作系统/">操作系统</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="引入进程之前–多道程序设计"><a href="#引入进程之前–多道程序设计" class="headerlink" title="引入进程之前–多道程序设计"></a>引入进程之前–多道程序设计</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>多道程序设计技术</strong>是操作系统最早引入的技术，它的设计思想是允多个程序<strong>同时</strong>进入内存并运行，其目的是为了CPU的利用率，进而提高系统效率。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>多道程序设计技术引入之前，多个程序串行执行。只存在一个程序计数器（PC, program counter）,一个程序执行完毕之后，才会执行下一个程序。而多道程序设计技术允许多个程序同时进入内存并运行，那就要每个程序分配程序计数器。如果内存中有四个程序在并发执行，那就需要四个程序计数器。</p>
+<h2 id="新技术带来的问题"><a href="#新技术带来的问题" class="headerlink" title="新技术带来的问题"></a>新技术带来的问题</h2><p>一个技术、一个机制的引入，一方面解决了以前棘手的问题，但同时，往往带来新的问题。多道程序设计技术也是如此。</p>
+<blockquote>
+<p>多道程序设计技术允许多个程序同时进入内存并运行，在这样的并发环境下，如何描述、刻画这样执行的程序呢？因此引入了“进程”。</p>
+</blockquote>
+<h1 id="进程（Process）"><a href="#进程（Process）" class="headerlink" title="进程（Process）"></a>进程（Process）</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>进程是具有独立功能的程序关于<strong>某个数据集合上</strong>的<strong>一次运行活动</strong>，是系统进行资源分配和调度（若不支持线程机制，进程的系统调度的单位。否则，线程是系统调度的单位）的独立单位。</p>
+<h2 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h2><ul>
+<li>进程是程序的一次执行过程。若程序执行两次甚至多次，则需要两个甚至多个进程。</li>
+<li>进程是是正在运行程序的抽象。它代表运行的CPU，也称进程是对CPU的抽象。（虚拟技术的支持，将一个CPU变幻为多个虚拟的CPU）</li>
+<li>系统资源（如内存、文件）以进程为单位分配。</li>
+<li><strong>操作系统为每个进程分配了独立的地址空间</strong></li>
+<li>操作系统通过“调度”把控制权交给进程。</li>
+</ul>
+<blockquote>
+<p>为什么引入线程 有了进程这概念之后 应用程序可以并发地去执行了 那么为什么要在进程当中再派生出线程呢？ </p>
+</blockquote>
+<h2 id="为什么引入线程？"><a href="#为什么引入线程？" class="headerlink" title="为什么引入线程？"></a>为什么引入线程？</h2><p>首先我们引入了进程这个概念，虽然进程<strong>有利于资源的管理和保护</strong>。然而在实际应用中，进程有这样的问题： </p>
+<ol>
+<li>进程切换的代价、开销比较大； </li>
+<li>在一个进程内也需要并行执行多个程序，实现不同的功能。 </li>
+<li>进程有时候性能比较低。</li>
+</ol>
+<blockquote>
+<p>引入线程有以下三个方面的考虑</p>
+</blockquote>
+<ol>
+<li><strong>应用的需要</strong>。比如打开一个浏览器，我想一边浏览网页，一边下载文件，一边播放音乐。如果一个浏览器是一个进程，那么这样的需求需要线程机制。</li>
+<li><strong>开销的考虑</strong>。在进程内创建、终止线程比创建、终止进程要快。同一进程内的线程间切换比进程间的切换要快,尤其是用户级线程间的切换。线程之间相互通信无须通过内核（同一进程内的线程共享内存和文件）</li>
+<li><strong>性能的考虑</strong>。多个线程中，任务功能不同（有的负责计算，有的负责I/O）,如果有多个处理器，一个进程就可以有很多的任务同时在执行。 </li>
+</ol>
+<h1 id="线程-Thread"><a href="#线程-Thread" class="headerlink" title="线程(Thread)"></a>线程(Thread)</h1><h2 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h2><p>线程是进程的一个实体,是CPU调度和分派的基本单位,它是比进程更小的能独立运行的基本单位.线程自己基本上不拥有系统资源,只拥有一点在运行中必不可少的资源(如程序计数器,一组寄存器和栈),但是它可与同属一个进程的其他的线程共享进程所拥有的全部资源.</p>
+<p>一个线程可以创建和撤销另一个线程;同一个进程中的多个线程之间可以并发执行.</p>
+<p>相对进程而言，线程是一个更加接近于执行体的概念，它可以与同进程中的其他线程共享数据，但拥有自己的栈空间，拥有独立的执行序列。</p>
+<p>在串行程序基础上引入线程和进程是为了提高程序的并发度，从而提高程序运行效率和响应时间。</p>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><ul>
+<li>有标识符ID</li>
+<li>有状态及状态转换，所以需要提供一些状态转换操作</li>
+<li>不运行时需要保存上下文环境，所以需要程序计数器等寄存器</li>
+<li>有自己的栈和栈指针</li>
+<li>共享所在进程的地址空间和其它资源</li>
+</ul>
+<h1 id="进程与线程区别"><a href="#进程与线程区别" class="headerlink" title="进程与线程区别"></a>进程与线程区别</h1><p><strong>1.定义方面：进程是程序在某个数据集合上的一次运行活动，有独立的地址空间；线程是进程中的一个执行路径。（进程可以创建多个线程）</strong></p>
+<p><strong>2.角色方面：在支持线程机制的系统中，进程是系统资源分配的单位，线程是CPU调度的单位。</strong></p>
+<p>​    总线程数&lt;= CPU数量：并行运行 </p>
+<p>​    总线程数&gt; CPU数量：并发运行 </p>
+<p><strong>3.资源共享方面：进程之间不能共享资源，而线程共享所在进程的地址空间和其它资源。同时线程还有自己的栈和栈指针，程序计数器等寄存器。</strong></p>
+<p><strong>4.独立性方面：进程有自己独立的地址空间，而线程没有，线程必须依赖于进程而存在。</strong></p>
+<p><strong>5.开销方面。进程切换的开销较大。线程相对较小。（前面也提到过，引入线程也出于了开销的考虑。）</strong></p>
+<p>线程之间没有单独的地址空间，一个线程死掉就等于整个进程死掉，所以多进程的程序要比多线程的程序健壮，但在进程切换时，耗费资源较大，效率要差一些。</p>
+<h1 id="Read-more"><a href="#Read-more" class="headerlink" title="Read more"></a>Read more</h1><p><a href="https://discuss.leetcode.com/topic/90877/process-vs-thread" target="_blank" rel="noopener">Process Vs Thread</a></p>
+<p><a href="http://www.differencebetween.info/difference-between-process-and-thread" target="_blank" rel="noopener">Difference between Process and Thread</a> </p>
+<p><a href="http://www.java67.com/2012/12/what-is-difference-between-thread-vs-process-java.html" target="_blank" rel="noopener">what is different between thread and process</a></p>
+<p><a href="http://www.cnblogs.com/zl1991/p/6867985.html" target="_blank" rel="noopener">理解Android进程创建流程（转）</a></p>
+<p>本文转载整理自：</p>
+<p><a href="http://blog.csdn.net/zheng548/article/details/54669908" target="_blank" rel="noopener">http://blog.csdn.net/zheng548/article/details/54669908</a></p>
+<p><a href="https://blog.csdn.net/robbyo/article/details/8549904" target="_blank" rel="noopener">https://blog.csdn.net/robbyo/article/details/8549904</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/操作系统/">操作系统</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/05/线程和进程的区别/&title=《线程和进程的区别》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/05/线程和进程的区别/&title=《线程和进程的区别》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/05/线程和进程的区别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《线程和进程的区别》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/05/线程和进程的区别/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/05/线程和进程的区别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/04/05/Java后端技术/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Java后端技术</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/05/线程和进程的区别/&title=《线程和进程的区别》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/05/线程和进程的区别/&title=《线程和进程的区别》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/05/线程和进程的区别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《线程和进程的区别》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/05/线程和进程的区别/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/05/线程和进程的区别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuklEQVR42u3awW4qMQwFUP7/p9vtkyrgXjvhsTizQgUyOVPJNnYej/j6Ca5/P9mu/Oz1ZuUHHh4e3jVevun2ln8/n6z2GpzvGQ8PD+82rw3Z7S2TFfJHmewZDw8P79t4SdB/vdrTUF5S8fDw8L6fl3zrdaGcsPOEhIeHh/e/eG0R3DYv8jXzhu/hXgseHh5ezNuPqT7/+sp8Dw8PD+/QgYA2ZG/K5aRML3aLh4eHd4GXB9y8aZs0cF9venPoCg8PD+82bzN8asdXSaCfJYOnDxEPDw/vGm8zrEoK6z273eexWRweHh7e4jZtYb0puNuy+81vBTw8PLwLvH1bdjbKSlJL8smn6QEPDw/vGi9pCmxGX21Bn5f7bx4xHh4e3gXeqcNVycg/D/15sklSCB4eHt5Z3uxAVXvjtihvg36U9/Dw8PAO8WaF8iy4z45hzcp3PDw8vNu8/GarQX7cWc2HcFGKwsPDw/sIb3/LBNC2ifOGRVTF4+Hh4Y14+e1vhPJNgyNKTnh4eHgXeG1BnH8rTx63EwYeHh7eWV4bsttGQ/uA2iNWb9IPHh4e3gVeEmpnm8uPHeTjrrz0LzIJHh4eXslLlm5btD/lNSvQoweNh4eHd4GXJ4az4658Ones6MfDw8P7CG82uMpL87YZsRqz4eHh4R3l5cE6Tw/DMX8Q9JP1h7kIDw8P71ADd3YEqk0VswI9QuLh4eFd4+XFcfJ6lkjaoVf0D8DDw8M7ypsNq9pDAElKyA8TFO/i4eHhXeDlV4LMV8ibsLOEVF94eHh4JW9W7Lbbmo3K2rRRF9Z4eHh4C17dwwi2PoPNGrhP/4KHh4f3BbzZ8axN6bwp5fHw8PC+gZf/0s+PFMw6CVFLAg8PD+8ab1YKb77bRvKkjH5zMgIPDw/vEK+tS/PB1ex4Vt1u2F94eHh4Ke8X/j27YLezrqAAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
