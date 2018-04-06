@@ -157,6 +157,55 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-Java的序列化"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018年04月06日 20:39:33" datetime="2018-04-06T12:39:33.000Z"  itemprop="datePublished">2018年04月06日</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java/">Java</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/BameirilyoBlog/2018/04/06/Java的序列化/">Java的序列化</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        对于Java的序列化，一直只知道只需要实现Serializbale这个接口就可以了，具体内部实现一直不是很了解，正好这次在重复造RPC的轮子的时候涉及到序列化问题，就抽时间看了下 Java序列化的底层实现，这篇文章算是这次的学习小结吧。
+Java序列化是指把Java对象保存为二进制字节码的过程，Java反序列化是指把二进制码重新转换成Java对象的过程。
+为什么需要序列化？第一种情况是：一般...
+    
+
+        <a href="/BameirilyoBlog/2018/04/06/Java的序列化/" class="post-more waves-effect waves-button">
+            全文阅读
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/Java基础/">Java基础</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-死锁"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -637,55 +686,6 @@ ArrayList不是线程安全的，只能用在单线程环境下。
     
 
         <a href="/BameirilyoBlog/2018/04/04/Java代码执行顺序/" class="post-more waves-effect waves-button">
-            全文阅读
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/Java基础/">Java基础</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-HashTable、HashMap和ConCurrentHashMap区别"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018年04月04日 16:19:04" datetime="2018-04-04T08:19:04.000Z"  itemprop="datePublished">2018年04月04日</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java/">Java</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/BameirilyoBlog/2018/04/04/HashTable、HashMap和ConCurrentHashMap区别/">HashTable、HashMap和ConCurrentHashMap区别</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        Map├Hashtable├HashMap└WeakHashMap
-HashMap和HashTable的对比 1.HashMap是非线程安全的，HashTable是线程安全的。
-Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放...
-    
-
-        <a href="/BameirilyoBlog/2018/04/04/HashTable、HashMap和ConCurrentHashMap区别/" class="post-more waves-effect waves-button">
             全文阅读
         </a>
     </div>

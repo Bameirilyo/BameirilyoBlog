@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-06T10:23:30.168Z</updated>
+  <updated>2018-04-06T12:45:53.322Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java的序列化</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/Java%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/Java的序列化/</id>
+    <published>2018-04-06T12:39:33.000Z</published>
+    <updated>2018-04-06T12:45:53.322Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>对于Java的序列化，一直只知道只需要实现Serializbale这个接口</strong>就可以了，具体内部实现一直不是很了解，正好这次在重复造RPC的轮子的时候涉及到序列化问题，就抽时间看了下 Java序列化的底层实现，这篇文章算是这次的学习小结吧。</p><p><strong>Java序列化是指把Java对象保存为二进制字节码的过程，Java反序列化是指把二进制码重新转换成Java对象的过程。</strong></p><h1 id="为什么需要序列化？"><a href="#为什么需要序列化？" class="headerlink" title="为什么需要序列化？"></a>为什么需要序列化？</h1><p>第一种情况是：一般情况下Java对象的声明周期都比Java虚拟机的要短，实际应用中我们希望在JVM停止运行之后能够持久化指定的对象，这时候就需要把对象进行序列化之后保存。</p><p>第二种情况是：需要把Java对象通过网络进行传输的时候。因为数据只能够以二进制的形式在网络中进行传输，因此当把对象通过网络发送出去之前需要先序列化成二进制数据，在接收端读到二进制数据之后反序列化成Java对象。</p><h1 id="有一个需要注意的问题就是，如果子类实现了Serializable接口，但是父类没有实现Serializable接口，这个时候进行反序列化会发生什么情况？"><a href="#有一个需要注意的问题就是，如果子类实现了Serializable接口，但是父类没有实现Serializable接口，这个时候进行反序列化会发生什么情况？" class="headerlink" title="有一个需要注意的问题就是，如果子类实现了Serializable接口，但是父类没有实现Serializable接口，这个时候进行反序列化会发生什么情况？"></a>有一个需要注意的问题就是，如果子类实现了Serializable接口，但是父类没有实现Serializable接口，这个时候进行反序列化会发生什么情况？</h1><p>答：如果父类有默认构造函数的话，即使没有实现Serializable接口也不会有问题，反序列化的时候会调用默认构造函数进行初始化，否则的话反序列化的时候会抛出.InvalidClassException:异常，异常原因为no validconstructor。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;对于Java的序列化，一直只知道只需要实现Serializbale这个接口&lt;/strong&gt;就可以了，具体内部实现一直不是很了解，正好这次在重复造RPC的轮子的时候涉及到序列化问题，就抽时间看了下 Java序列化的底层实现，这篇文章算是这次的学习小结吧。&lt;/
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/Java/"/>
+    
+    
+      <category term="Java基础" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/Java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>死锁</title>
