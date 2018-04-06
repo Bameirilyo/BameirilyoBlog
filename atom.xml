@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-05T14:47:44.235Z</updated>
+  <updated>2018-04-06T10:23:30.168Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>死锁</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/%E6%AD%BB%E9%94%81/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/死锁/</id>
+    <published>2018-04-06T10:01:38.000Z</published>
+    <updated>2018-04-06T10:23:30.168Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="死锁定义"><a href="#死锁定义" class="headerlink" title="死锁定义"></a>死锁定义</h1><p><strong>在两个或多个并发进程中，如果每个进程持有某种资源而又都等待别的进程释放它或它们现在保持着的资源，在未改变这种状态之前都不能向前推进，称这一组进程产生了死锁。通俗地讲，就是两个或多个进程被无限期地阻塞、相互等待的一种状态。</strong></p><h1 id="产生条件"><a href="#产生条件" class="headerlink" title="产生条件"></a>产生条件</h1><p><strong>互斥条件：一个资源一次只能被一个进程使用</strong><br><strong>请求保持条件：一个进程因请求资源而阻塞时，对已经获得资源保持不放</strong><br><strong>不可抢占条件：进程已获得的资源在未使用完之前不能强行剥夺</strong><br><strong>循环等待条件：若干进程之间形成一种头尾相接的循环等待资源的关系</strong></p><h1 id="检测方法"><a href="#检测方法" class="headerlink" title="检测方法"></a>检测方法</h1><p>两个容器，一个用于保存线程正在请求的锁，一个用于保存线程已经持有的锁。每次加锁之前都会做如下检测:</p><p>1)检测当前正在请求的锁是否已经被其它线程持有,如果有，则把那些线程找出来</p><p>2)遍历第一步中返回的线程，检查自己持有的锁是否正被其中任何一个线程请求</p><p> 如果第二步返回真,表示出现了死锁</p><h1 id="如何避免死锁"><a href="#如何避免死锁" class="headerlink" title="如何避免死锁"></a>如何避免死锁</h1><p>在有些情况下死锁是可以避免的。三种用于避免死锁的技术：</p><ol><li><strong>加锁顺序（线程按照一定的顺序加锁）</strong></li><li><strong>加锁时限（线程尝试获取锁的时候加上一定的时限，超过时限则放弃对该锁的请求，并释放自己占有的锁）</strong></li><li><strong>死锁检测</strong></li></ol><p>那么当检测出死锁时，这些线程该做些什么呢？</p><p>给这些线程设置优先级，让一个（或几个）线程回退，剩下的线程就像没发生死锁一样继续保持着它们需要的锁。如果赋予这些线程的优先级是固定不变的，同一批线程总是会拥有更高的优先级。为避免这个问题，可以在死锁发生的时候设置随机的优先级。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;死锁定义&quot;&gt;&lt;a href=&quot;#死锁定义&quot; class=&quot;headerlink&quot; title=&quot;死锁定义&quot;&gt;&lt;/a&gt;死锁定义&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;在两个或多个并发进程中，如果每个进程持有某种资源而又都等待别的进程释放它或它们现在保持着的资源，在未改变这种
+      
+    
+    </summary>
+    
+      <category term="操作系统" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="操作系统" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>线程和进程的区别</title>
