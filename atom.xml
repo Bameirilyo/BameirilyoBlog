@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-07T14:57:34.200Z</updated>
+  <updated>2018-04-07T15:21:06.292Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>求链表中倒数第k个节点</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/07/%E6%B1%82%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/07/求链表中倒数第k个节点/</id>
+    <published>2018-04-07T15:18:30.000Z</published>
+    <updated>2018-04-07T15:21:06.292Z</updated>
+    
+    <content type="html"><![CDATA[<p>为了求出链表中的倒数第k个元素，最容易想到的方法是首先遍历一遍单链表，求出整个单链表的长度n，然后将倒数第k个，转换为正数第n-k个，接下去遍历一次就可以得到结果。<br>不过这种方法需要对链表进行两次遍历，第一次遍历用于求解单链表的长度，第二次遍历用于查找正数第n-k个元素。</p><p>如果沿从头至尾的方向从链表中的某个元素开始，遍历k个元素刚好到达链表尾，那么元素就是要找的倒数第k个元素。<br>设计如下：依次对链表的每一个结点元素进行这样的测试，遍历k个元素，查看是否到达链表尾，直到找到那个倒数第k个元素。<br>此种方法将对同一批元素进行反复多次的遍历，对于链表的大部分元素而言，都要遍历k个元素，如果链表长度为n，则该算法时间复杂度为O(kn)级，效率太低。<br>存在另一种更高效的方法。<br><strong>在查找过程中，设置两个指针，让其中一个指针比另一个指针先前移k-1步，然后两个指针同时往前移动。循环直到先行的指针指为NULL时，另一个指针所指的位置就是所要找的位置。</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Node <span class="title">findElem</span><span class="params">(Node head,<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(k &lt; <span class="number">1</span> || head == <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Node p1 = head;</span><br><span class="line">    Node p2 = head;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k - <span class="number">1</span>; i++) &#123; <span class="comment">//前移k-1步</span></span><br><span class="line">        <span class="keyword">if</span>(p1.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">            p1 = p1.next;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (p1 != <span class="keyword">null</span>) &#123;</span><br><span class="line">        p1 = p1.next;</span><br><span class="line">        p2 = p2.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;为了求出链表中的倒数第k个元素，最容易想到的方法是首先遍历一遍单链表，求出整个单链表的长度n，然后将倒数第k个，转换为正数第n-k个，接下去遍历一次就可以得到结果。&lt;br&gt;不过这种方法需要对链表进行两次遍历，第一次遍历用于求解单链表的长度，第二次遍历用于查找正数第n-k个元
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="链表" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>链表基本代码实现</title>
