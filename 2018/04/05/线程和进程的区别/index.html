@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="引入进程之前–多道程序设计概述多道程序设计技术是操作系统最早引入的技术，它的设计思想是允多个程序同时进入内存并运行，其目的是为了CPU的利用率，进而提高系统效率。 特点多道程序设计技术引入之前，多个程序串行执行。只存在一个程序计数器（PC, program counter）,一个程序执行完毕之后，才会执行下一个程序。而多道程序设计技术允许多个程序同时进入内存并运行，那就要每个程序分配程序计数器。如">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-05T14:47:44.235Z">
+<meta property="og:updated_time" content="2018-04-07T13:21:54.589Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程和进程的区别">
 <meta name="twitter:description" content="引入进程之前–多道程序设计概述多道程序设计技术是操作系统最早引入的技术，它的设计思想是允多个程序同时进入内存并运行，其目的是为了CPU的利用率，进而提高系统效率。 特点多道程序设计技术引入之前，多个程序串行执行。只存在一个程序计数器（PC, program counter）,一个程序执行完毕之后，才会执行下一个程序。而多道程序设计技术允许多个程序同时进入内存并运行，那就要每个程序分配程序计数器。如">
@@ -234,7 +234,7 @@
 <li>有自己的栈和栈指针</li>
 <li>共享所在进程的地址空间和其它资源</li>
 </ul>
-<h1 id="进程与线程区别"><a href="#进程与线程区别" class="headerlink" title="进程与线程区别"></a>进程与线程区别</h1><p><strong>1.定义方面：进程是程序在某个数据集合上的一次运行活动，有独立的地址空间；线程是进程中的一个执行路径。（进程可以创建多个线程）</strong></p>
+<h1 id="进程与线程区别"><a href="#进程与线程区别" class="headerlink" title="进程与线程区别"></a>进程与线程区别</h1><p><strong>1.定义方面：进程是程序在某个数据集合上的一次运行活动；线程是进程中的一个执行路径。（进程可以创建多个线程）</strong></p>
 <p><strong>2.角色方面：在支持线程机制的系统中，进程是系统资源分配的单位，线程是CPU调度的单位。</strong></p>
 <p>​    总线程数&lt;= CPU数量：并行运行 </p>
 <p>​    总线程数&gt; CPU数量：并发运行 </p>
