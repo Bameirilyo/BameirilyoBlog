@@ -20,18 +20,18 @@
     
     
     <meta name="keywords" content="操作系统">
-    <meta name="description" content="死锁定义在两个或多个并发进程中，如果每个进程持有某种资源而又都等待别的进程释放它或它们现在保持着的资源，在未改变这种状态之前都不能向前推进，称这一组进程产生了死锁。通俗地讲，就是两个或多个进程被无限期地阻塞、相互等待的一种状态。 产生条件互斥条件：一个资源一次只能被一个进程使用请求保持条件：一个进程因请求资源而阻塞时，对已经获得资源保持不放不可抢占条件：进程已获得的资源在未使用完之前不能强行剥夺循">
+    <meta name="description" content="死锁定义是指两个或两个以上的进程在执行过程中，由于竞争资源或者由于彼此通信而造成的一种阻塞的现象，若无外力作用，它们都将无法推进下去。 活锁活锁指的是任务或者执行者没有被阻塞，由于某些条件没有满足，导致一直重复尝试，失败，尝试，失败。 产生条件互斥条件：一个资源一次只能被一个进程使用请求保持条件：一个进程因请求资源而阻塞时，对已经获得资源保持不放不可抢占条件：进程已获得的资源在未使用完之前不能强行">
 <meta name="keywords" content="操作系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="死锁">
 <meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/死锁/index.html">
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
-<meta property="og:description" content="死锁定义在两个或多个并发进程中，如果每个进程持有某种资源而又都等待别的进程释放它或它们现在保持着的资源，在未改变这种状态之前都不能向前推进，称这一组进程产生了死锁。通俗地讲，就是两个或多个进程被无限期地阻塞、相互等待的一种状态。 产生条件互斥条件：一个资源一次只能被一个进程使用请求保持条件：一个进程因请求资源而阻塞时，对已经获得资源保持不放不可抢占条件：进程已获得的资源在未使用完之前不能强行剥夺循">
+<meta property="og:description" content="死锁定义是指两个或两个以上的进程在执行过程中，由于竞争资源或者由于彼此通信而造成的一种阻塞的现象，若无外力作用，它们都将无法推进下去。 活锁活锁指的是任务或者执行者没有被阻塞，由于某些条件没有满足，导致一直重复尝试，失败，尝试，失败。 产生条件互斥条件：一个资源一次只能被一个进程使用请求保持条件：一个进程因请求资源而阻塞时，对已经获得资源保持不放不可抢占条件：进程已获得的资源在未使用完之前不能强行">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-06T10:23:30.168Z">
+<meta property="og:updated_time" content="2018-04-06T13:41:01.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="死锁">
-<meta name="twitter:description" content="死锁定义在两个或多个并发进程中，如果每个进程持有某种资源而又都等待别的进程释放它或它们现在保持着的资源，在未改变这种状态之前都不能向前推进，称这一组进程产生了死锁。通俗地讲，就是两个或多个进程被无限期地阻塞、相互等待的一种状态。 产生条件互斥条件：一个资源一次只能被一个进程使用请求保持条件：一个进程因请求资源而阻塞时，对已经获得资源保持不放不可抢占条件：进程已获得的资源在未使用完之前不能强行剥夺循">
+<meta name="twitter:description" content="死锁定义是指两个或两个以上的进程在执行过程中，由于竞争资源或者由于彼此通信而造成的一种阻塞的现象，若无外力作用，它们都将无法推进下去。 活锁活锁指的是任务或者执行者没有被阻塞，由于某些条件没有满足，导致一直重复尝试，失败，尝试，失败。 产生条件互斥条件：一个资源一次只能被一个进程使用请求保持条件：一个进程因请求资源而阻塞时，对已经获得资源保持不放不可抢占条件：进程已获得的资源在未使用完之前不能强行">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
     
@@ -166,7 +166,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#死锁定义"><span class="post-toc-number">1.</span> <span class="post-toc-text">死锁定义</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#产生条件"><span class="post-toc-number">2.</span> <span class="post-toc-text">产生条件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#检测方法"><span class="post-toc-number">3.</span> <span class="post-toc-text">检测方法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#如何避免死锁"><span class="post-toc-number">4.</span> <span class="post-toc-text">如何避免死锁</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#死锁定义"><span class="post-toc-number">1.</span> <span class="post-toc-text">死锁定义</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#活锁"><span class="post-toc-number">2.</span> <span class="post-toc-text">活锁</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#产生条件"><span class="post-toc-number">3.</span> <span class="post-toc-text">产生条件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#检测方法"><span class="post-toc-number">4.</span> <span class="post-toc-text">检测方法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#如何避免死锁"><span class="post-toc-number">5.</span> <span class="post-toc-text">如何避免死锁</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#死锁的解除"><span class="post-toc-number">6.</span> <span class="post-toc-text">死锁的解除</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#死锁检测与死锁恢复"><span class="post-toc-number">7.</span> <span class="post-toc-text">死锁检测与死锁恢复</span></a></li></ol>
         </nav>
     </aside>
 
@@ -192,7 +192,8 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="死锁定义"><a href="#死锁定义" class="headerlink" title="死锁定义"></a>死锁定义</h1><p><strong>在两个或多个并发进程中，如果每个进程持有某种资源而又都等待别的进程释放它或它们现在保持着的资源，在未改变这种状态之前都不能向前推进，称这一组进程产生了死锁。通俗地讲，就是两个或多个进程被无限期地阻塞、相互等待的一种状态。</strong></p>
+            <h1 id="死锁定义"><a href="#死锁定义" class="headerlink" title="死锁定义"></a>死锁定义</h1><p>是指两个或两个以上的进程在执行过程中，<strong>由于竞争资源或者由于彼此通信而造成的一种阻塞的现象</strong>，若无外力作用，它们都将无法推进下去。</p>
+<h1 id="活锁"><a href="#活锁" class="headerlink" title="活锁"></a>活锁</h1><p>活锁指的是任务或者执行者没有被阻塞，由于某些条件没有满足，导致一直重复尝试，失败，尝试，失败。</p>
 <h1 id="产生条件"><a href="#产生条件" class="headerlink" title="产生条件"></a>产生条件</h1><p><strong>互斥条件：一个资源一次只能被一个进程使用</strong><br><strong>请求保持条件：一个进程因请求资源而阻塞时，对已经获得资源保持不放</strong><br><strong>不可抢占条件：进程已获得的资源在未使用完之前不能强行剥夺</strong><br><strong>循环等待条件：若干进程之间形成一种头尾相接的循环等待资源的关系</strong></p>
 <h1 id="检测方法"><a href="#检测方法" class="headerlink" title="检测方法"></a>检测方法</h1><p>两个容器，一个用于保存线程正在请求的锁，一个用于保存线程已经持有的锁。每次加锁之前都会做如下检测:</p>
 <p>1)检测当前正在请求的锁是否已经被其它线程持有,如果有，则把那些线程找出来</p>
@@ -206,6 +207,12 @@
 </ol>
 <p>那么当检测出死锁时，这些线程该做些什么呢？</p>
 <p>给这些线程设置优先级，让一个（或几个）线程回退，剩下的线程就像没发生死锁一样继续保持着它们需要的锁。如果赋予这些线程的优先级是固定不变的，同一批线程总是会拥有更高的优先级。为避免这个问题，可以在死锁发生的时候设置随机的优先级。</p>
+<p><strong>银行家算法</strong>：该算法需要检查申请者对资源的最大需求量，如果系统现存的各类资源可以满足申请者的请求，就满足申请者的请求。这样申请者就可很快完成其计算，然后释放它占用的资源，从而保证了系统中的所有进程都能完成，所以可避免死锁的发生。</p>
+<h1 id="死锁的解除"><a href="#死锁的解除" class="headerlink" title="死锁的解除"></a>死锁的解除</h1><p>一旦检测出死锁，就应立即釆取相应的措施，以解除死锁。 死锁解除的主要方法有：</p>
+<p>1) <strong>资源剥夺法</strong>。挂起某些死锁进程，并抢占它的资源，将这些资源分配给其他的死锁进程。但应防止被挂起的进程长时间得不到资源，而处于资源匮乏的状态。</p>
+<p>2) <strong>撤销进程法</strong>。强制撤销部分、甚至全部死锁进程并剥夺这些进程的资源。撤销的原则可以按进程优先级和撤销进程代价的高低进行。</p>
+<p>3) <strong>进程回退法</strong>。让一（多）个进程回退到足以回避死锁的地步，进程回退时自愿释放资源而不是被剥夺。要求系统保持进程的历史信息，设置还原点。</p>
+<h1 id="死锁检测与死锁恢复"><a href="#死锁检测与死锁恢复" class="headerlink" title="死锁检测与死锁恢复"></a>死锁检测与死锁恢复</h1><p><strong>死锁检测算法</strong> 死锁检测的基本思想是，如果一个进程所请求的资源能够被满足，那么就让它执行，否则释放它拥有的所有资源，然后让其它能满足条件的进程执行。</p>
 
         </div>
 

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>WSL（Windows下Linux子系统）安装过程 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux">
+    <meta name="description" content="WSL(Windows Subsystem for Linux) 适用于Linux的Windows子系统，今天初步在自己的笔记本上尝试了一下，也遇到一些问题，现记录如下： 安装步骤如下： 1.控制面板-&amp;gt;程序和功能-&amp;gt;启用或关闭Windows功能-&amp;gt;勾选适用于Linux的Windows子系统，重启电脑 2.应用商店下搜索wsl，现已支持Ubuntu、openSUSE LEAP 4">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WSL（Windows下Linux子系统）安装过程">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/WSL（Windows下Linux子系统）安装过程/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="WSL(Windows Subsystem for Linux) 适用于Linux的Windows子系统，今天初步在自己的笔记本上尝试了一下，也遇到一些问题，现记录如下： 安装步骤如下： 1.控制面板-&amp;gt;程序和功能-&amp;gt;启用或关闭Windows功能-&amp;gt;勾选适用于Linux的Windows子系统，重启电脑 2.应用商店下搜索wsl，现已支持Ubuntu、openSUSE LEAP 4">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-07T13:02:26.466Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WSL（Windows下Linux子系统）安装过程">
+<meta name="twitter:description" content="WSL(Windows Subsystem for Linux) 适用于Linux的Windows子系统，今天初步在自己的笔记本上尝试了一下，也遇到一些问题，现记录如下： 安装步骤如下： 1.控制面板-&amp;gt;程序和功能-&amp;gt;启用或关闭Windows功能-&amp;gt;勾选适用于Linux的Windows子系统，重启电脑 2.应用商店下搜索wsl，现已支持Ubuntu、openSUSE LEAP 4">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">WSL（Windows下Linux子系统）安装过程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">WSL（Windows下Linux子系统）安装过程</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-06T14:23:52.000Z" itemprop="datePublished" class="page-time">
+  2018年04月06日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/操作系统/">操作系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-WSL（Windows下Linux子系统）安装过程"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">WSL（Windows下Linux子系统）安装过程</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年04月06日 22:23:52" datetime="2018-04-06T14:23:52.000Z"  itemprop="datePublished">2018年04月06日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/操作系统/">操作系统</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>WSL(Windows Subsystem for Linux) 适用于Linux的Windows子系统，今天初步在自己的笔记本上尝试了一下，也遇到一些问题，现记录如下：</p>
+<p><strong>安装步骤如下：</strong></p>
+<p>1.控制面板-&gt;程序和功能-&gt;启用或关闭Windows功能-&gt;勾选<strong>适用于Linux的Windows子系统</strong>，重启电脑</p>
+<p>2.应用商店下搜索wsl，现已支持Ubuntu、openSUSE LEAP 42、SUSE Linux Enterprise、Debian、Kali Linux五个版本，直接安装即可</p>
+<p>安装位置为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc</span><br></pre></td></tr></table></figure>
+<p>注：所有系统均只有命令行，没有桌面</p>
+<p>3.根据提示设置账户名及密码</p>
+<p>4.设置root账户密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
+<p><strong>系统安装完成，下面为桌面安装过程</strong></p>
+<p>5.在<strong>Ubuntu</strong>下我们可以通过 <strong>apt-get</strong> 命令很方便的安装/卸载软件，由于默认的软件包仓库是位于国外的，安装软件的时候就可能遇到各种网络问题或者下载到的一些资源不完整，因此就需要切换数据源为国内的镜像站点来改善</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.备份原来的数据源配置文件</span></span><br><span class="line">cp /etc/apt/sources.list /etc/apt/sources.list_backup</span><br><span class="line"><span class="comment"># 2.编辑数据源配置文件</span></span><br><span class="line">vi /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<p>在这里我使用的是阿里云的数据源：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 3.更新配置</span><br><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
+<p>6.下载软件</p>
+<blockquote>
+<p>可供选择安装的X-Windows有多个：VcXsrv Windows X Server、Xming、Cygwin X Server，本文选择第一个，因为比较容易，而且据说稳定；</p>
+</blockquote>
+<p>软件首页：<a href="https://sourceforge.net/projects/vcxsrv/" target="_blank" rel="noopener">https://sourceforge.net/projects/vcxsrv/</a><br>下载地址：<a href="https://ncu.dl.sourceforge.net/project/vcxsrv/vcxsrv/1.19.3.3/vcxsrv-64.1.19.3.3.installer.exe" target="_blank" rel="noopener">https://ncu.dl.sourceforge.net/project/vcxsrv/vcxsrv/1.19.3.3/vcxsrv-64.1.19.3.3.installer.exe</a></p>
+<p>下载软件，windows下安装好，启动Launcher，首次启动自动进入界面设置后：</p>
+<p><strong>选择：“one large window”，Display number设置成0，其它默认即可：</strong></p>
+<p>7.打开Bash，安装ubuntu-desktop, unity, and ccsm（下载桌面及解压花了很久很久）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ubuntu-desktop unity compizconfig-settings-manager</span><br></pre></td></tr></table></figure>
+<p>若报错，则改为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ubuntu-desktop unity compiz-core</span><br></pre></td></tr></table></figure>
+<p><strong>需要提醒的是，需下载650M，解压后近2.4G ，均安装在C盘</strong></p>
+<p>8.配置compiz窗口管理器</p>
+<p>启动之前安装的X-Windows，在Bash中执行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span>  DISPLAY=localhost:0</span><br><span class="line">sudo ccsm</span><br></pre></td></tr></table></figure>
+<p>9.切换到<code>Ubuntu`</code>Bash<code>窗口，执行以下命令并切换回</code>VcXsrv`窗口查看效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo compiz</span><br></pre></td></tr></table></figure>
+<p>附加：</p>
+<p><strong>安装中文支持并配置profile文件</strong></p>
+<p>在桌面环境打开一个<code>终端</code>，执行以下命令安装中文支持</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -y install language-pack-zh-hans</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/profile</span><br></pre></td></tr></table></figure>
+<p>将以下环境变量添加到<code>/etc/profile</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> DISPLAY=localhost:0</span><br><span class="line"><span class="built_in">export</span> LANG=zh_CN.UTF-8</span><br><span class="line"><span class="built_in">export</span> LANGUAGE=zh_CN.UTF-8</span><br><span class="line"><span class="built_in">export</span> LC_ALL=zh_CN.UTF-8</span><br></pre></td></tr></table></figure>
+<p>重新加载<code>profile</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+<p>重新生成<code>locale</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locale-gen</span><br></pre></td></tr></table></figure>
+<p><strong>卸载子系统</strong></p>
+<p>设置&gt;应用&gt;应用和功能，找到Ubuntu卸载即可</p>
+<p>安装过程参考自：</p>
+<p><a href="https://www.jianshu.com/p/bc38ed12da1d" target="_blank" rel="noopener">https://www.jianshu.com/p/bc38ed12da1d</a></p>
+<p><a href="https://blog.csdn.net/u011138447/article/details/78262369" target="_blank" rel="noopener">https://blog.csdn.net/u011138447/article/details/78262369</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/34884285/" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34884285/</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/Linux/">Linux</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/WSL（Windows下Linux子系统）安装过程/&title=《WSL（Windows下Linux子系统）安装过程》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/WSL（Windows下Linux子系统）安装过程/&title=《WSL（Windows下Linux子系统）安装过程》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/WSL（Windows下Linux子系统）安装过程/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《WSL（Windows下Linux子系统）安装过程》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/WSL（Windows下Linux子系统）安装过程/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/WSL（Windows下Linux子系统）安装过程/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/04/06/SQL必知必会/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">SQL必知必会</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/WSL（Windows下Linux子系统）安装过程/&title=《WSL（Windows下Linux子系统）安装过程》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/WSL（Windows下Linux子系统）安装过程/&title=《WSL（Windows下Linux子系统）安装过程》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/WSL（Windows下Linux子系统）安装过程/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《WSL（Windows下Linux子系统）安装过程》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/WSL（Windows下Linux子系统）安装过程/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/06/WSL（Windows下Linux子系统）安装过程/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADO0lEQVR42u3awVLrQAwEQP//T+ddoXg2I8lUOUr7RDkm3t4DQqM9jvh6/biuP/36TP7z2Z3kjcdfXNjY2Nhvwn5dXtfL/fk9Z8/kS0+2Jn/mdGuwsbGx17GrjLwIJc9fF6r8TrJObGxsbOyzIlT9bz/flHxt2NjY2NjVRUzakmpgdFehxcbGxt7KTkKleZtRbTl6W3NzloaNjY39eHY+FX3+z38y38bGxsZ+MPtVvHrjgV4xyxuhsgIbGxt7Ebt3ZKcKTpqZvAhVt+y04cHGxsZewc7HtL2BQW9xUbhfjJawsbGxP4GdR/bVgpQPHubHdKJDP9jY2NiL2ElR6TUn1ZhpEkL1DvFgY2Nj72D3jsJMDl8mm9hrMJInsbGxsbey83/lqyUnL5PJ+LYaOUXzEGxsbOx17F6ElAdJyW/lb2zisbGxsZey80hosujJIZ7Jar99io2Njb2O3WPMh6+F2UUrxsLGxsb+THbymuroN4+Z7m08fgmVsLGxsVewJ/F9b3HVQz+9JiTfdGxsbOwd7Opo9q4DlJMS1TtUVB73YmNjY78tOz9qWT182Qv0J8eATrcPGxsbexE7CXd6G1H93ev1JM1GuWRiY2Njr2D3/vTny6oOkidD5WRQgY2Njb2PfS+m2or0EvvqqKDQjWFjY2O/FXtyHKcaDOWNyl1NUaFiY2NjY78tOx/c9o7v9Ia1Uaw/fwYbGxt7NTvfmmQ8PClLveIafSc2Njb2UnaVmgf9+Qh2/t6omGFjY2OvYFdj/WqZ6UX8ecOTr/DbfWxsbOxF7Otwp9py9IpQtdmobtlRzbSwsbGx35A9ifKrEf9kcyftEDY2NvZudh4q5ZFT3mDkhSrZ3IICGxsbex272rTkL86LWW+s29tWbGxs7B3s3iC2WuSSuL+3Kb0jR9jY2Nib2JMRQh5IRVV03LQkG42NjY29lZ0Urfx+NcTvNTDVscF/vh8bGxt7HbvaMNwF65XA/PlfChg2Njb2R7J7x2jywCjfpnxccUMBw8bGxl7EziOnpOz1RhFH8bqtbmNjY2M/mJ2HSvM78+fzRui2LA0bGxv7wey8AByDK19idcSbwEbzbWxsbOznsv8BBljZhV+o3FgAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -157,6 +157,56 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-WSL（Windows下Linux子系统）安装过程"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018年04月06日 22:23:52" datetime="2018-04-06T14:23:52.000Z"  itemprop="datePublished">2018年04月06日</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/操作系统/">操作系统</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/BameirilyoBlog/2018/04/06/WSL（Windows下Linux子系统）安装过程/">WSL（Windows下Linux子系统）安装过程</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        WSL(Windows Subsystem for Linux) 适用于Linux的Windows子系统，今天初步在自己的笔记本上尝试了一下，也遇到一些问题，现记录如下：
+安装步骤如下：
+1.控制面板-&gt;程序和功能-&gt;启用或关闭Windows功能-&gt;勾选适用于Linux的Windows子系统，重启电脑
+2.应用商店下搜索wsl，现已支持Ubuntu、openSUSE LEA...
+    
+
+        <a href="/BameirilyoBlog/2018/04/06/WSL（Windows下Linux子系统）安装过程/" class="post-more waves-effect waves-button">
+            全文阅读
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/Linux/">Linux</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-SQL必知必会"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -284,8 +334,9 @@ Java序列化是指把Java对象保存为二进制字节码的过程，Java反�
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        死锁定义在两个或多个并发进程中，如果每个进程持有某种资源而又都等待别的进程释放它或它们现在保持着的资源，在未改变这种状态之前都不能向前推进，称这一组进程产生了死锁。通俗地讲，就是两个或多个进程被无限期地阻塞、相互等待的一种状态。
-产生条件互斥条件：一个资源一次只能被一个进程使用请求保持条件：一个进程因请求资源而阻塞时，对已经获得资源保持不放不可抢占条件：进程已获得的资源在未使用完之前不能强行...
+        死锁定义是指两个或两个以上的进程在执行过程中，由于竞争资源或者由于彼此通信而造成的一种阻塞的现象，若无外力作用，它们都将无法推进下去。
+活锁活锁指的是任务或者执行者没有被阻塞，由于某些条件没有满足，导致一直重复尝试，失败，尝试，失败。
+产生条件互斥条件：一个资源一次只能被一个进程使用请求保持条件：一个进程因请求资源而阻塞时，对已经获得资源保持不放不可抢占条件：进程已获得的资源在未使用完之前不...
     
 
         <a href="/BameirilyoBlog/2018/04/06/死锁/" class="post-more waves-effect waves-button">
@@ -636,58 +687,6 @@ Java的关键字，在jvm层面上
     
 
         <a href="/BameirilyoBlog/2018/04/04/synchronized与Lock的区别/" class="post-more waves-effect waves-button">
-            全文阅读
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/Java基础/">Java基础</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-List接口的实现类-ArrayList、LinkedList、Vector之间的区别"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018年04月04日 19:54:20" datetime="2018-04-04T11:54:20.000Z"  itemprop="datePublished">2018年04月04日</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java/">Java</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/BameirilyoBlog/2018/04/04/List接口的实现类-ArrayList、LinkedList、Vector之间的区别/">List接口的实现类--ArrayList、LinkedList、Vector之间的区别</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        概述Collection├List│├LinkedList│├ArrayList│└Vector│　└Stack└Set
-ArrayList是基于数组实现的，是一个动态数组，其容量能自动增长。
-ArrayList不是线程安全的，只能用在单线程环境下。
-允许元素为null
-实现了Serializable接口，因此它支持序列化，能够通过序列化传输；
-实现了RandomAccess接口，支持快速随...
-    
-
-        <a href="/BameirilyoBlog/2018/04/04/List接口的实现类-ArrayList、LinkedList、Vector之间的区别/" class="post-more waves-effect waves-button">
             全文阅读
         </a>
     </div>
