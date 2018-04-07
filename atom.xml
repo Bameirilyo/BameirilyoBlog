@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-07T15:23:51.911Z</updated>
+  <updated>2018-04-07T15:26:21.780Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>从链表中删除重复元素</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/07/%E4%BB%8E%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/07/从链表中删除重复元素/</id>
+    <published>2018-04-07T15:25:02.000Z</published>
+    <updated>2018-04-07T15:26:21.780Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">deleteDuplecate</span> </span>&#123;</span><br><span class="line"><span class="comment">//法一：优点是时间复杂度低，但是需要额外的存储空间来保存遍历过的值。时间复杂度O(n)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete_v1</span><span class="params">(Node head)</span></span>&#123;</span><br><span class="line">Hashtable&lt;Integer,Integer&gt; table=<span class="keyword">new</span> Hashtable&lt;Integer,Integer&gt;();</span><br><span class="line">Node temp=head;</span><br><span class="line">Node pre=<span class="keyword">null</span>; <span class="comment">//辅助链表的头节点</span></span><br><span class="line"><span class="keyword">while</span>(temp!=<span class="keyword">null</span>)&#123;</span><br><span class="line"><span class="keyword">if</span>(table.containsKey(temp.data))</span><br><span class="line">pre.next=temp.next;   </span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">table.put(temp.data, <span class="number">1</span>);</span><br><span class="line">pre=temp;</span><br><span class="line">&#125;</span><br><span class="line">temp=temp.next;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//法二：双重循环遍历链表,优点：不需要额外的存储空间.时间复杂度O(n^2)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete_v2</span><span class="params">(Node head)</span></span>&#123;</span><br><span class="line">Node p=head;</span><br><span class="line"><span class="keyword">while</span>(p!=<span class="keyword">null</span>)&#123;</span><br><span class="line">Node q = p;</span><br><span class="line"><span class="keyword">while</span>(q.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line"><span class="keyword">if</span>(q.next.data==p.data)&#123;</span><br><span class="line">q.next=q.next.next;</span><br><span class="line">&#125;<span class="keyword">else</span></span><br><span class="line">q=q.next;</span><br><span class="line">&#125;</span><br><span class="line">p=p.next;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//法三：外循环当前遍历的结点为p，内循环从表头开始遍历至p</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete_v3</span><span class="params">(Node head)</span></span>&#123;</span><br><span class="line">Node p=head;</span><br><span class="line"><span class="keyword">while</span>(p!=<span class="keyword">null</span>)&#123;</span><br><span class="line">Node q=head;</span><br><span class="line"><span class="keyword">while</span>(q.next!=p &amp;&amp; q.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line"><span class="keyword">if</span>(q.next.data==p.data)&#123;</span><br><span class="line">q.next=q.next.next;</span><br><span class="line">&#125;<span class="keyword">else</span></span><br><span class="line">q=q.next;</span><br><span class="line">&#125;</span><br><span class="line">p=p.next;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">Node next=<span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">int</span> data;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> data)</span></span>&#123;</span><br><span class="line"><span class="keyword">this</span>.data=data;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="链表" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>E22求链表中倒数第k个节点</title>

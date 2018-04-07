@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>从链表中删除重复元素 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="数据结构与算法,链表">
+    <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455import java.util.*;public class deleteDuplecate &amp;#123;	//法一：优点是时间复杂度低，但是需要额外的存储空间来保存遍历过的值。时间复杂度O(n)">
+<meta name="keywords" content="数据结构与算法,链表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从链表中删除重复元素">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/07/从链表中删除重复元素/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455import java.util.*;public class deleteDuplecate &amp;#123;	//法一：优点是时间复杂度低，但是需要额外的存储空间来保存遍历过的值。时间复杂度O(n)">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-07T15:26:21.780Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从链表中删除重复元素">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455import java.util.*;public class deleteDuplecate &amp;#123;	//法一：优点是时间复杂度低，但是需要额外的存储空间来保存遍历过的值。时间复杂度O(n)">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">从链表中删除重复元素</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">从链表中删除重复元素</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-07T15:25:02.000Z" itemprop="datePublished" class="page-time">
+  2018年04月07日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据结构与算法/">数据结构与算法</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-从链表中删除重复元素"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">从链表中删除重复元素</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年04月07日 23:25:02" datetime="2018-04-07T15:25:02.000Z"  itemprop="datePublished">2018年04月07日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据结构与算法/">数据结构与算法</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">deleteDuplecate</span> </span>&#123;</span><br><span class="line">	<span class="comment">//法一：优点是时间复杂度低，但是需要额外的存储空间来保存遍历过的值。时间复杂度O(n)</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete_v1</span><span class="params">(Node head)</span></span>&#123;</span><br><span class="line">		Hashtable&lt;Integer,Integer&gt; table=<span class="keyword">new</span> Hashtable&lt;Integer,Integer&gt;();</span><br><span class="line">		Node temp=head;</span><br><span class="line">		Node pre=<span class="keyword">null</span>; <span class="comment">//辅助链表的头节点</span></span><br><span class="line">		<span class="keyword">while</span>(temp!=<span class="keyword">null</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(table.containsKey(temp.data))</span><br><span class="line">				pre.next=temp.next;   </span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				table.put(temp.data, <span class="number">1</span>);</span><br><span class="line">				pre=temp;</span><br><span class="line">			&#125;			</span><br><span class="line">			temp=temp.next;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//法二：双重循环遍历链表,优点：不需要额外的存储空间.时间复杂度O(n^2)</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete_v2</span><span class="params">(Node head)</span></span>&#123;</span><br><span class="line">		Node p=head;</span><br><span class="line">		<span class="keyword">while</span>(p!=<span class="keyword">null</span>)&#123;</span><br><span class="line">			Node q = p;</span><br><span class="line">			<span class="keyword">while</span>(q.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">				<span class="keyword">if</span>(q.next.data==p.data)&#123;</span><br><span class="line">					q.next=q.next.next;</span><br><span class="line">				&#125;<span class="keyword">else</span></span><br><span class="line">					q=q.next;</span><br><span class="line">			&#125;</span><br><span class="line">			p=p.next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//法三：外循环当前遍历的结点为p，内循环从表头开始遍历至p</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete_v3</span><span class="params">(Node head)</span></span>&#123;</span><br><span class="line">		Node p=head;</span><br><span class="line">		<span class="keyword">while</span>(p!=<span class="keyword">null</span>)&#123;</span><br><span class="line">			Node q=head;</span><br><span class="line">			<span class="keyword">while</span>(q.next!=p &amp;&amp; q.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">				<span class="keyword">if</span>(q.next.data==p.data)&#123;</span><br><span class="line">					q.next=q.next.next;</span><br><span class="line">				&#125;<span class="keyword">else</span></span><br><span class="line">					q=q.next;</span><br><span class="line">			&#125;</span><br><span class="line">			p=p.next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">	Node next=<span class="keyword">null</span>;</span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> data)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.data=data;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/数据结构与算法/">数据结构与算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/链表/">链表</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/07/从链表中删除重复元素/&title=《从链表中删除重复元素》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/07/从链表中删除重复元素/&title=《从链表中删除重复元素》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/07/从链表中删除重复元素/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《从链表中删除重复元素》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/07/从链表中删除重复元素/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/07/从链表中删除重复元素/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/04/07/E22求链表中倒数第k个节点/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">E22求链表中倒数第k个节点</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/07/从链表中删除重复元素/&title=《从链表中删除重复元素》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/07/从链表中删除重复元素/&title=《从链表中删除重复元素》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/07/从链表中删除重复元素/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《从链表中删除重复元素》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/07/从链表中删除重复元素/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/07/从链表中删除重复元素/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADOUlEQVR42u3aO5LbMBAFQN3/0uvEgV225PdmuC4KakYqLgWioWB2Po9HfH39cv1559n1bJ3Xn5+9t/3uBRc2Njb2m7CTrbevmW1rdnD5j4GNjY19NvuqrScHmgen9oASCzY2NjZ2norkAeZZQHqdDrUpDTY2NjZ2/so2YdgXnrCxsbGxN4Gnrb2/puZH859qadjY2Ni3Z+floft//pb+NjY2NvaN2bPC0OsEY7Z+Ph602f/PFbCxsbEPYm9GdvK/5t/aj/Xk4z7Y2NjYJ7HbAlNSDGqPIE+ENqWlYXKCjY2NfXt2XrJPDqh9cnbEbVrymE0AYWNjY9+enaQTyaHMykNtm3af5PxWS8PGxsY+iJ0Xd/IglxenvmNsqGgMYGNjY38AOzmUTSMhOYL8megHw8bGxj6IPZtXbA8o/24StNpQusJjY2Nj356dbyW/kycqbcN4MxKEjY2NfTa7TRXaQZ9N22DTEnh6BxsbG/s4dpt+zNKAvIWQB632XfUsEjY2Nvbt2Ql1lmDMBoDaVm6enGBjY2Ofzc7HX2aDPvnR7A+i+MGwsbGxj2bnpZxNAtMWg9pRyzpWY2NjY78t+9ojaMGzxkPbVPjHu7CxsbEPYidlo/Zl1xae2mEgbGxs7E9g5xtt/5NvtzhLOfKm9SM/RWxsbOw3YbfDl3kakK+fF5Ly8BaFLmxsbOwj2HnCsBnTuTbsJfuMDgsbGxv7OHabcmxGatpWbrJC8mRfXsPGxsa+O3vWZG0L97Omwuy9q+4HNjY29tuyN0M2mzJ9HjhnreKnO8fGxsY+iH0tdZZI5O2HzdvrDAwbGxv7rdhtOtGmLvvBoOT5C7IxbGxs7LdlJ0Fl1rJtt7JpG9StAmxsbOzj2HnzoG0AtG3a2f12JAgbGxv7DPZXeW2KUG1reVYUi3aFjY2NfRD7qhbCLJFItpgEvLz1i42NjX0qexO0ZiWnfcBrk5y/rIONjY19HHu/dN1bLotEbVIRBTBsbGzsj2TnyGFoKa98fWxsbGzspHyTt4TbitemNnZZAMPGxsa+MbsduGkHLvOj3HQ5ihYFNjY29kHsPADkYSlvDLQrzGCr/jY2Njb2fdk/AA5gkc1owzgLAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
