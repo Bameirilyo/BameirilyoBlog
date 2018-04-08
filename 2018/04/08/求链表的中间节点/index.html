@@ -20,18 +20,18 @@
     
     
     <meta name="keywords" content="数据结构与算法,链表">
-    <meta name="description" content="思路： 设置两个指针fast和slow，两个指针同时向前走，fast指针每次走两步，slow指针每次走一步，直到fast指针走到最后一个结点时，此时slow指针所指的结点就是中间结点。注意链表为空，链表结点个数为1和2的情况。时间复杂度为O（n）。 1234567891011121314private static ListNode findMid(ListNode head) &amp;#123;">
+    <meta name="description" content="题目： 求链表的中间结点。如果链表中结点总数为奇数，返回中间结点；如果结点总数为偶数，返回中间两个结点的任意一个。 思路： 设置两个指针fast和slow，两个指针同时向前走，fast指针每次走两步，slow指针每次走一步，直到fast指针走到最后一个结点时，此时slow指针所指的结点就是中间结点。注意链表为空，链表结点个数为1和2的情况。时间复杂度为O（n）。 12345678910111213">
 <meta name="keywords" content="数据结构与算法,链表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="求链表的中间节点">
 <meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/求链表的中间节点/index.html">
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
-<meta property="og:description" content="思路： 设置两个指针fast和slow，两个指针同时向前走，fast指针每次走两步，slow指针每次走一步，直到fast指针走到最后一个结点时，此时slow指针所指的结点就是中间结点。注意链表为空，链表结点个数为1和2的情况。时间复杂度为O（n）。 1234567891011121314private static ListNode findMid(ListNode head) &amp;#123;">
+<meta property="og:description" content="题目： 求链表的中间结点。如果链表中结点总数为奇数，返回中间结点；如果结点总数为偶数，返回中间两个结点的任意一个。 思路： 设置两个指针fast和slow，两个指针同时向前走，fast指针每次走两步，slow指针每次走一步，直到fast指针走到最后一个结点时，此时slow指针所指的结点就是中间结点。注意链表为空，链表结点个数为1和2的情况。时间复杂度为O（n）。 12345678910111213">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-08T07:39:48.838Z">
+<meta property="og:updated_time" content="2018-04-08T07:48:13.096Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="求链表的中间节点">
-<meta name="twitter:description" content="思路： 设置两个指针fast和slow，两个指针同时向前走，fast指针每次走两步，slow指针每次走一步，直到fast指针走到最后一个结点时，此时slow指针所指的结点就是中间结点。注意链表为空，链表结点个数为1和2的情况。时间复杂度为O（n）。 1234567891011121314private static ListNode findMid(ListNode head) &amp;#123;">
+<meta name="twitter:description" content="题目： 求链表的中间结点。如果链表中结点总数为奇数，返回中间结点；如果结点总数为偶数，返回中间两个结点的任意一个。 思路： 设置两个指针fast和slow，两个指针同时向前走，fast指针每次走两步，slow指针每次走一步，直到fast指针走到最后一个结点时，此时slow指针所指的结点就是中间结点。注意链表为空，链表结点个数为1和2的情况。时间复杂度为O（n）。 12345678910111213">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
     
@@ -185,7 +185,9 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>思路：</p>
+            <p><strong>题目：</strong></p>
+<p>求链表的中间结点。如果链表中结点总数为奇数，返回中间结点；如果结点总数为偶数，返回中间两个结点的任意一个。</p>
+<p><strong>思路：</strong></p>
 <p>设置两个指针fast和slow，两个指针同时向前走，fast指针每次走两步，slow指针每次走一步，直到fast指针走到最后一个结点时，此时slow指针所指的结点就是中间结点。注意链表为空，链表结点个数为1和2的情况。时间复杂度为O（n）。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> ListNode <span class="title">findMid</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ListNode slow = head;</span><br><span class="line">    ListNode fast = head;</span><br><span class="line">    <span class="comment">//每次移动时，让fast结点移动两位，slow结点移动一位</span></span><br><span class="line">    <span class="keyword">while</span>(fast != <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">        fast = fast.next.next;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//直到fast结点移动到null时，此时slow指针指向的位置就是中间结点的位置</span></span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>注：<strong>当n为偶数时，得到的中间结点是第n/2 + 1个结点。比如链表有6个节点时，得到的是第4个节点。</strong></p>

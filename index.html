@@ -185,9 +185,11 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        思路：
+        题目：
+求链表的中间结点。如果链表中结点总数为奇数，返回中间结点；如果结点总数为偶数，返回中间两个结点的任意一个。
+思路：
 设置两个指针fast和slow，两个指针同时向前走，fast指针每次走两步，slow指针每次走一步，直到fast指针走到最后一个结点时，此时slow指针所指的结点就是中间结点。注意链表为空，链表结点个数为1和2的情况。时间复杂度为O（n）。
-1234567891011121314private static ListNode findMid(ListNode head) &#123;...
+12345678910111...
     
 
         <a href="/BameirilyoBlog/2018/04/08/求链表的中间节点/" class="post-more waves-effect waves-button">
