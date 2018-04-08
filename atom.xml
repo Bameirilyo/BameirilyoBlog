@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-07T15:26:21.780Z</updated>
+  <updated>2018-04-08T03:41:21.711Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>E24反转链表</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E24%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E24反转链表/</id>
+    <published>2018-04-08T03:39:04.000Z</published>
+    <updated>2018-04-08T03:41:21.711Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*定义链表*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    Node next;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;   </span><br><span class="line">    <span class="keyword">this</span>.val = val;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReverseList</span> </span>&#123;</span><br><span class="line">    <span class="comment">/* 反转链表*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reverseList</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>)&#123;  </span><br><span class="line">        <span class="keyword">return</span> head; </span><br><span class="line">        &#125;</span><br><span class="line">        Node reHead = <span class="keyword">null</span>;<span class="comment">// 定义新链表头结点</span></span><br><span class="line">        <span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">            Node cur = head.next;<span class="comment">// 记录下一个节点</span></span><br><span class="line">            head.next = reHead;<span class="comment">// 将rehead节点连接到head节点上</span></span><br><span class="line">            reHead = head;<span class="comment">// 让rehead指向head</span></span><br><span class="line">            head = cur;<span class="comment">// 将head指向下一个节点</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> reHead;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**递归反转链表 */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reverseList2</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>)    <span class="keyword">return</span> head;</span><br><span class="line">        Node rehead = reverseList2(head.next);</span><br><span class="line">        head.next.next = head;<span class="comment">// 将头节点置于末端</span></span><br><span class="line">        head.next = <span class="keyword">null</span>;<span class="comment">// 防止链表循环</span></span><br><span class="line">        <span class="keyword">return</span> rehead;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**打印链表  */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printList</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>)    <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.print(head.val + <span class="string">" "</span>);</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;<span class="comment">/*测试*/</span></span><br><span class="line">        Node n1 = <span class="keyword">new</span> Node(<span class="number">1</span>);   Node n2 = <span class="keyword">new</span> Node(<span class="number">2</span>);   Node n3 = <span class="keyword">new</span> Node(<span class="number">3</span>);</span><br><span class="line">        Node n4 = <span class="keyword">new</span> Node(<span class="number">4</span>);   Node n5 = <span class="keyword">new</span> Node(<span class="number">5</span>);   n1.next = n2;</span><br><span class="line">        n2.next = n3;    n3.next = n4; n4.next = n5;</span><br><span class="line">       <span class="comment">// Node rehead = reverseList(n1);</span></span><br><span class="line">        Node rehead = reverseList2(n1);               </span><br><span class="line">        printList(rehead);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="链表" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>从链表中删除重复元素</title>
