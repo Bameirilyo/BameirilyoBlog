@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>E23链表中环的入口节点(判断链表是否有环) | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="数据结构与算法,链表">
+    <meta name="description" content="题目一个链表中包含环，请找出该链表的环的入口结点。 思路如果链表中有环，那么先获取环中节点个数n，设置两个指针指向pHead  快指针向前移动n次，然后进行循环，快慢指针同时向后移动，直到指向的节点相同，即环入口节点  获取环中节点个数：设置两个指针：p1和p2。p1一次移动一次，p2一次移动两次  当p2等于p1，说明存在环。返回该节点  通过该节点很容易能获得环中节点个数  123456789">
+<meta name="keywords" content="数据结构与算法,链表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="E23链表中环的入口节点(判断链表是否有环)">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E23链表中环的入口节点(判断链表是否有环)/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="题目一个链表中包含环，请找出该链表的环的入口结点。 思路如果链表中有环，那么先获取环中节点个数n，设置两个指针指向pHead  快指针向前移动n次，然后进行循环，快慢指针同时向后移动，直到指向的节点相同，即环入口节点  获取环中节点个数：设置两个指针：p1和p2。p1一次移动一次，p2一次移动两次  当p2等于p1，说明存在环。返回该节点  通过该节点很容易能获得环中节点个数  123456789">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-08T08:07:58.249Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="E23链表中环的入口节点(判断链表是否有环)">
+<meta name="twitter:description" content="题目一个链表中包含环，请找出该链表的环的入口结点。 思路如果链表中有环，那么先获取环中节点个数n，设置两个指针指向pHead  快指针向前移动n次，然后进行循环，快慢指针同时向后移动，直到指向的节点相同，即环入口节点  获取环中节点个数：设置两个指针：p1和p2。p1一次移动一次，p2一次移动两次  当p2等于p1，说明存在环。返回该节点  通过该节点很容易能获得环中节点个数  123456789">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">E23链表中环的入口节点(判断链表是否有环)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">E23链表中环的入口节点(判断链表是否有环)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-08T07:51:00.000Z" itemprop="datePublished" class="page-time">
+  2018年04月08日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据结构与算法/">数据结构与算法</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.</span> <span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#思路"><span class="post-toc-number">2.</span> <span class="post-toc-text">思路</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-E23链表中环的入口节点(判断链表是否有环)"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">E23链表中环的入口节点(判断链表是否有环)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年04月08日 15:51:00" datetime="2018-04-08T07:51:00.000Z"  itemprop="datePublished">2018年04月08日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据结构与算法/">数据结构与算法</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>一个链表中包含环，请找出该链表的环的入口结点。</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>如果链表中有环，那么先获取环中节点个数n，设置两个指针指向pHead </p>
+<p>快指针向前移动n次，然后进行循环，快慢指针同时向后移动，直到指向的节点相同，即环入口节点 </p>
+<p>获取环中节点个数：设置两个指针：p1和p2。p1一次移动一次，p2一次移动两次 </p>
+<p>当p2等于p1，说明存在环。返回该节点 </p>
+<p>通过该节点很容易能获得环中节点个数 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 链表中环的入口结点 </span>&#123;</span><br><span class="line">    <span class="comment">//找到一快一慢指针相遇处的节点，相遇的节点一定是在环中</span></span><br><span class="line">    <span class="comment">//此方法可用作判断链表是否有环</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ListNode <span class="title">meetingNode</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">         </span><br><span class="line">        ListNode slow = head.next;</span><br><span class="line">        <span class="keyword">if</span>(slow == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">         </span><br><span class="line">        ListNode fast = slow.next;</span><br><span class="line">        <span class="keyword">while</span> (slow != <span class="keyword">null</span> &amp;&amp; fast != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(slow == fast)&#123;</span><br><span class="line">                <span class="keyword">return</span> fast;</span><br><span class="line">            &#125;</span><br><span class="line">            slow=slow.next;</span><br><span class="line">            fast=fast.next;</span><br><span class="line">             </span><br><span class="line">            <span class="keyword">if</span>(fast!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                fast=fast.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">EntryNodeOfLoop</span><span class="params">(ListNode pHead)</span> </span>&#123;</span><br><span class="line">        ListNode meetingNode = meetingNode(pHead);</span><br><span class="line">        <span class="keyword">if</span>(meetingNode == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line"><span class="comment">//      得到环中的节点个数</span></span><br><span class="line">        <span class="keyword">int</span> nodesInLoop = <span class="number">1</span>;</span><br><span class="line">        ListNode p1 = meetingNode;</span><br><span class="line">        <span class="keyword">while</span>(p1.next != meetingNode)&#123;</span><br><span class="line">            p1=p1.next;</span><br><span class="line">            ++nodesInLoop;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//      移动p1，次数为环中节点数目</span></span><br><span class="line">        p1 = pHead;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; nodesInLoop; i++)&#123;</span><br><span class="line">            p1 = p1.next;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//      再移动p1，p2</span></span><br><span class="line">        ListNode p2 = pHead;</span><br><span class="line">        <span class="keyword">while</span>(p1!= p2)&#123;</span><br><span class="line">            p1 = p1.next;</span><br><span class="line">            p2 = p2.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> p1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/数据结构与算法/">数据结构与算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/链表/">链表</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E23链表中环的入口节点(判断链表是否有环)/&title=《E23链表中环的入口节点(判断链表是否有环)》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E23链表中环的入口节点(判断链表是否有环)/&title=《E23链表中环的入口节点(判断链表是否有环)》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E23链表中环的入口节点(判断链表是否有环)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《E23链表中环的入口节点(判断链表是否有环)》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E23链表中环的入口节点(判断链表是否有环)/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E23链表中环的入口节点(判断链表是否有环)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/04/08/求链表的中间节点/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">求链表的中间节点</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E23链表中环的入口节点(判断链表是否有环)/&title=《E23链表中环的入口节点(判断链表是否有环)》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E23链表中环的入口节点(判断链表是否有环)/&title=《E23链表中环的入口节点(判断链表是否有环)》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E23链表中环的入口节点(判断链表是否有环)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《E23链表中环的入口节点(判断链表是否有环)》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E23链表中环的入口节点(判断链表是否有环)/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E23链表中环的入口节点(判断链表是否有环)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAAD70lEQVR42u3aSU4jARAEQP7/aeaKhNzOrCoGDuETsk0v0UhJLR8f8evzy+vVO1/f//7z86ef317J9Tz/bnKc4QsHDhw4cMS3+nzo55t5dbkJbvLpZ/BKHt4behw4cODAccSRhNnzoWdBmMC115CHLg4cOHDg+Ascm9hrI3l288n148CBAweOv8+Rl2H7RmTSTMSBAwcOHL/LkYRZEoGzm9w0ItswPuuV4sCBAweOdFugbtL9/Z9/ZL8DBw4cOHCUW2FJ6LZNw7YITB5PPpR6c204cODAgWPNcduwSwqzWcDnWG15hgMHDhw4bjny4c0mCDcQyZHzVmA9cMKBAwcOHGuO9jby7z8XgXmzb7imkLyPAwcOHDjWHEm7rW3StTOdtv3XBvCsRMSBAwcOHJtuWHvKzVCqHRq1NPk7UZcUBw4cOHCUHPkAaTMW2rTzNjTDRiEOHDhw4FhwzMqetmRqo7cdgG1GZS//78CBAwcOHPOKpi6u2mKpvZQkhpPv51gvv48DBw4cOBYcm6DNY3i21tbeWF7yvfm7wIEDBw4ciznL2dimDOl8EXyzTlFHLA4cOHDgGHHkt5rfzGy1rm0OJuFaD8xw4MCBA8cRx6YhOGvetZ/OHl694oADBw4cOI44Zs3B9rI2bcck+PeNRRw4cODAsefYxGcUXUFlNAvadmGuaC/iwIEDB44FR3Ibs+FT3lhsg7NdlShGazhw4MCB44gjGd78xGpCcvzNpkY9DMOBAwcOHDc7bGfr1/mqQXuWNm43DU0cOHDgwHHF0V7WbEDVBmf7r0C7xlf0SnHgwIEDR8DRhmJ+yrz8awM1f5Dtw8CBAwcOHHuOdpCz+U7+u/sCL+cr9gdx4MCBA8eCox0XtaOdZJFuP6zKx2M4cODAgeOKo11N2Cy35eVcEtKbxmL9d4EDBw4cOEqOzRLAJvZmq3XtwKwIdRw4cODAseZoFxqSk20ac3kx2UIUyxk4cODAgWPB0RZp+VLCflXiirgAxYEDBw4cP8xRZPXpMZOztIVihIIDBw4cOE458rHQPthux12bVYyo94kDBw4cOEqO2W3MFuna19UIqghaHDhw4MCx4Mgbc7OlhHZhIr/5zXLGcMsDBw4cOHCUmdLGXgv3fFn7wVV+/JdXjgMHDhw41hyzgqddTbgtyWZDqdvyDwcOHDhwPJ8rCddZWOZMLcfm2t6cBQcOHDhwHHG0kZavHbQJ3z6YWQvyJRYOHDhw4PjvHElktqOs9ph5+zIvKXHgwIEDx+9yXJVVs9/9idDFgQMHDhy3HMkltosOm7JwhrKJeRw4cODAccVxexuz1mG+AJEXY3mc48CBAweOI45/63L2SduPkXMAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
