@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-08T11:23:47.561Z</updated>
+  <updated>2018-04-08T11:53:15.233Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>E52两个链表的第一个公共节点</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E52%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E52两个链表的第一个公共节点/</id>
+    <published>2018-04-08T11:47:10.000Z</published>
+    <updated>2018-04-08T11:53:15.233Z</updated>
+    
+    <content type="html"><![CDATA[<p>思路：</p><p><strong>首先遍历两个链表得到它们的长度，就能知道哪个链表比较长，以及长的链表比短的链表多几个结点。在第二次遍历的时候，在较长的链表上先走若干步，接着再同时在两个链表上遍历，找到的第一个相同的结点就是它们的第一个公共结点</strong>。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ListNode <span class="title">findFirstCommonNode</span><span class="params">(ListNode head1, ListNode head2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len1 = getListLength(head1);</span><br><span class="line">    <span class="keyword">int</span> len2 = getListLength(head2);</span><br><span class="line">    ListNode longListNode = head1;</span><br><span class="line">    ListNode shortListNode = head2;</span><br><span class="line">    <span class="keyword">int</span> dif = len1 - len2;</span><br><span class="line">    <span class="keyword">if</span> (len2 &gt; len1) &#123;</span><br><span class="line">        longListNode = head2;</span><br><span class="line">        shortListNode = head1;</span><br><span class="line">        dif = len2 - len1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dif; i++) &#123;</span><br><span class="line">        longListNode = longListNode.nextNode;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (longListNode != <span class="keyword">null</span> &amp;&amp; shortListNode != <span class="keyword">null</span> </span><br><span class="line">           &amp;&amp; longListNode != shortListNode) &#123;</span><br><span class="line">        longListNode = longListNode.nextNode;</span><br><span class="line">        shortListNode = shortListNode.nextNode;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> longListNode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getListLength</span><span class="params">(ListNode head1)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (head1 == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    ListNode point = head1;</span><br><span class="line">    <span class="keyword">while</span> (point != <span class="keyword">null</span>) &#123;</span><br><span class="line">        point = point.nextNode;</span><br><span class="line">        result++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;思路：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;首先遍历两个链表得到它们的长度，就能知道哪个链表比较长，以及长的链表比短的链表多几个结点。在第二次遍历的时候，在较长的链表上先走若干步，接着再同时在两个链表上遍历，找到的第一个相同的结点就是它们的第一个公共结点&lt;/strong&gt;。&lt;/p
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="链表" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>E18_2删除链表中重复的节点</title>
