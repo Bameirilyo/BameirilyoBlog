@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-08T09:59:49.908Z</updated>
+  <updated>2018-04-08T11:23:47.561Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>E18_2删除链表中重复的节点</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E18-2%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E8%8A%82%E7%82%B9/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E18-2删除链表中重复的节点/</id>
+    <published>2018-04-08T11:20:15.000Z</published>
+    <updated>2018-04-08T11:23:47.561Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>题目：</strong></p><p>在一个排序的链表中，如何删除重复的节点？ </p><p>样例输入： 1 2 3 3 4 4 5 </p><p>样例输出： 1 2 5</p><p>解法一：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ListNode <span class="title">deleteDuplication</span><span class="params">(ListNode pHead)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pHead == <span class="keyword">null</span> || pHead.next == <span class="keyword">null</span>) &#123; <span class="comment">// 只有0个或1个结点，则返回</span></span><br><span class="line">        <span class="keyword">return</span> pHead;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (pHead.val == pHead.next.val) &#123; <span class="comment">// 当前结点是重复结点</span></span><br><span class="line">        ListNode pNode = pHead.next;</span><br><span class="line">        <span class="keyword">while</span> (pNode != <span class="keyword">null</span> &amp;&amp; pNode.val == pHead.val) &#123;</span><br><span class="line">            <span class="comment">// 跳过值与当前结点相同的全部结点,找到第一个与当前结点不同的结点</span></span><br><span class="line">            pNode = pNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> deleteDuplication(pNode); <span class="comment">// 从第一个与当前结点不同的结点开始递归</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 当前结点不是重复结点</span></span><br><span class="line">        pHead.next = deleteDuplication(pHead.next); <span class="comment">//保留当前结点，从下一个结点开始递归</span></span><br><span class="line">        <span class="keyword">return</span> pHead;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>解法二：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">deleteDuplication</span><span class="params">(ListNode pHead)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pHead == <span class="keyword">null</span> || pHead.next == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> pHead;</span><br><span class="line">    ListNode helper = <span class="keyword">new</span> ListNode(-<span class="number">1</span>);</span><br><span class="line">    helper.next = pHead;</span><br><span class="line">    ListNode prev = helper, curr = pHead, next = pHead.next;</span><br><span class="line">    <span class="keyword">while</span>(curr != <span class="keyword">null</span> &amp;&amp; next != <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(next.val != curr.val)&#123;</span><br><span class="line">            prev = curr;</span><br><span class="line">            curr = next;</span><br><span class="line">            next = next.next;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">while</span>(next != <span class="keyword">null</span> &amp;&amp; next.val == curr.val)</span><br><span class="line">                next = next.next;</span><br><span class="line">            curr = prev.next = next;</span><br><span class="line">            <span class="keyword">if</span>(next != <span class="keyword">null</span>)</span><br><span class="line">                next = next.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> helper.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;题目：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在一个排序的链表中，如何删除重复的节点？ &lt;/p&gt;
+&lt;p&gt;样例输入： 1 2 3 3 4 4 5 &lt;/p&gt;
+&lt;p&gt;样例输出： 1 2 5&lt;/p&gt;
+&lt;p&gt;解法一：&lt;/p&gt;
+&lt;figure class=&quot;highlight
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="链表" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>E18_1删除链表的节点</title>
