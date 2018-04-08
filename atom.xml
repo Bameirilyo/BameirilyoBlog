@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-08T09:11:49.435Z</updated>
+  <updated>2018-04-08T09:59:49.908Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E18-1%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E8%8A%82%E7%82%B9/"/>
     <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E18-1删除链表的节点/</id>
     <published>2018-04-08T09:05:55.000Z</published>
-    <updated>2018-04-08T09:11:49.435Z</updated>
+    <updated>2018-04-08T09:59:49.908Z</updated>
     
     <content type="html"><![CDATA[<p><strong>题目：</strong></p><p>给定单向链表的头指针和一个节点指针，定义一个函数在O(1)时间删除该节点。</p><p><strong>思路：</strong></p><p>由于给定的是单向链表，正常删除链表的时间复杂度是查找链表的时间复杂度即O(n),如果要求在O(1)时间复杂度内删除节点，通过遍历链表找到该节点的上一节点和下一节点的方法是行不通了。所以实现的思路是，根据给定的要删除的节点，可以直接找到其后年的节点，把后面的节点的内容复制到当前节点处，同时将当前节点指向其后面节点的后面节点保证链表不断开，再把下一节点删掉就相当于把给定的节点删除了。</p><p>需要考虑到的一点是，如果要删除的节点是链表的尾节点的话，那还是需要从头结点按照顺序遍历到尾节点的前一节点，然后删除尾节点，总的平均时间复杂度就是[(n-1)*1+O(n)]/n,结果还是O(1)。</p><p><strong>代码实现：</strong></p><p><strong>BUG：</strong>链表只有一个头节点的情况下，该代码无法删除，网上未找到有效代码</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deleteNode</span><span class="params">(ListNode head,ListNode node)</span></span>&#123;</span><br><span class="line">    <span class="comment">//删除尾节点，采用顺序查找找到尾节点的前一节点</span></span><br><span class="line">    <span class="keyword">if</span>(node.next==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">while</span>(head.next!=node)&#123;</span><br><span class="line">            head=head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        head.next=<span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//要删除的节点是头结点</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(head==node)&#123;</span><br><span class="line">        head=<span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//要删除的节点是中间普通节点</span></span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        node.data=node.next.data;</span><br><span class="line">        node.next=node.next.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -37,6 +37,12 @@
     
     </summary>
     
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="链表" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E9%93%BE%E8%A1%A8/"/>
     
   </entry>
   
