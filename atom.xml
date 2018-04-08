@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-08T03:41:21.711Z</updated>
+  <updated>2018-04-08T06:30:31.635Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>E25合并两个排序的链表</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E25%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/E25合并两个排序的链表/</id>
+    <published>2018-04-08T06:17:53.000Z</published>
+    <updated>2018-04-08T06:30:31.635Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>题目：</strong></p><p>输入两个递增排序的链表，合并这两个链表并使新链表中的结点仍然是按照递增排序的。</p><p><strong>步骤：</strong></p><p>Step1.定义一个指向新链表的指针，暂且让它指向NULL；</p><p>Step2.比较两个链表的头结点，让较小的头结点作为新链表的头结点；</p><p>Step3.递归比较两个链表的其余节点，让较小的节点作为上一个新节点的后一个节点；</p><p><strong>递归解法：</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Node <span class="title">Merge</span><span class="params">(Node head1, Node head2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head1 == <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> head2;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> (head2 == <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> head1;</span><br><span class="line">    &#125;</span><br><span class="line">Node newHead = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span> (head1.val &lt;= head2.val)&#123;</span><br><span class="line">        newHead = head1;</span><br><span class="line">        newHead.next = Merge(head1.next, head2);</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        newHead = head2;</span><br><span class="line">        newHead.next = Merge(head1, head2.next);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> newHead;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>非递归解法：</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">Merge</span><span class="params">(ListNode list1,ListNode list2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(list1 == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> list2;</span><br><span class="line">    <span class="keyword">if</span>(list2 == <span class="keyword">null</span> )</span><br><span class="line">        <span class="keyword">return</span> list1;</span><br><span class="line">    ListNode tmp1 = list1;</span><br><span class="line">    ListNode tmp2 = list2;</span><br><span class="line">    ListNode head = <span class="keyword">new</span> ListNode(<span class="number">0</span>);<span class="comment">//这里不能把返回链表赋值为null，因为下一行马上就要把它赋值给另一链表，得让它在内存里有位置才行</span></span><br><span class="line">    ListNode headptr = head;</span><br><span class="line">    <span class="keyword">while</span>(tmp1 != <span class="keyword">null</span> &amp;&amp; tmp2!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(tmp1.val &lt;= tmp2.val) &#123;</span><br><span class="line">            head.next=tmp1;</span><br><span class="line">            head = head.next;</span><br><span class="line">            tmp1 = tmp1.next;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            head.next=tmp2;</span><br><span class="line">            head = head.next;</span><br><span class="line">            tmp2=tmp2.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//其中一个链表已经跑到头之后，继续单链表的合并</span></span><br><span class="line">    <span class="keyword">while</span>(tmp1 != <span class="keyword">null</span>)&#123;</span><br><span class="line">        head.next = tmp1;</span><br><span class="line">        head = head.next;</span><br><span class="line">        tmp1= tmp1.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(tmp2 != <span class="keyword">null</span>)&#123;</span><br><span class="line">        head.next = tmp2;</span><br><span class="line">        head = head.next;</span><br><span class="line">        tmp2= tmp2.next;</span><br><span class="line">    &#125;</span><br><span class="line">    head = headptr.next;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;题目：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;输入两个递增排序的链表，合并这两个链表并使新链表中的结点仍然是按照递增排序的。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;步骤：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Step1.定义一个指向新链表的指针，暂且让它指向NULL；&lt;/p&gt;
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="链表" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>E24反转链表</title>
