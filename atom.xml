@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-08T11:53:15.233Z</updated>
+  <updated>2018-04-08T12:37:53.626Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>栈</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/%E6%A0%88/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/08/栈/</id>
+    <published>2018-04-08T12:34:18.000Z</published>
+    <updated>2018-04-08T12:37:53.626Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>定义：</strong></p><p>栈是一种只能在一端进行插入或删除操作的线性表。（先进后出表）</p><p><strong>java中的Stack继承Vector</strong></p><p><strong>实例化</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stack stack = <span class="keyword">new</span> Stack();</span><br></pre></td></tr></table></figure><p><strong>基本使用</strong></p><p>判断是否为空</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stack.empty()</span><br></pre></td></tr></table></figure><p>取栈顶值（不出栈）</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stack.peek()</span><br></pre></td></tr></table></figure><p>进栈</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stack.push(Object);</span><br></pre></td></tr></table></figure><p>出栈</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stack.pop();</span><br></pre></td></tr></table></figure><p>示例：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StackTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Stack stack=<span class="keyword">new</span> Stack();</span><br><span class="line">        <span class="comment">//1.empty()栈是否为空</span></span><br><span class="line">        System.out.println(stack.empty());</span><br><span class="line">        <span class="comment">//2.peek()栈顶值    </span></span><br><span class="line">        <span class="comment">//3.进栈push()</span></span><br><span class="line">        stack.push(<span class="keyword">new</span> Integer(<span class="number">1</span>));</span><br><span class="line">        stack.push(<span class="string">"b"</span>);</span><br><span class="line">        System.out.println(stack.peek());</span><br><span class="line">        <span class="comment">//4.pop()出栈</span></span><br><span class="line">        stack.pop();</span><br><span class="line">        System.out.println(stack.peek());</span><br><span class="line">        System.out.println(stack.empty());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>运行结果：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">true</span></span><br><span class="line">b</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="keyword">false</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;定义：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;栈是一种只能在一端进行插入或删除操作的线性表。（先进后出表）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;java中的Stack继承Vector&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;实例化&lt;/strong&gt;&lt;/p&gt;
+&lt;f
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="栈" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%A0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>E52两个链表的第一个公共节点</title>
