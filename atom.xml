@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-09T11:38:53.661Z</updated>
+  <updated>2018-04-09T12:46:26.201Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>E26树的子结构</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/09/E26%E6%A0%91%E7%9A%84%E5%AD%90%E7%BB%93%E6%9E%84/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/09/E26树的子结构/</id>
+    <published>2018-04-09T12:41:58.000Z</published>
+    <updated>2018-04-09T12:46:26.201Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>题目：</strong></p><p>输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）</p><p><strong>思路：</strong></p><p>(1)在树A中找到和数B的根节点相同的节点；</p><p>   可以利用前序遍历A树中的节点，找到和B树的根节点相同的节点。</p><p>(2)在树A中找到和树B根节点相同的节点设为R；</p><p>   再对比节点R在树B中的左孩子和右孩子是否和树B中的节点相同。</p><p>   如果R节点的值和树B中的节点的值不同，则不是子结构，如果相同，递归去判断他们的各自的左孩子和右孩子是否相同。</p><p>   递归的出口是到达树A或者树B的叶节点。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">HasSubtree</span><span class="params">(TreeNode root1, TreeNode root2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">//当Tree1和Tree2都不为零的时候，才进行比较。否则直接返回false</span></span><br><span class="line">        <span class="keyword">if</span> (root2 != <span class="keyword">null</span> &amp;&amp; root1 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//如果找到了对应Tree2的根节点的点</span></span><br><span class="line">            <span class="keyword">if</span>(root1.val == root2.val)&#123;</span><br><span class="line">                <span class="comment">//以这个根节点为为起点判断是否包含Tree2</span></span><br><span class="line">                result = doesTree1HaveTree2(root1,root2);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//如果找不到，那么就再去root的左儿子当作起点，去判断时候包含Tree2</span></span><br><span class="line">            <span class="keyword">if</span> (!result) &#123;</span><br><span class="line">                result = HasSubtree(root1.left,root2);</span><br><span class="line">            &#125;</span><br><span class="line">             </span><br><span class="line">            <span class="comment">//如果还找不到，那么就再去root的右儿子当作起点，去判断时候包含Tree2</span></span><br><span class="line">            <span class="keyword">if</span> (!result) &#123;</span><br><span class="line">                result = HasSubtree(root1.right,root2);</span><br><span class="line">               &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//返回结果</span></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">doesTree1HaveTree2</span><span class="params">(TreeNode node1, TreeNode node2)</span></span>&#123;</span><br><span class="line">        <span class="comment">//如果Tree2已经遍历完了都能对应的上，返回true</span></span><br><span class="line">        <span class="keyword">if</span> (node2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果Tree2还没有遍历完，Tree1却遍历完了。返回false</span></span><br><span class="line">        <span class="keyword">if</span> (node1 == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果其中有一个点没有对应上，返回false</span></span><br><span class="line">        <span class="keyword">if</span> (node1.val != node2.val) &#123;  </span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">        <span class="comment">//如果根节点对应的上，那么就分别去子节点里面匹配</span></span><br><span class="line">        <span class="keyword">return</span> doesTree1HaveTree2(node1.left,node2.left) &amp;&amp;</span><br><span class="line">            doesTree1HaveTree2(node1.right,node2.right);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;题目：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;思路：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;(1)在树A中找到和数B的根节点相同的节点；&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="树" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>E08二叉树的下一个结点</title>
