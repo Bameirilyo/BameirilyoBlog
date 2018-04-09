@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-09T08:24:46.287Z</updated>
+  <updated>2018-04-09T08:33:05.514Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>E07重建二叉树</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/09/E07%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/09/E07重建二叉树/</id>
+    <published>2018-04-09T08:25:27.000Z</published>
+    <updated>2018-04-09T08:33:05.514Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>题目：</strong></p><p>输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。</p><p><strong>思路：</strong></p><p>根据先序遍历数组，可以得到树的根节点，根据得到的根节点，去中序数组中找到相应的根节点，因为中序的遍历顺序是左–根–右，可以得到根节点的左子树和右子树的中序遍历数组，这样树的左子树中节点的个数和右子树上节点的个数就确定了。在先序数组中，左子树的先序和左子树的先序也可以确定了。</p><p><strong>参数：</strong></p><p>先序遍历数组，子树在先序数组中的开始位置，结束位置。</p><p>中序遍历数组，子树在中序数组中的开始位置，结束位置。</p><p>可以根据先序和中序数组得到子树的先序和中序数组，所以此问题可以用递归解决。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> TreeNode <span class="title">reConstructBinaryTree</span><span class="params">(<span class="keyword">int</span> [] pre,<span class="keyword">int</span> [] in)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pre == <span class="keyword">null</span> || in ==<span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    TreeNode root=reConstructBinaryTree(pre,<span class="number">0</span>,pre.length-<span class="number">1</span>,in,<span class="number">0</span>,in.length-<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//前序遍历&#123;1,2,4,7,3,5,6,8&#125;和中序遍历序列&#123;4,7,2,1,5,3,8,6&#125;</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> TreeNode <span class="title">reConstructBinaryTree</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span>[] pre,<span class="keyword">int</span> startPre,<span class="keyword">int</span> endPre,<span class="keyword">int</span>[] in,<span class="keyword">int</span> startIn,<span class="keyword">int</span> endIn)</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(startPre &gt; endPre || startIn &gt; endIn)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    </span><br><span class="line">    TreeNode root=<span class="keyword">new</span> TreeNode(pre[startPre]);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = startIn;i &lt;= endIn;i++)</span><br><span class="line">        <span class="keyword">if</span>(in[i] == pre[startPre])&#123;</span><br><span class="line">            root.left=reConstructBinaryTree(pre,startPre+<span class="number">1</span>,startPre+i-startIn,</span><br><span class="line">                                            in,startIn,i-<span class="number">1</span>);</span><br><span class="line">            root.right=reConstructBinaryTree(pre,i-startIn+startPre+<span class="number">1</span>,endPre, </span><br><span class="line">                                             in,i+<span class="number">1</span>,endIn);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;题目：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="树" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>二叉树的遍历</title>
