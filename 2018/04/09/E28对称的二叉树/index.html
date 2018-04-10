@@ -20,18 +20,18 @@
     
     
     <meta name="keywords" content="数据结构与算法,树">
-    <meta name="description" content=": 题目: 请实现一个函数，用来判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。 思路：  首先根节点以及其左右子树，左子树的左子树和右子树的右子树相同   左子树的右子树和右子树的左子树相同即可，采用递归 非递归也可，采用栈或队列存取各级子树根节点​  1234567891011121314151617public class Solution &amp;#12">
+    <meta name="description" content="题目: 请实现一个函数，用来判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。 思路：  首先根节点以及其左右子树，左子树的左子树和右子树的右子树相同   左子树的右子树和右子树的左子树相同即可，采用递归 非递归也可，采用栈或队列存取各级子树根节点​  123456789101112131415public class Solution &amp;#123;">
 <meta name="keywords" content="数据结构与算法,树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="E28对称的二叉树">
 <meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/09/E28对称的二叉树/index.html">
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
-<meta property="og:description" content=": 题目: 请实现一个函数，用来判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。 思路：  首先根节点以及其左右子树，左子树的左子树和右子树的右子树相同   左子树的右子树和右子树的左子树相同即可，采用递归 非递归也可，采用栈或队列存取各级子树根节点​  1234567891011121314151617public class Solution &amp;#12">
+<meta property="og:description" content="题目: 请实现一个函数，用来判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。 思路：  首先根节点以及其左右子树，左子树的左子树和右子树的右子树相同   左子树的右子树和右子树的左子树相同即可，采用递归 非递归也可，采用栈或队列存取各级子树根节点​  123456789101112131415public class Solution &amp;#123;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-09T13:54:53.467Z">
+<meta property="og:updated_time" content="2018-04-10T14:48:43.916Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="E28对称的二叉树">
-<meta name="twitter:description" content=": 题目: 请实现一个函数，用来判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。 思路：  首先根节点以及其左右子树，左子树的左子树和右子树的右子树相同   左子树的右子树和右子树的左子树相同即可，采用递归 非递归也可，采用栈或队列存取各级子树根节点​  1234567891011121314151617public class Solution &amp;#12">
+<meta name="twitter:description" content="题目: 请实现一个函数，用来判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。 思路：  首先根节点以及其左右子树，左子树的左子树和右子树的右子树相同   左子树的右子树和右子树的左子树相同即可，采用递归 非递归也可，采用栈或队列存取各级子树根节点​  123456789101112131415public class Solution &amp;#123;">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
     
@@ -185,8 +185,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>:</p>
-<p><strong>题目:</strong></p>
+            <p><strong>题目:</strong></p>
 <p>请实现一个函数，用来判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。</p>
 <p><strong>思路：</strong></p>
 <ul>
@@ -196,7 +195,7 @@
 <li>左子树的右子树和右子树的左子树相同即可，采用递归</li>
 <li>非递归也可，采用栈或队列存取各级子树根节点<br>​</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isSymmetrical</span><span class="params">(TreeNode pRoot)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pRoot == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> comRoot(pRoot.left, pRoot.right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">comRoot</span><span class="params">(TreeNode left, TreeNode right)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        <span class="keyword">if</span>(left == <span class="keyword">null</span>) <span class="keyword">return</span> right==<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(right == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(left.val != right.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> comRoot(left.right, right.left) &amp;&amp; comRoot(left.left, right.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isSymmetrical</span><span class="params">(TreeNode pRoot)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pRoot == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> comRoot(pRoot.left, pRoot.right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">comRoot</span><span class="params">(TreeNode left, TreeNode right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(left == <span class="keyword">null</span>) <span class="keyword">return</span> right==<span class="keyword">null</span>;<span class="comment">//此为"等于"的判断，不是赋值</span></span><br><span class="line">        <span class="keyword">if</span>(right == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(left.val != right.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> comRoot(left.right, right.left) &amp;&amp; comRoot(left.left, right.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
 
