@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-10T14:45:37.057Z</updated>
+  <updated>2018-04-10T14:52:55.514Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>E05_2数组B合并到A数组</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/10/E05-2%E6%95%B0%E7%BB%84B%E5%90%88%E5%B9%B6%E5%88%B0A%E6%95%B0%E7%BB%84/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/10/E05-2数组B合并到A数组/</id>
+    <published>2018-04-10T14:49:46.000Z</published>
+    <updated>2018-04-10T14:52:55.514Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="E05-2有两个从小到大排序以后的数组A和B，其中A的末端有足够的缓冲空容纳B。请编写一个方法，将B合并入A并排序。"><a href="#E05-2有两个从小到大排序以后的数组A和B，其中A的末端有足够的缓冲空容纳B。请编写一个方法，将B合并入A并排序。" class="headerlink" title="E05_2有两个从小到大排序以后的数组A和B，其中A的末端有足够的缓冲空容纳B。请编写一个方法，将B合并入A并排序。"></a>E05_2有两个从小到大排序以后的数组A和B，其中A的末端有足够的缓冲空容纳B。请编写一个方法，将B合并入A并排序。</h1><p>题目：</p><p>有两个从小到大排序以后的数组A和B，其中A的末端有足够的缓冲空容纳B。请编写一个方法，将B合并入A并排序。</p><p>给定两个有序int数组A和B，A中的缓冲空用0填充，同时给定A和B的真实大小int n和int m，请返回合并后的数组。</p><p>方法一：直接暴力解法，把B直接添加到A中，然后再排序，快排时间复杂度为nlog(n);</p><p>方法二：新建已个数组（这个题可以不需要建立数组），把A和B 的元素都添加到新数组中去，时间复杂度为O（M+N）;空间复杂度增加了O（M）；</p><p>方法三：在A的左边和B比较，然后将B插入到A中去，但是移动的次数过多，移动一次时间复杂度为O（M）,那么时间复杂就为O（M*N）;</p><p>方法四：先计算A和B的长度，由于数组的后面的元素是空的，所以可以从后面复杂数组元素。时间复杂度为O（M+N），空间复杂度为O（1）；</p><p>下列是解法：</p><p>把A看成有序的，然后把B中的数据插入到A中，再利用插入排序算法对A进行排序。<br>假设A = {1, 4, 5}，B = ｛2, 3｝<br>初始状态如下：<br><img src="http://uploadfiles.nowcoder.com/images/20150807/277064_1438949425691_1.png" alt="img"><br>此时A[0 ~ 2]是有序的，利用插入排序向A中插入2，插入后如下图所示<br><img src="http://uploadfiles.nowcoder.com/images/20150807/277064_1438949440458_2.png" alt="img"><br>A中的 4 和 5 向后移动了，接着向A[0 ~ 3]中插入3后<br><img src="http://uploadfiles.nowcoder.com/images/20150807/277064_1438949452997_3.png" alt="img"><br>此时4 和 5又向后移动了。<br>再合并的时候，我们是从左向右合并的，结果造成了一些数据的多次移动，导致效率不理想。<br>如果考虑从右向左合并呢？<br>这时我们需要先断定合并后的从长度：k=lenA + lenB-1<br>令i=lenA-1, j=lenB-1<br>比较A[i]和B[j]，如果A[i]&gt;B[j]，A[k–]=A[i–];<br>如果A[i]&lt;B[j]，A[k–]=B[j–];<br>如此循环，直到 i&lt;0 或 j&lt;0<br>最后再判断j是否为0，不为0就继续A[k–]=B[j–]<br>按上面的流程执行，结果如下图所示<br><img src="http://uploadfiles.nowcoder.com/images/20150807/277064_1438949247085_4.png" alt="img"><br><img src="http://uploadfiles.nowcoder.com/images/20150807/277064_1438949261509_5.png" alt="img"><br><img src="http://uploadfiles.nowcoder.com/images/20150807/277064_1438949276407_6.png" alt="img"><br><img src="http://uploadfiles.nowcoder.com/images/20150807/277064_1438949299226_7.png" alt="img"><br>代码：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mergeAB</span><span class="params">(<span class="keyword">int</span>[] A,<span class="keyword">int</span> n,<span class="keyword">int</span>[] B,<span class="keyword">int</span> m)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=n-<span class="number">1</span> ;</span><br><span class="line">    <span class="keyword">int</span> j=m-<span class="number">1</span> ;</span><br><span class="line">    <span class="keyword">int</span> k=m+n-<span class="number">1</span> ;</span><br><span class="line">    <span class="keyword">while</span>(i&gt;=<span class="number">0</span> &amp;&amp; j &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(A[i] &gt;= B[j])&#123;</span><br><span class="line">            A[k--] = A[i--];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            A[k--] = B[j--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(j &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">        A[k--]=B[j--];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;E05-2有两个从小到大排序以后的数组A和B，其中A的末端有足够的缓冲空容纳B。请编写一个方法，将B合并入A并排序。&quot;&gt;&lt;a href=&quot;#E05-2有两个从小到大排序以后的数组A和B，其中A的末端有足够的缓冲空容纳B。请编写一个方法，将B合并入A并排序。&quot; cl
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="数组" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E7%BB%84/"/>
+    
+  </entry>
   
   <entry>
     <title>E04二维数组中的查找</title>
