@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>TCP与UDP（传输层协议） | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="网络">
+    <meta name="description" content="区别 TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。 TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。 TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却  一般。  TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。">
+<meta name="keywords" content="网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP与UDP（传输层协议）">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP（传输层协议）/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="区别 TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。 TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。 TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却  一般。  TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-12T14:38:55.234Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP与UDP（传输层协议）">
+<meta name="twitter:description" content="区别 TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。 TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。 TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却  一般。  TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">TCP与UDP（传输层协议）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">TCP与UDP（传输层协议）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-12T14:37:51.000Z" itemprop="datePublished" class="page-time">
+  2018年04月12日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/网络/">网络</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#区别"><span class="post-toc-number">1.</span> <span class="post-toc-text">区别</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#为什么UDP有时比TCP更有优势"><span class="post-toc-number">2.</span> <span class="post-toc-text">为什么UDP有时比TCP更有优势?</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-TCP与UDP（传输层协议）"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">TCP与UDP（传输层协议）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年04月12日 22:37:51" datetime="2018-04-12T14:37:51.000Z"  itemprop="datePublished">2018年04月12日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/网络/">网络</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><ul>
+<li>TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。</li>
+<li>TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。</li>
+<li>TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却</li>
+</ul>
+<p>一般。</p>
+<ul>
+<li>TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。</li>
+<li>TCP连接只能是点到点的；UDP支持一对一、一对多、多对一和多对多的交互通信。</li>
+<li>TCP首部开销20字节；UDP的首部开销小，只有8个字节。</li>
+<li>TCP的逻辑通信信道是全双工的可靠信道；UDP的逻辑通信信道是不可靠信道。</li>
+</ul>
+<h1 id="为什么UDP有时比TCP更有优势"><a href="#为什么UDP有时比TCP更有优势" class="headerlink" title="为什么UDP有时比TCP更有优势?"></a>为什么UDP有时比TCP更有优势?</h1><p>UDP以其简单、传输快的优势，在越来越多场景下取代了TCP,如实时游戏。</p>
+<p>（1）网速的提升给UDP的稳定性提供可靠网络保障，丢包率很低，如果使用应用层重传，能够确保传输的可靠性。</p>
+<p>（2）TCP为了实现网络通信的可靠性，使用了复杂的拥塞控制算法，建立了繁琐的握手过程，由于TCP内置的系统协议栈中，极难对其进行改进。</p>
+<p>采用TCP，一旦发生丢包，TCP会将后续的包缓存起来，等前面的包重传并接收到后再继续发送，延时会越来越大，基于UDP对实时性要求较为严格的情况下，采用自定义重传机制，能够把丢包产生的延迟降到最低，尽量减少网络问题对游戏性造成影响。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/网络/">网络</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP（传输层协议）/&title=《TCP与UDP（传输层协议）》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP（传输层协议）/&title=《TCP与UDP（传输层协议）》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP（传输层协议）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCP与UDP（传输层协议）》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP（传输层协议）/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP（传输层协议）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/04/11/查找算法/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">查找算法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP（传输层协议）/&title=《TCP与UDP（传输层协议）》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP（传输层协议）/&title=《TCP与UDP（传输层协议）》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP（传输层协议）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCP与UDP（传输层协议）》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP（传输层协议）/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP（传输层协议）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADLElEQVR42u3a207rQAwFUP7/pzmvIHQm23YqNe7KEyq5ranExvZ8fcXH948j/+Tn53/P+fv5+ZzzPb9ecWBjY2M/hP19PPJzzvc8v3ryPuflLr8nNjY29jr2JCTOD6gCzhF4frfCEmNjY2N/MDuJkLuWLz+wsbGxsasBlpQr1TPn4YSNjY39yexqMCRN+Unw5Iv+8l4aNjY29tuz86no+//8kvk2NjY29huzJ42bycC1Gk754CF6LjY2NvYi9ryoSIYHvaFC702Sq7CxsbE3sc+XVQNsMtyNvp9WrVH+NTY2NvYD2XlE5edXw++upUyiFBsbG3sTO/mjX12C3vadSWTmG4CwsbGx97Grt6iGX6/IyVtRTTw2Njb2OnaVl2dBtYWUROm85YSNjY29iT1ZoGoDaLKhJ9++kyiwsbGxN7GTUiSPol7U9YqQyeYhbGxs7H3s82V5IOVtoMkgeVKo/AowbGxs7EXsagmRN57uqoqScqVcV2FjY2OvYN/wb/2guZ+8dHUTTzIGxsbGxv4cdg6ej3snI+Tm1kxsbGzspew8hHoNo17x09vKeRGQ2NjY2CvY8/Fq9Q6TZtMZn5+DjY2NvZWdR0s+gq22lqpR12yKYWNjYy9i9/6Vn7eQ8vjJl6Y8+sXGxsZexL5rHNvbLTNfiNxy0VfDxsbGfiA7H44mD543jwrfT/Gc8nQaGxsb+yHsXlMmbyrlT6kik+WOshobGxt7BTt/req0tLoo58jpXXtxZ2xsbOyHs3sbJSflR7XY6JUuhdDCxsbGfji7twSTDTq9Ba1u6Gm2lrCxsbEfy75rq02vpOmVHEkJdHEHbGxs7HXsXlDlyGoI9TZTFkYF2NjY2OvYvQDLC4PJwGASq/9dPmxsbOwV7MlGnFe3lqpRV2g2YWNjYy9iV8erk0KlGlGTQUJe/GBjY2PvYCex0YuQXkAm7aQbAgwbGxt7HTu5dT5STV4xZ/Sy9+IqbGxs7A9m5yFUHSH3ypXml4SNjY39wexeLE228lQXKxpIY2NjY69j55GTh1xvYHBXHF58DdjY2NiL2HkAVBtM+aB3MtbNSxpsbGzsdex/XwVy3kczcYMAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

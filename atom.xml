@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-11T13:53:17.400Z</updated>
+  <updated>2018-04-12T14:38:55.234Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>TCP与UDP（传输层协议）</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP%E4%B8%8EUDP%EF%BC%88%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE%EF%BC%89/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP（传输层协议）/</id>
+    <published>2018-04-12T14:37:51.000Z</published>
+    <updated>2018-04-12T14:38:55.234Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><ul><li>TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。</li><li>TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。</li><li>TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却</li></ul><p>一般。</p><ul><li>TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。</li><li>TCP连接只能是点到点的；UDP支持一对一、一对多、多对一和多对多的交互通信。</li><li>TCP首部开销20字节；UDP的首部开销小，只有8个字节。</li><li>TCP的逻辑通信信道是全双工的可靠信道；UDP的逻辑通信信道是不可靠信道。</li></ul><h1 id="为什么UDP有时比TCP更有优势"><a href="#为什么UDP有时比TCP更有优势" class="headerlink" title="为什么UDP有时比TCP更有优势?"></a>为什么UDP有时比TCP更有优势?</h1><p>UDP以其简单、传输快的优势，在越来越多场景下取代了TCP,如实时游戏。</p><p>（1）网速的提升给UDP的稳定性提供可靠网络保障，丢包率很低，如果使用应用层重传，能够确保传输的可靠性。</p><p>（2）TCP为了实现网络通信的可靠性，使用了复杂的拥塞控制算法，建立了繁琐的握手过程，由于TCP内置的系统协议栈中，极难对其进行改进。</p><p>采用TCP，一旦发生丢包，TCP会将后续的包缓存起来，等前面的包重传并接收到后再继续发送，延时会越来越大，基于UDP对实时性要求较为严格的情况下，采用自定义重传机制，能够把丢包产生的延迟降到最低，尽量减少网络问题对游戏性造成影响。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;区别&quot;&gt;&lt;a href=&quot;#区别&quot; class=&quot;headerlink&quot; title=&quot;区别&quot;&gt;&lt;/a&gt;区别&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。&lt;/li&gt;
+&lt;li&gt;TCP 传输单位
+      
+    
+    </summary>
+    
+      <category term="网络" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="网络" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>查找算法</title>
