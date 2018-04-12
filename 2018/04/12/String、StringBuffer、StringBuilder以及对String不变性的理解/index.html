@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>String、StringBuffer、StringBuilder以及对String不变性的理解 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java基础">
+    <meta name="description" content="String、StringBuffer、StringBuilder 都是 final 类, 都不允许被继承;  String 长度是不可变的,StringBuffer、StringBuilder 长度是可变的;  StringBuffer 是线程安全的，StringBuilder 不是线程安全的，但它们两个中的所有方法都是相同的，StringBuffer在StringBuilder的方法之上添加了">
+<meta name="keywords" content="Java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="String、StringBuffer、StringBuilder以及对String不变性的理解">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/String、StringBuffer、StringBuilder以及对String不变性的理解/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="String、StringBuffer、StringBuilder 都是 final 类, 都不允许被继承;  String 长度是不可变的,StringBuffer、StringBuilder 长度是可变的;  StringBuffer 是线程安全的，StringBuilder 不是线程安全的，但它们两个中的所有方法都是相同的，StringBuffer在StringBuilder的方法之上添加了">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-12T14:42:55.873Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="String、StringBuffer、StringBuilder以及对String不变性的理解">
+<meta name="twitter:description" content="String、StringBuffer、StringBuilder 都是 final 类, 都不允许被继承;  String 长度是不可变的,StringBuffer、StringBuilder 长度是可变的;  StringBuffer 是线程安全的，StringBuilder 不是线程安全的，但它们两个中的所有方法都是相同的，StringBuffer在StringBuilder的方法之上添加了">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">String、StringBuffer、StringBuilder以及对String不变性的理解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">String、StringBuffer、StringBuilder以及对String不变性的理解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-12T14:40:27.000Z" itemprop="datePublished" class="page-time">
+  2018年04月12日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java/">Java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#String、StringBuffer、StringBuilder"><span class="post-toc-number">1.</span> <span class="post-toc-text">String、StringBuffer、StringBuilder</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#String不变性的理解"><span class="post-toc-number">2.</span> <span class="post-toc-text">String不变性的理解</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#String有重写Object的hashcode和toString吗？如果重写equals不重写hashcode会出现什么问题？"><span class="post-toc-number">3.</span> <span class="post-toc-text">String有重写Object的hashcode和toString吗？如果重写equals不重写hashcode会出现什么问题？</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-String、StringBuffer、StringBuilder以及对String不变性的理解"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">String、StringBuffer、StringBuilder以及对String不变性的理解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年04月12日 22:40:27" datetime="2018-04-12T14:40:27.000Z"  itemprop="datePublished">2018年04月12日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java/">Java</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="String、StringBuffer、StringBuilder"><a href="#String、StringBuffer、StringBuilder" class="headerlink" title="String、StringBuffer、StringBuilder"></a>String、StringBuffer、StringBuilder</h2><ul>
+<li>都是 final 类, 都不允许被继承; </li>
+<li>String 长度是不可变的,StringBuffer、StringBuilder 长度是可变的; </li>
+<li>StringBuffer 是线程安全的，StringBuilder 不是线程安全的，但它们两个中的所有方法都是相同的，StringBuffer在StringBuilder的方法之上添加了synchronized修饰，保证线程安全。 </li>
+<li>StringBuilder比StringBuffer拥有更好的性能。 </li>
+<li>如果一个String类型的字符串，在编译时就可以确定是一个字符串常量，则编译完成之后，字符串会自动拼接成一个常量。此时String的速度比StringBuffer和StringBuilder的性能好的多。 </li>
+</ul>
+<h2 id="String不变性的理解"><a href="#String不变性的理解" class="headerlink" title="String不变性的理解"></a>String不变性的理解</h2><ul>
+<li>String 类是被final进行修饰的，不能被继承。 </li>
+<li>在用+号链接字符串的时候会创建新的字符串。 </li>
+<li>String s = new String(“Hello world”); 可能创建两个对象也可能创建一个对象。如果静态区中有“Hello world”字符串常量对象的话，则仅仅在堆中创建一个对象。如果静态区中没有“Hello world”对象，则堆上和静态区中都需要创建对象。 </li>
+<li>在 java 中, 通过使用 “+” 符号来串联字符串的时候, 实际上底层会转成通过 StringBuilder 实例的 append() 方法来实现。 </li>
+</ul>
+<h2 id="String有重写Object的hashcode和toString吗？如果重写equals不重写hashcode会出现什么问题？"><a href="#String有重写Object的hashcode和toString吗？如果重写equals不重写hashcode会出现什么问题？" class="headerlink" title="String有重写Object的hashcode和toString吗？如果重写equals不重写hashcode会出现什么问题？"></a>String有重写Object的hashcode和toString吗？如果重写equals不重写hashcode会出现什么问题？</h2><p><strong>String有重写Object的hashcode和toString吗？</strong></p>
+<p>String重写了Object类的hashcode和toString方法。 </p>
+<p><strong>当equals方法被重写时，通常有必要重写hashCode方法，以维护hashCode方法的常规协定，该协定声明相对等的两个对象必须有相同的hashCode</strong></p>
+<ul>
+<li>object1.euqal(object2) 为true时，object1.hashCode() == object2.hashCode() 为true </li>
+<li>object1.hashCode() ==  object2.hashCode() 为false时，object1.euqal(object2)必定为false </li>
+<li>object1.hashCode() ==  object2.hashCode() 为true时，但object1.euqal(object2)不一定定为true </li>
+</ul>
+<p><strong>重写equals不重写hashcode会出现什么问题</strong></p>
+<p>在存储散列集合时(如Set类)，如果原对象.equals(新对象)，但没有对hashCode重写，即两个对象拥有不同的hashCode，则在集合中将会存储两个值相同的对象，从而导致混淆。因此在重写equals方法时，必须重写hashCode方法。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/Java基础/">Java基础</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/String、StringBuffer、StringBuilder以及对String不变性的理解/&title=《String、StringBuffer、StringBuilder以及对String不变性的理解》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/String、StringBuffer、StringBuilder以及对String不变性的理解/&title=《String、StringBuffer、StringBuilder以及对String不变性的理解》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/String、StringBuffer、StringBuilder以及对String不变性的理解/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《String、StringBuffer、StringBuilder以及对String不变性的理解》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/String、StringBuffer、StringBuilder以及对String不变性的理解/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/String、StringBuffer、StringBuilder以及对String不变性的理解/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/04/12/TCP与UDP（传输层协议）/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">TCP与UDP（传输层协议）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/String、StringBuffer、StringBuilder以及对String不变性的理解/&title=《String、StringBuffer、StringBuilder以及对String不变性的理解》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/String、StringBuffer、StringBuilder以及对String不变性的理解/&title=《String、StringBuffer、StringBuilder以及对String不变性的理解》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/String、StringBuffer、StringBuilder以及对String不变性的理解/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《String、StringBuffer、StringBuilder以及对String不变性的理解》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/String、StringBuffer、StringBuilder以及对String不变性的理解/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/String、StringBuffer、StringBuilder以及对String不变性的理解/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEjUlEQVR42u3aW47qQAwFQPa/ae73CEGO7XAVh8rXCDKku0Bqvx6P+Hq+XK/vVu/P302emz/l9c7TLkyYMGHCdEmmZFmfX/m8mc+gybYnlMlTos/BhAkTJkzLmfJF5xvLryrrPODI94UJEyZMmH6TaZK45ulonr7mu8CECRMmTJiqiehkoXl9Nam+5rVZTJgwYcL0a0z5x1WP517JONlk7+v5ei0cEyZMmDBdjKl6JN/p76/MN2HChAkTpssw9ZqOecF33oCsFpcnBei3u8aECRMmTGuZ8gNyknbOy7u9pmZ1zQerxYQJEyZMC5l6RdXeZiajP9WEvPfcg98RJkyYMGG6EVPyd/JutZGZbDjZZLWwe/CVYMKECROmtUw5XHKs9hLRHta855gHOpgwYcKEaTtTfoj2mov5oT5vrFbXUBDAhAkTJkzLmT6nr0mSmRDkr+Rbqg4MVRN1TJgwYcK0l6mauFYLtb2EM99wb8AoT+8f1SgJEyZMmDBdmOl7B3N16fN26aSxelAbwIQJEyZMC5mqwzpJElsF6gUi1fJuHl78eR0TJkyYMN2CqXfEToq/vVbluUFAVA7GhAkTJkxrmQqzq+Nt98ZhE7hJGbr3U8CECRMmTFuYegdk9ZHzodXekGueih/8jjBhwoQJ01qmvPA6P5KTT/heMzX/+g/WiQkTJkyYljNVj+15cJDT98qyeSoe3Y8JEyZMmFYxFQ7C4qDMvGibj/L0iAvPxYQJEyZMy5nyFHESOlTT0TyFThLsPJ1+GxBgwoQJE6aFTNWPnqSdefm4mlpXg4xRORsTJkyYMK1iysc6/09KnBeRJysvv4sJEyZMmNYyJe3MvC+ap7tV+md8zcu7B/+LCRMmTJhWMfVGPxOO3phpjpgXZ6vEj3xLmDBhwoRpCVOerPaKwnlzsRqm5OXaPHQ4qBBgwoQJE6ZVTJMt5ctKDuYkZc0DhV6ocRAoYMKECROmtUzJUnrJZO/T5o3MyZoLlWBMmDBhwrSEKS+nzo/V/MDucedF4fIeMWHChAnTLZgmTcSzmp29UmyvCZqnzZgwYcKE6R5Mk5GaSduyV1ZuNiaLoz+YMGHChOlOTL2ktBc0VO+pBgTzpmkUN2HChAkTpiVMyTHfW1CeHlfvTMKO5/jChAkTJkx7mebF2d7xPGl/TiZqqmFHOYPHhAkTJkyXZ6oez/kr+caSEm3+Nc8DFEyYMGHCdCem/NhOtt08gHuDNcEQbTO8wIQJEyZMt2CajLzkR/JkyKbahqx+tW+fggkTJkyY1jLlQL1BmUlAcFbRtvcUTJgwYcJ0D6bmpM9guGceEOTrrL7+dp2YMGHChGkt0zxQ6I3O5H/Pi7bV544CCEyYMGHCdEmmasqaL/Ssdumk4Nsb33lbEceECRMmTGuZzjrI87JvHqFMIp1q0PD2x4EJEyZMmH6MqdfOrHYMe0HDWQM6mDBhwoTpN5mSQ3SSTldLwPngUU5ZuAkTJkyYMC1hOncIpnfA50M/PY48MR7VwjFhwoQJ08WYegnkvCBbHdaZl2vnYQomTJgwYVrF9A9GNIytqgULZwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
