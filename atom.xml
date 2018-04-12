@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-12T14:42:55.873Z</updated>
+  <updated>2018-04-12T14:47:01.616Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java访问权限修饰词的作用域</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/Java%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E8%AF%8D%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/Java访问权限修饰词的作用域/</id>
+    <published>2018-04-12T14:46:16.000Z</published>
+    <updated>2018-04-12T14:47:01.616Z</updated>
+    
+    <content type="html"><![CDATA[<table><thead><tr><th style="text-align:center">作用域（可见）</th><th style="text-align:center">当前类</th><th style="text-align:center">同包</th><th style="text-align:center">子孙类</th><th style="text-align:center">其他包</th></tr></thead><tbody><tr><td style="text-align:center">public</td><td style="text-align:center">√</td><td style="text-align:center">√</td><td style="text-align:center">√</td><td style="text-align:center">√</td></tr><tr><td style="text-align:center">protected</td><td style="text-align:center">√</td><td style="text-align:center">√</td><td style="text-align:center">√</td><td style="text-align:center">×</td></tr><tr><td style="text-align:center">default(friendly)</td><td style="text-align:center">√</td><td style="text-align:center">√</td><td style="text-align:center">×</td><td style="text-align:center">×</td></tr><tr><td style="text-align:center">private</td><td style="text-align:center">√</td><td style="text-align:center">×</td><td style="text-align:center">×</td><td style="text-align:center">×</td></tr></tbody></table>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;作用域（可见）&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;当前类&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;同包&lt;/th&gt;
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/Java/"/>
+    
+    
+      <category term="Java基础" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/Java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>String、StringBuffer、StringBuilder以及对String不变性的理解</title>
