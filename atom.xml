@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-14T12:50:42.839Z</updated>
+  <updated>2018-04-14T14:08:35.463Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java基础知识小集</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%B0%8F%E9%9B%86/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/Java基础知识小集/</id>
+    <published>2018-04-14T14:05:13.000Z</published>
+    <updated>2018-04-14T14:08:35.463Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="局部变量能否和成员变量重名？"><a href="#局部变量能否和成员变量重名？" class="headerlink" title="局部变量能否和成员变量重名？"></a>局部变量能否和成员变量重名？</h1><p>局部变量可以和成员变量重名，不加“this”修饰时，优先使用最近的变量。 </p><p>java采用局部优先的思想。局部变量可以和成员变量相同，使用标识符调用时，优先使用局部变量。在实例方法中出现变量名相同时，可以使用this关键字来调用。如果成员变量用static修饰了呢，也能用this调用吗？不能了，这个时候可以通过类名来调用，因为静态成员是属于类的。</p><p>  <img src="https://uploadfiles.nowcoder.net/images/20171104/631730_1509805462010_05AB09F792804DEE45454E55F8DB7F08" alt="img"> </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;局部变量能否和成员变量重名？&quot;&gt;&lt;a href=&quot;#局部变量能否和成员变量重名？&quot; class=&quot;headerlink&quot; title=&quot;局部变量能否和成员变量重名？&quot;&gt;&lt;/a&gt;局部变量能否和成员变量重名？&lt;/h1&gt;&lt;p&gt;局部变量可以和成员变量重名，不加“this”
+      
+    
+    </summary>
+    
+      <category term="网络" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="网络" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>操作系统知识小集</title>
