@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-13T05:08:09.440Z</updated>
+  <updated>2018-04-14T12:46:45.814Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>找东西背后的概率问题</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/%E6%89%BE%E4%B8%9C%E8%A5%BF%E8%83%8C%E5%90%8E%E7%9A%84%E6%A6%82%E7%8E%87%E9%97%AE%E9%A2%98/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/找东西背后的概率问题/</id>
+    <published>2018-04-14T12:44:16.000Z</published>
+    <updated>2018-04-14T12:46:45.814Z</updated>
+    
+    <content type="html"><![CDATA[<p>来自于《思考的乐趣-Matrix67数学笔记》第一部分第2节的一条小题</p><p><strong>题目：</strong></p><p>我的书桌有8个抽屉，分别用数字1到8编号。每次拿到一份文件后，我都会把这份文件随机的放在一个抽屉中。但是我非常粗心，有1/5的概率会忘了把文件放进抽屉里，最终把文件搞丢。<br>            现在我要找一份非常重要的文件。我将按顺序打开每一个抽屉，直到找到这份文件为止（或者很悲剧的发现，翻遍了所有抽屉都没能找到这份文件）。考虑下面三个问题。<br>(1) 假如我打开了第一个抽屉，发现里面没有我要的文件。这份文件在其余的7个抽屉里的概率是多少？<br>(2) 假如我翻遍了前4个抽屉，里面都没有我要的文件。这份文件在剩下的4个抽屉里的概率是多少？<br>(3) 假如我翻遍了前7个抽屉，里面都没有我要的文件。这份文件在最后一个抽屉里的概率是多少？</p><p>解：</p><p>M牛在书中给出的一个巧妙解法是这样的:</p><blockquote><p><strong>注意到，平均每10份文件就有两份被搞丢，其余8份平均地分给了8个抽屉。假如我把所有搞丢了的文件都找了回来，那么它们应该还占2个抽屉。这让我们想到了这样一个有趣的思路：在这8个抽屉后加上2个虚拟抽屉——抽屉9和抽屉10，这两个抽屉专门用来装我丢掉的文件。我们甚至可以把题目等价地变为：随机把文件放在10个抽屉里，但找文件时不允许打开最后2个抽屉。当我已经找过n个抽屉但仍没找到我想要的文件时，文件只能在剩下的10-n个抽屉里，但是我只能打开剩下的8-n个抽屉，因此所有的概率是(8 - n)/(10 - n)。当n分别等于1、4、7时，这个概率值分别是7/9、2/3和1/3。</strong></p></blockquote><p>从基本的解法中可发现，对于此题中的事件A、B，有P(A|B)恒等于1。因此，实际上当文件不在前n个抽屉中时，文件在后(抽屉总数-n)个抽屉中的概率就为(文件在后(抽屉总数 - n)个抽屉中的概率 除以 文件不在前n个抽屉中的概率)</p><p>考虑文件不在前n个抽屉中的概率，可得P(文件不在前n个抽屉中) = 1 - P(文件不丢失)·(n / 抽屉总数)</p><p>考虑文件在后(抽屉总数 - n)个抽屉中的概率，可得P(文件在后(抽屉总数 - n)个抽屉中) = P(文件不丢失)·(抽屉总数 - n) / 抽屉总数</p><p>则总体概率为P(B|A) = P(文件不丢失)·(抽屉总数 - n) / (抽屉总数 - P(文件不丢失)·n)</p><p>代入P(文件不丢失) = 4/5， 抽屉总数 = 8，可得</p><p>总体概率P = (4/5)·(8 - n) / (8 - 4·n / 5) = (8 - n) / (10 - n)</p><p>转载自网络</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;来自于《思考的乐趣-Matrix67数学笔记》第一部分第2节的一条小题&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;题目：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;我的书桌有8个抽屉，分别用数字1到8编号。每次拿到一份文件后，我都会把这份文件随机的放在一个抽屉中。但是我非常粗心，有1/5的概率会
+      
+    
+    </summary>
+    
+      <category term="数学题" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E5%AD%A6%E9%A2%98/"/>
+    
+    
+      <category term="数学题" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E5%AD%A6%E9%A2%98/"/>
+    
+  </entry>
   
   <entry>
     <title>Deepin用终端查看已安装的软件列表及软件卸载</title>
