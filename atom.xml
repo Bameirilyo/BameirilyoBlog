@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-14T12:46:45.814Z</updated>
+  <updated>2018-04-14T12:50:42.839Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>操作系统知识小集</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86%E5%B0%8F%E9%9B%86/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/操作系统知识小集/</id>
+    <published>2018-04-14T12:50:06.000Z</published>
+    <updated>2018-04-14T12:50:42.839Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="进程状态变化"><a href="#进程状态变化" class="headerlink" title="进程状态变化"></a>进程状态变化</h1><p><img src="http://uploadfiles.nowcoder.net/images/20150920/458054_1442753187771_5CDBB527FAC51A534C0C85F7B4B46194" alt="img"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;进程状态变化&quot;&gt;&lt;a href=&quot;#进程状态变化&quot; class=&quot;headerlink&quot; title=&quot;进程状态变化&quot;&gt;&lt;/a&gt;进程状态变化&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http://uploadfiles.nowcoder.net/images/20150
+      
+    
+    </summary>
+    
+      <category term="操作系统" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="操作系统" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>找东西背后的概率问题</title>
