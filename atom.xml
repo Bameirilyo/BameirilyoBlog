@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-15T15:38:57.995Z</updated>
+  <updated>2018-04-15T15:40:04.099Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/Java%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E5%BC%8F%E5%8F%8A%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
     <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/Java实现多线程的方式及三种方式的区别/</id>
     <published>2018-04-15T07:38:02.000Z</published>
-    <updated>2018-04-15T15:38:57.995Z</updated>
+    <updated>2018-04-15T15:40:04.099Z</updated>
     
     <content type="html"><![CDATA[<h1 id="实现多线程的方式"><a href="#实现多线程的方式" class="headerlink" title="实现多线程的方式"></a>实现多线程的方式</h1><ul><li>继承Thread类，重写run函数。</li><li>实现Runnable接口 </li><li>使用ExecutorService、Callable、Future实现有返回结果的多线程</li></ul><h1 id="三种方式的区别"><a href="#三种方式的区别" class="headerlink" title="三种方式的区别"></a>三种方式的区别</h1><ul><li>实现Runnable接口可以避免Java单继承特性而带来的局限；增强程序的健壮性，代码能够被多个线程共享，代码与数据是独立的；适合多个相同程序代码的线程区处理同一资源的情况。 </li><li>继承Thread类和实现Runnable方法启动线程都是使用start方法，然后JVM虚拟机将此线程放到就绪队列中，如果有处理机可用，则执行run方法。 </li><li>实现Callable接口要实现call方法，并且线程执行完毕后会有返回值。其他的两种都是重写run方法，没有返回值。 </li></ul>]]></content>
     
@@ -36,6 +36,10 @@
     
     </summary>
     
+      <category term="Java" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/Java/"/>
+    
+    
+      <category term="Java基础" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/Java%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
