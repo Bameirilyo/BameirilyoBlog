@@ -13,7 +13,7 @@
     
     
     
-    <title>Java实现多线程的方式及三种方式的区别 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <title>线程池 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -23,14 +23,14 @@
     <meta name="description" content="什么是线程池？线程池顾名思义就是事先创建若干个可执行的线程放入一个池（容器）中，需要的时候从池中获取线程不用自行创建，使用完毕不需要销毁线程而是放回池中，从而减少创建和销毁线程对象的开销。  设计一个动态大小的线程池，如何设计，应该有哪些方法 ？ 一个线程池包括以下四个基本组成部分：   线程管理器(ThreadPool)：用于创建并管理线程池，包括创建线程，销毁线程池，添加新任务；  工作线程(">
 <meta name="keywords" content="Java基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java实现多线程的方式及三种方式的区别">
+<meta property="og:title" content="线程池">
 <meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/线程池/index.html">
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="什么是线程池？线程池顾名思义就是事先创建若干个可执行的线程放入一个池（容器）中，需要的时候从池中获取线程不用自行创建，使用完毕不需要销毁线程而是放回池中，从而减少创建和销毁线程对象的开销。  设计一个动态大小的线程池，如何设计，应该有哪些方法 ？ 一个线程池包括以下四个基本组成部分：   线程管理器(ThreadPool)：用于创建并管理线程池，包括创建线程，销毁线程池，添加新任务；  工作线程(">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-15T15:48:26.253Z">
+<meta property="og:updated_time" content="2018-04-15T15:51:37.593Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java实现多线程的方式及三种方式的区别">
+<meta name="twitter:title" content="线程池">
 <meta name="twitter:description" content="什么是线程池？线程池顾名思义就是事先创建若干个可执行的线程放入一个池（容器）中，需要的时候从池中获取线程不用自行创建，使用完毕不需要销毁线程而是放回池中，从而减少创建和销毁线程对象的开销。  设计一个动态大小的线程池，如何设计，应该有哪些方法 ？ 一个线程池包括以下四个基本组成部分：   线程管理器(ThreadPool)：用于创建并管理线程池，包括创建线程，销毁线程池，添加新任务；  工作线程(">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
@@ -119,7 +119,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Java实现多线程的方式及三种方式的区别</div>
+        <div class="flex-col header-title ellipsis">线程池</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -141,10 +141,10 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">Java实现多线程的方式及三种方式的区别</h1>
+        <h1 class="title">线程池</h1>
         <h5 class="subtitle">
             
-                <time datetime="2018-04-15T15:46:02.000Z" itemprop="datePublished" class="page-time">
+                <time datetime="2018-04-15T15:50:48.000Z" itemprop="datePublished" class="page-time">
   2018年04月15日
 </time>
 
@@ -175,9 +175,9 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">Java实现多线程的方式及三种方式的区别</h1>
+        <h1 class="post-card-title">线程池</h1>
         <div class="post-meta">
-            <time class="post-time" title="2018年04月15日 23:46:02" datetime="2018-04-15T15:46:02.000Z"  itemprop="datePublished">2018年04月15日</time>
+            <time class="post-time" title="2018年04月15日 23:50:48" datetime="2018-04-15T15:50:48.000Z"  itemprop="datePublished">2018年04月15日</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java/">Java</a></li></ul>
@@ -240,7 +240,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/线程池/&title=《Java实现多线程的方式及三种方式的区别》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/线程池/&title=《线程池》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -250,7 +250,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/线程池/&title=《Java实现多线程的方式及三种方式的区别》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/线程池/&title=《线程池》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -260,7 +260,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java实现多线程的方式及三种方式的区别》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/线程池/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《线程池》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/线程池/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -363,7 +363,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/线程池/&title=《Java实现多线程的方式及三种方式的区别》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/线程池/&title=《线程池》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -373,7 +373,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/线程池/&title=《Java实现多线程的方式及三种方式的区别》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/线程池/&title=《线程池》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -383,7 +383,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java实现多线程的方式及三种方式的区别》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/线程池/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《线程池》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/线程池/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
