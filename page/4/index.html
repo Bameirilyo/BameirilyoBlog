@@ -285,9 +285,9 @@ S...
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        对于Java的序列化，一直只知道只需要实现Serializbale这个接口就可以了，具体内部实现一直不是很了解，正好这次在重复造RPC的轮子的时候涉及到序列化问题，就抽时间看了下 Java序列化的底层实现，这篇文章算是这次的学习小结吧。
-Java序列化是指把Java对象保存为二进制字节码的过程，Java反序列化是指把二进制码重新转换成Java对象的过程。
-为什么需要序列化？第一种情况是：一般...
+        定义Java序列化是指把Java对象保存为二进制字节码的过程，Java反序列化是指把二进制码重新转换成Java对象的过程。
+为什么需要序列化？第一种情况是：一般情况下Java对象的声明周期都比Java虚拟机的要短，实际应用中我们希望在JVM停止运行之后能够持久化指定的对象，这时候就需要把对象进行序列化之后保存。
+第二种情况是：需要把Java对象通过网络进行传输的时候。因为数据只能够以二进制的...
     
 
         <a href="/BameirilyoBlog/2018/04/06/Java的序列化/" class="post-more waves-effect waves-button">
