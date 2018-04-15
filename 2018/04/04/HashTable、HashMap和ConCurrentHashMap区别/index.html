@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="Map├Hashtable├HashMap└WeakHashMap HashMap和HashTable的对比 1.HashMap是非线程安全的，HashTable是线程安全的。 Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放之后才">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-04T12:27:49.017Z">
+<meta property="og:updated_time" content="2018-04-15T07:37:24.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashTable、HashMap和ConCurrentHashMap区别">
 <meta name="twitter:description" content="Map├Hashtable├HashMap└WeakHashMap HashMap和HashTable的对比 1.HashMap是非线程安全的，HashTable是线程安全的。 Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放之后才">
@@ -166,7 +166,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HashMap和HashTable的对比"><span class="post-toc-number">1.</span> <span class="post-toc-text">HashMap和HashTable的对比</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HashTable和ConCurrentHashMap的对比"><span class="post-toc-number">2.</span> <span class="post-toc-text">HashTable和ConCurrentHashMap的对比</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HashMap和ConCurrentHashMap的对比"><span class="post-toc-number">3.</span> <span class="post-toc-text">HashMap和ConCurrentHashMap的对比</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HashMap和HashTable的对比"><span class="post-toc-number">1.</span> <span class="post-toc-text">HashMap和HashTable的对比</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HashTable和ConCurrentHashMap的对比"><span class="post-toc-number">2.</span> <span class="post-toc-text">HashTable和ConCurrentHashMap的对比</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HashMap和ConCurrentHashMap的对比"><span class="post-toc-number">3.</span> <span class="post-toc-text">HashMap和ConCurrentHashMap的对比</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Concurrent-HashMap-线程安全吗，-Concurrent-HashMap如何保证-线程安全？"><span class="post-toc-number">4.</span> <span class="post-toc-text">Concurrent HashMap 线程安全吗， Concurrent HashMap如何保证 线程安全？</span></a></li></ol>
         </nav>
     </aside>
 
@@ -213,6 +213,11 @@
 <h1 id="HashTable和ConCurrentHashMap的对比"><a href="#HashTable和ConCurrentHashMap的对比" class="headerlink" title="HashTable和ConCurrentHashMap的对比"></a>HashTable和ConCurrentHashMap的对比</h1><p>ConcurrentHashMap引入了分割(Segment)，把一个大的Map拆分成N个小的HashTable，在put方法中，会根据hash(paramK.hashCode())来决定具体存放进哪个Segment，如果查看Segment的put操作，我们会发现内部使用的同步机制是基于lock操作的，这样就可以对Map的一部分（Segment）进行上锁，这样影响的只是将要放入同一个Segment的元素的put操作，保证同步的时候，锁住的不是整个Map（HashTable就是这么做的），相对于HashTable提高了多线程环境下的性能，因此HashTable已经被淘汰了。</p>
 <h1 id="HashMap和ConCurrentHashMap的对比"><a href="#HashMap和ConCurrentHashMap的对比" class="headerlink" title="HashMap和ConCurrentHashMap的对比"></a>HashMap和ConCurrentHashMap的对比</h1><p>（1）ConcurrentHashMap对整个桶数组进行了分割分段(Segment)，然后在每一个分段上都用lock锁进行保护，相对于HashTable的syn关键字锁的粒度更精细了一些，并发性能更好，而HashMap没有锁机制，不是线程安全的。</p>
 <p>（2）HashMap的键值对允许有null，但是ConCurrentHashMap都不允许。</p>
+<h1 id="Concurrent-HashMap-线程安全吗，-Concurrent-HashMap如何保证-线程安全？"><a href="#Concurrent-HashMap-线程安全吗，-Concurrent-HashMap如何保证-线程安全？" class="headerlink" title="Concurrent HashMap 线程安全吗， Concurrent HashMap如何保证 线程安全？"></a>Concurrent HashMap 线程安全吗， Concurrent HashMap如何保证 线程安全？</h1><ul>
+<li>HashTable容器在竞争激烈的并发环境下表现出效率低下的原因是所有访问HashTable的线程都必须竞争同一把锁，那假如容器里有多把锁，每一把锁用于锁容器其中一部分数据，那么当多线程访问容器里不同数据段的数据时，线程间就不会存在锁竞争，从而可以有效的提高并发访问效率，这就是ConcurrentHashMap所使用的锁分段技术，首先将数据分成一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问。 </li>
+<li>get操作的高效之处在于整个get过程不需要加锁，除非读到的值是空的才会加锁重读。get方法里将要使用的共享变量都定义成volatile，如用于统计当前Segement大小的count字段和用于存储值的HashEntry的value。定义成volatile的变量，能够在线程之间保持可见性，能够被多线程同时读，并且保证不会读到过期的值，但是只能被单线程写（有一种情况可以被多线程写，就是写入的值不依赖于原值），在get操作里只需要读不需要写共享变量count和value，所以可以不用加锁。 </li>
+<li>Put方法首先定位到Segment，然后在Segment里进行插入操作。插入操作需要经历两个步骤，第一步判断是否需要对Segment里的HashEntry数组进行扩容，第二步定位添加元素的位置然后放在HashEntry数组里。 </li>
+</ul>
 
         </div>
 

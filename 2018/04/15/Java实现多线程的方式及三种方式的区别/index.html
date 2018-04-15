@@ -13,27 +13,24 @@
     
     
     
-    <title>Java基础知识小集 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <title>Java实现多线程的方式及三种方式的区别 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="网络">
-    <meta name="description" content="局部变量能否和成员变量重名？局部变量可以和成员变量重名，不加“this”修饰时，优先使用最近的变量。  java采用局部优先的思想。局部变量可以和成员变量相同，使用标识符调用时，优先使用局部变量。在实例方法中出现变量名相同时，可以使用this关键字来调用。如果成员变量用static修饰了呢，也能用this调用吗？不能了，这个时候可以通过类名来调用，因为静态成员是属于类的。">
-<meta name="keywords" content="网络">
+    <meta name="keywords" content="">
+    <meta name="description" content="实现多线程的方式 继承Thread类，重写run函数。 实现Runnable接口  使用ExecutorService、Callable、Future实现有返回结果的多线程  三种方式的区别 实现Runnable接口可以避免Java单继承特性而带来的局限；增强程序的健壮性，代码能够被多个线程共享，代码与数据是独立的；适合多个相同程序代码的线程区处理同一资源的情况。  继承Thread类和实现Run">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java基础知识小集">
-<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/Java基础知识小集/index.html">
+<meta property="og:title" content="Java实现多线程的方式及三种方式的区别">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/Java实现多线程的方式及三种方式的区别/index.html">
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
-<meta property="og:description" content="局部变量能否和成员变量重名？局部变量可以和成员变量重名，不加“this”修饰时，优先使用最近的变量。  java采用局部优先的思想。局部变量可以和成员变量相同，使用标识符调用时，优先使用局部变量。在实例方法中出现变量名相同时，可以使用this关键字来调用。如果成员变量用static修饰了呢，也能用this调用吗？不能了，这个时候可以通过类名来调用，因为静态成员是属于类的。">
+<meta property="og:description" content="实现多线程的方式 继承Thread类，重写run函数。 实现Runnable接口  使用ExecutorService、Callable、Future实现有返回结果的多线程  三种方式的区别 实现Runnable接口可以避免Java单继承特性而带来的局限；增强程序的健壮性，代码能够被多个线程共享，代码与数据是独立的；适合多个相同程序代码的线程区处理同一资源的情况。  继承Thread类和实现Run">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://uploadfiles.nowcoder.net/images/20171104/631730_1509805462010_05AB09F792804DEE45454E55F8DB7F08">
-<meta property="og:updated_time" content="2018-04-14T14:08:35.463Z">
+<meta property="og:updated_time" content="2018-04-15T15:38:57.995Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java基础知识小集">
-<meta name="twitter:description" content="局部变量能否和成员变量重名？局部变量可以和成员变量重名，不加“this”修饰时，优先使用最近的变量。  java采用局部优先的思想。局部变量可以和成员变量相同，使用标识符调用时，优先使用局部变量。在实例方法中出现变量名相同时，可以使用this关键字来调用。如果成员变量用static修饰了呢，也能用this调用吗？不能了，这个时候可以通过类名来调用，因为静态成员是属于类的。">
-<meta name="twitter:image" content="https://uploadfiles.nowcoder.net/images/20171104/631730_1509805462010_05AB09F792804DEE45454E55F8DB7F08">
+<meta name="twitter:title" content="Java实现多线程的方式及三种方式的区别">
+<meta name="twitter:description" content="实现多线程的方式 继承Thread类，重写run函数。 实现Runnable接口  使用ExecutorService、Callable、Future实现有返回结果的多线程  三种方式的区别 实现Runnable接口可以避免Java单继承特性而带来的局限；增强程序的健壮性，代码能够被多个线程共享，代码与数据是独立的；适合多个相同程序代码的线程区处理同一资源的情况。  继承Thread类和实现Run">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
     
@@ -121,7 +118,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Java基础知识小集</div>
+        <div class="flex-col header-title ellipsis">Java实现多线程的方式及三种方式的区别</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -143,15 +140,13 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">Java基础知识小集</h1>
+        <h1 class="title">Java实现多线程的方式及三种方式的区别</h1>
         <h5 class="subtitle">
             
-                <time datetime="2018-04-14T14:05:13.000Z" itemprop="datePublished" class="page-time">
-  2018年04月14日
+                <time datetime="2018-04-15T07:38:02.000Z" itemprop="datePublished" class="page-time">
+  2018年04月15日
 </time>
 
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/网络/">网络</a></li></ul>
 
             
         </h5>
@@ -168,22 +163,20 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#局部变量能否和成员变量重名？"><span class="post-toc-number">1.</span> <span class="post-toc-text">局部变量能否和成员变量重名？</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#实现多线程的方式"><span class="post-toc-number">1.</span> <span class="post-toc-text">实现多线程的方式</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三种方式的区别"><span class="post-toc-number">2.</span> <span class="post-toc-text">三种方式的区别</span></a></li></ol>
         </nav>
     </aside>
 
 
-<article id="post-Java基础知识小集"
+<article id="post-Java实现多线程的方式及三种方式的区别"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">Java基础知识小集</h1>
+        <h1 class="post-card-title">Java实现多线程的方式及三种方式的区别</h1>
         <div class="post-meta">
-            <time class="post-time" title="2018年04月14日 22:05:13" datetime="2018-04-14T14:05:13.000Z"  itemprop="datePublished">2018年04月14日</time>
+            <time class="post-time" title="2018年04月15日 15:38:02" datetime="2018-04-15T07:38:02.000Z"  itemprop="datePublished">2018年04月15日</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/网络/">网络</a></li></ul>
-
 
 
             
@@ -194,9 +187,16 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="局部变量能否和成员变量重名？"><a href="#局部变量能否和成员变量重名？" class="headerlink" title="局部变量能否和成员变量重名？"></a>局部变量能否和成员变量重名？</h1><p>局部变量可以和成员变量重名，不加“this”修饰时，优先使用最近的变量。 </p>
-<p>java采用局部优先的思想。局部变量可以和成员变量相同，使用标识符调用时，优先使用局部变量。在实例方法中出现变量名相同时，可以使用this关键字来调用。如果成员变量用static修饰了呢，也能用this调用吗？不能了，这个时候可以通过类名来调用，因为静态成员是属于类的。</p>
-<p>  <img src="https://uploadfiles.nowcoder.net/images/20171104/631730_1509805462010_05AB09F792804DEE45454E55F8DB7F08" alt="img"> </p>
+            <h1 id="实现多线程的方式"><a href="#实现多线程的方式" class="headerlink" title="实现多线程的方式"></a>实现多线程的方式</h1><ul>
+<li>继承Thread类，重写run函数。</li>
+<li>实现Runnable接口 </li>
+<li>使用ExecutorService、Callable、Future实现有返回结果的多线程</li>
+</ul>
+<h1 id="三种方式的区别"><a href="#三种方式的区别" class="headerlink" title="三种方式的区别"></a>三种方式的区别</h1><ul>
+<li>实现Runnable接口可以避免Java单继承特性而带来的局限；增强程序的健壮性，代码能够被多个线程共享，代码与数据是独立的；适合多个相同程序代码的线程区处理同一资源的情况。 </li>
+<li>继承Thread类和实现Runnable方法启动线程都是使用start方法，然后JVM虚拟机将此线程放到就绪队列中，如果有处理机可用，则执行run方法。 </li>
+<li>实现Callable接口要实现call方法，并且线程执行完毕后会有返回值。其他的两种都是重写run方法，没有返回值。 </li>
+</ul>
 
         </div>
 
@@ -215,8 +215,6 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/网络/">网络</a></li></ul>
-
 
             
 <div class="page-share-wrap">
@@ -225,7 +223,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/Java基础知识小集/&title=《Java基础知识小集》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/Java实现多线程的方式及三种方式的区别/&title=《Java实现多线程的方式及三种方式的区别》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -235,22 +233,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/Java基础知识小集/&title=《Java基础知识小集》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/Java实现多线程的方式及三种方式的区别/&title=《Java实现多线程的方式及三种方式的区别》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
 <!--      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/Java基础知识小集/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/Java实现多线程的方式及三种方式的区别/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java基础知识小集》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/Java基础知识小集/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java实现多线程的方式及三种方式的区别》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/Java实现多线程的方式及三种方式的区别/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/Java基础知识小集/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/Java实现多线程的方式及三种方式的区别/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>     -->
@@ -270,21 +268,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/BameirilyoBlog/2018/04/15/Java实现多线程的方式及三种方式的区别/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 上一篇</div>
-        <h4 class="title">Java实现多线程的方式及三种方式的区别</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/BameirilyoBlog/2018/04/14/操作系统知识小集/" id="post-next" class="post-nav-link">
+      <a href="/BameirilyoBlog/2018/04/14/Java基础知识小集/" id="post-next" class="post-nav-link">
         <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">操作系统知识小集</h4>
+        <h4 class="title">Java基础知识小集</h4>
       </a>
     </div>
   
@@ -355,7 +346,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/Java基础知识小集/&title=《Java基础知识小集》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/Java实现多线程的方式及三种方式的区别/&title=《Java实现多线程的方式及三种方式的区别》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -365,22 +356,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/Java基础知识小集/&title=《Java基础知识小集》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/Java实现多线程的方式及三种方式的区别/&title=《Java实现多线程的方式及三种方式的区别》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
 <!--      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/Java基础知识小集/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/Java实现多线程的方式及三种方式的区别/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java基础知识小集》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/Java基础知识小集/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java实现多线程的方式及三种方式的区别》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/Java实现多线程的方式及三种方式的区别/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/Java基础知识小集/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/Java实现多线程的方式及三种方式的区别/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>     -->
@@ -391,7 +382,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsUlEQVR42u3au1LDMBAF0Pz/T0NDATNxfPehkOK4YsBYOi606ys9HvH19et6/dere66ekzzz9Z0LFx4eHt5g6lcTTe6pgl+Pkt95MxYeHh7eMd7V8Ff39F7H6yf3/uvGgoeHh/eRvLyzrbbgvUYcDw8P79N4SeOb3J88+R8KAx4eHl7Mm7SzyaJfDS+qoyxkLXh4eHi13LXcEP/vz0f29/Dw8PDGu+r5El9d0PM2vTfPn+fg4eHhHeDlC27SZOfHBaoBx2SeeHh4eOd41QJQZVdDhK3jCHh4eHi7vMkWfr6dnwQcvdb8ZkQ8PDy8Y7zqZ391439SSJLSVfhWwMPDwxvzthbuXoBbjXEnIQUeHh7eFq+6KFdfRC8anm+8/Qkj8PDw8N7Cq8YEW+3ypAzcfDHg4eHhrfLyuKGwYV9sxHuv7OYePDw8vAO8/B96TXavzOxGFXh4eHinebsbVL0wYhIl4+Hh4b2fl3zw56FALwKuBr6FbTA8PDy8VV41SphMJX9xC203Hh4e3tt51at3tLQXiESvAw8PD2+Vd+Jo1LxR7o375Pd4eHh4B3jVwpAP0AuIk9HLxxfw8PDwVnlb082PUuVjTWDRmTI8PDy8Fq/6iOomWW99rm6kRTEKHh4e3mFeXgC2qL2jWnlBwsPDw9vlJUM2DzwVt/l7kcTNC8LDw8M7xksW33yZnsB2CwYeHh7eaV71gz+ZaFJ+TpQKPDw8vBO8r+JVjXSrm1vJKIWtNTw8PLwDvPzqvYjegYP84EJhAwwPDw9vlTcpBpPYdxJk5K08Hh4e3jne5JxSPpXlelXNWvDw8PA+gNcLgquxQh5/PPk9Hh4e3gfwek1zeUGPQ5CbMoOHh4d3jNdrkfNgonqEq9dGXxYGPDw8vFVe9YN/vsU1P3ywFWTg4eHhFXnfSRa7YH63W1MAAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAAD5UlEQVR42u3ay2rjQBAF0Pz/T2dgdgMj+d6qlh3I0coodrv7KFCux9dXfH3/vfLXVytcXVer3a/fvv/YhQMHDhw4gqMmG72/f7XRHO7+/v1+Epr7T+HAgQMHjrMceXBtN5SQ5RD3e2iDLg4cOHDg+CzHqYDX/rVN51ahHQcOHDhwfJRjn56dLVziwIEDB46fw9EGtjzN2xDnD2CWUuLAgQMHjic4nhho+GmvPzzfgQMHDhy/huN7dLWNqLZplLeOZmH1coc4cODAgWPNcTatyuPX5v1tm6oedMCBAwcOHIc4ZsME7VDCrHSYpGTJ4etEDgcOHDhwLDiS9lI7+jBDOUtZj1/gwIEDB44Fx2xQoKXcs86KjPVDwoEDBw4cRzmS5Ce/0zar2hmDe8o8bv7zGgcOHDhwrDnyDSXp1gxo0zSataNw4MCBA8dzHG0I3GylDXj5GFx7/5IGBw4cOHCsOZIP5CW5Nnk7NV0wG9eIRuVw4MCBA8eIox1NmzWictxTLaVZAREHDhw4cGw4Nk2jPARuynaz780fFQ4cOHDgOMsxK9XlX98ebwa6GaR48T+CAwcOHDhKjk0alo+45UngZmxuE+zr+IwDBw4cOOLe/b4VdKrtlAfg2covAi0OHDhw4BhxJG2nWfEuH5jLj5SsnP8sePG9OHDgwIHjEMdsNKHdxKyBNONrRxxw4MCBA8eeY18KnLWm2rGJs4H8RYkQBw4cOHCMOGbFteQwszVnZcFNcfBArREHDhw4cASpzmw0LU8I26Rx3wxLTooDBw4cOPYc7WFmo29tMTEficvXSR42Dhw4cOB4jqMNh/kKbXjOg/Rs9OFychAHDhw4cIw42nJbOzw3S9KGw22j5hYOHDhw4Hia44lBhNnrdrTiVIESBw4cOHDsOdovaMtzUWFuFFDbMYjohwUOHDhw4FhztIW8NjHbHHvDsS9K4sCBAweOliPfSl40bFc49QBmQxL/6cLhwIEDB44FR37U/H6b2m0CagsRBWkcOHDgwLHgyD9W54Lx8fajCXnhEgcOHDhwvIej3VCOlbR5jg23LWYSit8OOHDgwIEjng3btItmdzaH2bSsovkOHDhw4MAx4hg2ZhYlxTb0zop9s5QPBw4cOHDsOTZFvTZh2xfvcrhkzVlxEwcOHDhwJBz51tuQNjtkklhuypEvToQDBw4cOA5x5MW4TWA7G+DzdK5I3nDgwIEDx9s52u5/m5Llx27fHz02HDhw4MDxRo4nAt5s/fyQdcsKBw4cOHAc4siLg/nm9ilWO8aXp23R5CAOHDhw4BhxtEW65JD5MWYhPD/YpnGFAwcOHDhKjj+NJBBa3y3ZBwAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 

@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-14T14:08:35.463Z</updated>
+  <updated>2018-04-15T15:38:57.995Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java实现多线程的方式及三种方式的区别</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/Java%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E5%BC%8F%E5%8F%8A%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/Java实现多线程的方式及三种方式的区别/</id>
+    <published>2018-04-15T07:38:02.000Z</published>
+    <updated>2018-04-15T15:38:57.995Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="实现多线程的方式"><a href="#实现多线程的方式" class="headerlink" title="实现多线程的方式"></a>实现多线程的方式</h1><ul><li>继承Thread类，重写run函数。</li><li>实现Runnable接口 </li><li>使用ExecutorService、Callable、Future实现有返回结果的多线程</li></ul><h1 id="三种方式的区别"><a href="#三种方式的区别" class="headerlink" title="三种方式的区别"></a>三种方式的区别</h1><ul><li>实现Runnable接口可以避免Java单继承特性而带来的局限；增强程序的健壮性，代码能够被多个线程共享，代码与数据是独立的；适合多个相同程序代码的线程区处理同一资源的情况。 </li><li>继承Thread类和实现Runnable方法启动线程都是使用start方法，然后JVM虚拟机将此线程放到就绪队列中，如果有处理机可用，则执行run方法。 </li><li>实现Callable接口要实现call方法，并且线程执行完毕后会有返回值。其他的两种都是重写run方法，没有返回值。 </li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;实现多线程的方式&quot;&gt;&lt;a href=&quot;#实现多线程的方式&quot; class=&quot;headerlink&quot; title=&quot;实现多线程的方式&quot;&gt;&lt;/a&gt;实现多线程的方式&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;继承Thread类，重写run函数。&lt;/li&gt;
+&lt;li&gt;实现Runnable接口
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Java基础知识小集</title>
@@ -1155,9 +1178,9 @@
     <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/HashTable%E3%80%81HashMap%E5%92%8CConCurrentHashMap%E5%8C%BA%E5%88%AB/"/>
     <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/04/HashTable、HashMap和ConCurrentHashMap区别/</id>
     <published>2018-04-04T08:19:04.000Z</published>
-    <updated>2018-04-04T12:27:49.017Z</updated>
+    <updated>2018-04-15T07:37:24.304Z</updated>
     
-    <content type="html"><![CDATA[<p>Map<br>├Hashtable<br>├HashMap<br>└WeakHashMap</p><h1 id="HashMap和HashTable的对比"><a href="#HashMap和HashTable的对比" class="headerlink" title="HashMap和HashTable的对比"></a>HashMap和HashTable的对比</h1><p> <strong>1.HashMap是非线程安全的，HashTable是线程安全的。</strong></p><p>Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放之后才能再次获得同步锁更新Hashtable）；而HashMap中的方法在缺省情况下是非Synchronize的。所以在单线程环境下Hashtable比HashMap要慢。如果你不需要同步，只需要单一线程，那么使用HashMap性能要好过Hashtable。</p><p>在多线程并发的环境下，可以直接使用Hashtable，不需要自己为它的方法实现同步，但使用HashMap时就必须要自己增加同步处理：</p><p>Map m =Collections.synchronizedMap(new HashMap(…))。</p><p><strong>2.HashMap的键和值都允许有null存在，而HashTable则都不行。</strong></p><p><strong>3.因为线程安全、哈希效率的问题，HashMap效率比HashTable的要高。</strong></p><p><strong>4.哈希值的使用不同</strong></p><p>HashTable直接使用对象的hashCode。而HashMap重新计算hash值。</p><p><strong>5.内部实现使用的数组初始化和扩容方式不同</strong></p><p>HashMap默认初始化数组的大小为16，要求底层数组的容量一定要为2的整数次幂，HashTable为11。HashMap扩容时乘2，使用位运算取得哈希，效率高于取模。而HashTable为乘2加1，都是素数和奇数，这样取模哈希结果更均匀。</p><p>6.继承的父类不同</p><p>Hashtable继承自Dictionary类，而HashMap继承自AbstractMap类。但二者都实现了Map接口。</p><p>7.两个遍历方式的内部实现上不同</p><p>Hashtable、HashMap都使用了 Iterator。而由于历史原因，Hashtable还使用了Enumeration的方式。</p><p>8.是否提供contains方法</p><p>HashMap把Hashtable的contains方法去掉了，改成containsValue和containsKey，因为contains方法容易让人引起误解。</p><p>Hashtable则保留了contains，containsValue和containsKey三个方法，其中contains和containsValue功能相同。</p><h1 id="HashTable和ConCurrentHashMap的对比"><a href="#HashTable和ConCurrentHashMap的对比" class="headerlink" title="HashTable和ConCurrentHashMap的对比"></a>HashTable和ConCurrentHashMap的对比</h1><p>ConcurrentHashMap引入了分割(Segment)，把一个大的Map拆分成N个小的HashTable，在put方法中，会根据hash(paramK.hashCode())来决定具体存放进哪个Segment，如果查看Segment的put操作，我们会发现内部使用的同步机制是基于lock操作的，这样就可以对Map的一部分（Segment）进行上锁，这样影响的只是将要放入同一个Segment的元素的put操作，保证同步的时候，锁住的不是整个Map（HashTable就是这么做的），相对于HashTable提高了多线程环境下的性能，因此HashTable已经被淘汰了。</p><h1 id="HashMap和ConCurrentHashMap的对比"><a href="#HashMap和ConCurrentHashMap的对比" class="headerlink" title="HashMap和ConCurrentHashMap的对比"></a>HashMap和ConCurrentHashMap的对比</h1><p>（1）ConcurrentHashMap对整个桶数组进行了分割分段(Segment)，然后在每一个分段上都用lock锁进行保护，相对于HashTable的syn关键字锁的粒度更精细了一些，并发性能更好，而HashMap没有锁机制，不是线程安全的。</p><p>（2）HashMap的键值对允许有null，但是ConCurrentHashMap都不允许。</p>]]></content>
+    <content type="html"><![CDATA[<p>Map<br>├Hashtable<br>├HashMap<br>└WeakHashMap</p><h1 id="HashMap和HashTable的对比"><a href="#HashMap和HashTable的对比" class="headerlink" title="HashMap和HashTable的对比"></a>HashMap和HashTable的对比</h1><p> <strong>1.HashMap是非线程安全的，HashTable是线程安全的。</strong></p><p>Hashtable中的线程安全是Synchronize的（sychronized意味着在一次仅有一个线程能够更改Hashtable，就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放之后才能再次获得同步锁更新Hashtable）；而HashMap中的方法在缺省情况下是非Synchronize的。所以在单线程环境下Hashtable比HashMap要慢。如果你不需要同步，只需要单一线程，那么使用HashMap性能要好过Hashtable。</p><p>在多线程并发的环境下，可以直接使用Hashtable，不需要自己为它的方法实现同步，但使用HashMap时就必须要自己增加同步处理：</p><p>Map m =Collections.synchronizedMap(new HashMap(…))。</p><p><strong>2.HashMap的键和值都允许有null存在，而HashTable则都不行。</strong></p><p><strong>3.因为线程安全、哈希效率的问题，HashMap效率比HashTable的要高。</strong></p><p><strong>4.哈希值的使用不同</strong></p><p>HashTable直接使用对象的hashCode。而HashMap重新计算hash值。</p><p><strong>5.内部实现使用的数组初始化和扩容方式不同</strong></p><p>HashMap默认初始化数组的大小为16，要求底层数组的容量一定要为2的整数次幂，HashTable为11。HashMap扩容时乘2，使用位运算取得哈希，效率高于取模。而HashTable为乘2加1，都是素数和奇数，这样取模哈希结果更均匀。</p><p>6.继承的父类不同</p><p>Hashtable继承自Dictionary类，而HashMap继承自AbstractMap类。但二者都实现了Map接口。</p><p>7.两个遍历方式的内部实现上不同</p><p>Hashtable、HashMap都使用了 Iterator。而由于历史原因，Hashtable还使用了Enumeration的方式。</p><p>8.是否提供contains方法</p><p>HashMap把Hashtable的contains方法去掉了，改成containsValue和containsKey，因为contains方法容易让人引起误解。</p><p>Hashtable则保留了contains，containsValue和containsKey三个方法，其中contains和containsValue功能相同。</p><h1 id="HashTable和ConCurrentHashMap的对比"><a href="#HashTable和ConCurrentHashMap的对比" class="headerlink" title="HashTable和ConCurrentHashMap的对比"></a>HashTable和ConCurrentHashMap的对比</h1><p>ConcurrentHashMap引入了分割(Segment)，把一个大的Map拆分成N个小的HashTable，在put方法中，会根据hash(paramK.hashCode())来决定具体存放进哪个Segment，如果查看Segment的put操作，我们会发现内部使用的同步机制是基于lock操作的，这样就可以对Map的一部分（Segment）进行上锁，这样影响的只是将要放入同一个Segment的元素的put操作，保证同步的时候，锁住的不是整个Map（HashTable就是这么做的），相对于HashTable提高了多线程环境下的性能，因此HashTable已经被淘汰了。</p><h1 id="HashMap和ConCurrentHashMap的对比"><a href="#HashMap和ConCurrentHashMap的对比" class="headerlink" title="HashMap和ConCurrentHashMap的对比"></a>HashMap和ConCurrentHashMap的对比</h1><p>（1）ConcurrentHashMap对整个桶数组进行了分割分段(Segment)，然后在每一个分段上都用lock锁进行保护，相对于HashTable的syn关键字锁的粒度更精细了一些，并发性能更好，而HashMap没有锁机制，不是线程安全的。</p><p>（2）HashMap的键值对允许有null，但是ConCurrentHashMap都不允许。</p><h1 id="Concurrent-HashMap-线程安全吗，-Concurrent-HashMap如何保证-线程安全？"><a href="#Concurrent-HashMap-线程安全吗，-Concurrent-HashMap如何保证-线程安全？" class="headerlink" title="Concurrent HashMap 线程安全吗， Concurrent HashMap如何保证 线程安全？"></a>Concurrent HashMap 线程安全吗， Concurrent HashMap如何保证 线程安全？</h1><ul><li>HashTable容器在竞争激烈的并发环境下表现出效率低下的原因是所有访问HashTable的线程都必须竞争同一把锁，那假如容器里有多把锁，每一把锁用于锁容器其中一部分数据，那么当多线程访问容器里不同数据段的数据时，线程间就不会存在锁竞争，从而可以有效的提高并发访问效率，这就是ConcurrentHashMap所使用的锁分段技术，首先将数据分成一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问。 </li><li>get操作的高效之处在于整个get过程不需要加锁，除非读到的值是空的才会加锁重读。get方法里将要使用的共享变量都定义成volatile，如用于统计当前Segement大小的count字段和用于存储值的HashEntry的value。定义成volatile的变量，能够在线程之间保持可见性，能够被多线程同时读，并且保证不会读到过期的值，但是只能被单线程写（有一种情况可以被多线程写，就是写入的值不依赖于原值），在get操作里只需要读不需要写共享变量count和value，所以可以不用加锁。 </li><li>Put方法首先定位到Segment，然后在Segment里进行插入操作。插入操作需要经历两个步骤，第一步判断是否需要对Segment里的HashEntry数组进行扩容，第二步定位添加元素的位置然后放在HashEntry数组里。 </li></ul>]]></content>
     
     <summary type="html">
     
