@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Deepin下vsftpd虚拟用户配置 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux,项目问题">
+    <meta name="description" content="安装vsftpd和db-util12sudo apt-get -y install vsftpdsudo apt-get install db-util 查看下vsftpd都安装了那些文件 1dpkg -L vsftpd |tac 建立本地虚拟用户   12sudo useradd -m -d /home/vsftpd vsftpd      #指定目录为/home/vsftpdsudo cat">
+<meta name="keywords" content="Linux,项目问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deepin下vsftpd虚拟用户配置">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/16/Deepin下vsftpd虚拟用户配置/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="安装vsftpd和db-util12sudo apt-get -y install vsftpdsudo apt-get install db-util 查看下vsftpd都安装了那些文件 1dpkg -L vsftpd |tac 建立本地虚拟用户   12sudo useradd -m -d /home/vsftpd vsftpd      #指定目录为/home/vsftpdsudo cat">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-16T15:31:33.739Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Deepin下vsftpd虚拟用户配置">
+<meta name="twitter:description" content="安装vsftpd和db-util12sudo apt-get -y install vsftpdsudo apt-get install db-util 查看下vsftpd都安装了那些文件 1dpkg -L vsftpd |tac 建立本地虚拟用户   12sudo useradd -m -d /home/vsftpd vsftpd      #指定目录为/home/vsftpdsudo cat">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Deepin下vsftpd虚拟用户配置</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Deepin下vsftpd虚拟用户配置</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-16T15:17:02.000Z" itemprop="datePublished" class="page-time">
+  2018年04月16日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/操作系统/">操作系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装vsftpd和db-util"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装vsftpd和db-util</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#建立本地虚拟用户"><span class="post-toc-number">2.</span> <span class="post-toc-text">建立本地虚拟用户</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#建立虚拟用户数据库"><span class="post-toc-number">3.</span> <span class="post-toc-text">建立虚拟用户数据库</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#PAM验证配置"><span class="post-toc-number">4.</span> <span class="post-toc-text">PAM验证配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#vsftp权限配置"><span class="post-toc-number">5.</span> <span class="post-toc-text">vsftp权限配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#虚拟用户相关配置"><span class="post-toc-number">6.</span> <span class="post-toc-text">虚拟用户相关配置</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Deepin下vsftpd虚拟用户配置"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Deepin下vsftpd虚拟用户配置</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年04月16日 23:17:02" datetime="2018-04-16T15:17:02.000Z"  itemprop="datePublished">2018年04月16日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/操作系统/">操作系统</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="安装vsftpd和db-util"><a href="#安装vsftpd和db-util" class="headerlink" title="安装vsftpd和db-util"></a>安装vsftpd和db-util</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -y install vsftpd</span><br><span class="line">sudo apt-get install db-util</span><br></pre></td></tr></table></figure>
+<p>查看下vsftpd都安装了那些文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -L vsftpd |tac</span><br></pre></td></tr></table></figure>
+<h1 id="建立本地虚拟用户"><a href="#建立本地虚拟用户" class="headerlink" title="建立本地虚拟用户"></a>建立本地虚拟用户</h1>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd -m -d /home/vsftpd vsftpd      <span class="comment">#指定目录为/home/vsftpd</span></span><br><span class="line">sudo cat /etc/passwd |grep vsftpd          <span class="comment">#查看家目录</span></span><br></pre></td></tr></table></figure>
+<p>注意：创建的用户vsftpd现在是无法登录到系统的，因为没有给该用户设置密码。在此，我们也无需让vsftpd登录到系统，这样相对来说比较安全。</p>
+<p>用户创建完毕后，我们来创建对应的目录并修改其所属用户，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R vsftpd:vsftpd  /home/vsftpd/</span><br></pre></td></tr></table></figure>
+<h1 id="建立虚拟用户数据库"><a href="#建立虚拟用户数据库" class="headerlink" title="建立虚拟用户数据库"></a>建立虚拟用户数据库</h1><pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /etc/vsftpd</span><br><span class="line">sudo vim /etc/vsftpd/login.txt</span><br></pre></td></tr></table></figure>
+</code></pre><p>将下面的内容填到login.txt文件内：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">norco1</span><br><span class="line">norcoarm1</span><br><span class="line">norco2</span><br><span class="line">norcoarm2</span><br><span class="line">norco3</span><br><span class="line">norcoarm3</span><br></pre></td></tr></table></figure>
+<p>注：login.txt为登录vsftpd的用户与密码文件。奇数行为用户名，偶数行为密码。<br>   。如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用db_load对loginx.txt进行加密</span></span><br><span class="line">sudo db_load -T -t <span class="built_in">hash</span> -f /etc/vsftpd/login.txt /etc/vsftpd/login.db</span><br><span class="line"><span class="comment">#修改权限（此步可不做，未发现问题）</span></span><br><span class="line">chmod 600 /etc/vsftpd/vsftpd_login.db</span><br></pre></td></tr></table></figure>
+<p>生成数据库文件之后建议删除 loginuser.txt</p>
+<h1 id="PAM验证配置"><a href="#PAM验证配置" class="headerlink" title="PAM验证配置"></a>PAM验证配置</h1><p>vsftpd的PAM验证，在此没有使用vsftpd安装时所生成的/etc/pam.d/vsftpd文件。</p>
+<p>因为经过多次的测试，发现如果使用该文件进行验证的话，无法验证通过。猜想有可能是vsftpd的一个BUG。</p>
+<p>创建验证文件，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pam.d/vsftpd.virtual</span><br><span class="line">auth required pam_userdb.so db=/etc/vsftpd/login</span><br><span class="line">account required pam_userdb.so db=/etc/vsftpd/login</span><br></pre></td></tr></table></figure>
+<p>其中/etc/vsftpd/login对应/etc/vsftpd/login.db文件</p>
+<h1 id="vsftp权限配置"><a href="#vsftp权限配置" class="headerlink" title="vsftp权限配置"></a>vsftp权限配置</h1><p>现在正式配置vsftpd，vsftpd的几乎所有配置项都在/etc/vsftpd.conf文件中进行。</p>
+<p>先备份。</p>
+<p>根据业务要求vsftpd.conf配置内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">listen=YES</span><br><span class="line">listen_ipv6=NO</span><br><span class="line">anonymous_enable=NO</span><br><span class="line">local_enable=YES</span><br><span class="line">write_enable=YES</span><br><span class="line">local_umask=022</span><br><span class="line">dirmessage_enable=YES</span><br><span class="line">use_localtime=YES</span><br><span class="line">xferlog_enable=YES</span><br><span class="line">connect_from_port_20=YES</span><br><span class="line">xferlog_file=/var/<span class="built_in">log</span>/vsftpd.log</span><br><span class="line">xferlog_std_format=YES</span><br><span class="line">chroot_local_user=YES</span><br><span class="line">chroot_list_enable=NO</span><br><span class="line">allow_writeable_chroot=YES</span><br><span class="line">secure_chroot_dir=/var/run/vsftpd/empty</span><br><span class="line">rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem</span><br><span class="line">rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key</span><br><span class="line">ssl_enable=NO</span><br><span class="line">guest_enable=YES</span><br><span class="line">pam_service_name=vsftpd.virtual</span><br><span class="line">user_config_dir=/etc/vsftpd/vu</span><br><span class="line">pasv_enable=YES</span><br><span class="line">pasv_min_port=30000</span><br><span class="line">pasv_max_port=31000</span><br></pre></td></tr></table></figure>
+<p>在以上配置文件中，有几点需要重点指出。</p>
+<p>local_enable=YES</p>
+<p>write_enable=YES</p>
+<p>local_umask=022</p>
+<p>这两项是启用系统用户的写权限。特别是write_enable=YES项一定要启用，否则vsftpd虚拟用户将无法登录vsftpd。</p>
+<p>为什么会是这样？因为虚拟用户依赖与系统用户。</p>
+<p>chroot_local_user=YES</p>
+<p>chroot_list_enable=NO</p>
+<p>allow_writeable_chroot=YES</p>
+<p>这三项是配置vsftpd用户禁止切换上级目录的权限。</p>
+<p>guest_enable=YES</p>
+<p>pam_service_name=vsftpd.virtual</p>
+<p>user_config_dir=/etc/vsftpd/vu</p>
+<p>这三项是启用vsftpd虚拟用以及虚拟用户账号配置目录。</p>
+<p>pasv_enable=YES</p>
+<p>pasv_min_port=30000</p>
+<p>pasv_max_port=31000</p>
+<p>这三项是启用vsftpd被动模式及相关端口。</p>
+<h1 id="虚拟用户相关配置"><a href="#虚拟用户相关配置" class="headerlink" title="虚拟用户相关配置"></a>虚拟用户相关配置</h1><p>vsftpd配置文件修改文件后，现在开始配置虚拟用户的相关权限。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /etc/vsftpd/vu</span><br><span class="line">sudo vim /etc/vsftpd/vu/ailanni</span><br><span class="line">guest_username=ftpilanni</span><br><span class="line">local_root=/www/</span><br><span class="line">virtual_use_local_privs=YES</span><br><span class="line">anon_umask=133</span><br></pre></td></tr></table></figure>
+<p>以上配置参数，其中guest_username=ftpilanni表示的是设置FTP对应的系统用户为ftpilanni</p>
+<p>local_root=/www/表示使用本地用户登录到ftp时的默认目录。</p>
+<p>virtual_use_local_privs=YES虚拟用户和本地用户有相同的权限。</p>
+<p>anon_umask表示文件上传的默认掩码。计算方式是777减去anon_umask就是上传文件的权限。在此我们设置的是133，也就是说上传后文件的权限是644。即上传的文件对所属用户来说只有读写权限，没有执行权限。</p>
+<p><strong>若需配置多个用户时如下设置用户权限 </strong></p>
+<p>在该文件夹下依次建立与login.txt对应的帐号名称相同的文件<br>内容可以参考下面：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#vim norco1</span></span><br><span class="line"><span class="comment">#[norco1]只允许下载</span></span><br><span class="line">anon_world_readable_only=NO</span><br><span class="line">local_root=/opt/ftp/norco1</span><br><span class="line"></span><br><span class="line"><span class="comment">#vim norco2    </span></span><br><span class="line"><span class="comment">#[norco2]允许建立，修改，但是不允许删除</span></span><br><span class="line">anon_world_readable_only=NO</span><br><span class="line">write_enable=YES</span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line">anon_upload_enable=YES</span><br><span class="line">local_root=/opt/ftp/norco2</span><br><span class="line"></span><br><span class="line"><span class="comment">#vim norco3</span></span><br><span class="line"><span class="comment">#[norco3]全部权限</span></span><br><span class="line">anon_world_readable_only=NO</span><br><span class="line">write_enable=YES</span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line">anon_upload_enable=YES</span><br><span class="line">anon_other_write_enable=YES</span><br><span class="line">local_root=/opt/ftp/norco3</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/项目问题/">项目问题</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/16/Deepin下vsftpd虚拟用户配置/&title=《Deepin下vsftpd虚拟用户配置》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/16/Deepin下vsftpd虚拟用户配置/&title=《Deepin下vsftpd虚拟用户配置》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/16/Deepin下vsftpd虚拟用户配置/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Deepin下vsftpd虚拟用户配置》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/16/Deepin下vsftpd虚拟用户配置/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/16/Deepin下vsftpd虚拟用户配置/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/04/15/线程池/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">线程池</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/16/Deepin下vsftpd虚拟用户配置/&title=《Deepin下vsftpd虚拟用户配置》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/16/Deepin下vsftpd虚拟用户配置/&title=《Deepin下vsftpd虚拟用户配置》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/16/Deepin下vsftpd虚拟用户配置/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Deepin下vsftpd虚拟用户配置》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/16/Deepin下vsftpd虚拟用户配置/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/16/Deepin下vsftpd虚拟用户配置/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADK0lEQVR42u3aQXLbQAwEQP//08o1KZepGYBxSavmyUXLy23qAGOwX1/x9fh2/X3/+yfzFZK/+unOT6vddmFjY2O/Cftxef30gOs7M1j7mWQPP74abGxs7OPY7YaSkpaXluv190/ExsbGxk7Y16UrKWzJCm1rhI2NjY19vbmkkCSMWYD1qwUMGxsb++XZSai0aSfa9TeN0M1ZGjY2NvbLs9vQ55V//i/zbWxsbOwXZj/Kq21RNqVrFldFz8XGxsY+iN22GUkY1A5uZyPhts3AxsbG/gT2bLy6ieyTQH8WZkV7wMbGxj6U3Q5rZ4Phe1/l8MVhY2NjH8HOtzIb3F7fbw8D5YX2ycvCxsbGPojdxkbXy7UHfZJnJWXy+k6dUWFjY2O/ITsZoOb/9OcbbduVPE6qTyFhY2Njvzl79iLupc7i/nZU/OQz2NjY2EewN0ce2/ajjaLypmjYlmBjY2O/ITsf7ubj2FmTMxvZ5uB/7mBjY2Mfzd4ERu0AYHZU6IZoCRsbG/sg9mYYkBeYNtxvj+C0AwxsbGzsz2G3YX0ySJgVsH2JxcbGxv4EdpKfzx6ftwrt2GA2SMbGxsY+jz2bgSZlbLbmJjwavnRsbGzsI9jtoknLMRvNtmPd1aACGxsb+wj2JsTfrDArn/tDn9jY2Ninsmdxz10Nw70vIlofGxsb+wh2Ev1sjvK0UdFsIFGvj42Njf0x7N8fx24GycXRT2xsbOyj2XnpascAefC0ibei32JjY2Mfx54VoVl7MIv429f95D42Njb2QexkQ7NXkDcMm7Fx2z4V3wM2Njb2W7FnsX47OW17gWJSXX4Z2NjY2KeyZw9O4qS7xgyb/Tw5c4qNjY19BLsN/WeFbVVyyj08KaXY2NjYR7Af5ZU3G7NvYHMY9Dr8qvMzbGxs7Ddht6Xo3mM9+bZmx3024RQ2Njb2e7HzorVvJGYDg+tnDQsYNjY29nHsNhK6t/2YDYZXkRY2Njb2B7NnUVRe9pJytQmksLGxsbHzYtYOG/KXNSuf2NjY2Gez281tYqMWdtfesLGxsU9l52Ugj+nb4L5dM1//hvk2NjY29uuy/wBQlvcTD6MIpgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -157,6 +157,56 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-Deepin下vsftpd虚拟用户配置"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018年04月16日 23:17:02" datetime="2018-04-16T15:17:02.000Z"  itemprop="datePublished">2018年04月16日</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/操作系统/">操作系统</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/BameirilyoBlog/2018/04/16/Deepin下vsftpd虚拟用户配置/">Deepin下vsftpd虚拟用户配置</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        安装vsftpd和db-util12sudo apt-get -y install vsftpdsudo apt-get install db-util
+查看下vsftpd都安装了那些文件
+1dpkg -L vsftpd |tac
+建立本地虚拟用户   12sudo useradd -m -d /home/vsftpd vsftpd      #指定目录为/home/vsftpdsudo c...
+    
+
+        <a href="/BameirilyoBlog/2018/04/16/Deepin下vsftpd虚拟用户配置/" class="post-more waves-effect waves-button">
+            全文阅读
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/项目问题/">项目问题</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-线程池"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -656,54 +706,6 @@ TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢�
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/网络/">网络</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-查找算法"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018年04月11日 19:14:34" datetime="2018-04-11T11:14:34.000Z"  itemprop="datePublished">2018年04月11日</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据结构与算法/">数据结构与算法</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/BameirilyoBlog/2018/04/11/查找算法/">查找算法</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        目前查找方法主要：顺序查找、有序查找（分为：折半查找即二分查找、差值查找和斐波那契查找方法）、线性索引查找、二叉排序树、平衡二叉树（AVL树）以及多路查找树（B树）、散列表查找（哈希表）等查找方法
-​     【1】顺序查找：是最简单的查找方法，其时间复杂度为O(n)，是通过构造一个线性表，采用遍历的方法，将记录与关键字一个一个的对比，若相等则查找成功，若全都不相等，则查找失败即记录不存在；...
-    
-
-        <a href="/BameirilyoBlog/2018/04/11/查找算法/" class="post-more waves-effect waves-button">
-            全文阅读
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/数据结构与算法/">数据结构与算法</a></li></ul>
 
     </div>
     
