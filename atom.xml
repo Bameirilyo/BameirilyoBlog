@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-17T05:15:07.744Z</updated>
+  <updated>2018-04-17T09:03:15.988Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>网络基础知识小集</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/17/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%B0%8F%E9%9B%86/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/17/网络基础知识小集/</id>
+    <published>2018-04-17T09:01:48.000Z</published>
+    <updated>2018-04-17T09:03:15.988Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Http和https的区别"><a href="#Http和https的区别" class="headerlink" title="Http和https的区别"></a>Http和https的区别</h1><ul><li>http是HTTP协议运行在TCP之上。所有传输的内容都是明文，客户端和服务器端都无法验证对方的身份。 </li><li>https是HTTP运行在SSL/TLS之上，SSL/TLS运行在TCP之上。所有传输的内容都经过加密，加密采用对称加密，但对称加密的密钥用服务器方的证书进行了非对称加密。此外客户端可以验证服务器端的身份，如果配置了客户端验证，服务器方也可以验证客户端的身份。 </li><li>https协议需要到ca申请证书，一般免费证书很少，需要交费。 </li></ul><ul><li>http是超文本传输协议，信息是明文传输，https 则是具有安全性的ssl加密传输协议 </li><li>http和https使用的是完全不同的连接方式用的端口也不一样,前者是80,后者是443。 </li><li>http的连接很简单,是无状态的。 </li><li>HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议要比http协议安全 </li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Http和https的区别&quot;&gt;&lt;a href=&quot;#Http和https的区别&quot; class=&quot;headerlink&quot; title=&quot;Http和https的区别&quot;&gt;&lt;/a&gt;Http和https的区别&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;http是HTTP协议运行在TCP之上。
+      
+    
+    </summary>
+    
+      <category term="网络" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="网络" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>输出比当前数大的最近的4的倍数</title>
