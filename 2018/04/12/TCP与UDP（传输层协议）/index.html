@@ -29,7 +29,7 @@
 <meta property="og:description" content="区别 TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。 TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。 TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却一般。   TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。 T">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://img-blog.csdn.net/20150624175234142">
-<meta property="og:updated_time" content="2018-04-17T05:57:03.692Z">
+<meta property="og:updated_time" content="2018-04-17T05:59:31.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP与UDP（传输层协议）">
 <meta name="twitter:description" content="区别 TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。 TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。 TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却一般。   TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。 T">
@@ -212,7 +212,7 @@
 <h1 id="关于tcp中time-wait状态的4个问题"><a href="#关于tcp中time-wait状态的4个问题" class="headerlink" title="关于tcp中time_wait状态的4个问题"></a>关于tcp中time_wait状态的4个问题</h1><p>time_wait是个常问的问题，tcp网络编程中最不容易理解的也是它的time_wait状态，这也说明了tcp/ip四次挥手中time_wait状态的重要性。 </p>
 <p><strong>1.time_wait状态是什么</strong></p>
 <p>简单来说：time_wait状态是四次挥手中服务器向客户端发送FIN终止连接后进入的状态。</p>
-<p>下图为tcp四次挥手过程<br>  <img src="https://img-blog.csdn.net/20150624175234142" alt="这里写图片描述"><br>  可以看到time_wait状态存在于客户端收到服务器Fin并返回ack包时的状态<br>  当处于time_wait状态时，我们无法创建新的连接，因为端口被占用。</p>
+<p>下图为tcp四次挥手过程<br>  <img src="https://img-blog.csdn.net/20150624175234142" alt="四次挥手"><br>  可以看到time_wait状态存在于客户端收到服务器Fin并返回ack包时的状态<br>  当处于time_wait状态时，我们无法创建新的连接，因为端口被占用。</p>
 <h3 id="2-为什么会有time-wait状态"><a href="#2-为什么会有time-wait状态" class="headerlink" title="2.为什么会有time_wait状态"></a>2.为什么会有time_wait状态</h3><p>time_wait存在的原因有两点<br>  1.可靠的终止TCP连接。<br>  2.保证让迟来的TCP报文段有足够的时间被识别并丢弃。</p>
 <p>1.可靠的终止TCP连接，若处于time_wait的客户端发送给服务器确认报文段丢失的话，服务器将在此重新发送FIN报文段，那么客户端必须处于一个可接收的状态就是time_wait而不是close状态。<br> 2.保证迟来的TCP报文段有足够的时间被识别并丢弃，linux中一个TCP端口不能打开两次或两次以上，当客户端处于time_wait状态时我们将无法使用此端口建立新连接，如果不存在time_wait状态，新连接可能会收到旧连接的数据。time_wait持续的时间是2MSL，保证旧的数据可以丢弃，因为网络中的数据最大存在MSL(maxinum segment lifetime)。</p>
 <h3 id="3-哪一方会有time-wait状态"><a href="#3-哪一方会有time-wait状态" class="headerlink" title="3.哪一方会有time_wait状态"></a>3.哪一方会有time_wait状态</h3><p>time_wait状态是一般有客户端的状态。而且会占用端口<br>  有时产生在服务器端，因为服务器主动断开连接或者发生异常</p>
