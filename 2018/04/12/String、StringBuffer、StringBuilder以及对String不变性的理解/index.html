@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="String、StringBuffer、StringBuilder 都是 final 类, 都不允许被继承;  String 长度是不可变的,StringBuffer、StringBuilder 长度是可变的;  StringBuffer 是线程安全的，StringBuilder 不是线程安全的，但它们两个中的所有方法都是相同的，StringBuffer在StringBuilder的方法之上添加了">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T14:42:55.873Z">
+<meta property="og:updated_time" content="2018-04-17T05:47:45.630Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="String、StringBuffer、StringBuilder以及对String不变性的理解">
 <meta name="twitter:description" content="String、StringBuffer、StringBuilder 都是 final 类, 都不允许被继承;  String 长度是不可变的,StringBuffer、StringBuilder 长度是可变的;  StringBuffer 是线程安全的，StringBuilder 不是线程安全的，但它们两个中的所有方法都是相同的，StringBuffer在StringBuilder的方法之上添加了">
@@ -211,7 +211,7 @@
 <ul>
 <li>object1.euqal(object2) 为true时，object1.hashCode() == object2.hashCode() 为true </li>
 <li>object1.hashCode() ==  object2.hashCode() 为false时，object1.euqal(object2)必定为false </li>
-<li>object1.hashCode() ==  object2.hashCode() 为true时，但object1.euqal(object2)不一定定为true </li>
+<li>object1.hashCode() ==  object2.hashCode() 为true时，但object1.euqal(object2)不一定为true </li>
 </ul>
 <p><strong>重写equals不重写hashcode会出现什么问题</strong></p>
 <p>在存储散列集合时(如Set类)，如果原对象.equals(新对象)，但没有对hashCode重写，即两个对象拥有不同的hashCode，则在集合中将会存储两个值相同的对象，从而导致混淆。因此在重写equals方法时，必须重写hashCode方法。</p>
