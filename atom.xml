@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-16T15:31:33.739Z</updated>
+  <updated>2018-04-17T05:15:07.744Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>输出比当前数大的最近的4的倍数</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/17/%E8%BE%93%E5%87%BA%E6%AF%94%E5%BD%93%E5%89%8D%E6%95%B0%E5%A4%A7%E7%9A%84%E6%9C%80%E8%BF%91%E7%9A%844%E7%9A%84%E5%80%8D%E6%95%B0/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/17/输出比当前数大的最近的4的倍数/</id>
+    <published>2018-04-17T05:12:23.000Z</published>
+    <updated>2018-04-17T05:15:07.744Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目：</p><p>输入1.2.3.4中任意数则输出4；输入5.6.7.8中任意数则输出8；不使用语法关键字</p><p>解法：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((x-<span class="number">1</span>)/<span class="number">4</span>+<span class="number">1</span>)*<span class="number">4</span>;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;题目：&lt;/p&gt;
+&lt;p&gt;输入1.2.3.4中任意数则输出4；输入5.6.7.8中任意数则输出8；不使用语法关键字&lt;/p&gt;
+&lt;p&gt;解法：&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;
+      
+    
+    </summary>
+    
+      <category term="数学题" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E5%AD%A6%E9%A2%98/"/>
+    
+    
+      <category term="数学题" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E5%AD%A6%E9%A2%98/"/>
+    
+  </entry>
   
   <entry>
     <title>Deepin下vsftpd虚拟用户配置</title>
