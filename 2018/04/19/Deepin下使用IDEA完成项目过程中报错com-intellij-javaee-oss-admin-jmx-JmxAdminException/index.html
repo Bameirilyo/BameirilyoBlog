@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Deepin下使用IDEA完成项目过程中报错com.intellij.javaee.oss.admin.jmx.JmxAdminException | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux,项目问题">
+    <meta name="description" content="详细报错信息为： 123Artifact unnamed: Artifact is being deployed, please wait...Artifact unnamed: Error during artifact deployment. See server log for details.Artifact unnamed: com.intellij.javaee.oss.admin.j">
+<meta name="keywords" content="Linux,项目问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deepin下使用IDEA完成项目过程中报错com.intellij.javaee.oss.admin.jmx.JmxAdminException">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/19/Deepin下使用IDEA完成项目过程中报错com-intellij-javaee-oss-admin-jmx-JmxAdminException/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="详细报错信息为： 123Artifact unnamed: Artifact is being deployed, please wait...Artifact unnamed: Error during artifact deployment. See server log for details.Artifact unnamed: com.intellij.javaee.oss.admin.j">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20180418230153979?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JhbWVpcmlseW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180418230311238?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JhbWVpcmlseW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180418230404623?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JhbWVpcmlseW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180418230547749?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JhbWVpcmlseW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2018-04-18T16:10:17.924Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Deepin下使用IDEA完成项目过程中报错com.intellij.javaee.oss.admin.jmx.JmxAdminException">
+<meta name="twitter:description" content="详细报错信息为： 123Artifact unnamed: Artifact is being deployed, please wait...Artifact unnamed: Error during artifact deployment. See server log for details.Artifact unnamed: com.intellij.javaee.oss.admin.j">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180418230153979?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JhbWVpcmlseW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Deepin下使用IDEA完成项目过程中报错com.intellij.javaee.oss.admin.jmx.JmxAdminException</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Deepin下使用IDEA完成项目过程中报错com.intellij.javaee.oss.admin.jmx.JmxAdminException</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-18T16:08:57.000Z" itemprop="datePublished" class="page-time">
+  2018年04月19日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/操作系统/">操作系统</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-Deepin下使用IDEA完成项目过程中报错com-intellij-javaee-oss-admin-jmx-JmxAdminException"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Deepin下使用IDEA完成项目过程中报错com.intellij.javaee.oss.admin.jmx.JmxAdminException</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年04月19日 00:08:57" datetime="2018-04-18T16:08:57.000Z"  itemprop="datePublished">2018年04月19日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/操作系统/">操作系统</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>详细报错信息为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Artifact unnamed: Artifact is being deployed, please wait...</span><br><span class="line">Artifact unnamed: Error during artifact deployment. See server log for details.</span><br><span class="line">Artifact unnamed: com.intellij.javaee.oss.admin.jmx.JmxAdminException: com.intellij.execution.ExecutionException: /home/bameirilyo/IdeaProjects/mmall/out/artifacts/unnamed/unnamed.war not found for the web module.</span><br></pre></td></tr></table></figure>
+<p>解决方法为：</p>
+<p>1.点击idea右上角Project Structur按钮</p>
+<p><img src="https://img-blog.csdn.net/20180418230153979?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JhbWVpcmlseW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"></p>
+<p>2.选择Modules</p>
+<p><img src="https://img-blog.csdn.net/20180418230311238?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JhbWVpcmlseW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"></p>
+<p>3.鼠标右键 +Add ，选择Web</p>
+<p><img src="https://img-blog.csdn.net/20180418230404623?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JhbWVpcmlseW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"></p>
+<p>4.Artifacts模块中点击“+”号，“Web Application：Exploded”中出现From Modules选择即可。</p>
+<p><img src="https://img-blog.csdn.net/20180418230547749?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JhbWVpcmlseW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/项目问题/">项目问题</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/19/Deepin下使用IDEA完成项目过程中报错com-intellij-javaee-oss-admin-jmx-JmxAdminException/&title=《Deepin下使用IDEA完成项目过程中报错com.intellij.javaee.oss.admin.jmx.JmxAdminException》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/19/Deepin下使用IDEA完成项目过程中报错com-intellij-javaee-oss-admin-jmx-JmxAdminException/&title=《Deepin下使用IDEA完成项目过程中报错com.intellij.javaee.oss.admin.jmx.JmxAdminException》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/19/Deepin下使用IDEA完成项目过程中报错com-intellij-javaee-oss-admin-jmx-JmxAdminException/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Deepin下使用IDEA完成项目过程中报错com.intellij.javaee.oss.admin.jmx.JmxAdminException》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/19/Deepin下使用IDEA完成项目过程中报错com-intellij-javaee-oss-admin-jmx-JmxAdminException/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/19/Deepin下使用IDEA完成项目过程中报错com-intellij-javaee-oss-admin-jmx-JmxAdminException/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/04/19/Idea内初始化git/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Idea内初始化git</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/19/Deepin下使用IDEA完成项目过程中报错com-intellij-javaee-oss-admin-jmx-JmxAdminException/&title=《Deepin下使用IDEA完成项目过程中报错com.intellij.javaee.oss.admin.jmx.JmxAdminException》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/19/Deepin下使用IDEA完成项目过程中报错com-intellij-javaee-oss-admin-jmx-JmxAdminException/&title=《Deepin下使用IDEA完成项目过程中报错com.intellij.javaee.oss.admin.jmx.JmxAdminException》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/19/Deepin下使用IDEA完成项目过程中报错com-intellij-javaee-oss-admin-jmx-JmxAdminException/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Deepin下使用IDEA完成项目过程中报错com.intellij.javaee.oss.admin.jmx.JmxAdminException》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/19/Deepin下使用IDEA完成项目过程中报错com-intellij-javaee-oss-admin-jmx-JmxAdminException/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/19/Deepin下使用IDEA完成项目过程中报错com-intellij-javaee-oss-admin-jmx-JmxAdminException/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAT4AAAE+CAAAAAAxUyPsAAAFRklEQVR42u3awW4iMRAEUP7/p7PXrBRMVbfhwptTRMBjv0Gi3O3HI75+fl3PXjl/9tlo+5HPo7UjPN5x4cOHDx8+fOUkzrdpP5VM+ie42hXNvhwvxsGHDx8+fPhGfOfAkfydj7kPLvkczg/7/Eq0Lnz48OHDh+/NfOf3JD//+X83y84j1OprgQ8fPnz48H08uCSxI5ncpmHQRqWcFR8+fPjw4XsH3yxGzNret5a0CTFtO+FCrwMfPnz48OErQ8P3/P2W83348OHDh+/r+X7KK2+H5xPaHGtLjsqd485KAx8+fPjw4RtpbBbZvucu9HmEhPjCHPDhw4cPH74R36xkPyuat6z7peYBK28P4MOHDx8+fDO+9mPtgbC2TLAJLvsiRXsIAB8+fPjw4dvwtYWA9pZJUX4ThvLR8sZA1FDHhw8fPnz4glXPNuSz5nQegPajvaOJfq2egQ8fPnz48AW3eSyuttyQF8rzpkLecihY8eHDhw8fvsUvcttU3m/pN+X+2WPb3KUo1uPDhw8fPnxP3p9DtMvIx8yPxLVNgra4cKFYjw8fPnz48MVt8nZa7eLb5ndeG0829m1AmX0WHz58+PDhSz47+wnPj5rdJZiNll/trPDhw4cPH758VvlE2wbzrASQl/vv9qnbhsR/FRd8+PDhw4evTBdtCzlfalHmjhc5K/23LYfiiBs+fPjw4cMX882OZ+XvzAn2DYO2PTCLQX/kPnz48OHDh6/km237NzduY83meFmOVbf/8eHDhw8fvtHJsc2gLejmWNiGoy3oF415fPjw4cOHb8SXlOxnJYP2MFx7HC2KF/l5vbblgA8fPnz48MV8efhor3PRfBMjEu48uLTxJSrW48OHDx8+fAHfpuw+a2bvy/2zwv3scf4xW3z48OHDh2/Et9nAt+X+djM/K7Xvm/TR1wUfPnz48OFb7JTzW+Zkeal9FiD2zfV2vfjw4cOHD9+eL48UL4rXV6e7acZvDsat+hL48OHDhw/fiLJdZFKIbzfqbTthRjyLVvjw4cOHD9+MbxYdZkFnEzJmj3PW2i/a7fjw4cOHD9+CLy9/J7ecHSxrSxIb3Pwrgg8fPnz48N3ia5vTeWlgdvArCT3DkFGuIi/348OHDx8+fDlfsvlvJ9cW6BOs9kHmn21bAv+9Ex8+fPjw4ZtXy3fnysvt9yag3D1L1jbLL5QM8OHDhw/fF/Nt4sim1D7bwOfhI/kqzKIMPnz48OHDt+drN+Ht5nwWg/al+fYAXF2ewIcPHz58+Ebd7X0I2Jfp265+ErA2jfai0IAPHz58+PDFfJs29mxJOXRbpNjMrR3/acUFHz58+PDhC/jagZKlbjbkeXP9bmmgfQUfPnz48OFr+drmcb5Tbkvt+wewiUTJnF8g4sOHDx8+fMFs2+CyOQrWBqN825+X2jfXH/PEhw8fPnz4Sr5iSzxaTB418qZ1e5Bu/xWJHhU+fPjw4cMXzLwNFpv40k43L6+3wSUvLrxYIz58+PDhwzfiO/+034oyLXp7x1sBZXV7fPjw4cOHb3T7PL60wSUpfM9iUBJ92ne+gMaHDx8+fPg+/hu9KQ3M/k7o89JDPrdVzMKHDx8+fPh+jZO3lmcTnbG2LfD22zELTHXhAB8+fPjw4QsG2oeMWVm/XXAeTVYb/vNo+PDhw4cP3wf5ZgtoR2u580CTlyeevo4PHz58+PB9nC/Z3relgfzxzAJQXoxoUgw+fPjw4cOX8iVBIeeYQd8izr8K++CFDx8+fPjwLUaom8rtxjtpP8+iTBI4ZiX7a+f78OHDhw/ft/P9AxYPfRy0jVGxAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
