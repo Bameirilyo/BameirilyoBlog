@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="安装vsftpd和db-util12sudo apt-get -y install vsftpdsudo apt-get install db-util 查看下vsftpd都安装了那些文件 1dpkg -L vsftpd |tac 建立本地虚拟用户   12sudo useradd -m -d /home/vsftpd vsftpd      #指定目录为/home/vsftpdsudo cat">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-16T15:31:33.739Z">
+<meta property="og:updated_time" content="2018-04-20T09:11:56.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Deepin下vsftpd虚拟用户配置">
 <meta name="twitter:description" content="安装vsftpd和db-util12sudo apt-get -y install vsftpdsudo apt-get install db-util 查看下vsftpd都安装了那些文件 1dpkg -L vsftpd |tac 建立本地虚拟用户   12sudo useradd -m -d /home/vsftpd vsftpd      #指定目录为/home/vsftpdsudo cat">
@@ -199,9 +199,9 @@
 <p>注意：创建的用户vsftpd现在是无法登录到系统的，因为没有给该用户设置密码。在此，我们也无需让vsftpd登录到系统，这样相对来说比较安全。</p>
 <p>用户创建完毕后，我们来创建对应的目录并修改其所属用户，如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R vsftpd:vsftpd  /home/vsftpd/</span><br></pre></td></tr></table></figure>
-<h1 id="建立虚拟用户数据库"><a href="#建立虚拟用户数据库" class="headerlink" title="建立虚拟用户数据库"></a>建立虚拟用户数据库</h1><pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /etc/vsftpd</span><br><span class="line">sudo vim /etc/vsftpd/login.txt</span><br></pre></td></tr></table></figure>
-</code></pre><p>将下面的内容填到login.txt文件内：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">norco1</span><br><span class="line">norcoarm1</span><br><span class="line">norco2</span><br><span class="line">norcoarm2</span><br><span class="line">norco3</span><br><span class="line">norcoarm3</span><br></pre></td></tr></table></figure>
+<h1 id="建立虚拟用户数据库"><a href="#建立虚拟用户数据库" class="headerlink" title="建立虚拟用户数据库"></a>建立虚拟用户数据库</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /etc/vsftpd</span><br><span class="line">sudo vim /etc/vsftpd/login.txt</span><br></pre></td></tr></table></figure>
+<p>将下面的内容填到login.txt文件内：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">norco1</span><br><span class="line">norcoarm1</span><br><span class="line">norco2</span><br><span class="line">norcoarm2</span><br><span class="line">norco3</span><br><span class="line">norcoarm3</span><br></pre></td></tr></table></figure>
 <p>注：login.txt为登录vsftpd的用户与密码文件。奇数行为用户名，偶数行为密码。<br>   。如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用db_load对loginx.txt进行加密</span></span><br><span class="line">sudo db_load -T -t <span class="built_in">hash</span> -f /etc/vsftpd/login.txt /etc/vsftpd/login.db</span><br><span class="line"><span class="comment">#修改权限（此步可不做，未发现问题）</span></span><br><span class="line">chmod 600 /etc/vsftpd/vsftpd_login.db</span><br></pre></td></tr></table></figure>
 <p>生成数据库文件之后建议删除 loginuser.txt</p>
@@ -233,7 +233,7 @@
 <p>pasv_max_port=31000</p>
 <p>这三项是启用vsftpd被动模式及相关端口。</p>
 <h1 id="虚拟用户相关配置"><a href="#虚拟用户相关配置" class="headerlink" title="虚拟用户相关配置"></a>虚拟用户相关配置</h1><p>vsftpd配置文件修改文件后，现在开始配置虚拟用户的相关权限。如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /etc/vsftpd/vu</span><br><span class="line">sudo vim /etc/vsftpd/vu/ailanni</span><br><span class="line">guest_username=ftpilanni</span><br><span class="line">local_root=/www/</span><br><span class="line">virtual_use_local_privs=YES</span><br><span class="line">anon_umask=133</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /etc/vsftpd/vu</span><br><span class="line">sudo vim /etc/vsftpd/vu/ailanni</span><br><span class="line">guest_username=ftpilanni</span><br><span class="line">local_root=/www/</span><br><span class="line">virtual_use_local_privs=YES</span><br><span class="line">anon_umask=133</span><br></pre></td></tr></table></figure>
 <p>以上配置参数，其中guest_username=ftpilanni表示的是设置FTP对应的系统用户为ftpilanni</p>
 <p>local_root=/www/表示使用本地用户登录到ftp时的默认目录。</p>
 <p>virtual_use_local_privs=YES虚拟用户和本地用户有相同的权限。</p>
