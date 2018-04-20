@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-20T02:56:33.880Z</updated>
+  <updated>2018-04-20T04:36:42.634Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -17,13 +17,44 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>三个整数</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/20/%E4%B8%89%E4%B8%AA%E6%95%B4%E6%95%B0/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/20/三个整数/</id>
+    <published>2018-04-20T02:59:36.000Z</published>
+    <updated>2018-04-20T04:36:42.634Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目：</p><p>输入三个数x,y,z，经过若干次操作使三个数变成一样大</p><p>操作一：选择其中两个数加1；</p><p>操作二：选择其中一个数加2；</p><p>输出最少的操作次数</p><p>思路：</p><p>贪心，首先对三个数进行排序。从小到大为xyz， </p><p>  ①如果xy之间差距为偶数，通过对x＋2就使得xy相等，然后，对xy分别+1，使得xyz相等。 </p><p>  ②如果 xy之间为奇数，那么就通过对xy分别+1，使得y=z。此时如果x和Z之间差距为偶数，那么就对x加2，使得XYZ相等；如果x和Z之间差距为奇数，那么就x加2，使得X比zy都大1，然后对yz分别加1，使xyz相等 。 </p><p>  假设为2 5 8，那么由②可以变为  5 8 8，然后根据③，变化为 9 8 8，然后变化为 9 9 9。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            arr[i] = scanner.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">        Arrays.sort(arr);</span><br><span class="line">        <span class="keyword">int</span> x = arr[<span class="number">0</span>], y = arr[<span class="number">1</span>], z = arr[<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">if</span> ((y - x) % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            System.out.println((y - x) / <span class="number">2</span> + z - y);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> sum1 = z - y;</span><br><span class="line">            <span class="keyword">int</span> sum2 = z - x - sum1;</span><br><span class="line">            <span class="keyword">if</span> (sum2 % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                System.out.println(sum1 + sum2 / <span class="number">2</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(sum1 + sum2 / <span class="number">2</span> + <span class="number">2</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;题目：&lt;/p&gt;
+&lt;p&gt;输入三个数x,y,z，经过若干次操作使三个数变成一样大&lt;/p&gt;
+&lt;p&gt;操作一：选择其中两个数加1；&lt;/p&gt;
+&lt;p&gt;操作二：选择其中一个数加2；&lt;/p&gt;
+&lt;p&gt;输出最少的操作次数&lt;/p&gt;
+&lt;p&gt;思路：&lt;/p&gt;
+&lt;p&gt;贪心，首先对三个数进行排序。从小到大为
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>从一个字符串中找出字典序最大子序列</title>
     <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/19/%E4%BB%8E%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E6%89%BE%E5%87%BA%E5%AD%97%E5%85%B8%E5%BA%8F%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97/"/>
     <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/19/从一个字符串中找出字典序最大子序列/</id>
     <published>2018-04-19T14:15:47.000Z</published>
-    <updated>2018-04-20T02:56:33.880Z</updated>
+    <updated>2018-04-20T02:59:02.071Z</updated>
     
-    <content type="html"><![CDATA[<p>说明：</p><p>字典序最大(不是递增)，例如 tt&gt;t、sa&gt;s、xe&gt;xba</p><p>例：</p><p>字符串test的字典序最大子序列为tt</p><p>字符串abcde的字典序最大子序列为e</p><p><strong>思路：</strong></p><p>从后向前找，最后一个字符肯定包含在内，前面的字符大于后面的字符才能保证字典序最大；所以，从后往前找时，遇到比最后一个大的字符，留下当作倒数第二个字符，继续找到比倒数第二个字符大的当作第三个字符。。。。。。</p><p>代码实现：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        String str = sc.next();</span><br><span class="line">        <span class="keyword">char</span>[] ch = str.toCharArray();</span><br><span class="line">        <span class="keyword">char</span>[] chars = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">50</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;ch.length;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> id = <span class="number">50</span>;</span><br><span class="line">            <span class="keyword">for</span>(i=ch.length-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--) &#123;</span><br><span class="line">                <span class="keyword">if</span>(ch[i] &gt;= max) &#123;</span><br><span class="line">                    chars[--id] = ch[i];</span><br><span class="line">                    max = ch[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(i=id;i&lt;<span class="number">50</span>;i++) &#123;</span><br><span class="line">                System.out.print(chars[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>说明：</p><p>字典序最大(不是递增)，例如 tt&gt;t、sa&gt;s、xe&gt;xba</p><p>例：</p><p>字符串test的字典序最大子序列为tt</p><p>字符串abcde的字典序最大子序列为e</p><p><strong>思路：</strong></p><p>从后向前找，最后一个字符肯定包含在内，前面的字符大于后面的字符才能保证字典序最大；所以，从后往前找时，遇到比最后一个大的字符，留下当作倒数第二个字符，继续找到比倒数第二个字符大的当作第三个字符。。。。。。时间复杂度O(n)</p><p>代码实现：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        String str = sc.next();</span><br><span class="line">        <span class="keyword">char</span>[] ch = str.toCharArray();</span><br><span class="line">        <span class="keyword">char</span>[] chars = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">50</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;ch.length;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> id = <span class="number">50</span>;</span><br><span class="line">            <span class="keyword">for</span>(i=ch.length-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--) &#123;</span><br><span class="line">                <span class="keyword">if</span>(ch[i] &gt;= max) &#123;</span><br><span class="line">                    chars[--id] = ch[i];</span><br><span class="line">                    max = ch[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(i=id;i&lt;<span class="number">50</span>;i++) &#123;</span><br><span class="line">                System.out.print(chars[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -39,10 +70,10 @@
     
     </summary>
     
-      <category term="操作系统" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="操作系统" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
