@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>TCP与UDP、三次握手四次挥手 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="网络">
+    <meta name="description" content="区别 TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。 TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。 TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却一般。   TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。 T">
+<meta name="keywords" content="网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP与UDP、三次握手四次挥手">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="区别 TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。 TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。 TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却一般。   TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。 T">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/0.jpg">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/1.png">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/3.png">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/4.png">
+<meta property="og:updated_time" content="2018-04-20T09:04:23.855Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP与UDP、三次握手四次挥手">
+<meta name="twitter:description" content="区别 TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。 TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。 TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却一般。   TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。 T">
+<meta name="twitter:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/0.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">TCP与UDP、三次握手四次挥手</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">TCP与UDP、三次握手四次挥手</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-12T14:37:51.000Z" itemprop="datePublished" class="page-time">
+  2018年04月12日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/网络/">网络</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#区别"><span class="post-toc-number">1.</span> <span class="post-toc-text">区别</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#为什么UDP有时比TCP更有优势"><span class="post-toc-number">2.</span> <span class="post-toc-text">为什么UDP有时比TCP更有优势?</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三次握手与四次挥手"><span class="post-toc-number">3.</span> <span class="post-toc-text">三次握手与四次挥手</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三次握手过程："><span class="post-toc-number">4.</span> <span class="post-toc-text">三次握手过程：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题1：-为什么要三次握手？"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">问题1： 为什么要三次握手？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题2：为什么要发送特定的数据包，随便发不行吗？"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">问题2：为什么要发送特定的数据包，随便发不行吗？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题3：上图中的SYN和ACK是什么？"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">问题3：上图中的SYN和ACK是什么？</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#四次挥手："><span class="post-toc-number">5.</span> <span class="post-toc-text">四次挥手：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题1：-为什么要四次挥手？"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">问题1： 为什么要四次挥手？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题2：为什么双方要发送这样的数据包？"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">问题2：为什么双方要发送这样的数据包？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#附加"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">附加</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SYN网络攻击："><span class="post-toc-number">5.3.1.</span> <span class="post-toc-text">SYN网络攻击：</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#关于tcp中time-wait状态的4个问题"><span class="post-toc-number">6.</span> <span class="post-toc-text">关于tcp中time_wait状态的4个问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-为什么会有time-wait状态"><span class="post-toc-number">6.0.1.</span> <span class="post-toc-text">2.为什么会有time_wait状态</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-哪一方会有time-wait状态"><span class="post-toc-number">6.0.2.</span> <span class="post-toc-text">3.哪一方会有time_wait状态</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-如何避免time-wait状态占用资源"><span class="post-toc-number">6.0.3.</span> <span class="post-toc-text">4.如何避免time_wait状态占用资源</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#close-wait状态出现的原因"><span class="post-toc-number">7.</span> <span class="post-toc-text">close_wait状态出现的原因</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#为什么TCP连接需要三次握手，两次不可以吗，为什么"><span class="post-toc-number">8.</span> <span class="post-toc-text">为什么TCP连接需要三次握手，两次不可以吗，为什么</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-TCP与UDP、三次握手四次挥手"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">TCP与UDP、三次握手四次挥手</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年04月12日 22:37:51" datetime="2018-04-12T14:37:51.000Z"  itemprop="datePublished">2018年04月12日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/网络/">网络</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><ul>
+<li>TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。</li>
+<li>TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。</li>
+<li>TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却一般。</li>
+</ul>
+<ul>
+<li>TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。</li>
+<li>TCP连接只能是点到点的；UDP支持一对一、一对多、多对一和多对多的交互通信。</li>
+<li>TCP首部开销20字节；UDP的首部开销小，只有8个字节。</li>
+<li>TCP的逻辑通信信道是全双工的可靠信道；UDP的逻辑通信信道是不可靠信道。</li>
+</ul>
+<h1 id="为什么UDP有时比TCP更有优势"><a href="#为什么UDP有时比TCP更有优势" class="headerlink" title="为什么UDP有时比TCP更有优势?"></a>为什么UDP有时比TCP更有优势?</h1><p>UDP以其简单、传输快的优势，在越来越多场景下取代了TCP,如实时游戏。</p>
+<p>（1）网速的提升给UDP的稳定性提供可靠网络保障，丢包率很低，如果使用应用层重传，能够确保传输的可靠性。</p>
+<p>（2）TCP为了实现网络通信的可靠性，使用了复杂的拥塞控制算法，建立了繁琐的握手过程，由于TCP内置的系统协议栈中，极难对其进行改进。</p>
+<p>采用TCP，一旦发生丢包，TCP会将后续的包缓存起来，等前面的包重传并接收到后再继续发送，延时会越来越大，基于UDP对实时性要求较为严格的情况下，采用自定义重传机制，能够把丢包产生的延迟降到最低，尽量减少网络问题对游戏性造成影响。</p>
+<h1 id="三次握手与四次挥手"><a href="#三次握手与四次挥手" class="headerlink" title="三次握手与四次挥手"></a>三次握手与四次挥手</h1><p><img src="/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/0.jpg" alt="preview"></p>
+<p>TCP共有6个标志位，分别是：</p>
+<ul>
+<li>SYN(synchronous),建立联机。</li>
+<li>ACK(acknowledgement),确认。</li>
+<li>PSH(push),传输。</li>
+<li>FIN(finish),结束。</li>
+<li>RST(reset),重置。</li>
+<li>URG(urgent),紧急。</li>
+</ul>
+<p>三次握手与四次挥手分别对应TCP连接建立过程与断开过程，先上TCP报文格式：</p>
+<p><img src="/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/1.png" alt="img"></p>
+<h1 id="三次握手过程："><a href="#三次握手过程：" class="headerlink" title="三次握手过程："></a>三次握手过程：</h1><p><img src="/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/3.png" alt="img"></p>
+<h2 id="问题1：-为什么要三次握手？"><a href="#问题1：-为什么要三次握手？" class="headerlink" title="问题1： 为什么要三次握手？"></a>问题1： 为什么要三次握手？</h2><p>答案一：</p>
+<p><strong>为了防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误。 </strong></p>
+<p>例子 ：</p>
+<p>“已失效的连接请求报文段”的产生在这样一种情况下：client发出的第一个连接请求报文段并没有丢失，而是在某个网络结点长时间的滞留了，以致延误到连接释放以后的某个时间才到达server。本来这是一个早已失效的报文段。但server收到此失效的连接请求报文段后，就误认为是client再次发出的一个新的连接请求。于是就向client发出确认报文段，同意建立连接。假设不采用“三次握手”，那么只要server发出确认，新的连接就建立了。由于现在client并没有发出建立连接的请求，因此不会理睬server的确认，也不会向server发送数据。但server却以为新的运输连接已经建立，并一直等待client发来数据。这样，server的很多资源就白白浪费掉了。采用“三次握手”的办法可以防止上述现象发生。例如刚才那种情况，client不会向server的确认发出确认。server由于收不到确认，就知道client并没有要求建立连接。” </p>
+<p>答案二：</p>
+<p>三次握手的目的是建立可靠的通信信道，说到通讯，简单来说就是数据的发送与接收，而三次握手最主要的目的就是双方确认自己与对方的发送与接收机能正常。</p>
+<p>​        第一次握手：Client什么都不能确认；Server确认了对方发送正常</p>
+<p>​        第二次握手：Client确认了：自己发送、接收正常，对方发送、接收正常；Server确认了：自己接收正常，对方发送正常</p>
+<p>​        第三次握手：Client确认了：自己发送、接收正常，对方发送、接收正常；Server确认了：自己发送、接收正常，对方发送接收正常</p>
+<p>所以三次握手就能确认双发收发功能都正常，缺一不可。</p>
+<h2 id="问题2：为什么要发送特定的数据包，随便发不行吗？"><a href="#问题2：为什么要发送特定的数据包，随便发不行吗？" class="headerlink" title="问题2：为什么要发送特定的数据包，随便发不行吗？"></a>问题2：为什么要发送特定的数据包，随便发不行吗？</h2><p>答：三次握手的另外一个目的就是确认双方都支持TCP，告知对方用TCP传输。</p>
+<p>​        第一次握手：Server 猜测Client可能要建立TCP请求，但不确定，因为也可能是Client乱发了一个数据包给自己</p>
+<p>​        第二次握手：通过ack=J+1，Client知道Server是支持TCP的，且理解了自己要建立TCP连接的意图</p>
+<p>​        第三次握手：通过ack=K+1，Server知道Client是支持TCP的，且确实是要建立TCP连接</p>
+<h2 id="问题3：上图中的SYN和ACK是什么？"><a href="#问题3：上图中的SYN和ACK是什么？" class="headerlink" title="问题3：上图中的SYN和ACK是什么？"></a>问题3：上图中的SYN和ACK是什么？</h2><p>答：SYN是标志位，SYN=1表示请求连接；</p>
+<p>​        ACK其实就是ack后面加上的那个数，真正发送的时候不单独发ACK，只发ack，下面四次挥手的图同理</p>
+<h1 id="四次挥手："><a href="#四次挥手：" class="headerlink" title="四次挥手："></a>四次挥手：</h1><p><img src="/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/4.png" alt="img"></p>
+<p><strong>【注意】中断连接端可以是Client端，也可以是Server端。</strong></p>
+<h2 id="问题1：-为什么要四次挥手？"><a href="#问题1：-为什么要四次挥手？" class="headerlink" title="问题1： 为什么要四次挥手？"></a>问题1： 为什么要四次挥手？</h2><p>答：根本原因是，一方发送FIN只表示自己发完了所有要发的数据，但还允许对方继续把没发完的数据发过来。</p>
+<p>​        举个例子：A和B打电话，通话即将结束后，A说“我没啥要说的了”，B回答“我知道了”，但是B可能还会有要说的话，A不能要求B跟着自己的节奏结束通话，于是B可能又巴拉巴拉说了一通，最后B说“我说完了”，A回答“知道了”，这样通话才算结束。</p>
+<h2 id="问题2：为什么双方要发送这样的数据包？"><a href="#问题2：为什么双方要发送这样的数据包？" class="headerlink" title="问题2：为什么双方要发送这样的数据包？"></a>问题2：为什么双方要发送这样的数据包？</h2><p>答：和握手的情况类似，只是为了让对方知晓自己理解了对方的意图。</p>
+<h2 id="附加"><a href="#附加" class="headerlink" title="附加"></a><strong>附加</strong></h2><h3 id="SYN网络攻击："><a href="#SYN网络攻击：" class="headerlink" title="SYN网络攻击："></a><strong>SYN网络攻击：</strong></h3><p>原理：<br>  在三次握手过程中，Server发送SYN-ACK之后，收到Client的ACK之前的TCP连接称为半连接（half-open<br>connect），此时Server处于SYN_RCVD状态，当收到ACK后，Server转入ESTABLISHED状态。SYN攻击就是Client在短时间内伪造大量不存在的IP地址，并向Server不断地发送SYN包，Server回复确认包，并等待Client的确认，由于源地址是不存在的，因此，Server需要不断重发直至超时，这些伪造的SYN包将产时间占用未连接队列，导致正常的SYN请求因为队列满而被丢弃，从而引起网络堵塞甚至系统瘫痪。</p>
+<p>检测：<br>SYN攻击时一种典型的DDOS攻击，检测SYN攻击的方式非常简单，即当Server上有大量半连接状态且源IP地址是随机的，则可以断定遭到SYN攻击了。windows下打开cmd,输入命令：”netstat<br> -n -p TCP“，查看是否有大量的”SYN_RECEIVED“状态。</p>
+<h1 id="关于tcp中time-wait状态的4个问题"><a href="#关于tcp中time-wait状态的4个问题" class="headerlink" title="关于tcp中time_wait状态的4个问题"></a>关于tcp中time_wait状态的4个问题</h1><p>time_wait是个常问的问题，tcp网络编程中最不容易理解的也是它的time_wait状态，这也说明了tcp/ip四次挥手中time_wait状态的重要性。 </p>
+<p><strong>1.time_wait状态是什么</strong></p>
+<p>简单来说：time_wait状态是四次挥手中服务器向客户端发送FIN终止连接后进入的状态。</p>
+<p>  可以看到time_wait状态存在于客户端收到服务器Fin并返回ack包时的状态<br>  当处于time_wait状态时，我们无法创建新的连接，因为端口被占用。</p>
+<h3 id="2-为什么会有time-wait状态"><a href="#2-为什么会有time-wait状态" class="headerlink" title="2.为什么会有time_wait状态"></a>2.为什么会有time_wait状态</h3><p>time_wait存在的原因有两点<br>  1.可靠的终止TCP连接。<br>  2.保证让迟来的TCP报文段有足够的时间被识别并丢弃。</p>
+<p>1.可靠的终止TCP连接，若处于time_wait的客户端发送给服务器确认报文段丢失的话，服务器将在此重新发送FIN报文段，那么客户端必须处于一个可接收的状态就是time_wait而不是close状态。<br> 2.保证迟来的TCP报文段有足够的时间被识别并丢弃，linux中一个TCP端口不能打开两次或两次以上，当客户端处于time_wait状态时我们将无法使用此端口建立新连接，如果不存在time_wait状态，新连接可能会收到旧连接的数据。time_wait持续的时间是2MSL，保证旧的数据可以丢弃，因为网络中的数据最大存在MSL(maxinum segment lifetime)。</p>
+<h3 id="3-哪一方会有time-wait状态"><a href="#3-哪一方会有time-wait状态" class="headerlink" title="3.哪一方会有time_wait状态"></a>3.哪一方会有time_wait状态</h3><p>time_wait状态是一般有客户端的状态。而且会占用端口<br>有时产生在服务器端，因为服务器主动断开连接或者发生异常</p>
+<h3 id="4-如何避免time-wait状态占用资源"><a href="#4-如何避免time-wait状态占用资源" class="headerlink" title="4.如何避免time_wait状态占用资源"></a>4.如何避免time_wait状态占用资源</h3><p>如果是客户端，我们一般不用担心，因为客户端一般选用临时端口，再次创建连接会新分配一个端口。除非指定客户端使用某端口，不过一般不需要这么做。</p>
+<p>如果是服务器主动关闭连接后异常终止，则因为它总是使用用一个知名服务器端口号，所以连接的time_wait状态将导致它不能重启，不过我们可以通过socket的选项SO_REUSEADDR来强制进程立即使用处于time_wait状态的连接占用的端口。<br>通过socksetopt设置后，即使sock处于time_wait状态，与之绑定的socket地址也可以立即被重用。</p>
+<p>此外也可以通过修改内核参数/proc/sys/net/ipv4/tcp_tw/recycle来快速回收被关闭的socket,从而是tcp连接根本不进入time_wait状态，进而允许应用程序立即重用本地的socket地址。</p>
+<h1 id="close-wait状态出现的原因"><a href="#close-wait状态出现的原因" class="headerlink" title="close_wait状态出现的原因"></a>close_wait状态出现的原因</h1><p>某一方在网络连接断开后，对等方没有检测到这个错误（对方断开）而没有调用 closesocket，导致了这个状态的出现。</p>
+<p>Server 程序处于CLOSE_WAIT状态，而不是LAST_ACK状态，说明还没有发FIN给Client，那么可能是在关闭连接之前还有许多数据要发送或者其他事要做,导致没有发这个FIN packet。 </p>
+<h1 id="为什么TCP连接需要三次握手，两次不可以吗，为什么"><a href="#为什么TCP连接需要三次握手，两次不可以吗，为什么" class="headerlink" title="为什么TCP连接需要三次握手，两次不可以吗，为什么"></a>为什么TCP连接需要三次握手，两次不可以吗，为什么</h1><p>为了防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误。 </p>
+<p>例子 ：</p>
+<p>“已失效的连接请求报文段”的产生在这样一种情况下：client发出的第一个连接请求报文段并没有丢失，而是在某个网络结点长时间的滞留了，以致延误到连接释放以后的某个时间才到达server。本来这是一个早已失效的报文段。但server收到此失效的连接请求报文段后，就误认为是client再次发出的一个新的连接请求。于是就向client发出确认报文段，同意建立连接。假设不采用“三次握手”，那么只要server发出确认，新的连接就建立了。由于现在client并没有发出建立连接的请求，因此不会理睬server的确认，也不会向server发送数据。但server却以为新的运输连接已经建立，并一直等待client发来数据。这样，server的很多资源就白白浪费掉了。采用“三次握手”的办法可以防止上述现象发生。例如刚才那种情况，client不会向server的确认发出确认。server由于收不到确认，就知道client并没有要求建立连接。” </p>
+<p>转载自：<a href="https://blog.csdn.net/zixiaomuwu/article/details/60965466" target="_blank" rel="noopener">https://blog.csdn.net/zixiaomuwu/article/details/60965466</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/网络/">网络</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/&title=《TCP与UDP、三次握手四次挥手》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/&title=《TCP与UDP、三次握手四次挥手》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCP与UDP、三次握手四次挥手》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/BameirilyoBlog/2018/04/12/String、StringBuffer、StringBuilder以及对String不变性的理解/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 上一篇</div>
+        <h4 class="title">String、StringBuffer、StringBuilder以及对String不变性的理解</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/04/11/查找算法/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">查找算法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/&title=《TCP与UDP、三次握手四次挥手》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/&title=《TCP与UDP、三次握手四次挥手》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCP与UDP、三次握手四次挥手》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADL0lEQVR42u3aSW7jQBAEQP//05qrgdGS2UUDUil4Eiya3dE8lGr5+Ymv26/r91+ef3707f/Xo7XOVrzswsbGxv4Q9u3plbMfLf8cluynfQHJ4WJjY2PvYz/fbn4EZ4DkznxvydFjY2NjY0dBokwb2vDZvgBsbGxs7EnRJ3nCPDhhY2NjfzM7KSrl6UHy5Lap0Ia6y2pp2NjY2G/Pzrui7//5T/rb2NjY2G/MvpXXVYWnNjidNRgePgEbGxt7ETsPAFclKvMgdJZmYGNjY29lt5tr78mbu9H7Oco1sLGxsXezny/Qws6SiqtGfyJqcq7Y2NjYH8hOMJNmajK+066YNH0LPDY2NvbHsvNAMi8b5QM3bSmqDlrY2NjY69h50Se5MwknbZC7eCIJGxsbexE7L9nPU4hJ4GwTnrYVgY2Njf257HkTdxK65klI8vnOcWBjY2N/AbsdrMm3fjYY1B7ri3uwsbGx17Hb5fMS/wVZUdkqPqylYWNjY38sex6cJgd61nJoW8UPQxo2Njb2F7CTlKCt1bRjmm3CU3yLjY2NvZTdBoz8t32+rbPDakMaNjY29g72pOgzSQ/O1s3/68VQKTY2NvYidp5sTEJLnmy0rdw2uN5JRbCxsbEXsSdt1Hm4SlbPU47oNWBjY2OvYxc/4s+WicNeexCHO8TGxsZexD4LIXmb4ez4kie097yormFjY2N/ILsdwUmKUG27Nw+cecHrxTOxsbGx17Gv7YHmT7gqsUkaEncCGDY2NvZSdlLoT/6rvXOSruQ7xMbGxt7HzhuoSWDIN5RsKznKs1YBNjY29lb25Kf/X7SHkyJXHsAejuxgY2NjL2LnRf/8nrNCVQ1oi0rY2NjYS9ltJ/SnvOYHlIfVJL3BxsbG3sG+lVcbQvKC1NnRHA4eYWNjYy9in4WftqwzSRvaEZ8kZcLGxsbex54UiZ5T8+Zuu/ULAhg2Njb2OvZZU/asoZuM10xWj5rQ2NjY2NhxeagtA501Kuq1sLGxsb+Y3ZaN5klLe1hRowIbGxt7Hbst3LTFnWTop1190h7GxsbG3sQ+KxK1acB8uGcyrDPqb2NjY2O/L/sfI1p8uHgE12kAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
