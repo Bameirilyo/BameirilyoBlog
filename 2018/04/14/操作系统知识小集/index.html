@@ -20,19 +20,20 @@
     
     
     <meta name="keywords" content="操作系统">
-    <meta name="description" content="进程状态变化">
+    <meta name="description" content="进程状态变化 1.银行家算法：系统处于不安全状态可能会发生死锁，处于安全状态一定不会发生死锁 2.Windows操作系统中，文件组织采用树型目录结构。 3.在设备管理中，逻辑设备表（LUT）的作用是（在物理设备和逻辑设备之间建立对应关系）。 4.某个磁盘系统采用最短寻道时间优先（SSTF）磁盘调度算法，假设有一个请求柱面读写的磁盘请   求队列如下：27、136、58、100、72、40，当前磁头">
 <meta name="keywords" content="操作系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="操作系统知识小集">
 <meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/操作系统知识小集/index.html">
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
-<meta property="og:description" content="进程状态变化">
+<meta property="og:description" content="进程状态变化 1.银行家算法：系统处于不安全状态可能会发生死锁，处于安全状态一定不会发生死锁 2.Windows操作系统中，文件组织采用树型目录结构。 3.在设备管理中，逻辑设备表（LUT）的作用是（在物理设备和逻辑设备之间建立对应关系）。 4.某个磁盘系统采用最短寻道时间优先（SSTF）磁盘调度算法，假设有一个请求柱面读写的磁盘请   求队列如下：27、136、58、100、72、40，当前磁头">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://uploadfiles.nowcoder.net/images/20150920/458054_1442753187771_5CDBB527FAC51A534C0C85F7B4B46194">
-<meta property="og:updated_time" content="2018-04-14T12:50:42.839Z">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/操作系统知识小集/空闲区数.png">
+<meta property="og:updated_time" content="2018-04-25T12:34:29.447Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统知识小集">
-<meta name="twitter:description" content="进程状态变化">
+<meta name="twitter:description" content="进程状态变化 1.银行家算法：系统处于不安全状态可能会发生死锁，处于安全状态一定不会发生死锁 2.Windows操作系统中，文件组织采用树型目录结构。 3.在设备管理中，逻辑设备表（LUT）的作用是（在物理设备和逻辑设备之间建立对应关系）。 4.某个磁盘系统采用最短寻道时间优先（SSTF）磁盘调度算法，假设有一个请求柱面读写的磁盘请   求队列如下：27、136、58、100、72、40，当前磁头">
 <meta name="twitter:image" content="http://uploadfiles.nowcoder.net/images/20150920/458054_1442753187771_5CDBB527FAC51A534C0C85F7B4B46194">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
@@ -195,6 +196,39 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="进程状态变化"><a href="#进程状态变化" class="headerlink" title="进程状态变化"></a>进程状态变化</h1><p><img src="http://uploadfiles.nowcoder.net/images/20150920/458054_1442753187771_5CDBB527FAC51A534C0C85F7B4B46194" alt="img"></p>
+<p>1.银行家算法：系统处于不安全状态可能会发生死锁，处于安全状态一定不会发生死锁</p>
+<p>2.Windows操作系统中，文件组织采用树型目录结构。</p>
+<p>3.在设备管理中，逻辑设备表（LUT）的作用是（在物理设备和逻辑设备之间建立对应关系）。</p>
+<p>4.某个磁盘系统采用最短寻道时间优先（SSTF）磁盘调度算法，假设有一个请求柱面读写的磁盘请</p>
+<p>  求队列如下：27、136、58、100、72、40，当前磁头位置是80 柱面。请问，磁盘总的移动距离为（）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> 最短寻道时间优先（SSTF）磁盘调度算法，每次寻找最近的位置访问。</span><br><span class="line">(1)方向假设从磁盘内部向外部移动</span><br><span class="line">起始  80   移动距离（柱面）</span><br><span class="line">72              8</span><br><span class="line">58             14    </span><br><span class="line">40             18</span><br><span class="line">27             13</span><br><span class="line">100            73</span><br><span class="line">136            36</span><br><span class="line">磁盘总的移动距离：8+14+18+13+73+36=162</span><br><span class="line">可以直接80-27+136-27 = 162</span><br><span class="line"></span><br><span class="line">(2)方向假设从磁盘外部向内部移动</span><br><span class="line">起始  80   移动距离</span><br><span class="line">100           20</span><br><span class="line">136           36</span><br><span class="line">72            64</span><br><span class="line">58            14</span><br><span class="line">40            18</span><br><span class="line">27            13</span><br><span class="line">磁盘总的移动距离：20+36+64+14+18+13=165</span><br></pre></td></tr></table></figure>
+<p>5.最短任务优先（SJF）调度算法可能会导致进程饿死（Starvation）</p>
+<p>6.chmod   命令，改写文件的读写许可设置</p>
+<p>语法为：  chmod abc file</p>
+<p>其中  a,b,c  各为一个数字，分别表示  User, Group, Other  的权限</p>
+<p>读r = 4, 写w = 2, 执行x = 1</p>
+<p>7.若一个 程序或 子程序可以安全的被 并行执行，则称其为 可重入（ reentrant或re-entrant）的；即，当该子程序正在运行时，可以再次进入并执行它。若一个函数是可重入的，则该函数：  </p>
+<p>不能含有 静态（全局）非常量数据。 不能返回静态（全局）非常量数据的地址。 只能处理由调用者提供的数据。 不能依赖于单实例模式资源的锁。 不能调用不可重入的函数。 多’用户/对象/进程 优先级’以及 多进程一般会使得对可重入代码的控制变得复杂。同时，IO代码通常不是可重入的，因为他们依赖于像磁盘这样共享的、单独的资源。 </p>
+<p>8.一个完整的计算机系统应包括___硬件系统和软件系统</p>
+<p>9.多道程序技术即是指在内存中存放多道作业，运行结束或出错，自动调度内存中另一道作业运行。多道程序主要优点如下： </p>
+<p>（1）资源利用率高。由于内存中装入了多道程序，使它们共享资源，保持系统资源处于忙碌状态，从而使各种资源得以充分利用。 </p>
+<p>（2）系统吞吐量大。由于CPU和其它系统资源保持“忙碌”状态，而且仅当作业完成或运行不下去时才切换，系统开销小，所以吞吐量 </p>
+<p>10.文件的保密是防止文件被（窃取）</p>
+<p>11.实现进程之间同步与互斥的通信工具为（ P、V操作  ）。</p>
+<p>12.进程的三个状态： </p>
+<p>​      <strong>运行态</strong>：进程占有处理器运行</p>
+<p>​      <strong>就绪态</strong>：进程具备运行条件等待处理器运行</p>
+<p>​      <strong>等待态</strong>：进程由于等待资源、输入输出、信号等而不具备运行条件</p>
+<p>  三种状态之间的转换： </p>
+<p>​      <strong>运行态</strong>——&gt;<strong>等待态</strong>：等待资源、I/O、信号</p>
+<p>​      <strong>等待态</strong>——&gt;<strong>就绪态</strong>：资源满足、I/O结束、信号完成 </p>
+<p>​      <strong>就绪态</strong>——&gt;<strong>运行态</strong>：处理器空闲时选择更高优先权进程抢占 </p>
+<p>​      <strong>运行态</strong>——&gt;<strong>就绪态</strong>：运行时间片到、有更高优先权进程 </p>
+<p>13.用管程实现进程同步时，管程中的过程是不可中断的。<strong>管程中的过程是原语，是不能中断的。</strong></p>
+<p>14.在可变式分区分配方案中，某一作业完成后，系统收回其主存空间，并与相邻空闲区合并，为此需修改空闲区表，造成空闲区数减1的情况是（）。有上邻空闲区，也有下邻空闲区</p>
+<p><img src="/BameirilyoBlog/2018/04/14/操作系统知识小集/空闲区数.png" alt="preview"></p>
+<p>15.临界资源是指每次仅允许一个进程访问的资源。</p>
+<p>属于临界资源的硬件有打印机、磁带机等,软件有消息缓冲队列、变量、数组、缓冲区等。 诸进程间应采取互斥方式，实现对这种资源的共享。</p>
 
         </div>
 
