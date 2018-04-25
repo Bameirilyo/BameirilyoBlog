@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-04-20T04:36:42.634Z</updated>
+  <updated>2018-04-25T12:18:52.193Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>网络</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/04/25/%E7%BD%91%E7%BB%9C/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/04/25/网络/</id>
+    <published>2018-04-25T12:14:59.000Z</published>
+    <updated>2018-04-25T12:18:52.193Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.</p><p>PPP协议有两种认证方式，PAP(口令鉴别协议)方式和CHAP（口令握手鉴别协议）方式。PAP只需进行一次认证，并且只在链路初始状态时执行。而且用户名与密码的传送方式是明文的。CHAP采用周期性的验证，并且认证内容经过MD5加密后再传送，安全性要比PAP高。</p><p>2.</p><p> IEEE 802.3标准采用CSMA/CD，并用二进制指数退避和1-坚持算法</p><p>CSMA/CD采用二进制指数退避算法，又称为二元指数<a href="https://baike.baidu.com/item/%E5%90%8E%E9%80%80%E7%AE%97%E6%B3%95/6714023" target="_blank" rel="noopener">后退算法</a>。退避算法是以冲突窗口大小为基准的，每个节点有一个冲突计数器C。退避的时间与冲突次数具有指数关系，冲突次数越多，退避的时间就可能越长，若达到限定的冲突次数，该节点就停止发送数据。</p><p>3.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">互联网采用的路由选择协议是动态的 </span><br><span class="line">RIP是基于距离向量的路由选择协议，RIP选择一个到目的网络具有最少路由器的路由（最短路由）。</span><br><span class="line">OSPF最主要特征是使用分布式链路状态协议，所有的路由器最终都能建立一个链路状态数据库（全网的拓扑结构图）。</span><br><span class="line">BGP-4采用路径向量路由选择协议。BGP所交换的网络可达性信息是要到达某个网络所要经过的自治系统序列。</span><br></pre></td></tr></table></figure><p>4.<img src="/BameirilyoBlog/2018/04/25/网络/OSI作用.png" alt="preview"></p><p>5.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">具有5个10M端口的集线器的总带宽可以达到(10M)</span><br></pre></td></tr></table></figure><p>集线器不管有多少个端口，所有端口都共享一条带宽，在同一时刻只能有两个端口传送数据，其他端口只能等待；只能工作在半双工模式下。交换机每个端口都有一条独占的带宽，当两个端口工作时并不影响其他端口的工作，交换机可以工作在半双工模式下也可以工作在全双工模式下。</p><p>6.</p><p>  某主机的  IP  地址为  180.80.77.55  ，子网掩码为  255.255.252.0  。若该主机向其所在子网发送广播分组，则目的地址可以是    180.80.79.255。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.子网掩码的第 3 个字节为 11111100 ，可知前 22 位为子网号、后 10 位为主机号。 IP 地址的第 3 个字节为 010011 01 （下划线为子网号的一部分），将主机号（即后 10 位）全置为 1 ，可以得到广播地址为 180.80.79.255 。</span><br><span class="line">2.把IP地址跟子网掩码取与（&amp;）得到网络地址：广播地址是网络地址的主机位全1 </span><br><span class="line">3. 广播地址(Broadcast Address)是专门用于同时向网络中所有工作站进行发送的一个地址。在使用TCP/IP 协议的网络中，主机标识段host ID 为全1 的IP 地址为广播地址，广播的分组传送给host ID段所涉及的所有计算机</span><br></pre></td></tr></table></figure><p>7.从组的使用范围来分，可以分为三种：全局组、本地域组和通用组。</p><p>8.</p><p>IEEE 802.3 ：以太网介质访问控制协议 （CSMA/CD）及物理层技术规范。<br> IEEE 802.5 ：令牌环网（Token-Ring)的介质访问控制协议及物理层技术规范。<br> IEEE 802.6 ：城域网介质访问控制协议DQDB （Distributed Queue Dual Bus 分布式队列双总线）及物理层技术规范。<br> IEEE 802.11：无线局域网（WLAN）的介质访问控制协议及物理层技术规范。</p><p>9.传输介质</p><p>10BASE-2 细缆           </p><p>10BASE-5 粗缆           </p><p>10BASE-T 非屏蔽双绞线 </p><p>10BASE-FL 光纤          </p><p>10.</p><p>几种常用的<a href="https://baike.baidu.com/item/%E5%B9%BF%E5%9F%9F%E7%BD%91" target="_blank" rel="noopener">广域网</a>：<a href="https://baike.baidu.com/item/%E5%85%AC%E7%94%A8%E7%94%B5%E8%AF%9D%E4%BA%A4%E6%8D%A2%E7%BD%91" target="_blank" rel="noopener">公用电话交换网</a>（ PSTN）、分组交换网（X . 25）、<a href="https://baike.baidu.com/item/%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E7%BD%91" target="_blank" rel="noopener">数字数据网</a>（DDN）、<a href="https://baike.baidu.com/item/%E5%B8%A7%E4%B8%AD%E7%BB%A7" target="_blank" rel="noopener">帧中继</a>（FR）、<a href="https://baike.baidu.com/item/%E4%BA%A4%E6%8D%A2%E5%BC%8F%E5%A4%9A%E5%85%86%E4%BD%8D%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1" target="_blank" rel="noopener">交换式多兆位数据服务</a>（SMDS）和<a href="https://baike.baidu.com/item/%E5%BC%82%E6%AD%A5%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">异步传输模式</a>（ATM）。</p><p>11.</p><p>  要想连上Internet，至少需要四个条件：1.IP地址；2.子网掩码；3.gateway(网关)；4.DNS（域名服务器） </p><p>  而此题说的是设备，则肯定选择路由器，因为只有路由器才能完成网关这个条件，而网关本身并不是一种设备 </p><ol><li><p>套接字由什么构成 (IP地址与端口号 )</p></li><li><p>物理层的接口有哪几个方面的特性？各包含些什么内容？ </p><p>（1）机械特性:说明接口所用的接线器的形状和尺寸、引线数目和排列、固定和锁定装置等等。<br>（2）电气特性:指明在接口电缆的各条线上出现的电压的范围。 </p><p>（3）功能特性:指明某条线上出现的某一电平的电压表示何意。 </p><p>（4）规程特性:说明对于不同功能的各种可能事件的出现顺序。</p></li><li><p>交换机根据下列哪个地址来决定转发？（目标MAC地址</p></li><li><p>Ethernet采用的媒体访问控制方式是 （CSMA/CD</p></li><li><p>虚电路方法在传输数据前（）必须预先建立一条逻辑连接</p></li><li><p>255.0.0.0；255.255.0.0；255.255.255.0分别为A,B,C类地址的缺省子网掩码</p></li><li><p>​    局域网中的MAC层与OSI 参考模型（数据链路层） 相对应</p></li><li><p>DNS：域名解析 </p><p>FTP：文件传输 </p><p>www：信息查询 </p><p>ADSL：非对称数字用户线路，数据传输</p></li><li><p>​</p></li><li><p>​</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1.&lt;/p&gt;
+&lt;p&gt;PPP协议有两种认证方式，PAP(口令鉴别协议)方式和CHAP（口令握手鉴别协议）方式。PAP只需进行一次认证，并且只在链路初始状态时执行。而且用户名与密码的传送方式是明文的。CHAP采用周期性的验证，并且认证内容经过MD5加密后再传送，安全性要比PAP
+      
+    
+    </summary>
+    
+      <category term="网络" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="网络" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>三个整数</title>
