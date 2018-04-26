@@ -20,18 +20,18 @@
     
     
     <meta name="keywords" content="Java基础">
-    <meta name="description" content="什么是线程池？线程池顾名思义就是事先创建若干个可执行的线程放入一个池（容器）中，需要的时候从池中获取线程不用自行创建，使用完毕不需要销毁线程而是放回池中，从而减少创建和销毁线程对象的开销。  设计一个动态大小的线程池，如何设计，应该有哪些方法 ？ 一个线程池包括以下四个基本组成部分：   线程管理器(ThreadPool)：用于创建并管理线程池，包括创建线程，销毁线程池，添加新任务；  工作线程(">
+    <meta name="description" content="什么是线程池？线程池顾名思义就是事先创建若干个可执行的线程放入一个池（容器）中，需要的时候从池中获取线程不用自行创建，使用完毕不需要销毁线程而是放回池中，从而减少创建和销毁线程对象的开销。 线程池的好处： 降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。 提高响应速度。当任务到达时，任务可以不需要的等到线程创建就能立即执行。 提高线程的可管理性。线程是稀缺资源，如果无限制的创建">
 <meta name="keywords" content="Java基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线程池">
 <meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/15/线程池/index.html">
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
-<meta property="og:description" content="什么是线程池？线程池顾名思义就是事先创建若干个可执行的线程放入一个池（容器）中，需要的时候从池中获取线程不用自行创建，使用完毕不需要销毁线程而是放回池中，从而减少创建和销毁线程对象的开销。  设计一个动态大小的线程池，如何设计，应该有哪些方法 ？ 一个线程池包括以下四个基本组成部分：   线程管理器(ThreadPool)：用于创建并管理线程池，包括创建线程，销毁线程池，添加新任务；  工作线程(">
+<meta property="og:description" content="什么是线程池？线程池顾名思义就是事先创建若干个可执行的线程放入一个池（容器）中，需要的时候从池中获取线程不用自行创建，使用完毕不需要销毁线程而是放回池中，从而减少创建和销毁线程对象的开销。 线程池的好处： 降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。 提高响应速度。当任务到达时，任务可以不需要的等到线程创建就能立即执行。 提高线程的可管理性。线程是稀缺资源，如果无限制的创建">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-15T15:51:37.593Z">
+<meta property="og:updated_time" content="2018-04-26T13:41:58.966Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程池">
-<meta name="twitter:description" content="什么是线程池？线程池顾名思义就是事先创建若干个可执行的线程放入一个池（容器）中，需要的时候从池中获取线程不用自行创建，使用完毕不需要销毁线程而是放回池中，从而减少创建和销毁线程对象的开销。  设计一个动态大小的线程池，如何设计，应该有哪些方法 ？ 一个线程池包括以下四个基本组成部分：   线程管理器(ThreadPool)：用于创建并管理线程池，包括创建线程，销毁线程池，添加新任务；  工作线程(">
+<meta name="twitter:description" content="什么是线程池？线程池顾名思义就是事先创建若干个可执行的线程放入一个池（容器）中，需要的时候从池中获取线程不用自行创建，使用完毕不需要销毁线程而是放回池中，从而减少创建和销毁线程对象的开销。 线程池的好处： 降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。 提高响应速度。当任务到达时，任务可以不需要的等到线程创建就能立即执行。 提高线程的可管理性。线程是稀缺资源，如果无限制的创建">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
     
@@ -166,7 +166,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#什么是线程池？"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是线程池？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#设计一个动态大小的线程池，如何设计，应该有哪些方法-？"><span class="post-toc-number">2.</span> <span class="post-toc-text">设计一个动态大小的线程池，如何设计，应该有哪些方法 ？</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#什么是线程池？"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是线程池？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#线程池的好处："><span class="post-toc-number">2.</span> <span class="post-toc-text">线程池的好处：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#具体参数介绍"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">具体参数介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线程池工作原则"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">线程池工作原则</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#设计一个动态大小的线程池，如何设计，应该有哪些方法-？"><span class="post-toc-number">3.</span> <span class="post-toc-text">设计一个动态大小的线程池，如何设计，应该有哪些方法 ？</span></a></li></ol>
         </nav>
     </aside>
 
@@ -192,7 +192,28 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="什么是线程池？"><a href="#什么是线程池？" class="headerlink" title="什么是线程池？"></a>什么是线程池？</h1><p>线程池顾名思义就是事先创建若干个可执行的线程放入一个池（容器）中，需要的时候从池中获取线程不用自行创建，使用完毕不需要销毁线程而是放回池中，从而减少创建和销毁线程对象的开销。 </p>
+            <h1 id="什么是线程池？"><a href="#什么是线程池？" class="headerlink" title="什么是线程池？"></a>什么是线程池？</h1><p>线程池顾名思义就是事先创建若干个可执行的线程放入一个池（容器）中，需要的时候从池中获取线程不用自行创建，使用完毕不需要销毁线程而是放回池中，从而减少创建和销毁线程对象的开销。</p>
+<h1 id="线程池的好处："><a href="#线程池的好处：" class="headerlink" title="线程池的好处："></a>线程池的好处：</h1><ul>
+<li>降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。</li>
+<li>提高响应速度。当任务到达时，任务可以不需要的等到线程创建就能立即执行。</li>
+<li>提高线程的可管理性。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。</li>
+</ul>
+<p>假设一个服务器完成一项任务所需的时间是：创建线程的时间T1，线程执行任务的时间T2，线程销毁的时间T3。如果每次请求到达就创建一个新的线程，且并发的线程数量很多，每个线程执行很短时间（T1+T3远大于T2）就结束了，这样频繁创建线程的开销是很大的，同时大大降低系统的效率。</p>
+<h2 id="具体参数介绍"><a href="#具体参数介绍" class="headerlink" title="具体参数介绍"></a>具体参数介绍</h2><ul>
+<li><strong>corePollSize</strong>：核心线程数。在创建了线程池后，线程中没有任何线程，等到有任务到来时才创建线程去执行任务。默认情况下，在创建了线程池后，线程池中的线程数为0，当有任务来之后，就会创建一个线程去执行任务，当线程池中的线程数目达到corePoolSize后，就会把到达的任务放到缓存队列当中。</li>
+<li><strong>maximumPoolSize</strong>：最大线程数。表明线程中最多能够创建的线程数量。</li>
+<li><strong>keepAliveTime：</strong>空闲的线程保留的时间。</li>
+<li><strong>TimeUnit：</strong>空闲线程的保留时间单位。</li>
+<li><strong>BlockingQueue<runnable> ：</runnable></strong>阻塞队列，存储等待执行的任务。参数有ArrayBlockingQueue、LinkedBlockingQueue、SynchronousQueue可选。</li>
+<li><strong>ThreadFactory</strong>：线程工厂，用来创建线程</li>
+<li><strong>RejectedExecutionHandler</strong>：队列已满，而且任务量大于最大线程的异常处理策略。</li>
+</ul>
+<h2 id="线程池工作原则"><a href="#线程池工作原则" class="headerlink" title="线程池工作原则"></a>线程池工作原则</h2><ul>
+<li>1、当线程池中线程数量小于 corePoolSize 则创建线程，并处理请求。</li>
+<li>2、当线程池中线程数量大于等于 corePoolSize 时，则把请求放入 workQueue 中,随着线程池中的核心线程们不断执行任务，只要线程池中有空闲的核心线程，线程池就从workQueue 中取任务并处理。</li>
+<li>3 、当 taskQueue 已存满，放不下新任务时则新建非核心线程入池，并处理请求直到线程数目达到 maximumPoolSize（最大线程数量设置值）。</li>
+<li>4、如果线程池中线程数大于 maximumPoolSize 则使用 RejectedExecutionHandler 来进行任务拒绝处理。</li>
+</ul>
 <h1 id="设计一个动态大小的线程池，如何设计，应该有哪些方法-？"><a href="#设计一个动态大小的线程池，如何设计，应该有哪些方法-？" class="headerlink" title="设计一个动态大小的线程池，如何设计，应该有哪些方法 ？"></a>设计一个动态大小的线程池，如何设计，应该有哪些方法 ？</h1><ul>
 <li>一个线程池包括以下四个基本组成部分： </li>
 </ul>

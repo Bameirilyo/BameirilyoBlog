@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>面试题 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java基础">
+    <meta name="description" content="1.三路快排 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566private void quickSort(int[] a, int left, int right) &amp;#123;     if (ri">
+<meta name="keywords" content="Java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试题">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/26/面试题/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="1.三路快排 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566private void quickSort(int[] a, int left, int right) &amp;#123;     if (ri">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-26T10:18:37.919Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面试题">
+<meta name="twitter:description" content="1.三路快排 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566private void quickSort(int[] a, int left, int right) &amp;#123;     if (ri">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">面试题</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">面试题</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-26T07:34:47.000Z" itemprop="datePublished" class="page-time">
+  2018年04月26日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java/">Java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-面试题"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">面试题</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年04月26日 15:34:47" datetime="2018-04-26T07:34:47.000Z"  itemprop="datePublished">2018年04月26日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java/">Java</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>1.三路快排</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (right &lt;= left) <span class="keyword">return</span>; </span><br><span class="line">    <span class="comment">/* * 工作指针</span></span><br><span class="line"><span class="comment">    * p指向序列左边等于pivot元素的位置</span></span><br><span class="line"><span class="comment">    * q指向序列右边等于Pivot元素的位置</span></span><br><span class="line"><span class="comment">    * i指向从左向右扫面时的元素</span></span><br><span class="line"><span class="comment">    * j指向从右向左扫描时的元素</span></span><br><span class="line"><span class="comment">    */</span> </span><br><span class="line">    <span class="keyword">int</span> p, q, i, j; </span><br><span class="line">    <span class="keyword">int</span> pivot;<span class="comment">// 锚点 </span></span><br><span class="line">    i = p = left; j = q = right - <span class="number">1</span>; </span><br><span class="line">    <span class="comment">/* * 每次总是取序列最右边的元素为锚点 */</span></span><br><span class="line">    pivot = a[right];</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        <span class="comment">/* * 工作指针i从右向左不断扫描，找小于或者等于锚点元素的元素 */</span> </span><br><span class="line">        <span class="keyword">while</span> (i &lt; right &amp;&amp; a[i] &lt;= pivot) &#123;</span><br><span class="line">            <span class="comment">/* * 找到与锚点元素相等的元素将其交换到p所指示的位置 */</span> </span><br><span class="line">            <span class="keyword">if</span> (a[i] == pivot) &#123; </span><br><span class="line">                swap(a, i, p); </span><br><span class="line">                p++; </span><br><span class="line">            &#125; </span><br><span class="line">            i++; </span><br><span class="line">        &#125; <span class="comment">/* * 工作指针j从左向右不断扫描，找大于或者等于锚点元素的元素 */</span> </span><br><span class="line">        <span class="keyword">while</span> (left &lt;= j &amp;&amp; a[j] &gt;= pivot) &#123; </span><br><span class="line">            <span class="comment">/* * 找到与锚点元素相等的元素将其交换到q所指示的位置 */</span> </span><br><span class="line">            <span class="keyword">if</span> (a[j] == pivot) &#123; </span><br><span class="line">                swap(a, j, q); </span><br><span class="line">                q--; </span><br><span class="line">            &#125; </span><br><span class="line">            j--; </span><br><span class="line">        &#125; <span class="comment">/* * 如果两个工作指针i j相遇则一趟遍历结束 */</span> </span><br><span class="line">        <span class="keyword">if</span> (i &gt;= j) <span class="keyword">break</span>; <span class="comment">/* * 将左边大于pivot的元素与右边小于pivot元素进行交换 */</span> </span><br><span class="line">        swap(a, i, j); </span><br><span class="line">        i++; </span><br><span class="line">        j--; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">/* * 因为工作指针i指向的是当前需要处理元素的下一个元素 </span></span><br><span class="line"><span class="comment">    * 故而需要退回到当前元素的实际位置，然后将等于pivot元素交换到序列中间 </span></span><br><span class="line"><span class="comment">    */</span> </span><br><span class="line">    i--; </span><br><span class="line">    p--; </span><br><span class="line">    <span class="keyword">while</span> (p &gt;= left) &#123; </span><br><span class="line">        swap(a, i, p); i--; p--; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">/* * 因为工作指针j指向的是当前需要处理元素的上一个元素 </span></span><br><span class="line"><span class="comment">    * 故而需要退回到当前元素的实际位置，然后将等于pivot元素交换到序列中间 </span></span><br><span class="line"><span class="comment">    */</span> </span><br><span class="line">    j++; </span><br><span class="line">    q++; </span><br><span class="line">    <span class="keyword">while</span> (q &lt;= right) &#123; </span><br><span class="line">        swap(a, j, q); </span><br><span class="line">        j++; </span><br><span class="line">        q++; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">/* * 递归遍历左右子序列 */</span> </span><br><span class="line">    quickSort(a, left, i); </span><br><span class="line">    quickSort(a, j, right); </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">quick</span><span class="params">(<span class="keyword">int</span>[] a)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (a.length &gt; <span class="number">0</span>) &#123; </span><br><span class="line">        quickSort(a, <span class="number">0</span>, a.length - <span class="number">1</span>); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">int</span> temp = arr[a]; arr[a] = arr[b]; arr[b] = temp; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*函数作用：取待排序序列中low、mid、high三个位置上数据，选取他们中间的那个数据作为枢轴*/</span> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">SelectPivotMedianOfThree</span><span class="params">(<span class="keyword">int</span> arr[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">int</span> mid = low + ((high - low) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="comment">//计算数组中间的元素的下标 </span></span><br><span class="line">    <span class="comment">//使用三数取中法选择枢轴 </span></span><br><span class="line">    <span class="keyword">if</span> (arr[mid] &gt; arr[high])</span><br><span class="line">        <span class="comment">//目标: arr[mid] &lt;= arr[high]</span></span><br><span class="line">    &#123; </span><br><span class="line">        swap(arr[mid],arr[high]); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">if</span> (arr[low] &gt; arr[high])</span><br><span class="line">        <span class="comment">//目标: arr[low] &lt;= arr[high] </span></span><br><span class="line">    &#123; </span><br><span class="line">        swap(arr[low],arr[high]); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">if</span> (arr[mid] &gt; arr[low]) <span class="comment">//目标: arr[low] &gt;= arr[mid] </span></span><br><span class="line">    &#123; swap(arr[mid],arr[low]); &#125; </span><br><span class="line">    <span class="comment">//此时，arr[mid] &lt;= arr[low] &lt;= arr[high] </span></span><br><span class="line">    <span class="keyword">return</span> arr[low]; </span><br><span class="line">    <span class="comment">//low的位置上保存这三个位置中间的值 </span></span><br><span class="line">    <span class="comment">//分割时可以直接使用low位置的元素作为枢轴，而不用改变分割函数了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QSort</span><span class="params">(<span class="keyword">int</span> arr[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">int</span> first = low; </span><br><span class="line">    <span class="keyword">int</span> last = high; </span><br><span class="line">    <span class="keyword">int</span> left = low; </span><br><span class="line">    <span class="keyword">int</span> right = high; </span><br><span class="line">    <span class="keyword">int</span> leftLen = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">int</span> rightLen = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">if</span> (high - low + <span class="number">1</span> &lt; <span class="number">10</span>) &#123; </span><br><span class="line">        InsertSort(arr,low,high); </span><br><span class="line">        <span class="keyword">return</span>; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">//一次分割 </span></span><br><span class="line">    <span class="keyword">int</span> key = SelectPivotMedianOfThree(arr,low,high);</span><br><span class="line">    <span class="comment">//使用三数取中法选择枢轴 </span></span><br><span class="line">    <span class="keyword">while</span>(low &lt; high) &#123; </span><br><span class="line">        <span class="keyword">while</span>(high &gt; low &amp;&amp; arr[high] &gt;= key) &#123; </span><br><span class="line">            <span class="keyword">if</span> (arr[high] == key)&#123;</span><br><span class="line">                <span class="comment">//处理相等元素  </span></span><br><span class="line">                swap(arr[right],arr[high]); </span><br><span class="line">                right--; </span><br><span class="line">                rightLen++; </span><br><span class="line">            &#125; </span><br><span class="line">            high--; </span><br><span class="line">        &#125; </span><br><span class="line">        arr[low] = arr[high]; </span><br><span class="line">        <span class="keyword">while</span>(high &gt; low &amp;&amp; arr[low] &lt;= key) &#123; </span><br><span class="line">            <span class="keyword">if</span> (arr[low] == key) &#123; </span><br><span class="line">                swap(arr[left],arr[low]); </span><br><span class="line">                left++; </span><br><span class="line">                leftLen++; </span><br><span class="line">            &#125; low++; </span><br><span class="line">        &#125; </span><br><span class="line">        arr[high] = arr[low]; </span><br><span class="line">    &#125; </span><br><span class="line">    arr[low] = key; </span><br><span class="line">    <span class="comment">//一次快排结束 </span></span><br><span class="line">    <span class="comment">//把与枢轴key相同的元素移到枢轴最终位置周围 </span></span><br><span class="line">    <span class="keyword">int</span> i = low - <span class="number">1</span>; </span><br><span class="line">    <span class="keyword">int</span> j = first; </span><br><span class="line">    <span class="keyword">while</span>(j &lt; left &amp;&amp; arr[i] != key) &#123; </span><br><span class="line">        swap(arr[i],arr[j]);</span><br><span class="line">        i--; </span><br><span class="line">        j++; </span><br><span class="line">    &#125; </span><br><span class="line">    i = low + <span class="number">1</span>; </span><br><span class="line">    j = last; </span><br><span class="line">    <span class="keyword">while</span>(j &gt; right &amp;&amp; arr[i] != key) &#123; </span><br><span class="line">        swap(arr[i],arr[j]); </span><br><span class="line">        i++; </span><br><span class="line">        j--; </span><br><span class="line">    &#125; </span><br><span class="line">    QSort(arr,first,low - <span class="number">1</span> - leftLen); </span><br><span class="line">    QSort(arr,low + <span class="number">1</span> + rightLen,last); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/Java基础/">Java基础</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/26/面试题/&title=《面试题》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/26/面试题/&title=《面试题》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/26/面试题/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《面试题》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/26/面试题/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/26/面试题/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/04/25/Linux/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Linux</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/26/面试题/&title=《面试题》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/26/面试题/&title=《面试题》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/04/26/面试题/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《面试题》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/26/面试题/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/04/26/面试题/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACnklEQVR42u3aQY7jMAwEwPz/07MP2BlPtyguvEDlFMSJ5dJBYpr6fOLX11+v58+f75N8/tNYn40XHh4e3vjRc0b7PhkxH/f5t3h4eHjbvOfF+vl9cvV5lPbR8w0GDw8P7z28pAh+vltejuPh4eH977w2Gsin43kUPDw8vLfx8hK2Xcrb0vx5OhazFjw8PLyYly/u73m/0t/Dw8PDG3fV7zal8u+328CP98HDw8Nb4OULbl7m3opfz8plPDw8vG1eO/AcOd82ipgDDw8Pb4HXBhBnMWs+EW0EPEpf8PDw8Aa8swNPZ23+yUMf/hYPDw9vgTc/HJAz8q1lvsHg4eHh7fHmx5vyuLY9lNBO2Tej4+Hh4V3lzRfosxV4cue84MbDw8Pb4+VHqdqwNc9UzwKIX76Dh4eHt8ZrG/PzLaF93LMDW3h4eHgbvLsNqvzR2yi2zVfw8PDw9njJz5IGWNLybx93cgShHgYPDw/vEm9+bHQyZW2sXMe4eHh4eANeW9pOJmJyqKveMPDw8PDWeJMqdBIBJ4eoJlfx8PDwNnjtAalbhe9ZpDvZSPDw8PC2eZP/8vNNpQ016kgXDw8Pb8Bri912e2jL67MguNgM8PDw8Ma8th3VYvIIuC3c6zACDw8P7yoviRXaiGHSHssPbI1iCDw8PLwxry2RL7T241HyChkPDw/v3/PaIeeN/7xkz+NjPDw8vD3e5BBV3hjLi+Y8OI6u4uHh4S3wzrpFk+W73TAmh7Tw8PDw9nhnxe7Z523pnIcUh4U1Hh4e3oB3FsXmC/febvbLZOHh4eG9gJdHEvny3bbZig0JDw8P7zW8pIWWT81ZkhA9IR4eHt4ar216tewLx6fOpgwPDw9vgTf5wz8pmifTdKGnh4eHh3fC+wPEynOo01i81QAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
