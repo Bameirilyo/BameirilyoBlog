@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>TCP的拥塞控制 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="网络">
+    <meta name="description" content="一般原理：发生拥塞控制的原因：资源(带宽、交换节点的缓存、处理机)的需求&amp;gt;可用资源。 作用：拥塞控制就是为了防止过多的数据注入到网络中，这样可以使网络中的路由器或者链路不至于过载。拥塞控制要做的都有一个前提：就是网络能够承受现有的网络负荷。 对比流量控制：拥塞控制是一个全局的过程，涉及到所有的主机、路由器、以及降低网络相关的所有因素。流量控制往往指点对点通信量的控制。是端对端的问题。 ​">
+<meta name="keywords" content="网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP的拥塞控制">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/01/TCP的拥塞控制/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="一般原理：发生拥塞控制的原因：资源(带宽、交换节点的缓存、处理机)的需求&amp;gt;可用资源。 作用：拥塞控制就是为了防止过多的数据注入到网络中，这样可以使网络中的路由器或者链路不至于过载。拥塞控制要做的都有一个前提：就是网络能够承受现有的网络负荷。 对比流量控制：拥塞控制是一个全局的过程，涉及到所有的主机、路由器、以及降低网络相关的所有因素。流量控制往往指点对点通信量的控制。是端对端的问题。 ​">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20160909153411895?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="https://img-blog.csdn.net/20160909153345254?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="https://img-blog.csdn.net/20160909153222894?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2018-05-01T14:40:00.390Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP的拥塞控制">
+<meta name="twitter:description" content="一般原理：发生拥塞控制的原因：资源(带宽、交换节点的缓存、处理机)的需求&amp;gt;可用资源。 作用：拥塞控制就是为了防止过多的数据注入到网络中，这样可以使网络中的路由器或者链路不至于过载。拥塞控制要做的都有一个前提：就是网络能够承受现有的网络负荷。 对比流量控制：拥塞控制是一个全局的过程，涉及到所有的主机、路由器、以及降低网络相关的所有因素。流量控制往往指点对点通信量的控制。是端对端的问题。 ​">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20160909153411895?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">TCP的拥塞控制</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">TCP的拥塞控制</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-01T14:25:48.000Z" itemprop="datePublished" class="page-time">
+  2018年05月01日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/网络/">网络</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-TCP的拥塞控制"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">TCP的拥塞控制</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年05月01日 22:25:48" datetime="2018-05-01T14:25:48.000Z"  itemprop="datePublished">2018年05月01日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/网络/">网络</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>一般原理：发生拥塞控制的原因：资源(带宽、交换节点的缓存、处理机)的需求&gt;可用资源。</p>
+<p>作用：<strong>拥塞控制就是为了防止过多的数据注入到网络中，这样可以使网络中的路由器或者链路不至于过载。</strong>拥塞控制要做的都有一个前提：就是网络能够承受现有的网络负荷。</p>
+<p>对比流量控制：拥塞控制是一个全局的过程，涉及到所有的主机、路由器、以及降低网络相关的所有因素。流量控制往往指点对点通信量的控制。是端对端的问题。</p>
+<p>​    <strong>拥塞窗口</strong>：发送方为一个动态变化的窗口叫做拥塞窗口，拥塞窗口的大小取决于网络的拥塞程度。发送方让自己的发送窗口=拥塞窗口，但是发送窗口不是一直等于拥塞窗口的，在网络情况好的时候，拥塞窗口不断的增加，发送方的窗口自然也随着增加，但是接受方的接受能力有限，在发送方的窗口达到某个大小时就不在发生变化了。</p>
+<p>​    <strong>发送方如果知道网络拥塞了呢？</strong>发送方发送一些报文段时，如果发送方没有在时间间隔内收到接收方的确认报文段，则就可以认为网络出现了拥塞。</p>
+<p>​    <strong>慢启动算法的思路</strong>：主机开发发送数据报时，如果立即将大量的数据注入到网络中，可能会出现网络的拥塞。慢启动算法就是在主机刚开始发送数据报的时候先探测一下网络的状况，如果网络状况良好，发送方每发送一次文段都能正确的接受确认报文段。那么就从小到大的增加拥塞窗口的大小，即增加发送窗口的大小。</p>
+<p>​    <strong>例子：</strong>开始发送方先设置cwnd（拥塞窗口）=1,发送第一个报文段M1，接收方接收到M1后，发送方接收到接收方的确认后，把cwnd增加到2，接着发送方发送M2、M3，发送方接收到接收方发送的确认后cwnd增加到4，慢启动算法每经过一个传输轮次（认为发送方都成功接收接收方的确认），拥塞窗口cwnd就加倍。</p>
+<p><strong>拥塞避免：</strong>为了防止cwnd增加过快而导致网络拥塞，所以需要设置一个<strong>慢开始门限</strong>ssthresh状态变量（我也不知道这个到底是什么，就认为他是一个拥塞控制的标识）,它的用法：</p>
+<ol>
+<li>当cwnd &lt; ssthresh,使用慢启动算法，</li>
+<li>当cwnd &gt; ssthresh,使用拥塞控制算法，停用慢启动算法。</li>
+<li><p>当cwnd = ssthresh，这两个算法都可以。</p>
+<p><strong>拥塞避免的思路</strong>：是让cwnd缓慢的增加而不是加倍的增长，每经历过一次往返时间就使cwnd增加1，而不是加倍，这样使cwnd缓慢的增长，比慢启动要慢的多。</p>
+</li>
+</ol>
+<p>​    无论是慢启动算法还是拥塞避免算法，只要判断网络出现拥塞，就要把慢启动开始门限(ssthresh)设置为设置为<strong>发送窗口</strong>的一半（&gt;=2），cwnd(拥塞窗口)设置为1，然后在使用慢启动算法，这样做的目的能迅速的减少主机向网络中传输数据，使发生拥塞的路由器能够把队列中堆积的分组处理完毕。拥塞窗口是按照线性的规律增长，比慢启动算法拥塞窗口增长块的多。</p>
+<p>  实例：1.TCP连接进行初始化的时候，cwnd=1,ssthresh=16。</p>
+<p>​             2.在慢启动算法开始时，cwnd的初始值是1，每次发送方收到一个ACK拥塞窗口就增加1，当ssthresh =cwnd时，就启动拥塞控制算法，拥塞窗口按照规律增长，</p>
+<p>​             3.当cwnd=24时，网络出现超时，发送方收不到确认ACK，此时设置ssthresh=12,(二分之一cwnd),设置cwnd=1,然后开始慢启动算法，当cwnd=ssthresh=12,慢启动算法变为拥塞控制算法，cwnd按照线性的速度进行增长。 </p>
+<p><img src="https://img-blog.csdn.net/20160909153411895?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img">     </p>
+<p>AIMD(加法增大乘法减小)</p>
+<ol>
+<li>乘法减小：无论在慢启动阶段还是在拥塞控制阶段，只要网络出现超时，就是将cwnd置为1，ssthresh置为cwnd的一半，然后开始执行慢启动算法（cwnd&lt;ssthresh）。</li>
+<li>加法增大：当网络频发出现超时情况时，ssthresh就下降的很快，为了减少注入到网络中的分组数，而加法增大是指执行拥塞避免算法后，是拥塞窗口缓慢的增大，以防止网络过早出现拥塞。</li>
+</ol>
+<p>​       这两个结合起来就是AIMD算法，是使用最广泛的算法。拥塞避免算法不能够完全的避免网络拥塞，通过控制拥塞窗口的大小只能使网络不易出现拥塞。</p>
+<p>快重传：</p>
+<p>​      快重传算法要求首先接收方收到一个失序的报文段后就立刻发出重复确认，而不要等待自己发送数据时才进行捎带确认。接收方成功的接受了发送方发送来的M1、M2并且分别给发送了ACK，现在接收方没有收到M3，而接收到了M4，显然接收方不能确认M4，因为M4是失序的报文段。如果根据可靠性传输原理接收方什么都不做，但是按照快速重传算法，在收到M4、M5等报文段的时候，不断重复的向发送方发送M2的ACK,如果接收方一连收到三个重复的ACK,那么发送方不必等待重传计时器到期，由于发送方尽早重传未被确认的报文段。</p>
+<p>!<img src="https://img-blog.csdn.net/20160909153345254?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"> </p>
+<p>​      <strong>快恢复：</strong></p>
+<ol>
+<li>当发送发连续接收到三个重复确认时，就执行乘法减小算法，把慢启动开始门限（ssthresh）减半，但是接下来并不执行慢开始算法。</li>
+</ol>
+<ol start="2">
+<li>此时不执行慢启动算法，而是把cwnd设置为ssthresh减半后的数值， 然后执行拥塞避免算法，使拥塞窗口缓慢地线性增大。</li>
+</ol>
+<p><img src="https://img-blog.csdn.net/20160909153222894?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img">      </p>
+<p>摘抄自：计算机网络(谢希仁第五版)。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/网络/">网络</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/01/TCP的拥塞控制/&title=《TCP的拥塞控制》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/01/TCP的拥塞控制/&title=《TCP的拥塞控制》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/05/01/TCP的拥塞控制/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCP的拥塞控制》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/01/TCP的拥塞控制/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/01/TCP的拥塞控制/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/04/26/面试题/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">面试题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/01/TCP的拥塞控制/&title=《TCP的拥塞控制》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/01/TCP的拥塞控制/&title=《TCP的拥塞控制》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/05/01/TCP的拥塞控制/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TCP的拥塞控制》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/01/TCP的拥塞控制/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/01/TCP的拥塞控制/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACu0lEQVR42u3ay27jQAwEwPz/T3uvARayu8kZJAFKJ8MPSTUHcdzk11d8vL4dT5++/+brv+Ppt0/nebr6gQMPDw9vcevvb+I97+n7OeD9d96//3iHeHh4eNd4yeM+OXVSEvIzt0UCDw8P7zfzkr1rW37yDT0eHh7e3+IltzJ7v40q8PDw8H6Wl2988wu3t/5+Ea9nLXh4eHjzHexXXiR+6vWV/h4eHh7euqu+b4a1za38nNHd4uHh4V3g5Q/cvNHV/rZd1no4DA8PD+8Cbx/mtsNYSQmZLdOVrBoPDw/v2+t8u5wXg83juy08H66Fh4eHd5nXnjR/QCdtrbx4FNfCw8PDu8DbNP43Y1KzaHg4EIaHh4d3lLdpU81gs5KQvBOFEXh4eHhrXt1GKjfNmyXYLxYeHh7ebd4mDpiNYSUhSPLQjwoDHh4e3gXeLAJoQ94Wto8q8PDw8M7yZo2ldlgqCTVmg1zF0BUeHh7eUV6bVbQtrlno0JaK6F8CHh4e3pq3byy1baq8bLRB84ehKzw8PLyjvLb1lY8RtNv0PC9ph8Pw8PDwTvHyELaNdNuQYtZs+1DM8PDw8K7x8i1v+xBvS0V+tqik4eHh4V3gHYtKR2MBmy34cKYMDw8Pb82bNcDySDffpuelpSgYeHh4eBd4eSgwi18PDE6Vv/3Q5cPDw8M7xEvChc1DeRYN7wsSHh4e3m1e+1c/X5SzS1CHIHh4eHjXeO3rNj54xcemVODh4eHd5r3Kow0UZsvRXvHxUzw8PLwLvPzYPMrz7XgeCrcDDXh4eHhnefvWfkualZN8WR+zFjw8PLyjvFms0IaqZ8Pf6Jx4eHh4v4A327NvQofVKAMeHh7eL+C1JWEWPeRtsw93hYeHh3eNl/w4aTJtfrsvVI+FAQ8PD+8ob/+HPw9hZx252TAWHh4e3gXeP8WF5Ckx2pHxAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
