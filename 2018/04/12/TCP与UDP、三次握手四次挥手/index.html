@@ -20,23 +20,23 @@
     
     
     <meta name="keywords" content="网络">
-    <meta name="description" content="区别 TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。 TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。 TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却一般。   TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。 T">
+    <meta name="description" content="区别 TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。 TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。 TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却一般。   TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。">
 <meta name="keywords" content="网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCP与UDP、三次握手四次挥手">
 <meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/index.html">
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
-<meta property="og:description" content="区别 TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。 TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。 TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却一般。   TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。 T">
+<meta property="og:description" content="区别 TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。 TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。 TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却一般。   TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/0.jpg">
+<meta property="og:image" content="http://images0.cnblogs.com/blog2015/621032/201508/092017231747399.jpg">
 <meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/1.png">
 <meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/3.png">
 <meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/4.png">
-<meta property="og:updated_time" content="2018-04-29T15:26:51.110Z">
+<meta property="og:updated_time" content="2018-05-01T14:03:13.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP与UDP、三次握手四次挥手">
-<meta name="twitter:description" content="区别 TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。 TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。 TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却一般。   TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。 T">
-<meta name="twitter:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/0.jpg">
+<meta name="twitter:description" content="区别 TCP 提供面向连接、可靠的数据流传输，而UDP 提供的是非面向连接的、不可靠的数据流传输。 TCP 传输单位称为TCP 报文段，UDP 传输单位称为用户数据报。 TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却一般。   TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。">
+<meta name="twitter:image" content="http://images0.cnblogs.com/blog2015/621032/201508/092017231747399.jpg">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
     
@@ -171,7 +171,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#区别"><span class="post-toc-number">1.</span> <span class="post-toc-text">区别</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#为什么UDP有时比TCP更有优势"><span class="post-toc-number">2.</span> <span class="post-toc-text">为什么UDP有时比TCP更有优势?</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三次握手与四次挥手"><span class="post-toc-number">3.</span> <span class="post-toc-text">三次握手与四次挥手</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三次握手过程："><span class="post-toc-number">4.</span> <span class="post-toc-text">三次握手过程：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题1：-为什么要三次握手？"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">问题1： 为什么要三次握手？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题2：为什么要发送特定的数据包，随便发不行吗？"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">问题2：为什么要发送特定的数据包，随便发不行吗？</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#四次挥手："><span class="post-toc-number">5.</span> <span class="post-toc-text">四次挥手：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题1：-为什么要四次挥手？"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">问题1： 为什么要四次挥手？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题2：为什么双方要发送这样的数据包？"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">问题2：为什么双方要发送这样的数据包？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#附加"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">附加</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SYN网络攻击："><span class="post-toc-number">5.3.1.</span> <span class="post-toc-text">SYN网络攻击：</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#关于tcp中time-wait状态的4个问题"><span class="post-toc-number">6.</span> <span class="post-toc-text">关于tcp中time_wait状态的4个问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-time-wait状态是什么"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">1.time_wait状态是什么</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-为什么会有time-wait状态"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">2.为什么会有time_wait状态</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-哪一方会有time-wait状态"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">3.哪一方会有time_wait状态</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-如何避免time-wait状态占用资源"><span class="post-toc-number">6.4.</span> <span class="post-toc-text">4.如何避免time_wait状态占用资源</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#close-wait状态出现的原因"><span class="post-toc-number">7.</span> <span class="post-toc-text">close_wait状态出现的原因</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#区别"><span class="post-toc-number">1.</span> <span class="post-toc-text">区别</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#为什么UDP有时比TCP更有优势"><span class="post-toc-number">2.</span> <span class="post-toc-text">为什么UDP有时比TCP更有优势?</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#TCP如何保证可靠传输？三次握手过程？"><span class="post-toc-number">3.</span> <span class="post-toc-text">TCP如何保证可靠传输？三次握手过程？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三次握手与四次挥手"><span class="post-toc-number">4.</span> <span class="post-toc-text">三次握手与四次挥手</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三次握手过程："><span class="post-toc-number">5.</span> <span class="post-toc-text">三次握手过程：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题1：-为什么要三次握手？"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">问题1： 为什么要三次握手？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题2：为什么要发送特定的数据包，随便发不行吗？"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">问题2：为什么要发送特定的数据包，随便发不行吗？</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#四次挥手："><span class="post-toc-number">6.</span> <span class="post-toc-text">四次挥手：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题1：-为什么要四次挥手？"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">问题1： 为什么要四次挥手？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题2：为什么双方要发送这样的数据包？"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">问题2：为什么双方要发送这样的数据包？</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#关于tcp中time-wait状态的4个问题"><span class="post-toc-number">7.</span> <span class="post-toc-text">关于tcp中time_wait状态的4个问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-time-wait状态是什么"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">1.time_wait状态是什么</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-为什么客户端在time-wait状态必须等待2MSL的时间（为什么会有time-wait状态）？"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">2.为什么客户端在time_wait状态必须等待2MSL的时间（为什么会有time_wait状态）？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-哪一方会有time-wait状态"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">3.哪一方会有time_wait状态</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-如何避免time-wait状态占用资源"><span class="post-toc-number">7.4.</span> <span class="post-toc-text">4.如何避免time_wait状态占用资源</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#close-wait状态出现的原因"><span class="post-toc-number">8.</span> <span class="post-toc-text">close_wait状态出现的原因</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#如果客户端不断的发送请求连接会怎样？"><span class="post-toc-number">9.</span> <span class="post-toc-text">如果客户端不断的发送请求连接会怎样？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#DDos攻击"><span class="post-toc-number">10.</span> <span class="post-toc-text">DDos攻击</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#DDos预防-没有根治的办法，除非不用TCP-IP链接"><span class="post-toc-number">11.</span> <span class="post-toc-text">DDos预防(没有根治的办法，除非不用TCP/IP链接)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SYN网络攻击"><span class="post-toc-number">11.0.1.</span> <span class="post-toc-text">SYN网络攻击</span></a></li></ol></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -203,16 +203,28 @@
 <li>TCP 注重数据安全性，UDP 数据传输快，因为不需要连接等待，少了许多操作，但是其安全性却一般。</li>
 </ul>
 <ul>
-<li>TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。</li>
-<li>TCP连接只能是点到点的；UDP支持一对一、一对多、多对一和多对多的交互通信。</li>
-<li>TCP首部开销20字节；UDP的首部开销小，只有8个字节。</li>
-<li>TCP的逻辑通信信道是全双工的可靠信道；UDP的逻辑通信信道是不可靠信道。</li>
+<li><p>TCP提供可靠的服务，通过TCP连接传送的数据，无差错、不丢失，不重复，按序到达；UDP尽最大努力交付，即不保证可靠交付。</p>
+</li>
+<li><p>TCP连接只能是点到点的；UDP支持一对一、一对多、多对一和多对多的交互通信。</p>
+</li>
+<li><p>TCP首部开销20字节；UDP的首部开销小，只有8个字节。</p>
+</li>
+<li><p>TCP的逻辑通信信道是全双工的可靠信道；UDP的逻辑通信信道是不可靠信道。</p>
+<p><strong>TCP加快传输效率的方法 </strong>:采取一块确认的机制 </p>
+</li>
 </ul>
 <h1 id="为什么UDP有时比TCP更有优势"><a href="#为什么UDP有时比TCP更有优势" class="headerlink" title="为什么UDP有时比TCP更有优势?"></a>为什么UDP有时比TCP更有优势?</h1><p>UDP以其简单、传输快的优势，在越来越多场景下取代了TCP,如实时游戏。</p>
 <p>（1）网速的提升给UDP的稳定性提供可靠网络保障，丢包率很低，如果使用应用层重传，能够确保传输的可靠性。</p>
 <p>（2）TCP为了实现网络通信的可靠性，使用了复杂的拥塞控制算法，建立了繁琐的握手过程，由于TCP内置的系统协议栈中，极难对其进行改进。</p>
 <p>采用TCP，一旦发生丢包，TCP会将后续的包缓存起来，等前面的包重传并接收到后再继续发送，延时会越来越大，基于UDP对实时性要求较为严格的情况下，采用自定义重传机制，能够把丢包产生的延迟降到最低，尽量减少网络问题对游戏性造成影响。</p>
-<h1 id="三次握手与四次挥手"><a href="#三次握手与四次挥手" class="headerlink" title="三次握手与四次挥手"></a>三次握手与四次挥手</h1><p><img src="/BameirilyoBlog/2018/04/12/TCP与UDP、三次握手四次挥手/0.jpg" alt="preview"></p>
+<h1 id="TCP如何保证可靠传输？三次握手过程？"><a href="#TCP如何保证可靠传输？三次握手过程？" class="headerlink" title="TCP如何保证可靠传输？三次握手过程？"></a>TCP如何保证可靠传输？三次握手过程？</h1><ul>
+<li>数据包校验 </li>
+<li>超时重传机制 </li>
+<li>应答机制 </li>
+<li>对失序数据包重排序 </li>
+<li>TCP还能提供流量控制 </li>
+</ul>
+<h1 id="三次握手与四次挥手"><a href="#三次握手与四次挥手" class="headerlink" title="三次握手与四次挥手"></a>三次握手与四次挥手</h1><p><img src="http://images0.cnblogs.com/blog2015/621032/201508/092017231747399.jpg" alt="img"></p>
 <p>TCP共有6个标志位，分别是：</p>
 <ul>
 <li>SYN(synchronous),建立联机。</li>
@@ -237,18 +249,35 @@
 <h2 id="问题1：-为什么要四次挥手？"><a href="#问题1：-为什么要四次挥手？" class="headerlink" title="问题1： 为什么要四次挥手？"></a>问题1： 为什么要四次挥手？</h2><p>根本原因是，一方发送FIN只表示自己发完了所有要发的数据，但还允许对方继续把没发完的数据发过来。</p>
 <p>举个例子：A和B打电话，通话即将结束后，A说“我没啥要说的了”，B回答“我知道了”，但是B可能还会有要说的话，A不能要求B跟着自己的节奏结束通话，于是B可能又巴拉巴拉说了一通，最后B说“我说完了”，A回答“知道了”，这样通话才算结束。</p>
 <h2 id="问题2：为什么双方要发送这样的数据包？"><a href="#问题2：为什么双方要发送这样的数据包？" class="headerlink" title="问题2：为什么双方要发送这样的数据包？"></a>问题2：为什么双方要发送这样的数据包？</h2><p>和握手的情况类似，只是为了让对方知晓自己理解了对方的意图。</p>
-<h2 id="附加"><a href="#附加" class="headerlink" title="附加"></a><strong>附加</strong></h2><h3 id="SYN网络攻击："><a href="#SYN网络攻击：" class="headerlink" title="SYN网络攻击："></a><strong>SYN网络攻击：</strong></h3><p>原理：<br>在三次握手过程中，Server发送SYN-ACK之后，收到Client的ACK之前的TCP连接称为半连接（half-open<br>connect），此时Server处于SYN_RCVD状态，当收到ACK后，Server转入ESTABLISHED状态。SYN攻击就是Client在短时间内伪造大量不存在的IP地址，并向Server不断地发送SYN包，Server回复确认包，并等待Client的确认，由于源地址是不存在的，因此，Server需要不断重发直至超时，这些伪造的SYN包将产时间占用未连接队列，导致正常的SYN请求因为队列满而被丢弃，从而引起网络堵塞甚至系统瘫痪。</p>
-<p>检测：<br>SYN攻击时一种典型的DDOS攻击，检测SYN攻击的方式非常简单，即当Server上有大量半连接状态且源IP地址是随机的，则可以断定遭到SYN攻击了。windows下打开cmd,输入命令：”netstat<br> -n -p TCP“，查看是否有大量的”SYN_RECEIVED“状态。</p>
 <h1 id="关于tcp中time-wait状态的4个问题"><a href="#关于tcp中time-wait状态的4个问题" class="headerlink" title="关于tcp中time_wait状态的4个问题"></a>关于tcp中time_wait状态的4个问题</h1><p>time_wait是个常问的问题，tcp网络编程中最不容易理解的也是它的time_wait状态，这也说明了tcp/ip四次挥手中time_wait状态的重要性。 </p>
 <h2 id="1-time-wait状态是什么"><a href="#1-time-wait状态是什么" class="headerlink" title="1.time_wait状态是什么"></a>1.time_wait状态是什么</h2><p>简单来说：time_wait状态是四次挥手中服务器向客户端发送FIN终止连接后进入的状态。</p>
 <p>可以看到time_wait状态存在于客户端收到服务器Fin并返回ack包时的状态<br>当处于time_wait状态时，我们无法创建新的连接，因为端口被占用。</p>
-<h2 id="2-为什么会有time-wait状态"><a href="#2-为什么会有time-wait状态" class="headerlink" title="2.为什么会有time_wait状态"></a>2.为什么会有time_wait状态</h2><p>time_wait存在的原因有两点<br>1.可靠的终止TCP连接。<br>2.保证让迟来的TCP报文段有足够的时间被识别并丢弃。</p>
-<p>1.可靠的终止TCP连接，若处于time_wait的客户端发送给服务器确认报文段丢失的话，服务器将在此重新发送FIN报文段，那么客户端必须处于一个可接收的状态就是time_wait而不是close状态。<br> 2.保证迟来的TCP报文段有足够的时间被识别并丢弃，linux中一个TCP端口不能打开两次或两次以上，当客户端处于time_wait状态时我们将无法使用此端口建立新连接，如果不存在time_wait状态，新连接可能会收到旧连接的数据。time_wait持续的时间是2MSL，保证旧的数据可以丢弃，因为网络中的数据最大存在MSL(maxinum segment lifetime)。</p>
+<h2 id="2-为什么客户端在time-wait状态必须等待2MSL的时间（为什么会有time-wait状态）？"><a href="#2-为什么客户端在time-wait状态必须等待2MSL的时间（为什么会有time-wait状态）？" class="headerlink" title="2.为什么客户端在time_wait状态必须等待2MSL的时间（为什么会有time_wait状态）？"></a>2.为什么客户端在time_wait状态必须等待2MSL的时间（为什么会有time_wait状态）？</h2><p>1.<strong>为了保证客户端发送的最后一个ACK报文段能够到达服务端。</strong>若处于time_wait的客户端发送给服务器的确认报文段ACK丢失的话，服务器将重新发送FIN报文段，那么客户端必须处于一个可接收的状态就是time_wait而不是close状态。</p>
+<p>2.<strong>保证已失效的报文段有足够的时间被识别并丢弃。</strong>客户端在发送完最后一个ACK报文段后，再经过时间2MSL，就可以使本连接持续的时间内所产生的所有报文段都从网络中消失，防止在下一个连接中出现旧的连接请求报文段。time_wait持续的时间是2MSL，保证旧的数据可以丢弃，因为网络中的数据最大存在MSL(maxinum segment lifetime)。</p>
 <h2 id="3-哪一方会有time-wait状态"><a href="#3-哪一方会有time-wait状态" class="headerlink" title="3.哪一方会有time_wait状态"></a>3.哪一方会有time_wait状态</h2><p>time_wait状态是一般有客户端的状态。而且会占用端口<br>有时产生在服务器端，因为服务器主动断开连接或者发生异常</p>
 <h2 id="4-如何避免time-wait状态占用资源"><a href="#4-如何避免time-wait状态占用资源" class="headerlink" title="4.如何避免time_wait状态占用资源"></a>4.如何避免time_wait状态占用资源</h2><p>如果是客户端，我们一般不用担心，因为客户端一般选用临时端口，再次创建连接会新分配一个端口。除非指定客户端使用某端口，不过一般不需要这么做。</p>
 <p>如果是服务器主动关闭连接后异常终止，则因为它总是使用用一个知名服务器端口号，所以连接的time_wait状态将导致它不能重启，不过我们可以通过socket的选项SO_REUSEADDR来强制进程立即使用处于time_wait状态的连接占用的端口。<br>通过socksetopt设置后，即使sock处于time_wait状态，与之绑定的socket地址也可以立即被重用。</p>
 <p>此外也可以通过修改内核参数/proc/sys/net/ipv4/tcp_tw/recycle来快速回收被关闭的socket,从而是tcp连接根本不进入time_wait状态，进而允许应用程序立即重用本地的socket地址。</p>
 <h1 id="close-wait状态出现的原因"><a href="#close-wait状态出现的原因" class="headerlink" title="close_wait状态出现的原因"></a>close_wait状态出现的原因</h1><p>客户端向服务端发送了FIN报文，此时服务端进入CLOSE_WAIT状态，而不是LAST_ACK状态，说明还没有发FIN报文给客户端，那么可能是在关闭连接之前还有许多数据要发送给客户端或者其他事要做,导致没有发这个FIN packet。 </p>
+<h1 id="如果客户端不断的发送请求连接会怎样？"><a href="#如果客户端不断的发送请求连接会怎样？" class="headerlink" title="如果客户端不断的发送请求连接会怎样？"></a>如果客户端不断的发送请求连接会怎样？</h1><p>服务器端回为每个请求创建一个链接，然后向client端发送创建链接时的回复，然后进行等待客户端发送第三次握手数据包，这样会白白浪费资源 </p>
+<h1 id="DDos攻击"><a href="#DDos攻击" class="headerlink" title="DDos攻击"></a>DDos攻击</h1><p>简单的说就是想服务器发送链接请求，首先进行 </p>
+<p>第一步：客户端向服务器端发送连接请求数据包（1） </p>
+<p>第二步：服务器向客户端回复连接请求数据包（2），然后服务器等待客户端发送tcp/ip链接的第三步数据包(3) </p>
+<p>第三步：如果客户端不向服务器端发送最后一个数据包(3)，则服务器须等待30s到2min中才能将此链接进行关闭。当大量的请求只进行到第二步，而不进行第三步，服务器又大量的资源等待第三个数据包。则造成DDos攻击。 </p>
+<h1 id="DDos预防-没有根治的办法，除非不用TCP-IP链接"><a href="#DDos预防-没有根治的办法，除非不用TCP-IP链接" class="headerlink" title="DDos预防(没有根治的办法，除非不用TCP/IP链接)"></a>DDos预防(没有根治的办法，除非不用TCP/IP链接)</h1><p>·  确保服务器的系统文件是最新版本，并及时更新系统补丁 </p>
+<p>·  关闭不必要的服务 </p>
+<p>·  限制同时打开SYN的半连接数目 </p>
+<p>·  缩短SYN半连接的timeout时间 </p>
+<p>·  正确设置防火墙 </p>
+<p>·  禁止对主机的非开放服务的访问 </p>
+<p>·  限制特定IP短地址的访问 </p>
+<p>·  启用防火墙的防DDos的属性 </p>
+<p>·  严格限制对外开放的服务器的向外访问 </p>
+<p>·  运行端口映射程序祸端口扫描程序，要认真检查特权端口和非特权端口。 </p>
+<p>·  认真检查网络设备和主机/服务器系统的日志。只要日志出现漏洞或是时间变更，那这台机器就可能遭到了攻击。 </p>
+<p>·  限制在防火墙外与网络文件共享。这样会给黑客截取系统文件的机会，主机的信息暴露给黑客，无疑是给了对方入侵的机会。 </p>
+<h3 id="SYN网络攻击"><a href="#SYN网络攻击" class="headerlink" title="SYN网络攻击"></a>SYN网络攻击</h3><p>原理：<br>在三次握手过程中，Server发送SYN-ACK之后，收到Client的ACK之前的TCP连接称为半连接（half-open<br>connect），此时Server处于SYN_RCVD状态，当收到ACK后，Server转入ESTABLISHED状态。SYN攻击就是Client在短时间内伪造大量不存在的IP地址，并向Server不断地发送SYN包，Server回复确认包，并等待Client的确认，由于源地址是不存在的，因此，Server需要不断重发直至超时，这些伪造的SYN包将产时间占用未连接队列，导致正常的SYN请求因为队列满而被丢弃，从而引起网络堵塞甚至系统瘫痪。</p>
+<p>检测：<br>SYN攻击时一种典型的DDOS攻击，检测SYN攻击的方式非常简单，即当Server上有大量半连接状态且源IP地址是随机的，则可以断定遭到SYN攻击了。windows下打开cmd,输入命令：”netstat -n -p TCP“ ，查看是否有大量的”SYN_RECEIVED“状态。</p>
 
         </div>
 
