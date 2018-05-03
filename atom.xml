@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-05-02T15:26:33.567Z</updated>
+  <updated>2018-05-03T14:38:06.452Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,59 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>钱币拼凑（动态规划问题）</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/05/03/%E9%92%B1%E5%B8%81%E6%8B%BC%E5%87%91%EF%BC%88%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98%EF%BC%89/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/05/03/钱币拼凑（动态规划问题）/</id>
+    <published>2018-05-03T14:33:59.000Z</published>
+    <updated>2018-05-03T14:38:06.452Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目：</p><p>给你六种面额 1、5、10、20、50、100 元的纸币，假设每种币值的数量都足够多，编写程序求组成N元（N为0~10000的非负整数）的不同组合的个数。 </p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//拼凑面额</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    <span class="keyword">int</span> arr[] = &#123;<span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">50</span>, <span class="number">100</span>&#125;;</span><br><span class="line">    <span class="keyword">while</span> (in.hasNext()) &#123;</span><br><span class="line">        <span class="keyword">int</span> n = in.nextInt();</span><br><span class="line">        <span class="keyword">long</span> res[] = <span class="keyword">new</span> <span class="keyword">long</span>[n + <span class="number">1</span>];</span><br><span class="line">        res[<span class="number">0</span>] = <span class="number">1L</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j &gt;= arr[i]) &#123;</span><br><span class="line">                    res[j] += res[j - arr[i]];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(res[n]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>给你六种面额 1、5、10、20、50、100 元的纸币，假设每种币值的数量都足够多，编写程序求组成N元（N为0~10000的非负整数）的不同组合的个数。 </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;题目：&lt;/p&gt;
+&lt;p&gt;给你六种面额 1、5、10、20、50、100 元的纸币，假设每种币值的数量都足够多，编写程序求组成N元（N为0~10000的非负整数）的不同组合的个数。 &lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解码字符串</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/05/03/%E8%A7%A3%E7%A0%81%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/05/03/解码字符串/</id>
+    <published>2018-05-03T14:31:06.000Z</published>
+    <updated>2018-05-03T14:33:22.485Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目：</p><p>给定一个经过编码的字符串，返回它解码后的字符串。 编码规则为: k[encoded_string]，表示其中方括号内部的 encoded_string 正好重复 k 次。注意 k 保证为正整数。 你可以认为输入字符串总是有效的；输入字符串中没有额外的空格，且输入的方括号总是符合格式要求的。 此外，你可以认为原始数据不包含数字，所有的数字只表示重复的次数 k ，例如不会出现像 3a 或 2[4] 的输入。 </p><p>示例: </p><p>s = “3[a]2[bc]”, 返回 “aaabcbc”. </p><p>s = “3[a2[c]]”, 返回 “accaccacc”. </p><p>s = “2[abc]3[cd]ef”, 返回 “abcabccdcdcdef”. </p><p>思路：</p><p><strong>1. 没有中括号时正常运算，将结果存入res中</strong></p><p><strong>2. 遇到左括号时将res及括号之前的数字分别压栈</strong></p><p><strong>3. 遇到右括号时将取出左括号之前的数字（stack中取出），并加上左括号前的运算结果res（stack中取出），并拼接字符串：</strong></p><p><strong>stack中存入的是遇到左括号时①括号之前计算结果res，②括号之前的数字</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">decodeString</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">String res = <span class="string">""</span>;</span><br><span class="line"><span class="comment">// 记录'['之前的数字</span></span><br><span class="line">Stack&lt;Integer&gt; countStack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line"><span class="comment">// 记录'['之前的运算结果</span></span><br><span class="line">Stack&lt;String&gt; resStack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line"><span class="keyword">int</span> idx = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> curNum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (idx &lt; s.length())&#123;</span><br><span class="line"><span class="keyword">char</span> ch = s.charAt(idx);</span><br><span class="line"><span class="keyword">if</span> (Character.isDigit(ch)) &#123;</span><br><span class="line"><span class="keyword">while</span> (Character.isDigit(s.charAt(idx)))</span><br><span class="line">curNum = <span class="number">10</span> * curNum </span><br><span class="line">+ (s.charAt(idx++) - <span class="string">'0'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (ch == <span class="string">'['</span>) &#123;</span><br><span class="line">resStack.push(res);</span><br><span class="line">res = <span class="string">""</span>;<span class="comment">// 注意</span></span><br><span class="line"><span class="comment">// 此push可以放在上面的while循环中</span></span><br><span class="line">countStack.push(curNum);</span><br><span class="line">curNum = <span class="number">0</span>;<span class="comment">// 注意</span></span><br><span class="line">idx++;</span><br><span class="line"><span class="comment">// 取出计算结果，和数字</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (ch == <span class="string">']'</span>) &#123;</span><br><span class="line">StringBuilder temp = <span class="keyword">new</span> StringBuilder(resStack.pop());</span><br><span class="line"><span class="keyword">int</span> repeatTimes = countStack.pop();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; repeatTimes; i++) &#123;</span><br><span class="line">temp.append(res);</span><br><span class="line">&#125;</span><br><span class="line">res = temp.toString();</span><br><span class="line">idx++;</span><br><span class="line"><span class="comment">// 字母</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">res += s.charAt(idx++);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;题目：&lt;/p&gt;
+&lt;p&gt;给定一个经过编码的字符串，返回它解码后的字符串。 编码规则为: k[encoded_string]，表示其中方括号内部的 encoded_string 正好重复 k 次。注意 k 保证为正整数。 你可以认为输入字符串总是有效的；输入字符串中没有额外的空
+      
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>Java虚拟机</title>
