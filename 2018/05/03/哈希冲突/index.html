@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>哈希冲突 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java基础">
+    <meta name="description" content="通过构造性能良好的哈希函数，可以减少冲突，但一般不可能完全避免冲突，因此解决冲突是哈希法的另一个关键问题。创建哈希表和查找哈希表都会遇到冲突，两种情况下解决冲突的方法应该一致。下面以创建哈希表为例，说明解决冲突的方法。常用的解决冲突方法有以下四种： 开放定址法这种方法也称再散列法，其基本思想是：当关键字key的哈希地址p=H（key）出现冲突时，以p为基础，产生另一个哈希地址p1，如果p1仍然冲突">
+<meta name="keywords" content="Java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="哈希冲突">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/03/哈希冲突/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="通过构造性能良好的哈希函数，可以减少冲突，但一般不可能完全避免冲突，因此解决冲突是哈希法的另一个关键问题。创建哈希表和查找哈希表都会遇到冲突，两种情况下解决冲突的方法应该一致。下面以创建哈希表为例，说明解决冲突的方法。常用的解决冲突方法有以下四种： 开放定址法这种方法也称再散列法，其基本思想是：当关键字key的哈希地址p=H（key）出现冲突时，以p为基础，产生另一个哈希地址p1，如果p1仍然冲突">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-03T14:52:53.699Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="哈希冲突">
+<meta name="twitter:description" content="通过构造性能良好的哈希函数，可以减少冲突，但一般不可能完全避免冲突，因此解决冲突是哈希法的另一个关键问题。创建哈希表和查找哈希表都会遇到冲突，两种情况下解决冲突的方法应该一致。下面以创建哈希表为例，说明解决冲突的方法。常用的解决冲突方法有以下四种： 开放定址法这种方法也称再散列法，其基本思想是：当关键字key的哈希地址p=H（key）出现冲突时，以p为基础，产生另一个哈希地址p1，如果p1仍然冲突">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">哈希冲突</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">哈希冲突</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-03T14:52:23.000Z" itemprop="datePublished" class="page-time">
+  2018年05月03日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java/">Java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#开放定址法"><span class="post-toc-number">1.</span> <span class="post-toc-text">开放定址法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线性探测再散列"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">线性探测再散列</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二次探测再散列"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">二次探测再散列</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#伪随机探测再散列"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">伪随机探测再散列</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例子"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">例子</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#再哈希法"><span class="post-toc-number">2.</span> <span class="post-toc-text">再哈希法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#链地址法"><span class="post-toc-number">3.</span> <span class="post-toc-text">链地址法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#建立公共溢出区"><span class="post-toc-number">4.</span> <span class="post-toc-text">建立公共溢出区</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#优缺点"><span class="post-toc-number">5.</span> <span class="post-toc-text">优缺点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开放散列（open-hashing）-拉链法（针对桶链结构）"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">开放散列（open hashing）/ 拉链法（针对桶链结构）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#封闭散列（closed-hashing）-开放定址法"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">封闭散列（closed hashing）/ 开放定址法</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-哈希冲突"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">哈希冲突</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年05月03日 22:52:23" datetime="2018-05-03T14:52:23.000Z"  itemprop="datePublished">2018年05月03日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java/">Java</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>通过构造性能良好的哈希函数，可以减少冲突，但一般不可能完全避免冲突，因此解决冲突是哈希法的另一个关键问题。创建哈希表和查找哈希表都会遇到冲突，两种情况下解决冲突的方法应该一致。下面以创建哈希表为例，说明解决冲突的方法。常用的解决冲突方法有以下四种：</p>
+<h1 id="开放定址法"><a href="#开放定址法" class="headerlink" title="开放定址法"></a>开放定址法</h1><p>这种方法也称再散列法，其基本思想是：当关键字key的哈希地址p=H（key）出现冲突时，以p为基础，产生另一个哈希地址p1，如果p1仍然冲突，再以p为基础，产生另一个哈希地址p2，…，直到找出一个不冲突的哈希地址pi ，将相应元素存入其中。这种方法有一个通用的再散列函数形式：</p>
+<p>$H_i$=（H（key）+$d_i$）% m      i=1，2，…，n</p>
+<p>其中H（key）为哈希函数，m 为表长，$d_i$称为增量序列。增量序列的取值方式不同，相应的再散列方式也不同。主要有以下三种：</p>
+<h2 id="线性探测再散列"><a href="#线性探测再散列" class="headerlink" title="线性探测再散列"></a>线性探测再散列</h2><p>$d_i$=1，2，3，…，m-1</p>
+<p>这种方法的特点是：冲突发生时，顺序查看表中下一单元，直到找出一个空单元或查遍全表。</p>
+<h2 id="二次探测再散列"><a href="#二次探测再散列" class="headerlink" title="二次探测再散列"></a>二次探测再散列</h2><p>$d_i$=$1^2$,$-1^2$,$2^2$,$-2^2$,……，$k^2$,$-k^2$       ( k&lt;=m/2 )</p>
+<p>这种方法的特点是：冲突发生时，在表的左右进行跳跃式探测，比较灵活。</p>
+<h2 id="伪随机探测再散列"><a href="#伪随机探测再散列" class="headerlink" title="伪随机探测再散列"></a>伪随机探测再散列</h2><p>$d_i$=伪随机数序列。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>具体实现时，应建立一个伪随机数发生器，（如i=(i+p) % m），并给定一个随机数做起点。</p>
+<p>例如，已知哈希表长度m=11，哈希函数为：H（key）= key  %  11，则H（47）=3，H（26）=4，H（60）=5，假设下一个关键字为69，则H（69）=3，与47冲突。</p>
+<p>如果用线性探测再散列处理冲突，下一个哈希地址为H1=（3 + 1）% 11 = 4，仍然冲突，再找下一个哈希地址为H2=（3 + 2）% 11 = 5，还是冲突，继续找下一个哈希地址为H3=（3 + 3）% 11 = 6，此时不再冲突，将69填入5号单元。</p>
+<p>如果用二次探测再散列处理冲突，下一个哈希地址为H1=（3 + $1^2$）% 11 = 4，仍然冲突，再找下一个哈希地址为H2=（3 - $1^2$）% 11 = 2，此时不再冲突，将69填入2号单元。</p>
+<p>如果用伪随机探测再散列处理冲突，且伪随机数序列为：2，5，9，……..，则下一个哈希地址为H1=（3 + 2）% 11 = 5，仍然冲突，再找下一个哈希地址为H2=（3 + 5）% 11 = 8，此时不再冲突，将69填入8号单元。</p>
+<h1 id="再哈希法"><a href="#再哈希法" class="headerlink" title="再哈希法"></a>再哈希法</h1><p>这种方法是同时构造多个不同的哈希函数：</p>
+<p>$H_i$=$RH_1$（key）    i=1，2，…，k</p>
+<p>当哈希地址$H_i$=$RH_1$（key）发生冲突时，再计算$H_i$=$RH_2$（key）……，直到冲突不再产生。这种方法不易产生聚集，但增加了计算时间。</p>
+<h1 id="链地址法"><a href="#链地址法" class="headerlink" title="链地址法"></a>链地址法</h1><p>这种方法的基本思想是将所有哈希地址为i的元素构成一个称为同义词链的单链表，并将单链表的头指针存在哈希表的第i个单元中，因而查找、插入和删除主要在同义词链中进行。链地址法适用于经常进行插入和删除的情况。</p>
+<h1 id="建立公共溢出区"><a href="#建立公共溢出区" class="headerlink" title="建立公共溢出区"></a>建立公共溢出区</h1><p> 这种方法的基本思想是：将哈希表分为基本表和溢出表两部分，凡是和基本表发生冲突的元素，一律填入溢出表。</p>
+<h1 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h1><h2 id="开放散列（open-hashing）-拉链法（针对桶链结构）"><a href="#开放散列（open-hashing）-拉链法（针对桶链结构）" class="headerlink" title="开放散列（open hashing）/ 拉链法（针对桶链结构）"></a>开放散列（open hashing）/ 拉链法（针对桶链结构）</h2><ol>
+<li><p>优点：          </p>
+<p>①对于记录总数频繁可变的情况，处理的比较好（也就是避免了动态调整的开销）          </p>
+<p>②由于记录存储在结点中，而结点是动态分配，不会造成内存的浪费，所以尤其适合那种记录本身尺寸（size）很大的情况，因为此时指针的开销可以忽略不计了         </p>
+<p>③删除记录时，比较方便，直接通过指针操作即可     </p>
+</li>
+<li><p>缺点：         </p>
+<p>①存储的记录是随机分布在内存中的，这样在查询记录时，相比结构紧凑的数据类型（比如数组），哈希表的跳转访问会带来额外的时间开销        </p>
+<p> ②如果所有的 key-value 对是可以提前预知，并之后不会发生变化时（即不允许插入和删除），可以人为创建一个不会产生冲突的完美哈希函数（perfect hash function），此时封闭散列的性能将远高于开放散列         </p>
+<p>③由于使用指针，记录不容易进行序列化（serialize）操作 </p>
+</li>
+</ol>
+<h2 id="封闭散列（closed-hashing）-开放定址法"><a href="#封闭散列（closed-hashing）-开放定址法" class="headerlink" title="封闭散列（closed hashing）/ 开放定址法"></a>封闭散列（closed hashing）/ 开放定址法</h2><ol>
+<li><p>优点：         </p>
+<p>①记录更容易进行序列化（serialize）操作         </p>
+<p>②如果记录总数可以预知，可以创建完美哈希函数，此时处理数据的效率是非常高的</p>
+</li>
+<li><p>缺点：         </p>
+<p>①存储记录的数目不能超过桶数组的长度，如果超过就需要扩容，而扩容会导致某次操作的时间成本飙升，这在实时或者交互式应用中可能会是一个严重的缺陷         </p>
+<p>②使用探测序列，有可能其计算的时间成本过高，导致哈希表的处理性能降低         </p>
+<p>③由于记录是存放在桶数组中的，而桶数组必然存在空槽，所以当记录本身尺寸（size）很大并且记录总数规模很大时，空槽占用的空间会导致明显的内存浪费          </p>
+<p>④删除记录时，比较麻烦。比如需要删除记录a，记录b是在a之后插入桶数组的，但是和记录a有冲突，是通过探测序列再次跳转找到的地址，所以如果直接删除a，a的位置变为空槽，而空槽是查询记录失败的终止条件，这样会导致记录b在a的位置重新插入数据前不可见，所以不能直接删除a，而是设置删除标记。这就需要额外的空间和操作。</p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/Java基础/">Java基础</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/03/哈希冲突/&title=《哈希冲突》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/03/哈希冲突/&title=《哈希冲突》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/05/03/哈希冲突/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《哈希冲突》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/03/哈希冲突/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/03/哈希冲突/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/05/03/查找数组中未出现的最小正整数/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">查找数组中未出现的最小正整数</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/03/哈希冲突/&title=《哈希冲突》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/03/哈希冲突/&title=《哈希冲突》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/05/03/哈希冲突/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《哈希冲突》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/03/哈希冲突/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/03/哈希冲突/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACpklEQVR42u3awW7rMAwEwP7/T7fXAm38dkmpCB7Gp8BpbI4OEkvy4yO+Pr9ds7/5/HF9v5887fntqwsPDw9vEfpzEHkoP7999Tl/b/tbPDw8vNu8PKznF+8XLr/zHDMeHh7e+/BOLcdsgfDw8PD+P14eUHsA4OHh4b0bbxbcLL3ePOFirQUPDw+vy12jLtL7fL7S38PDw8Nbd9Xb5lObpm/GDqJo8fDw8C7w8g23be23RYq87FsPh+Hh4eEd5T3/INn0Ny3/PPS2XIKHh4d3j9e+cpNMbxLopJRc1FHw8PDw1rx8W58dG8mm3za66nfh4eHhHeK1//Dvm/350rRLUGTieHh4eGveJqwEvB/DSu4UtRY8PDy8Ba9Nc6NWfQmYLWJb4MDDw8M7xWvT3D1yUzJOlv7luYeHh4d3iLcfF2gb/LNe1aZUgYeHh3eWNxt4mq3c7DiZlTzw8PDw/obXJtN5kp0PTuXfRmk0Hh4e3gXebLhq07iaDXKtRsTw8PDwjvKSZDoJMT8SZgfGcLgBDw8P7xpvduWjAPmYwuaA+eU+Hh4e3gVecgzMtv526ilvsLVtMzw8PLwbvKSY276yfdpsaaIFwsPDwzvKO4t5Livkx0m+q0etLzw8PLyjvJw6C2I/KJBEVRcj8PDw8Na8PMHNwcMphng/H1ZZ8PDw8C7zZhv0bIiqfXJdxsXDw8O7xjs7IpCUZZMicnt44OHh4d3jzQatTjX123pJ/S0eHh7eBd4+zW037rYIuz+c8PDw8G7wksNgVlBoi8KzpfkHGA8PD+8ary0lzELPk++2gPvyDh4eHt4b8GbDBG3pdlbejfp7eHh4eG/Daw+GdmBreOTg4eHhXeMlP26bWLPSw3658fDw8G7zZv/w75Ht8w8w8PDw8La8L0dCIha3NoB6AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
