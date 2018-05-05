@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="类别 synchronized Lock     存在层次 Java的关键字，在jvm层面上 是一个类   锁的释放 1、已获取锁的线程执行完同步代码会释放锁  2、线程执行发生异常，jvm会让线程释放锁 需在finally中手工释放锁（unlock()方法释放锁），不然容易造成线程死锁   锁的获取 假设A线程获得锁，B线程等待。如果A线程阻塞，B线程会一直等待 分情况而定，如果尝试获取不">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-17T06:51:36.029Z">
+<meta property="og:updated_time" content="2018-05-05T12:24:51.796Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="synchronized与Lock的区别">
 <meta name="twitter:description" content="类别 synchronized Lock     存在层次 Java的关键字，在jvm层面上 是一个类   锁的释放 1、已获取锁的线程执行完同步代码会释放锁  2、线程执行发生异常，jvm会让线程释放锁 需在finally中手工释放锁（unlock()方法释放锁），不然容易造成线程死锁   锁的获取 假设A线程获得锁，B线程等待。如果A线程阻塞，B线程会一直等待 分情况而定，如果尝试获取不">
@@ -233,13 +233,8 @@
 <li>（性能）synchronized是托管给JVM执行的，而lock是java写的控制锁的代码。在Java1.5中，synchronize是性能低效的。因为 这是一个重量级操作，需要调用操作接口，导致有可能加锁消耗的系统时间比加锁以外的操作还多。相比之下使用Java提供的Lock对象，性能更高一些。但 是到了Java1.6，发生了变化。synchronize在语义上很清晰，可以进行很多优化，有适应自旋，锁消除，锁粗化，轻量级锁，偏向锁等等。导致在Java1.6上synchronize的性能并不比Lock差。 </li>
 <li>（机制）synchronized原始采用的是CPU悲观锁机制，即线程获得的是独占锁。独占锁意味着其 他线程只能依靠阻塞来等待线程释放锁。Lock用的是乐观锁方式。所谓乐观锁就是，每次不加锁而是假设没有冲突而去完成某项操作，如果因为冲突失败就重试，直到成功为止。乐观锁实现的机制就是CAS操作（Compareand Swap）。</li>
 </ul>
-<p><strong>synchronized底层如何实现的？用在代码块和方法上有什么区别？</strong></p>
-<ul>
-<li>synchronized用在代码块锁的是调用该方法的对象（this），也可以选择锁住任何一个对象。 </li>
-<li>synchronized用在方法上锁的是调用该方法的对象， </li>
-<li>synchronized用在代码块可以减小锁的粒度，从而提高并发性能。 </li>
-<li>无论用在代码块上还是用在方法上，都是获取对象的锁；每一个对象只有一个锁与之相关联；实现同步需要很大的系统开销作为代价，甚至可能造成死锁，所以尽量避免无谓的同步控制。 </li>
-</ul>
+<p><strong>synchronized如何使用</strong></p>
+<p>  synchronized是Java中的关键字，是一种同步锁。它修饰的对象有以下几种：<br> 1). 修饰一个代码块，被修饰的代码块称为同步语句块，其作用的范围是大括号{}括起来的代码，作用的对象是调用这个代码块的对象；<br> 2). 修饰一个方法，被修饰的方法称为同步方法，其作用的范围是整个方法，作用的对象是调用这个方法的对象；<br> 3). 修改一个静态的方法，其作用的范围是整个静态方法，作用的对象是这个类的所有对象；<br> 4). 修改一个类，其作用的范围是synchronized后面括号括起来的部分，作用主的对象是这个类的所有对象。 </p>
 <p> <strong>两种锁的底层实现方式： </strong></p>
 <p> <strong>synchronized：</strong></p>
 <p>我们知道java是用字节码指令来控制程序（这里不包括热点代码编译成机器码）。在字节指令中，存在有synchronized所包含的代码块，那么会形成2段流程的执行。 </p>
