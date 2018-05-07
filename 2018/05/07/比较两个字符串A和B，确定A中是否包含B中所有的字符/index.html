@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>比较两个字符串A和B，确定A中是否包含B中所有的字符 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="数据结构与算法">
+    <meta name="description" content="题目样例：  给出 A = “ABCD” B = “ACD”，返回 true给出 A = “ABCD” B = “AABC”， 返回 false  注意在 A 中出现的 B 字符串里的字符不需要连续或者有序。 1234567891011121314151617181920212223242526272829303132333435import java.util.Arrays;import jav">
+<meta name="keywords" content="数据结构与算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="比较两个字符串A和B，确定A中是否包含B中所有的字符">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/07/比较两个字符串A和B，确定A中是否包含B中所有的字符/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="题目样例：  给出 A = “ABCD” B = “ACD”，返回 true给出 A = “ABCD” B = “AABC”， 返回 false  注意在 A 中出现的 B 字符串里的字符不需要连续或者有序。 1234567891011121314151617181920212223242526272829303132333435import java.util.Arrays;import jav">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-07T13:54:41.068Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="比较两个字符串A和B，确定A中是否包含B中所有的字符">
+<meta name="twitter:description" content="题目样例：  给出 A = “ABCD” B = “ACD”，返回 true给出 A = “ABCD” B = “AABC”， 返回 false  注意在 A 中出现的 B 字符串里的字符不需要连续或者有序。 1234567891011121314151617181920212223242526272829303132333435import java.util.Arrays;import jav">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">比较两个字符串A和B，确定A中是否包含B中所有的字符</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">比较两个字符串A和B，确定A中是否包含B中所有的字符</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-07T13:48:55.000Z" itemprop="datePublished" class="page-time">
+  2018年05月07日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据结构与算法/">数据结构与算法</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-比较两个字符串A和B，确定A中是否包含B中所有的字符"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">比较两个字符串A和B，确定A中是否包含B中所有的字符</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年05月07日 21:48:55" datetime="2018-05-07T13:48:55.000Z"  itemprop="datePublished">2018年05月07日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据结构与算法/">数据结构与算法</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>题目样例：</p>
+<blockquote>
+<p>给出 A = “ABCD” B = “ACD”，返回 true<br>给出 A = “ABCD” B = “AABC”， 返回 false</p>
+</blockquote>
+<p>注意<br>在 A 中出现的 B 字符串里的字符不需要连续或者有序。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        String inputStr = sc.next();</span><br><span class="line">        <span class="comment">//注：此题的输入为ABCD51NB;NB51，用分号分隔两个字符串</span></span><br><span class="line">        String[] strs = inputStr.split(<span class="string">";"</span>);</span><br><span class="line">        <span class="keyword">boolean</span> k = compareStrings(strs[<span class="number">0</span>],strs[<span class="number">1</span>]);</span><br><span class="line">        System.out.println(k);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">compareStrings</span><span class="params">(String A, String B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] a = A.toCharArray();</span><br><span class="line">        <span class="keyword">char</span>[] b = B.toCharArray();</span><br><span class="line">        Arrays.sort(a);</span><br><span class="line">        Arrays.sort(b);</span><br><span class="line">        <span class="keyword">int</span> acount=<span class="number">0</span>,bcount=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (acount&lt;a.length &amp;&amp; bcount&lt;b.length) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[acount]==b[bcount]) &#123;</span><br><span class="line">                acount++;</span><br><span class="line">                bcount++;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                acount++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (bcount == b.length) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（51信用卡笔试）</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/07/比较两个字符串A和B，确定A中是否包含B中所有的字符/&title=《比较两个字符串A和B，确定A中是否包含B中所有的字符》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/07/比较两个字符串A和B，确定A中是否包含B中所有的字符/&title=《比较两个字符串A和B，确定A中是否包含B中所有的字符》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/05/07/比较两个字符串A和B，确定A中是否包含B中所有的字符/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《比较两个字符串A和B，确定A中是否包含B中所有的字符》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/07/比较两个字符串A和B，确定A中是否包含B中所有的字符/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/07/比较两个字符串A和B，确定A中是否包含B中所有的字符/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/05/07/单例模式/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">单例模式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/07/比较两个字符串A和B，确定A中是否包含B中所有的字符/&title=《比较两个字符串A和B，确定A中是否包含B中所有的字符》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/07/比较两个字符串A和B，确定A中是否包含B中所有的字符/&title=《比较两个字符串A和B，确定A中是否包含B中所有的字符》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/05/07/比较两个字符串A和B，确定A中是否包含B中所有的字符/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《比较两个字符串A和B，确定A中是否包含B中所有的字符》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/07/比较两个字符串A和B，确定A中是否包含B中所有的字符/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/07/比较两个字符串A和B，确定A中是否包含B中所有的字符/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEhklEQVR42u3aS3KcQBAFQN3/0vLWCzF+r4pxTKNkpUAImkQRXb+vr/j4/uv4+8zrn6/OJM+66/zrld98YMKECROmj2T6fnlcMc0orxAT3GSdCcTVql7fExMmTJgwnc7U3i5hyq/Zb+r5apPgABMmTJgw/WamdlttXyDhyP82fwtMmDBhwoRp9npJoNCWfVvQtuCLCRMmTJiexzS7XZ6gtiHF/ny+wptr4ZgwYcKE6cOY2i35ST+/Zb4JEyZMmDB9DNP36MhbmPdu8HmK3rZI//G+mDBhwoTpWKa2YDpLaNuhmbZJ2RZ523YsJkyYMGE6nWnfwkw48gLrbJB0lujOnosJEyZMmE5hapuC+YPb4Zsc+t7xnSSwwIQJEyZM5zK9O0VsN+ac+96VRMM6mDBhwoTpQKa8DZkHBPkAUL7xt/ec/Stc/otgwoQJE6ZjmdrNsv1tm7huwog2ra1HkTBhwoQJ07FM+1eaLWvfCp0RtCvHhAkTJkxPYrq3wplv9nlqOvt4bSG4xsKECRMmTB/JlC8rR2mX9Y7rk+S5CCkwYcKECdOxTG3B9H0bdlveff0526Zm8cEwYcKECdNRTHlOnBdDN+M+9zZEN/UATJgwYcL0DKbkz/ajMLOhnBZ0Nu5Tf3JMmDBhwnQU072p46zMmiTAm7Bjk8ZjwoQJE6bTme5KCGd15c2VySu1n7MILDBhwoQJ0yFMm+SzLafun5V8tnbkKCpDY8KECROmY5nekZrmrcc24WwJ2jCimGzChAkTJkxHMSX58SwBzoOD13n5XavK74AJEyZMmJ7H1G6cs8GdvOmYJ73JBt8GOlGujwkTJkyYPp6piBQWm3o+drMp8rZty+JDYsKECROmRzC1D2433U1SOnvhdsTncm2YMGHChOlwpvxGs/ObtmLbCm3nbSJQTJgwYcJ0LNOs9FlvqPE1bWqdX9N+yLrgiwkTJkyYPpKpbUC+vnKTrOYJdtuezM9frhYTJkyYMB3L1I7UbFqV+eLaK/dF5+GUEyZMmDBhOoopL7O2IztFCTUeAGqHjfatVkyYMGHCdCLTbHCnbSVuUt99QtsGH5ddX0yYMGHCdDjT5gHJa89e9d4ydJucY8KECROmZzC1Rd58oXk5dZ9O3xVGXA7uYMKECROmA5naluTsVfeJ6+bOe3RMmDBhwnQuU8KxGXZJgolkyCZvheaJbtHgxIQJEyZMj2DaF1Vnr1dELrNmZIn1wxlMmDBhwvQIpjYUuOvF2tChbXm2heYffosJEyZMmI5lSpYyCws2ReSkONu+WBsQ/EMAEyZMmDAdwvRdHrMxnXbbnj0r/zB547OIRDBhwoQJ00cy5Uc7EDNrVbbpaP4BZkM8mDBhwoTpGUyzduBmiGfT8ryrXVp/eEyYMGHCdDjTpjacp5GzIvI+BJkVlDFhwoQJ029j+p8l1PxvZwNAdfsTEyZMmDD9AqY2jWzHa5Ln7sdn26QdEyZMmDA9g2lTSN0UZNstfMOaByWXqS8mTJgwYTqQ6YYCaJy4Jlt4Qr8JU4YBASZMmDBhOo/pD0/vEPGwremBAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
