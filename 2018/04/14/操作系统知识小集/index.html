@@ -30,7 +30,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://uploadfiles.nowcoder.net/images/20150920/458054_1442753187771_5CDBB527FAC51A534C0C85F7B4B46194">
 <meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/04/14/操作系统知识小集/空闲区数.png">
-<meta property="og:updated_time" content="2018-04-26T13:57:03.507Z">
+<meta property="og:updated_time" content="2018-05-07T14:02:17.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统知识小集">
 <meta name="twitter:description" content="进程状态变化 注意：创建和退出不是进程的状态。阻塞和就绪的区别：阻塞是等待除CPU以外的资源，而就绪等待的是CPU资源。 1）就绪——执行：对就绪状态的进程，当进程调度程序按一种选定的策略从中选中一个就绪进程，为之分配了处理机后，该进程便由就绪状态变为执行状态； 2）执行——阻塞：正在执行的进程因发生某等待事件而无法执行，则进程由执行状态变为阻塞状态，如进程提出输入/输出请求而变成等待外部设备传输">
@@ -240,6 +240,15 @@
 <p><img src="/BameirilyoBlog/2018/04/14/操作系统知识小集/空闲区数.png" alt="preview"></p>
 <p>15.临界资源是指每次仅允许一个进程访问的资源。</p>
 <p>属于临界资源的硬件有打印机、磁带机等,软件有消息缓冲队列、变量、数组、缓冲区等。 诸进程间应采取互斥方式，实现对这种资源的共享。</p>
+<ol start="16">
+<li>若信号量S的初值为2，当前值为-1，则表示有<strong>_1_</strong>个进程等待信号量S。</li>
+</ol>
+<p>信号量是一个整型变量，根据控制对象的不同被赋予不同的值。信号量分为两类：</p>
+<ul>
+<li>公用信号量：实现进程间的互斥，初值为1或资源的数目；</li>
+<li>私用信号量：实现进程间的同步，初值为0或某个正整数。</li>
+</ul>
+<p>信号量S的物理意义：S≥0表示某资源的可用数，若S＜0，则其绝对值表示阻塞队列中等待该资源的进程数。<br>当信号量S为-1时，其绝对值表示阻塞队列中等待该资源的进程数为1。</p>
 
         </div>
 
