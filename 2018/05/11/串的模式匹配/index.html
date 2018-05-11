@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>串的模式匹配 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="数据结构与算法">
+    <meta name="description" content="BF算法1Brute-Force算法易于理解，但是时间效率不高。它是一种带回溯的模式匹配算法，将目标串中所有长度为匹配串长度的字串依次与匹配串比较。 12345678910111213141516171819public static int bruteForce(String str1,String str2)&amp;#123;    if(str1 != null &amp;amp;&amp;amp; str2 !">
+<meta name="keywords" content="数据结构与算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="串的模式匹配">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/11/串的模式匹配/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="BF算法1Brute-Force算法易于理解，但是时间效率不高。它是一种带回溯的模式匹配算法，将目标串中所有长度为匹配串长度的字串依次与匹配串比较。 12345678910111213141516171819public static int bruteForce(String str1,String str2)&amp;#123;    if(str1 != null &amp;amp;&amp;amp; str2 !">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-11T13:23:39.230Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="串的模式匹配">
+<meta name="twitter:description" content="BF算法1Brute-Force算法易于理解，但是时间效率不高。它是一种带回溯的模式匹配算法，将目标串中所有长度为匹配串长度的字串依次与匹配串比较。 12345678910111213141516171819public static int bruteForce(String str1,String str2)&amp;#123;    if(str1 != null &amp;amp;&amp;amp; str2 !">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">串的模式匹配</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">串的模式匹配</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-11T13:22:30.000Z" itemprop="datePublished" class="page-time">
+  2018年05月11日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据结构与算法/">数据结构与算法</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#BF算法"><span class="post-toc-number">1.</span> <span class="post-toc-text">BF算法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#KMP算法"><span class="post-toc-number">2.</span> <span class="post-toc-text">KMP算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#算法思想："><span class="post-toc-number">2.1.</span> <span class="post-toc-text">算法思想：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#next数组详解"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">next数组详解</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-串的模式匹配"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">串的模式匹配</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年05月11日 21:22:30" datetime="2018-05-11T13:22:30.000Z"  itemprop="datePublished">2018年05月11日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据结构与算法/">数据结构与算法</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="BF算法"><a href="#BF算法" class="headerlink" title="BF算法"></a>BF算法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Brute-Force算法易于理解，但是时间效率不高。它是一种带回溯的模式匹配算法，将目标串中所有长度为匹配串长度的字串依次与匹配串比较。</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">bruteForce</span><span class="params">(String str1,String str2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(str1 != <span class="keyword">null</span> &amp;&amp; str2 != <span class="keyword">null</span> &amp;&amp; str1.length() &gt;= str2.length())&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt; str1.length() &amp;&amp; j &lt; str2.length()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (str1.charAt(i) == str2.charAt(j)) &#123;</span><br><span class="line">                i++;</span><br><span class="line">                j++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                i = i - j + <span class="number">1</span>;</span><br><span class="line">                j = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(j &gt;= str2.length())&#123;</span><br><span class="line">            <span class="keyword">return</span> i-str2.length();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最好情况下时间复杂度为O(m)，即主串前m个字符正好等于模式串的m个字符；最坏情况为O(nm).</p>
+<h1 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h1><h2 id="算法思想："><a href="#算法思想：" class="headerlink" title="算法思想："></a>算法思想：</h2><p>设s为目标串，t为模式串，并设i指针和j指针分别指示目标串和模式串中正待比较的字符，令i和j的初值均为0。若$s_i$=$t_i$，则i和j分别增1；否则，i不变，j退回到j=next[j]的位置(即模式串右滑)，比较$s_i$和$t_i$，若相等则指针各增1，否则j再退回到下一个j=next[j]的位置(即模式串继续右滑)，再比较$s_i$和$t_i$。以此类推，直到出现下列两种情况之一：一种情况是j退回到某个j=next[j]位置时，有$s_i$=$t_i$，则指针各增1后继续匹配；另一种情况是j退回到j=-1时，此时令i、j指针各增1，即下一次比较有$s_{i+1}$和$t_0$。</p>
+<h2 id="next数组详解"><a href="#next数组详解" class="headerlink" title="next数组详解"></a>next数组详解</h2><p>例子：</p>
+<p>目标串s=ababcabcacbab，模式串t=abcac</p>
+<p><strong>注：next数组与目标串无关，只利用模式串即可</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">j</th>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">t[j]</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">b</td>
+<td style="text-align:center">c</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">c</td>
+</tr>
+<tr>
+<td style="text-align:center">next[j]</td>
+<td style="text-align:center"><strong>-1</strong></td>
+<td style="text-align:center"><strong>0</strong></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>规定：next[0]=-1，next[1]=0</strong></p>
+<p>求其余值为：“t[1]-t[n-1]”之间的（<strong>即去头去尾</strong>）形成的<strong>后缀字符串</strong>与模式串t的开头字符串比较，没有相同字符串则为0，有几次值为几</p>
+<p>next[2]求法：形成字符串b，与模式串“abcac”没有相同字符，为0；</p>
+<p>next[3]求法：形成字符串bc、c，与模式串“abcac”没有相同字符，为0；</p>
+<p>next[4]求法：形成字符串bca、ca、a，a与模式串“abcac”有相同字符a，为1；</p>
+<p>求解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">第一次匹配：</span><br><span class="line">目标串：a b 	a 	b c a b c a c b a b </span><br><span class="line">模式串：a b 	c 	a c </span><br><span class="line">（i=2，j=2时失败）修改为i=2，j=next[2]=0</span><br><span class="line"></span><br><span class="line">第二次匹配：</span><br><span class="line">目标串：a b a b c a 	b 	c a c b a b </span><br><span class="line">模式串：    a b c a 	c </span><br><span class="line">（i=6，j=4时失败）修改为i=6，j=next[4]=1</span><br><span class="line"></span><br><span class="line">第三次匹配：</span><br><span class="line">目标串：a b a b c a b c a c 	b a b </span><br><span class="line">模式串：          a b c a c </span><br><span class="line">（i=10，j=5时成功）返回i-t.length=5</span><br></pre></td></tr></table></figure>
+<p>​            </p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/11/串的模式匹配/&title=《串的模式匹配》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/11/串的模式匹配/&title=《串的模式匹配》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/05/11/串的模式匹配/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《串的模式匹配》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/11/串的模式匹配/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/11/串的模式匹配/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/05/08/平衡二叉树、B树、B-树、B-树/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">平衡二叉树、B树、B+树、B*树</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/11/串的模式匹配/&title=《串的模式匹配》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/11/串的模式匹配/&title=《串的模式匹配》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/05/11/串的模式匹配/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《串的模式匹配》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/11/串的模式匹配/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/11/串的模式匹配/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACv0lEQVR42u3bQVIjMRAEQP//0+yViMV2VbcEPuScHGMYKecgierm8Yivr2/X9zuzJzx7zv+fNyM+8PDw8K7xvl5ezwZLJjcDPLvz+v6zGeLh4eHd4z1bUV9PK38p+cbQ/tYbCx4eHt7H8JLJtdvP/kCPh4eH9/m8aIBylPa14uHh4f0Vrz34vl64k6knT0iedixrwcPDw5ufYB+zTeI3P1+p7+Hh4eGtq+pthDrbKtpto5gtHh4e3gXebLp5gb/93bw9q3iteHh4eBd47TDJt3ksu98SosM3Hh4e3iHePgx9fWiul+8yon0zFh4eHt4v8mZLcxsxbOYQjYWHh4d3gdcWn5Kmgf3TNnHwqnaHh4eHN+LlkcEMNosqVoEvHh4e3gVevqJuYoWE2m5X+Uzw8PDwTvHy0tTsSJ1vLbMA4s0c8PDw8C7w2sW6ne5s6m25681P4uHh4R3lzQpLefNTW+javIKo6QoPDw/vEG+zGczC37yUNQuR644wPDw8vC5BLf51Mw9q961XbXz8pukKDw8P7yivXfpnpHZZT15H3s6Fh4eHd4OXH4vzo/Bmcd9/i4eHh3ePtwe08cSpxqyo/QsPDw/vKC8v88/Ap2LZFva0voeHh4d3iFeXlMoIIImGTxXeiini4eHhjXhtwX4fUrSNU7Ot5YeDNR4eHt4FXt789CivWQNWeydqGsDDw8O7xmtbsvKB28A3f6F1AQwPDw/vEC8JUvNoIHlCfkAfxiJ4eHh4R3lf5ZU3P+WtCW2bV/EtHh4e3gXeJlDIH5SU2TaNC7OIBA8PD2/Da4OGvEyVkNogoy684eHh4V3jzWKFfB3eBLv5xoOHh4f3mbxZM0Eb3c7i3R/u4+Hh4X0Arw0XNkv/pnEBDw8P7zZvU/TahAj5kX24UeHh4eH93hk4+oP/VFvAKm7YX3h4eHgp7x9/57GGv3rd5wAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
