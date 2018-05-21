@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>E回溯法 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="数据结构与算法">
+    <meta name="description" content="E12回溯法题目：请设计一个函数，用来推断在一个矩阵中是否存在一条包括某字符串全部字符的路径。路径能够从矩阵中随意一格開始。每一步能够在矩阵中间向左、右、上、下移动一格。假设一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。 举例分析比如在以下的3*4的矩阵中包括一条字符串”bcced”的路径。 但矩阵中不包括字符串“abcb”的路径，因为字符串的第一个字符b占领了矩阵中的第一行第二格子之">
+<meta name="keywords" content="数据结构与算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="E回溯法">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E回溯法/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="E12回溯法题目：请设计一个函数，用来推断在一个矩阵中是否存在一条包括某字符串全部字符的路径。路径能够从矩阵中随意一格開始。每一步能够在矩阵中间向左、右、上、下移动一格。假设一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。 举例分析比如在以下的3*4的矩阵中包括一条字符串”bcced”的路径。 但矩阵中不包括字符串“abcb”的路径，因为字符串的第一个字符b占领了矩阵中的第一行第二格子之">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-21T07:45:12.064Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="E回溯法">
+<meta name="twitter:description" content="E12回溯法题目：请设计一个函数，用来推断在一个矩阵中是否存在一条包括某字符串全部字符的路径。路径能够从矩阵中随意一格開始。每一步能够在矩阵中间向左、右、上、下移动一格。假设一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。 举例分析比如在以下的3*4的矩阵中包括一条字符串”bcced”的路径。 但矩阵中不包括字符串“abcb”的路径，因为字符串的第一个字符b占领了矩阵中的第一行第二格子之">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">E回溯法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">E回溯法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-21T07:44:42.000Z" itemprop="datePublished" class="page-time">
+  2018年05月21日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据结构与算法/">数据结构与算法</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#E12回溯法"><span class="post-toc-number">1.</span> <span class="post-toc-text">E12回溯法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#举例分析"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">举例分析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解题思路"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">解题思路</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-E回溯法"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">E回溯法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年05月21日 15:44:42" datetime="2018-05-21T07:44:42.000Z"  itemprop="datePublished">2018年05月21日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据结构与算法/">数据结构与算法</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="E12回溯法"><a href="#E12回溯法" class="headerlink" title="E12回溯法"></a>E12回溯法</h1><p><strong>题目：请设计一个函数，用来推断在一个矩阵中是否存在一条包括某字符串全部字符的路径。路径能够从矩阵中随意一格開始。每一步能够在矩阵中间向左、右、上、下移动一格。假设一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。</strong></p>
+<h2 id="举例分析"><a href="#举例分析" class="headerlink" title="举例分析"></a><strong>举例分析</strong></h2><p>比如在以下的3*4的矩阵中包括一条字符串”bcced”的路径。</p>
+<p>但矩阵中不包括字符串“abcb”的路径，因为字符串的第一个字符b占领了矩阵中的第一行第二格子之后，路径不能再次进入这个格子。</p>
+<p> a  b  c  e<br> s  f   c  s<br> a  d  e  e</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a><strong>解题思路</strong></h2><p>这是一个能够用回朔法解决的典型题。首先，在矩阵中任选一个格子作为路径的起点。假设矩阵中某个格子的字符为ch，那么这个格子不可能处在路径上的第i个位置。假设路径上的第i个字符不是ch。那么这个格子不可能处在路径上的第i个位置。假设路径上的第i个字符正好是ch。那么往相邻的格子寻找路径上的第i+1个字符。除在矩阵边界上的格子之外，其它格子都有4个相邻的格子。反复这个过程知道路径上的全部字符都在矩阵中找到相应的位置。</p>
+<p>因为回朔法的递归特性，路径能够被开成一个栈。当在矩阵中定位了路径中前n个字符的位置之后。在与第n个字符相应的格子的周围都没有找到第n+1个字符。这个时候仅仅要在路径上回到第n-1个字符。又一次定位第n个字符。</p>
+<p>因为路径不能反复进入矩阵的格子。还须要定义和字符矩阵大小一样的布尔值矩阵，用来标识路径是否已经进入每个格子。<br>当矩阵中坐标为（row,col）的格子和路径字符串中下标为pathLength的字符一样时。从4个相邻的格子(row,col-1),(row-1,col),(row,col+1)以及(row+1,col)中去定位路径字符串中下标为pathLength+1的字符。<br> 假设4个相邻的格子都没有匹配字符串中下标为pathLength+1的字符，表明当前路径字符串中下标为pathLength的字符在矩阵中的定位不对，我们须要回到前一个字符(pathLength-1)，然后又一次定位。<br> 一直反复这个过程，直到路径字符串上全部字符都在矩阵中找到合适的位置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">N12</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 假设一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> matrix 输入矩阵</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> rows   矩阵行数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> cols   矩阵列数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> str    要搜索的字符串</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 是否找到 true是,false否</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">hasPath</span><span class="params">(<span class="keyword">char</span>[] matrix, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">char</span>[] str)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 參数校验</span></span><br><span class="line">        <span class="keyword">if</span> (matrix == <span class="keyword">null</span> || matrix.length != rows * cols || str == <span class="keyword">null</span> || str.length &lt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 变量初始化</span></span><br><span class="line">        <span class="keyword">boolean</span>[] visited = <span class="keyword">new</span> <span class="keyword">boolean</span>[rows * cols];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; visited.length; i++) &#123;</span><br><span class="line">            visited[i] = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 记录结果的数组。</span></span><br><span class="line">        <span class="keyword">int</span>[] pathLength = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="comment">// 以每个点为起始进行搜索</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; cols; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (hasPathCore(matrix, rows, cols, str, visited, i, j, pathLength))&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 回溯搜索算法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> matrix     输入矩阵</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> rows       矩阵行数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> cols       矩阵列数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> str        要搜索的字符串</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> visited    訪问标记数组</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> row        当前处理的行号</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> col        当前处理的列号</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> pathLength 已经处理的str中字符个数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 是否找到 true是，false否</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">hasPathCore</span><span class="params">(<span class="keyword">char</span>[] matrix, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">char</span>[] str, <span class="keyword">boolean</span>[] visited,</span></span></span><br><span class="line"><span class="function"><span class="params">                                       <span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">int</span>[] pathLength)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (pathLength[<span class="number">0</span>] == str.length) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">boolean</span> hasPath = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 推断位置是否合法</span></span><br><span class="line">        <span class="keyword">if</span> (row &gt;= <span class="number">0</span> &amp;&amp; row &lt; rows</span><br><span class="line">                &amp;&amp; col &gt;= <span class="number">0</span> &amp;&amp; col &lt; cols</span><br><span class="line">                &amp;&amp; matrix[row * cols + col] == str[pathLength[<span class="number">0</span>]]</span><br><span class="line">                &amp;&amp; !visited[row * cols + col]) &#123;</span><br><span class="line">            visited[row * cols + col] = <span class="keyword">true</span>;</span><br><span class="line">            pathLength[<span class="number">0</span>]++;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 按左上右下进行回溯</span></span><br><span class="line">            hasPath = hasPathCore(matrix, rows, cols, str, visited, row, col - <span class="number">1</span>, pathLength)</span><br><span class="line">                    || hasPathCore(matrix, rows, cols, str, visited, row - <span class="number">1</span>, col, pathLength)</span><br><span class="line">                    || hasPathCore(matrix, rows, cols, str, visited, row, col + <span class="number">1</span>, pathLength)</span><br><span class="line">                    || hasPathCore(matrix, rows, cols, str, visited, row + <span class="number">1</span>, col, pathLength);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!hasPath) &#123;</span><br><span class="line">                pathLength[<span class="number">0</span>]--;</span><br><span class="line">                visited[row * cols + col] = <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> hasPath;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//ABCE  //ABCCED</span></span><br><span class="line">        <span class="comment">//SFCS</span></span><br><span class="line">        <span class="comment">//ADEE</span></span><br><span class="line">        System.out.println(hasPath(<span class="string">"ABCESFCSADEE"</span>.toCharArray(), <span class="number">3</span>, <span class="number">4</span>,</span><br><span class="line">                <span class="string">"ABCCED"</span>.toCharArray()) + <span class="string">"[true]"</span>);<span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//ABCE  //SEE</span></span><br><span class="line">        <span class="comment">//SFCS</span></span><br><span class="line">        <span class="comment">//ADEE</span></span><br><span class="line">        System.out.println(hasPath(<span class="string">"ABCESFCSADEE"</span>.toCharArray(), <span class="number">3</span>, <span class="number">4</span>,</span><br><span class="line">                <span class="string">"SEE"</span>.toCharArray()) + <span class="string">"[true]"</span>);<span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//ABCE  //ABCB</span></span><br><span class="line">        <span class="comment">//SFCS</span></span><br><span class="line">        <span class="comment">//ADEE</span></span><br><span class="line">        System.out.println(hasPath(<span class="string">"ABCESFCSADEE"</span>.toCharArray(), <span class="number">3</span>, <span class="number">4</span>,</span><br><span class="line">                <span class="string">"ABCB"</span>.toCharArray()) + <span class="string">"[false]"</span>);<span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//ABCEHJIG  //SLHECCEIDEJFGGFIE</span></span><br><span class="line">        <span class="comment">//SFCSLOPQ</span></span><br><span class="line">        <span class="comment">//ADEEMNOE</span></span><br><span class="line">        <span class="comment">//ADIDEJFM</span></span><br><span class="line">        <span class="comment">//VCEIFGGS</span></span><br><span class="line">        System.out.println(hasPath(<span class="string">"ABCEHJIGSFCSLOPQADEEMNOEADIDEJFMVCEIFGGS"</span>.toCharArray(), <span class="number">5</span>, <span class="number">8</span>,</span><br><span class="line">                <span class="string">"SLHECCEIDEJFGGFIE"</span>.toCharArray()) + <span class="string">"[true]"</span>);<span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//ABCEHJIG  //SGGFIECVAASABCEHJIGQEM</span></span><br><span class="line">        <span class="comment">//SFCSLOPQ  //</span></span><br><span class="line">        <span class="comment">//ADEEMNOE</span></span><br><span class="line">        <span class="comment">//ADIDEJFM</span></span><br><span class="line">        <span class="comment">//VCEIFGGS</span></span><br><span class="line">        System.out.println(hasPath(<span class="string">"ABCEHJIGSFCSLOPQADEEMNOEADIDEJFMVCEIFGGS"</span>.toCharArray(), <span class="number">5</span>, <span class="number">8</span>,</span><br><span class="line">                <span class="string">"SGGFIECVAASABCEHJIGQEM"</span>.toCharArray()) + <span class="string">"[true]"</span>);<span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//ABCEHJIG  //SGGFIECVAASABCEEJIGOEM</span></span><br><span class="line">        <span class="comment">//SFCSLOPQ</span></span><br><span class="line">        <span class="comment">//ADEEMNOE</span></span><br><span class="line">        <span class="comment">//ADIDEJFM</span></span><br><span class="line">        <span class="comment">//VCEIFGGS</span></span><br><span class="line">        System.out.println(hasPath(<span class="string">"ABCEHJIGSFCSLOPQADEEMNOEADIDEJFMVCEIFGGS"</span>.toCharArray(), <span class="number">5</span>, <span class="number">8</span>,</span><br><span class="line">                <span class="string">"SGGFIECVAASABCEEJIGOEM"</span>.toCharArray()) + <span class="string">"[false]"</span>);<span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//ABCEHJIG  //SGGFIECVAASABCEHJIGQEMS</span></span><br><span class="line">        <span class="comment">//SFCSLOPQ</span></span><br><span class="line">        <span class="comment">//ADEEMNOE</span></span><br><span class="line">        <span class="comment">//ADIDEJFM</span></span><br><span class="line">        <span class="comment">//VCEIFGGS</span></span><br><span class="line">        System.out.println(hasPath(<span class="string">"ABCEHJIGSFCSLOPQADEEMNOEADIDEJFMVCEIFGGS"</span>.toCharArray(), <span class="number">5</span>, <span class="number">8</span>,</span><br><span class="line">                <span class="string">"SGGFIECVAASABCEHJIGQEMS"</span>.toCharArray()) + <span class="string">"[false]"</span>);<span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//AAAA  //AAAAAAAAAAAA</span></span><br><span class="line">        <span class="comment">//AAAA</span></span><br><span class="line">        <span class="comment">//AAAA</span></span><br><span class="line">        System.out.println(hasPath(<span class="string">"AAAAAAAAAAAA"</span>.toCharArray(), <span class="number">3</span>, <span class="number">4</span>,</span><br><span class="line">                <span class="string">"AAAAAAAAAAAA"</span>.toCharArray()) + <span class="string">"[true]"</span>);<span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//AAAA  //AAAAAAAAAAAAA</span></span><br><span class="line">        <span class="comment">//AAAA</span></span><br><span class="line">        <span class="comment">//AAAA</span></span><br><span class="line">        System.out.println(hasPath(<span class="string">"AAAAAAAAAAAA"</span>.toCharArray(), <span class="number">3</span>, <span class="number">4</span>,</span><br><span class="line">                <span class="string">"AAAAAAAAAAAAA"</span>.toCharArray()) + <span class="string">"[false]"</span>);<span class="comment">// false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E回溯法/&title=《E回溯法》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E回溯法/&title=《E回溯法》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E回溯法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《E回溯法》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E回溯法/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E回溯法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/05/21/E递归/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">E递归</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E回溯法/&title=《E回溯法》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E回溯法/&title=《E回溯法》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E回溯法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《E回溯法》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E回溯法/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E回溯法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrUlEQVR42u3awZIaMQwEUP7/p8klt2SSbskmpOrNaYsFxs+HkWjr9Yqv98OVfOrpG/78+tPdXzcuPDw8vENLf1rEr0tPSMl/n96TbNbjFuDh4eFd4yULTZ66+VLaRbebi4eHh/dtvKQ5Hj7Ky+3Dw8PD+194s0xgtoltocLDw8P7DK9tYZPQIY8e8iJxMWvBw8PDm3SwxVHWv/37yvkeHh4e3vpUPT8MmzXQSbQxW+fPz+Lh4eFd4OUP3HxYahPv7gMRPDw8vG/g5TFEO6o1CzvyEQQ8PDy8z/Nyxiza2ACKeAIPDw/vMq+NAJISMjvW2gQWeHh4ePd4bZPaloR2p/PwNwop8PDw8C7w2kAhaXPz2+8D32hVeHh4eBd4s4a1LSebgarZZuHh4eHd460a1jK0zdv0NswtDsDw8PDwFrw8qM3D3E14sYl3f/MKHh4e3gVePigwy0iTd85GvoqhKzw8PLyjvLbNbVvktiHOm/tVdIuHh4e34OVf1Da7+bHWrAVPjsfw8PDw7vE2YwH5zWYF48A4Fx4eHt5R3ju+NsMEbVy7H8nCw8PDu83bHE2tKlLclOf3/ctMBB4eHt5R3qxI5O9vkXnJefwsHh4e3gVelO+OFpGPF7Tb1xYqPDw8vBu8PJy9cS7fNtDtNuHh4eHd4G2O7c8e87dbWcxE4OHh4V3gzR6+s+jh7PZFhQEPDw/vAm82KNB+Q7JNm1Lx+FsBDw8P7xDvXV75Qk8deuUFYzVThoeHhxfzTrW5+QFV0qy3sW+NwcPDw1vzZsUgASSv7Ldm1Vjj4eHhLXj7gYB2m4bjU/EJFx4eHt438/Klt+FFG+9G02R4eHh4H+dtQtU2IzlQcvDw8PCu8ZIPt6/Poof9duPh4eHd5m1+8LdjAbPhqtkwFh4eHt4F3g+quNpPXu6pMQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>E字符串 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="数据结构与算法">
+    <meta name="description" content="E58_1翻转单词顺序牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a  student.”。Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？  方法一：">
+<meta name="keywords" content="数据结构与算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="E字符串">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E字符串/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="E58_1翻转单词顺序牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a  student.”。Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？  方法一：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-21T07:42:45.219Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="E字符串">
+<meta name="twitter:description" content="E58_1翻转单词顺序牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a  student.”。Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？  方法一：">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">E字符串</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">E字符串</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-21T07:41:59.000Z" itemprop="datePublished" class="page-time">
+  2018年05月21日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据结构与算法/">数据结构与算法</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#E58-1翻转单词顺序"><span class="post-toc-number">1.</span> <span class="post-toc-text">E58_1翻转单词顺序</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#E58-2左旋字符串"><span class="post-toc-number">2.</span> <span class="post-toc-text">E58_2左旋字符串</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#拼接最小字典序字符串"><span class="post-toc-number">3.</span> <span class="post-toc-text">拼接最小字典序字符串</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-E字符串"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">E字符串</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年05月21日 15:41:59" datetime="2018-05-21T07:41:59.000Z"  itemprop="datePublished">2018年05月21日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据结构与算法/">数据结构与算法</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="E58-1翻转单词顺序"><a href="#E58-1翻转单词顺序" class="headerlink" title="E58_1翻转单词顺序"></a>E58_1翻转单词顺序</h1><p>牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a  student.”。Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？ </p>
+<p>方法一：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">ReverseSentence</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(str.trim().equals(<span class="string">""</span>))&#123;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br><span class="line">    String[] a = str.split(<span class="string">" "</span>);</span><br><span class="line">    StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = a.length; i &gt;<span class="number">0</span>;i--)&#123;</span><br><span class="line">        sb.append(a[i-<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">if</span>(i &gt; <span class="number">1</span>)&#123;</span><br><span class="line">            sb.append(<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sb.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>方法二：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">No58</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">reverseSentence</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(str==<span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">char</span>[] arr=str.toCharArray();</span><br><span class="line">        reverse(arr,<span class="number">0</span>,arr.length-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> start=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> end=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">char</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[i]==<span class="string">' '</span>)&#123;</span><br><span class="line">                reverse(arr, start, end);</span><br><span class="line">                end++;</span><br><span class="line">                start=end;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(i==arr.length)&#123;</span><br><span class="line">                end++;</span><br><span class="line">                reverse(arr, start, end);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                end++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">char</span> c:arr)&#123;</span><br><span class="line">            System.out.print(c);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">char</span>[] arr,<span class="keyword">int</span> start,<span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=start,j=end;i&lt;=j;i++,j--)&#123;</span><br><span class="line">            <span class="keyword">char</span> temp=arr[i];</span><br><span class="line">            arr[i]=arr[j];</span><br><span class="line">            arr[j]=temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="E58-2左旋字符串"><a href="#E58-2左旋字符串" class="headerlink" title="E58_2左旋字符串"></a>E58_2左旋字符串</h1><p>对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">LeftRotateString</span><span class="params">(String str,<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (str == <span class="keyword">null</span> || str.length() == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    StringBuilder sb1 = <span class="keyword">new</span> StringBuilder(str.substring(<span class="number">0</span>, n));</span><br><span class="line">    StringBuilder sb2 = <span class="keyword">new</span> StringBuilder(str.substring(n, str.length()));</span><br><span class="line">    sb2.append(sb1);</span><br><span class="line">    <span class="keyword">return</span> sb2.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="拼接最小字典序字符串"><a href="#拼接最小字典序字符串" class="headerlink" title="拼接最小字典序字符串"></a>拼接最小字典序字符串</h1><p>给定一个字符串类型的数组strs。找到一种拼接顺序，使得将所有字符串拼接起来组成的大字符串是所有可能性中字典序最小的，并返回这个大字符串。</p>
+<p>举例：</p>
+<p>strs=[“abc”,”de”]。可以拼成”abcde”,也可以拼成”deabc”,但前者字典顺序更小，所以返回“abcde”</p>
+<p>strs=[“b”,”ba”]. 可以拼成“bba”和“bab”，后者字典序小，返回后者“bab”</p>
+<p>如果字符串数组长度为n，则这道题的最优解的时间复杂度O(N*logN).实质是一种排序的实现，排序的结果就是拼接的顺序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Prior</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">findSmallest</span><span class="params">(String[] strs, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 这里使用插入排序</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; strs.length; i++) &#123;</span><br><span class="line">            <span class="comment">// 当前需要排序的元素</span></span><br><span class="line">            String target = strs[i];</span><br><span class="line">            <span class="comment">// j标记当前位置</span></span><br><span class="line">            <span class="keyword">int</span> j = i;</span><br><span class="line">            <span class="keyword">while</span>(j&gt;<span class="number">0</span> &amp;&amp; (target+strs[j-<span class="number">1</span>]).compareTo(strs[j-<span class="number">1</span>]+target) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">                strs[j] = strs[j-<span class="number">1</span>];</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            strs[j] = target;</span><br><span class="line">        &#125;</span><br><span class="line">        StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">        <span class="keyword">for</span>(String str: strs)&#123;</span><br><span class="line">            sb.append(str);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//方法二，使用Arrays.sort()方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">findSmallest2</span><span class="params">(String[] strs, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(strs == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Comparator&lt;String&gt; c = <span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String str1, String str2)</span> </span>&#123;</span><br><span class="line">                String str1first = str1 + str2;</span><br><span class="line">                String str2first = str2 + str1;</span><br><span class="line">                <span class="keyword">return</span> str1first.compareTo(str2first);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        Arrays.sort(strs, c);</span><br><span class="line">        StringBuffer str = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            str.append(strs[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> str.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E字符串/&title=《E字符串》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E字符串/&title=《E字符串》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E字符串/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《E字符串》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E字符串/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E字符串/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/BameirilyoBlog/2018/05/21/E栈/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 上一篇</div>
+        <h4 class="title">E栈</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/05/13/E查找和排序/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">E查找和排序</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E字符串/&title=《E字符串》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E字符串/&title=《E字符串》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E字符串/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《E字符串》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E字符串/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/21/E字符串/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvklEQVR42u3aQW7jQAwEQP3/09nrAo6tblKzyQKlU2BLY9UchgzJ64qvr5fr9fO/P5mtkDx7nbjw8PDw1q+eM15/8jM4XyF/9maD8PDw8I7x3p2on+/JSZ83LgkSefjBw8PD+528WUiIjvI4EcfDw8P7X3jF0qNfyVNqPDw8vJ/ltYlvEhLa4kW+QUdqLXh4eHiTDPbKl/7Zv4/09/Dw8PDWXfXZgZsMAcyeqt8WDw8P7wAvP3A37at2KGGWcL9dDQ8PD+8YLz/K8yGqTVm2DQBvV8PDw8M7xstffV88zYNHO76wqqPg4eHhPcTbFCw2ba18U26excPDw3uU1yaps5Juztin9VH1Fw8PD2/BS149+TaHzRLr/P6bWgseHh7eQ7wWOWuJbQaqZpuFh4eHd4KXLNqWGPLQkqTpeTH3m3vw8PDwjvFmxYhnh6X25d1vPsHDw8M7wGuXTsqpObgNCW0qj4eHh3eC15Ye2hR5lhDPWmg3pVs8PDy8h3j5Qm0wyNtaSYrcNs/w8PDwTvPaBlUbJNoBr01L7KYNhoeHh/coL3/FTXtsnzTX7TQ8PDy8Y7zZobxvYuVlhdmgAx4eHt6zvK/RlTfGNp9vfutmMgIPDw/vUV6bFrdHf75N7ZDBlU9+4eHh4S14+ZGdb02erM8S91mgwsPDw3uWlxcCklT7gSmGOBStZiLw8PDw1rxNGWLfDCsiWLCJw2IuHh4e3oKXN/LbFfL780LDTWDDw8PDe5S3aX3lxda2cZWXg2++xcPDwzvAa0sAedho0+WkiJz8Pbzw8PDwSl4bDGaNrn04Se6vE2s8PDy8BW/WGGtfZTYuMGuJ4eHh4f0e3qzRNWubzUbBrvZWPDw8vMO8TVG1rZHMist4eHh4/4bXDlq1ZdZ9+2oYnPDw8PAO8Pb/8D9bhK3LDfsLDw8PL+X9AdkP2k8lUrRuAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
