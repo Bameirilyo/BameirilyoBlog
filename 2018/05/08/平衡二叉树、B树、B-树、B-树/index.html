@@ -20,13 +20,13 @@
     
     
     <meta name="keywords" content="数据结构与算法">
-    <meta name="description" content="平衡二叉树、B树、B+树、B*树1、平衡二叉树（1）由来：平衡二叉树是基于二分法的策略提高数据的查找速度的二叉树的数据结构； （2）特点： 平衡二叉树是采用二分法思维把数据按规则组装成一个树形结构的数据，用这个树形结构的数据减少无关数据的检索，大大的提升了数据检索的速度；平衡二叉树的数据结构组装过程有以下规则： 非叶子节点只能允许最多两个子节点存在，每一个非叶子节点数据分布规则为左边的子节点小当前">
+    <meta name="description" content="平衡二叉树（1）由来：平衡二叉树是基于二分法的策略提高数据的查找速度的二叉树的数据结构； （2）特点： 平衡二叉树是采用二分法思维把数据按规则组装成一个树形结构的数据，用这个树形结构的数据减少无关数据的检索，大大的提升了数据检索的速度；平衡二叉树的数据结构组装过程有以下规则： 非叶子节点只能允许最多两个子节点存在，每一个非叶子节点数据分布规则为左边的子节点小当前节点的值，右边的子节点大于当前节点的">
 <meta name="keywords" content="数据结构与算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="平衡二叉树、B树、B+树、B*树">
 <meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/08/平衡二叉树、B树、B-树、B-树/index.html">
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
-<meta property="og:description" content="平衡二叉树、B树、B+树、B*树1、平衡二叉树（1）由来：平衡二叉树是基于二分法的策略提高数据的查找速度的二叉树的数据结构； （2）特点： 平衡二叉树是采用二分法思维把数据按规则组装成一个树形结构的数据，用这个树形结构的数据减少无关数据的检索，大大的提升了数据检索的速度；平衡二叉树的数据结构组装过程有以下规则： 非叶子节点只能允许最多两个子节点存在，每一个非叶子节点数据分布规则为左边的子节点小当前">
+<meta property="og:description" content="平衡二叉树（1）由来：平衡二叉树是基于二分法的策略提高数据的查找速度的二叉树的数据结构； （2）特点： 平衡二叉树是采用二分法思维把数据按规则组装成一个树形结构的数据，用这个树形结构的数据减少无关数据的检索，大大的提升了数据检索的速度；平衡二叉树的数据结构组装过程有以下规则： 非叶子节点只能允许最多两个子节点存在，每一个非叶子节点数据分布规则为左边的子节点小当前节点的值，右边的子节点大于当前节点的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/08/平衡二叉树、B树、B-树、B-树/1.PNG">
 <meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/08/平衡二叉树、B树、B-树、B-树/2.PNG">
@@ -36,10 +36,10 @@
 <meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/08/平衡二叉树、B树、B-树、B-树/6.PNG">
 <meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/08/平衡二叉树、B树、B-树、B-树/7.PNG">
 <meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/08/平衡二叉树、B树、B-树、B-树/8.PNG">
-<meta property="og:updated_time" content="2018-05-24T08:43:35.856Z">
+<meta property="og:updated_time" content="2018-05-24T08:46:13.649Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="平衡二叉树、B树、B+树、B*树">
-<meta name="twitter:description" content="平衡二叉树、B树、B+树、B*树1、平衡二叉树（1）由来：平衡二叉树是基于二分法的策略提高数据的查找速度的二叉树的数据结构； （2）特点： 平衡二叉树是采用二分法思维把数据按规则组装成一个树形结构的数据，用这个树形结构的数据减少无关数据的检索，大大的提升了数据检索的速度；平衡二叉树的数据结构组装过程有以下规则： 非叶子节点只能允许最多两个子节点存在，每一个非叶子节点数据分布规则为左边的子节点小当前">
+<meta name="twitter:description" content="平衡二叉树（1）由来：平衡二叉树是基于二分法的策略提高数据的查找速度的二叉树的数据结构； （2）特点： 平衡二叉树是采用二分法思维把数据按规则组装成一个树形结构的数据，用这个树形结构的数据减少无关数据的检索，大大的提升了数据检索的速度；平衡二叉树的数据结构组装过程有以下规则： 非叶子节点只能允许最多两个子节点存在，每一个非叶子节点数据分布规则为左边的子节点小当前节点的值，右边的子节点大于当前节点的">
 <meta name="twitter:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/08/平衡二叉树、B树、B-树、B-树/1.PNG">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
@@ -175,7 +175,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#平衡二叉树、B树、B-树、B-树"><span class="post-toc-number">1.</span> <span class="post-toc-text">平衡二叉树、B树、B+树、B*树</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、平衡二叉树"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1、平衡二叉树</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、B树-B-tree"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2、B树(B-tree)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3、B-树"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3、B+树</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4、B-树"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4、B*树</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#平衡二叉树"><span class="post-toc-number">1.</span> <span class="post-toc-text">平衡二叉树</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#B树-B-tree"><span class="post-toc-number">2.</span> <span class="post-toc-text">B树(B-tree)</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#B-树"><span class="post-toc-number">3.</span> <span class="post-toc-text">B+树</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#B-树-1"><span class="post-toc-number">4.</span> <span class="post-toc-text">B*树</span></a></li></ol>
         </nav>
     </aside>
 
@@ -201,7 +201,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="平衡二叉树、B树、B-树、B-树"><a href="#平衡二叉树、B树、B-树、B-树" class="headerlink" title="平衡二叉树、B树、B+树、B*树"></a>平衡二叉树、B树、B+树、B*树</h1><h2 id="1、平衡二叉树"><a href="#1、平衡二叉树" class="headerlink" title="1、平衡二叉树"></a><strong>1、平衡二叉树</strong></h2><p>（1）由来：平衡二叉树是基于二分法的策略提高数据的查找速度的二叉树的数据结构；</p>
+            <h1 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h1><p>（1）由来：平衡二叉树是基于二分法的策略提高数据的查找速度的二叉树的数据结构；</p>
 <p>（2）特点：</p>
 <p>平衡二叉树是采用二分法思维把数据按规则组装成一个树形结构的数据，用这个树形结构的数据减少无关数据的检索，大大的提升了数据检索的速度；平衡二叉树的数据结构组装过程有以下规则：</p>
 <p>非叶子节点只能允许最多两个子节点存在，每一个非叶子节点数据分布规则为左边的子节点小当前节点的值，右边的子节点大于当前节点的值(这里值是基于自己的算法规则而定的，比如hash值)；</p>
@@ -213,7 +213,7 @@
 <p>（2）非叶子节值大于左边子节点、小于右边子节点；</p>
 <p>（3）树的左右两边的层级数相差不会大于1;</p>
 <p>（4）没有值相等重复的节点;</p>
-<h2 id="2、B树-B-tree"><a href="#2、B树-B-tree" class="headerlink" title="2、B树(B-tree)"></a><strong>2、B树(B-tree)</strong></h2><p>注意:之前有看到有很多文章把B树和B-tree理解成了两种不同类别的树，其实这两个是同一种树;</p>
+<h1 id="B树-B-tree"><a href="#B树-B-tree" class="headerlink" title="B树(B-tree)"></a>B树(B-tree)</h1><p>注意:之前有看到有很多文章把B树和B-tree理解成了两种不同类别的树，其实这两个是同一种树;</p>
 <p>1、概念：B树和平衡二叉树稍有不同的是B树属于多叉树又名平衡多路查找树（查找路径不只两个），数据库索引技术里大量使用者B树和B+树的数据结构，让我们来看看他有什么特点;</p>
 <p>2、规则：</p>
 <p>（1）树种的每个节点最多拥有m个子节点且m&gt;=2,空树除外（注：m阶代表一个树节点最多有多少个查找路径，m阶=m路,当m=2则是2叉树,m=3则是3叉）；</p>
@@ -242,7 +242,7 @@
 <p><img src="/BameirilyoBlog/2018/05/08/平衡二叉树、B树、B-树、B-树/6.PNG" alt="img"></p>
 <p>3、特点：</p>
 <p>B树相对于平衡二叉树的不同是，每个节点包含的关键字增多了，特别是在B树应用到数据库中的时候，数据库充分利用了磁盘块的原理（磁盘数据存储是采用块的形式存储的，每个块的大小为4K，每次IO进行数据读取时，同一个磁盘块的数据可以一次性读取出来）把节点大小限制和充分使用在磁盘快大小范围；把树的节点关键字增多后树的层级比原来的二叉树少了，减少数据查找的次数和复杂度;</p>
-<h2 id="3、B-树"><a href="#3、B-树" class="headerlink" title="3、B+树"></a>3、<strong>B+树</strong></h2><p>B+树是B树的一个升级版，相对于B树来说B+树更充分的利用了节点的空间，让查询速度更加稳定，其速度完全接近于二分法查找。为什么说B+树查找的效率要比B树更高、更稳定；我们先看看两者的区别</p>
+<h1 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h1><p>B+树是B树的一个升级版，相对于B树来说B+树更充分的利用了节点的空间，让查询速度更加稳定，其速度完全接近于二分法查找。为什么说B+树查找的效率要比B树更高、更稳定；我们先看看两者的区别</p>
 <p>（1）B+跟B树不同B+树的非叶子节点不保存关键字记录的指针，这样使得B+树每个节点所能保存的关键字大大增加；</p>
 <p>（2）B+树叶子节点保存了父节点的所有关键字和关键字记录的指针，每个叶子节点的关键字从小到大链接；</p>
 <p>（3）B+树的根节点关键字数量和其子节点个数相等;</p>
@@ -250,7 +250,7 @@
 <p><img src="/BameirilyoBlog/2018/05/08/平衡二叉树、B树、B-树、B-树/7.PNG" alt="img"></p>
 <p>特点：</p>
 <p>在B树的基础上每个节点存储的关键字数更多，树的层级更少所以查询数据更快，所有指关键字指针都存在叶子节点，所以每次查找的次数都相同所以查询速度更稳定;</p>
-<h2 id="4、B-树"><a href="#4、B-树" class="headerlink" title="4、B*树"></a>4、<strong>B*树</strong></h2><p>B*树是B+树的变种，相对于B+树他们的不同之处如下：</p>
+<h1 id="B-树-1"><a href="#B-树-1" class="headerlink" title="B*树"></a>B*树</h1><p>B*树是B+树的变种，相对于B+树他们的不同之处如下：</p>
 <p>（1）首先是关键字个数限制问题，B+树初始化的关键字初始化个数是cei(m/2)，b<em>树的初始化个数为（cei(2/3</em>m)）</p>
 <p>（2）B+树节点满时就会分裂，而B*树节点满时会检查兄弟节点是否满（因为每个节点都有指向兄弟的指针），如果兄弟节点未满则向兄弟节点转移关键字，如果兄弟节点已满，则从当前节点和兄弟节点各拿出1/3的数据创建一个新的节点出来；</p>
 <p>特点：</p>
