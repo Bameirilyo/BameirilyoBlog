@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Redis安装过程及报错缺少tcl解决方法 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="项目问题">
+    <meta name="description" content="1.安装过程 1234$ wget http://download.redis.io/releases/redis-4.0.9.tar.gz$ tar xzf redis-4.0.9.tar.gz$ cd redis-4.0.9$ make 2.根据提示运行make test,报错信息如下： 12345678910bameirilyo@CY-20151020KBQI:/opt/redis/redi">
+<meta name="keywords" content="项目问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis安装过程及报错缺少tcl解决方法">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/27/Redis安装过程及报错缺少tcl解决方法/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="1.安装过程 1234$ wget http://download.redis.io/releases/redis-4.0.9.tar.gz$ tar xzf redis-4.0.9.tar.gz$ cd redis-4.0.9$ make 2.根据提示运行make test,报错信息如下： 12345678910bameirilyo@CY-20151020KBQI:/opt/redis/redi">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-27T14:06:57.653Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis安装过程及报错缺少tcl解决方法">
+<meta name="twitter:description" content="1.安装过程 1234$ wget http://download.redis.io/releases/redis-4.0.9.tar.gz$ tar xzf redis-4.0.9.tar.gz$ cd redis-4.0.9$ make 2.根据提示运行make test,报错信息如下： 12345678910bameirilyo@CY-20151020KBQI:/opt/redis/redi">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Redis安装过程及报错缺少tcl解决方法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Redis安装过程及报错缺少tcl解决方法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-27T14:05:37.000Z" itemprop="datePublished" class="page-time">
+  2018年05月27日
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-Redis安装过程及报错缺少tcl解决方法"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Redis安装过程及报错缺少tcl解决方法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年05月27日 22:05:37" datetime="2018-05-27T14:05:37.000Z"  itemprop="datePublished">2018年05月27日</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>1.安装过程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://download.redis.io/releases/redis-4.0.9.tar.gz</span><br><span class="line">$ tar xzf redis-4.0.9.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> redis-4.0.9</span><br><span class="line">$ make</span><br></pre></td></tr></table></figure>
+<p>2.根据提示运行make test,报错信息如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bameirilyo@CY-20151020KBQI:/opt/redis/redis-4.0.9$ make <span class="built_in">test</span></span><br><span class="line"><span class="built_in">cd</span> src &amp;&amp; make <span class="built_in">test</span></span><br><span class="line">make[1]: Entering directory <span class="string">'/opt/redis/redis-4.0.9/src'</span></span><br><span class="line">    CC Makefile.dep</span><br><span class="line">You need tcl 8.5 or newer <span class="keyword">in</span> order to run the Redis <span class="built_in">test</span></span><br><span class="line">Makefile:242: recipe <span class="keyword">for</span> target <span class="string">'test'</span> failed</span><br><span class="line">make[1]: *** [<span class="built_in">test</span>] Error 1</span><br><span class="line">make[1]: Leaving directory <span class="string">'/opt/redis/redis-4.0.9/src'</span></span><br><span class="line">Makefile:6: recipe <span class="keyword">for</span> target <span class="string">'test'</span> failed</span><br><span class="line">make: *** [<span class="built_in">test</span>] Error 2</span><br></pre></td></tr></table></figure>
+<p>3.根据报错信息You need tcl 8.5 or newer in order to run the Redis test安装tcl 8.6.8</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://downloads.sourceforge.net/tcl/tcl8.6.8-src.tar.gz </span><br><span class="line">sudo tar xzvf tcl8.6.8-src.tar.gz</span><br><span class="line"><span class="built_in">cd</span>  /usr/<span class="built_in">local</span>/tcl8.6.1/unix/ </span><br><span class="line">sudo ./configure </span><br><span class="line">sudo make </span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>4.之后继续返回redis目录继续make test安装之后make即可</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/项目问题/">项目问题</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/27/Redis安装过程及报错缺少tcl解决方法/&title=《Redis安装过程及报错缺少tcl解决方法》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/27/Redis安装过程及报错缺少tcl解决方法/&title=《Redis安装过程及报错缺少tcl解决方法》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/05/27/Redis安装过程及报错缺少tcl解决方法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Redis安装过程及报错缺少tcl解决方法》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/27/Redis安装过程及报错缺少tcl解决方法/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/27/Redis安装过程及报错缺少tcl解决方法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/05/24/Maven环境隔离设置/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Maven环境隔离设置</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/27/Redis安装过程及报错缺少tcl解决方法/&title=《Redis安装过程及报错缺少tcl解决方法》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/27/Redis安装过程及报错缺少tcl解决方法/&title=《Redis安装过程及报错缺少tcl解决方法》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/05/27/Redis安装过程及报错缺少tcl解决方法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Redis安装过程及报错缺少tcl解决方法》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/27/Redis安装过程及报错缺少tcl解决方法/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/05/27/Redis安装过程及报错缺少tcl解决方法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADPklEQVR42u3a0W7qMBAEUP7/p7mvSLcJM+sgEXPyhGgbfBypw+768Yiv58v1+s7/P319v73O73P+6Y9PXNjY2Ng3YT9Pr3P2+RITQE6arerwYWBjY2Nvxz76D3/0AXnIJchkDe2WvTFiY2Nj/zw7R87KiTxQsbGxsbHXAyzZjjyQ8i3DxsbGxm6bSrMmVLtZbbHx8V4aNjY29tezZ+Hxna8/Mt/GxsbG/mL2c3TNIioZGCTBk8fV4d2wsbGxN2InbaC2WTM73LOSNcOCBBsbG3sLdvIlvv2in0TUCiyJzDdrxsbGxt6IvTJYzcerLXgWqxeAsbGxsW/IbpeVB1K+lDxE28dw+A42Njb2z7BnBcbKCDYPxVkQYmNjY+/HPv9B2+hpF7f+6Qn7cFXY2NjYW7Bn8dOOXWcD4JVNLJ4zNjY29s3Znzh8k7f489dFGreNLWxsbOybs9vCYBgSCwG2Eo2Hr7GxsbG3Y7eD27atn8Pa5lRbqBSxjo2NjX1DdjvWbVtO7ZGdWawmG4eNjY29Ezs5QJOHyqw4SYJwNoqIemnY2NjYN2evlwErRctstNCG4h9/hY2Njb0RO4+H2cD12iJntvVvJtvY2NjYm7LbkiMPsDYa1w90Ht4BGxsbewv2ypHHPAjbgUE+0M17RH88Z2xsbOyN2Mmy8rFrO1idtZ+WNgsbGxt7I3bbXm8HqysHd5L7tL+DjY2NvSs7/9Vrlz4bLZ8/hmKwgY2Njb0Fe2U0e8FX/w+PiqPxADY2NvbN2fkwoB0ktEOF9fLjsvk2NjY29q3Y6y2btpWfbN9KXNW1FzY2NvbN2W0BkIdWzssjM38kxXgAGxsb++bsJJbauFpp3yf3XN90bGxs7J3Y7aGcawe3s+CcDRIOcxsbGxv75uxnec0W125oG3V1wwsbGxt7I3Z7mCYPnnYAkB8PaoNtNn7GxsbGvhd71rLJC4/ZYCBv9ydrfuQfg42NjX1b9uxY5OwAZR48K4XEm43AxsbG/kl2GyGzAzft9uUtJGxsbGzsvOnTljrJBs0O8RxuBDY2NvZ27FmczMqGWUNqWHKcBxg2Njb2FuzZQvPQmh27uWo4ccF8GxsbG/t72f8AqMmM4AswgDYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

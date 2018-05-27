@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="一般分为：本地开发环境（Local）、开发环境（Dev）、测试环境（Beta）、线上环境（Prod）  在pom.xml中的build节点内增加  1234567891011&amp;lt;resources&amp;gt;  &amp;lt;resource&amp;gt;    &amp;lt;directory&amp;gt;src/main/resources.$&amp;#123;deploy.type&amp;#125;&amp;lt;/directory">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-24T08:36:13.506Z">
+<meta property="og:updated_time" content="2018-05-27T14:06:24.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven环境隔离设置">
 <meta name="twitter:description" content="一般分为：本地开发环境（Local）、开发环境（Dev）、测试环境（Beta）、线上环境（Prod）  在pom.xml中的build节点内增加  1234567891011&amp;lt;resources&amp;gt;  &amp;lt;resource&amp;gt;    &amp;lt;directory&amp;gt;src/main/resources.$&amp;#123;deploy.type&amp;#125;&amp;lt;/directory">
@@ -186,11 +186,11 @@
 <li>在pom.xml中的build节点内增加</li>
 </ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/resources.$&#123;deploy.type&#125;<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">exclude</span>&gt;</span>*.jsp<span class="tag">&lt;/<span class="name">exclude</span>&gt;</span> //排除jsp，jsp不需要环境隔离</span><br><span class="line">    <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/resources<span class="tag">&lt;/<span class="name">directory</span>&gt;</span>//该目录为公用</span><br><span class="line">  <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="2">
 <li>在pom.xml中增加profiles节点</li>
 </ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>dev<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span>//用命令行编译时未指定环境则为默认环境</span><br><span class="line">      <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">deploy.type</span>&gt;</span>dev<span class="tag">&lt;/<span class="name">deploy.type</span>&gt;</span>//与上文directory内声明的名称一致即可</span><br><span class="line">      <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>beta<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">deploy.type</span>&gt;</span>beta<span class="tag">&lt;/<span class="name">deploy.type</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>prod<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">deploy.type</span>&gt;</span>prod<span class="tag">&lt;/<span class="name">deploy.type</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="3">
 <li><p>新建对应的文件夹，并把要隔离的文件分开，公共的留下</p>
 <p>如：新建resources.beta、resources.dev、resources.prod文件夹，并把不同的配置文件移到这几个文件夹内，如日志配置xml文件、数据库properties配置文件等等，其余applicationContext.xml、applicationContext-datasource.xml、generatorConfig.xml、mappers文件夹内文件留在resources文件夹内。</p>
 </li>
@@ -276,7 +276,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/BameirilyoBlog/2018/05/27/Redis安装过程及报错缺少tcl解决方法/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 上一篇</div>
+        <h4 class="title">Redis安装过程及报错缺少tcl解决方法</h4>
+      </a>
+    </div>
   
 
   
