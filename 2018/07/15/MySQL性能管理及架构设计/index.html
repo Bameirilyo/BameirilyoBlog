@@ -28,16 +28,16 @@
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="一、什么影响了数据库查询速度1.1 影响数据库查询速度的四个因素​    sql查询速度、服务器硬件、网卡流量、磁盘IO 1.2 风险分析 QPS：Queries Per Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。   TPS：是TransactionsPerSecond的缩写，也就是事务数/秒。它是软件测试">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计/MySQL体系结构.PNG">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计/MySQL体系结构.png">
 <meta property="og:image" content="https://img-blog.csdn.net/2018033009431381?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE2NTIzNjQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 <meta property="og:image" content="https://img-blog.csdn.net/20180330094323965?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE2NTIzNjQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 <meta property="og:image" content="https://img-blog.csdn.net/20180330094331377?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE2NTIzNjQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 <meta property="og:image" content="https://img-blog.csdn.net/20180330094344493?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE2NTIzNjQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:updated_time" content="2018-07-15T12:38:34.648Z">
+<meta property="og:updated_time" content="2018-07-15T12:41:25.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL性能管理及架构设计">
 <meta name="twitter:description" content="一、什么影响了数据库查询速度1.1 影响数据库查询速度的四个因素​    sql查询速度、服务器硬件、网卡流量、磁盘IO 1.2 风险分析 QPS：Queries Per Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。   TPS：是TransactionsPerSecond的缩写，也就是事务数/秒。它是软件测试">
-<meta name="twitter:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计/MySQL体系结构.PNG">
+<meta name="twitter:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计/MySQL体系结构.png">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
     
@@ -298,7 +298,7 @@
 </li>
 </ol>
 <h2 id="2-2-MySQL体系结构"><a href="#2-2-MySQL体系结构" class="headerlink" title="2.2 MySQL体系结构"></a>2.2 MySQL体系结构</h2><p>​    分三层：客户端 -&gt; 服务层 -&gt; 存储引擎</p>
-<p><img src="/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计/MySQL体系结构.PNG" alt="img"></p>
+<p><img src="/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计/MySQL体系结构.png" alt="img"></p>
 <p>​   </p>
 <ol>
 <li><code>MySQL</code>是<code>插件式的存储引擎</code>，其中存储引擎分很多种。只要实现符合mysql存储引擎的接口，可以开发自己的存储引擎!</li>
