@@ -20,18 +20,18 @@
     
     
     <meta name="keywords" content="数据库">
-    <meta name="description" content="yiVARCHAR类型一、VARCHAR类型1.存储特点 varchar用于存储变长字符串，只占用必要的存储空间 列的最大长度小于255则只占用一个额外字节用于记录字符串长度 列的最大长度大于255则要占用两个额外字节用于记录字符串长度  2.VARCHAR长度的选择问题 使用最小的符合需求的长度 varchar(5)和varchar(200)存储“MySQL”字符串性能不同  3.VARCHAR">
+    <meta name="description" content="一、VARCHAR类型1.存储特点 varchar用于存储变长字符串，只占用必要的存储空间 列的最大长度小于255则只占用一个额外字节用于记录字符串长度 列的最大长度大于255则要占用两个额外字节用于记录字符串长度  2.VARCHAR长度的选择问题 使用最小的符合需求的长度 varchar(5)和varchar(200)存储“MySQL”字符串性能不同  3.VARCHAR的适用场景 字符串列的">
 <meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VARCHAR和CHAR对比">
 <meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/14/VARCHAR和CHAR对比/index.html">
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
-<meta property="og:description" content="yiVARCHAR类型一、VARCHAR类型1.存储特点 varchar用于存储变长字符串，只占用必要的存储空间 列的最大长度小于255则只占用一个额外字节用于记录字符串长度 列的最大长度大于255则要占用两个额外字节用于记录字符串长度  2.VARCHAR长度的选择问题 使用最小的符合需求的长度 varchar(5)和varchar(200)存储“MySQL”字符串性能不同  3.VARCHAR">
+<meta property="og:description" content="一、VARCHAR类型1.存储特点 varchar用于存储变长字符串，只占用必要的存储空间 列的最大长度小于255则只占用一个额外字节用于记录字符串长度 列的最大长度大于255则要占用两个额外字节用于记录字符串长度  2.VARCHAR长度的选择问题 使用最小的符合需求的长度 varchar(5)和varchar(200)存储“MySQL”字符串性能不同  3.VARCHAR的适用场景 字符串列的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-16T07:20:21.960Z">
+<meta property="og:updated_time" content="2018-07-16T08:45:03.064Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VARCHAR和CHAR对比">
-<meta name="twitter:description" content="yiVARCHAR类型一、VARCHAR类型1.存储特点 varchar用于存储变长字符串，只占用必要的存储空间 列的最大长度小于255则只占用一个额外字节用于记录字符串长度 列的最大长度大于255则要占用两个额外字节用于记录字符串长度  2.VARCHAR长度的选择问题 使用最小的符合需求的长度 varchar(5)和varchar(200)存储“MySQL”字符串性能不同  3.VARCHAR">
+<meta name="twitter:description" content="一、VARCHAR类型1.存储特点 varchar用于存储变长字符串，只占用必要的存储空间 列的最大长度小于255则只占用一个额外字节用于记录字符串长度 列的最大长度大于255则要占用两个额外字节用于记录字符串长度  2.VARCHAR长度的选择问题 使用最小的符合需求的长度 varchar(5)和varchar(200)存储“MySQL”字符串性能不同  3.VARCHAR的适用场景 字符串列的">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
     
@@ -166,7 +166,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#yiVARCHAR类型"><span class="post-toc-text">yiVARCHAR类型</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、VARCHAR类型"><span class="post-toc-text">一、VARCHAR类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-存储特点"><span class="post-toc-text">1.存储特点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-VARCHAR长度的选择问题"><span class="post-toc-text">2.VARCHAR长度的选择问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-VARCHAR的适用场景"><span class="post-toc-text">3.VARCHAR的适用场景</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二、CHAR类型"><span class="post-toc-text">二、CHAR类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-存储特点-1"><span class="post-toc-text">1. 存储特点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-CHAR的适用场景"><span class="post-toc-text">2. CHAR的适用场景</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、VARCHAR类型"><span class="post-toc-text">一、VARCHAR类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-存储特点"><span class="post-toc-text">1.存储特点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-VARCHAR长度的选择问题"><span class="post-toc-text">2.VARCHAR长度的选择问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-VARCHAR的适用场景"><span class="post-toc-text">3.VARCHAR的适用场景</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二、CHAR类型"><span class="post-toc-text">二、CHAR类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-存储特点-1"><span class="post-toc-text">1. 存储特点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-CHAR的适用场景"><span class="post-toc-text">2. CHAR的适用场景</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -192,7 +192,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="yiVARCHAR类型"><a href="#yiVARCHAR类型" class="headerlink" title="yiVARCHAR类型"></a>yiVARCHAR类型</h1><h1 id="一、VARCHAR类型"><a href="#一、VARCHAR类型" class="headerlink" title="一、VARCHAR类型"></a>一、VARCHAR类型</h1><h2 id="1-存储特点"><a href="#1-存储特点" class="headerlink" title="1.存储特点"></a>1.存储特点</h2><ol>
+            <h1 id="一、VARCHAR类型"><a href="#一、VARCHAR类型" class="headerlink" title="一、VARCHAR类型"></a>一、VARCHAR类型</h1><h2 id="1-存储特点"><a href="#1-存储特点" class="headerlink" title="1.存储特点"></a>1.存储特点</h2><ol>
 <li>varchar用于存储变长字符串，只占用必要的存储空间</li>
 <li>列的最大长度小于255则只占用一个额外字节用于记录字符串长度</li>
 <li>列的最大长度大于255则要占用两个额外字节用于记录字符串长度</li>
@@ -301,9 +301,9 @@
 
   
     <div class="waves-block waves-effect next">
-      <a href="/BameirilyoBlog/2018/05/27/Redis安装过程及报错缺少tcl解决方法/" id="post-next" class="post-nav-link">
+      <a href="/BameirilyoBlog/2018/07/14/MySQL复制/" id="post-next" class="post-nav-link">
         <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Redis安装过程及报错缺少tcl解决方法</h4>
+        <h4 class="title">MySQL复制</h4>
       </a>
     </div>
   

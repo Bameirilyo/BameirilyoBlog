@@ -288,7 +288,7 @@ TPS：是TransactionsPerSecond的缩写，也就是事务数/秒。它是软...
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        yiVARCHAR类型一、VARCHAR类型1.存储特点
+        一、VARCHAR类型1.存储特点
 varchar用于存储变长字符串，只占用必要的存储空间
 列的最大长度小于255则只占用一个额外字节用于记录字符串长度
 列的最大长度大于255则要占用两个额外字节用于记录字符串长度
@@ -297,10 +297,69 @@ varchar用于存储变长字符串，只占用必要的存储空间
 使用最小的符合需求的长度
 varchar(5)和varchar(200)存储“MySQL”字符串性能不同
 
-3.VARC...
+3.VARCHAR的适用场景
+字符...
     
 
         <a href="/BameirilyoBlog/2018/07/14/VARCHAR和CHAR对比/" class="post-more waves-effect waves-button">
+            全文阅读
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/数据库/">数据库</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-MySQL复制"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018年07月14日 15:08:19" datetime="2018-07-14T07:08:19.000Z"  itemprop="datePublished">2018年07月14日</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据库/">数据库</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/BameirilyoBlog/2018/07/14/MySQL复制/">MySQL复制</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        一、复制解决了什么
+实现在不同服务器上的数据分布
+利用二进制日志增量进行，不需要太多的带宽，但是使用基于行的复制在进行大批量的更改时，会对带宽带来一定的压力，特别是跨IDC环境下进行复制，应该分批进行
+
+实现数据读取的负载均衡
+需要其他组件配合完成
+利用DNS轮询的方式把程序的读连接到不同的备份数据库
+利用LVS,haproxy这样的代理方式
+
+增加了数据安全性（复制不能代替备份）
+
+实现数...
+    
+
+        <a href="/BameirilyoBlog/2018/07/14/MySQL复制/" class="post-more waves-effect waves-button">
             全文阅读
         </a>
     </div>
@@ -593,55 +652,6 @@ varchar(5)和varchar(200)存储“MySQL”字符串性能不同
     
 
         <a href="/BameirilyoBlog/2018/05/21/E递归/" class="post-more waves-effect waves-button">
-            全文阅读
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/数据结构与算法/">数据结构与算法</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-E队列"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018年05月21日 15:43:46" datetime="2018-05-21T07:43:46.000Z"  itemprop="datePublished">2018年05月21日</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据结构与算法/">数据结构与算法</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/BameirilyoBlog/2018/05/21/E队列/">E队列</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        E09-2用两个队列实现栈思路：
-压入元素时，两队列都空，压入queue1；有一不空时，压入不空的那个队列；删除元素时，如果queue1为空，queue2有元素，将queue2的元素依次放入queue1中，直到最后一个元素，将其弹出；反之一样
-123456789101112131415161718192021222324252627282930313233343536373839404142...
-    
-
-        <a href="/BameirilyoBlog/2018/05/21/E队列/" class="post-more waves-effect waves-button">
             全文阅读
         </a>
     </div>
