@@ -29,7 +29,6 @@
 <meta property="og:description" content="一、数据库结构优化1.1 数据库结构优化目的​    1、减少数据冗余：（数据冗余是指在数据库中存在相同的数据，或者某些数据可以由其他数据计算得到），注意，尽量减少不代表完全避免数据冗余；   2、尽量避免数据维护中出现更新，插入和删除异常： ​    插入异常：如果表中某个实体随着另一个实体而存在 ​    更新异常：如果更改表中某个实体的单独属性时，需要多次进行更新 ​    删除异常：如果删">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计(二)/MySQL性能管理及架构设计/存储引擎对比.png">
-<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计(二)/MySQL性能管理及架构设计/整数类型.png">
 <meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
 <meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
 <meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
@@ -39,7 +38,7 @@
 <meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
 <meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
 <meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
-<meta property="og:updated_time" content="2018-07-16T06:57:41.483Z">
+<meta property="og:updated_time" content="2018-07-16T12:48:56.107Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL性能管理及架构设计(二)">
 <meta name="twitter:description" content="一、数据库结构优化1.1 数据库结构优化目的​    1、减少数据冗余：（数据冗余是指在数据库中存在相同的数据，或者某些数据可以由其他数据计算得到），注意，尽量减少不代表完全避免数据冗余；   2、尽量避免数据维护中出现更新，插入和删除异常： ​    插入异常：如果表中某个实体随着另一个实体而存在 ​    更新异常：如果更改表中某个实体的单独属性时，需要多次进行更新 ​    删除异常：如果删">
@@ -245,11 +244,7 @@
 <p><img src="/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计(二)/MySQL性能管理及架构设计/存储引擎对比.png" alt="img"></p>
 <ol start="3">
 <li><p>为表中的字段选择合适的数据类型</p>
-<ul>
-<li><p>当一个列可以选择多种数据类型是，应优先选择数字类型，其次是日期或二进制类型，最后是字符类型。对于同级别的数据类型，应当优先选择占用空间小的数据类型。</p>
-<p><img src="/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计(二)/MySQL性能管理及架构设计/整数类型.png" alt="img"></p>
-</li>
-</ul>
+<p>当一个列可以选择多种数据类型是，应优先选择数字类型，其次是日期或二进制类型，最后是字符类型。对于同级别的数据类型，应当优先选择占用空间小的数据类型。</p>
 </li>
 <li><p>建立数据库结构</p>
 </li>
