@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Java BigDecimal详解 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java基础">
+    <meta name="description" content="1.引言借用《Effactive  Java》这本书中的话，float和double类型的主要设计目标是为了科学计算和工程计算。他们执行二进制浮点运算，这是为了在广域数值范围上提供较为精确的快速近似计算而精心设计的。然而，它们没有提供完全精确的结果，所以不应该被用于要求精确结果的场合。但是，商业计算往往要求结果精确，这时候BigDecimal就派上大用场啦。 2.BigDecimal简介BigDe">
+<meta name="keywords" content="Java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java BigDecimal详解">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/17/Java-BigDecimal详解/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="1.引言借用《Effactive  Java》这本书中的话，float和double类型的主要设计目标是为了科学计算和工程计算。他们执行二进制浮点运算，这是为了在广域数值范围上提供较为精确的快速近似计算而精心设计的。然而，它们没有提供完全精确的结果，所以不应该被用于要求精确结果的场合。但是，商业计算往往要求结果精确，这时候BigDecimal就派上大用场啦。 2.BigDecimal简介BigDe">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-17T03:53:50.278Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java BigDecimal详解">
+<meta name="twitter:description" content="1.引言借用《Effactive  Java》这本书中的话，float和double类型的主要设计目标是为了科学计算和工程计算。他们执行二进制浮点运算，这是为了在广域数值范围上提供较为精确的快速近似计算而精心设计的。然而，它们没有提供完全精确的结果，所以不应该被用于要求精确结果的场合。但是，商业计算往往要求结果精确，这时候BigDecimal就派上大用场啦。 2.BigDecimal简介BigDe">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Java BigDecimal详解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Java BigDecimal详解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-17T03:12:56.000Z" itemprop="datePublished" class="page-time">
+  2018年07月17日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java基础/">Java基础</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-引言"><span class="post-toc-text">1.引言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-BigDecimal简介"><span class="post-toc-text">2.BigDecimal简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-测试代码"><span class="post-toc-text">3.测试代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-1构造函数（主要测试参数类型为double和String的两个常用构造函数）"><span class="post-toc-text">3.1构造函数（主要测试参数类型为double和String的两个常用构造函数）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-2-加法操作"><span class="post-toc-text">3.2 加法操作</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#4-源码分析"><span class="post-toc-text">4.源码分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-1-valueOf-doubleval-方法"><span class="post-toc-text">4.1 valueOf(doubleval)方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-2-add-BigDecimal-augend-方法"><span class="post-toc-text">4.2 add(BigDecimal augend)方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#5-总结"><span class="post-toc-text">5.总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Java-BigDecimal详解"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Java BigDecimal详解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年07月17日 11:12:56" datetime="2018-07-17T03:12:56.000Z"  itemprop="datePublished">2018年07月17日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java基础/">Java基础</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h1><p>借用《Effactive  Java》这本书中的话，float和double类型的主要设计目标是为了科学计算和工程计算。他们执行二进制浮点运算，这是为了在广域数值范围上提供较为精确的快速近似计算而精心设计的。然而，它们没有提供完全精确的结果，所以不应该被用于要求精确结果的场合。但是，商业计算往往要求结果精确，这时候BigDecimal就派上大用场啦。</p>
+<h1 id="2-BigDecimal简介"><a href="#2-BigDecimal简介" class="headerlink" title="2.BigDecimal简介"></a>2.BigDecimal简介</h1><p>BigDecimal 由任意精度的整数<em>非标度值</em> 和32 位的整数<em>标度</em> (scale) 组成。如果为零或正数，则标度是小数点后的位数。如果为负数，则将该数的非标度值乘以 10 的负scale 次幂。因此，BigDecimal表示的数值是(unscaledValue × 10<sup>-scale</sup> )。</p>
+<h1 id="3-测试代码"><a href="#3-测试代码" class="headerlink" title="3.测试代码"></a>3.测试代码</h1><h2 id="3-1构造函数（主要测试参数类型为double和String的两个常用构造函数）"><a href="#3-1构造函数（主要测试参数类型为double和String的两个常用构造函数）" class="headerlink" title="3.1构造函数（主要测试参数类型为double和String的两个常用构造函数）"></a>3.1构造函数（主要测试参数类型为double和String的两个常用构造函数）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BigDecimal aDouble =<span class="keyword">new</span> BigDecimal(<span class="number">1.22</span>);</span><br><span class="line">System.out.println(<span class="string">"construct with a double value: "</span> + aDouble);</span><br><span class="line">BigDecimal aString =<span class="keyword">new</span> BigDecimal(<span class="string">"1.22"</span>);</span><br><span class="line">System.out.println(<span class="string">"construct with a String value: "</span> + aString);</span><br></pre></td></tr></table></figure>
+<p>你认为输出结果会是什么呢？如果你没有认为第一个会输出1.22，那么恭喜你答对了，输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">construct with a doublevalue:1.2199999999999999733546474089962430298328399658203125</span><br><span class="line"></span><br><span class="line">construct with a String value: 1.22</span><br></pre></td></tr></table></figure>
+<p>JDK的描述：</p>
+<ol>
+<li><p>参数类型为double的构造方法的结果有一定的不可预知性。有人可能认为在Java中写入newBigDecimal(0.1)所创建的BigDecimal正好等于  0.1（非标度值 1，其标度为  1），但是它实际上等于0.1000000000000000055511151231257827021181583404541015625。</p>
+<p>这是因为0.1无法准确地表示为  double（或者说对于该情况，不能表示为任何有限长度的二进制小数）。这样，传入到构造方法的值不会正好等于 0.1（虽然表面上等于该值）。</p>
+</li>
+<li><p>另一方面，String 构造方法是完全可预知的：写入 newBigDecimal(“0.1”) 将创建一个 BigDecimal，它正好等于预期的 0.1。因此，比较而言，<strong>通常建议优先使用String构造方法</strong>。</p>
+</li>
+<li><p>当double必须用作BigDecimal的源时，请注意，此构造方法提供了一个准确转换；它不提供与以下操作相同的结果：先使用Double.toString(double)方法，然后使用BigDecimal(String) 构造方法，将double转换为String。要获取该结果，请使用static valueOf(double)方法。</p>
+<h2 id="3-2-加法操作"><a href="#3-2-加法操作" class="headerlink" title="3.2 加法操作"></a>3.2 加法操作</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BigDecimal a =<span class="keyword">new</span> BigDecimal(<span class="string">"1.22"</span>);</span><br><span class="line">System.out.println(<span class="string">"construct with a String value: "</span> + a);</span><br><span class="line">BigDecimal b =<span class="keyword">new</span> BigDecimal(<span class="string">"2.22"</span>);</span><br><span class="line">a.add(b);</span><br><span class="line">System.out.println(<span class="string">"aplus b is : "</span> + a);</span><br></pre></td></tr></table></figure>
+<p>我们很容易会认为会输出：</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">construct with a Stringvalue: 1.22</span><br><span class="line">a plus b is :3.44</span><br></pre></td></tr></table></figure>
+<p> 但实际上a plus b is : 1.22</p>
+<h1 id="4-源码分析"><a href="#4-源码分析" class="headerlink" title="4.源码分析"></a>4.源码分析</h1><h2 id="4-1-valueOf-doubleval-方法"><a href="#4-1-valueOf-doubleval-方法" class="headerlink" title="4.1 valueOf(doubleval)方法"></a>4.1 valueOf(doubleval)方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BigDecimal <span class="title">valueOf</span><span class="params">(<span class="keyword">double</span> val)</span> </span>&#123;</span><br><span class="line"> <span class="comment">// Reminder: a zero double returns '0.0', so we cannotfastpath</span></span><br><span class="line"> <span class="comment">// to use the constant ZERO. This might be important enough to</span></span><br><span class="line"> <span class="comment">// justify a factory approach, a cache, or a few private</span></span><br><span class="line"> <span class="comment">// constants, later.</span></span><br><span class="line"> <span class="function">returnnew <span class="title">BigDecimal</span><span class="params">(Double.toString(val)</span>)</span>;<span class="comment">//见3.1关于JDK描述的第三点</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-add-BigDecimal-augend-方法"><a href="#4-2-add-BigDecimal-augend-方法" class="headerlink" title="4.2 add(BigDecimal augend)方法"></a>4.2 add(BigDecimal augend)方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> BigDecimal <span class="title">add</span><span class="params">(BigDecimal augend)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//整型数字表示的BigDecimal,例a的intCompact值为122</span></span><br><span class="line">    <span class="keyword">long</span> xs =<span class="keyword">this</span>.intCompact; </span><br><span class="line">    <span class="keyword">long</span> ys = augend.intCompact;<span class="comment">//同上</span></span><br><span class="line">    BigInteger fst = (<span class="keyword">this</span>.intCompact !=INFLATED) ?<span class="keyword">null</span> :<span class="keyword">this</span>.intVal;<span class="comment">//初始化BigInteger的值，intVal为BigDecimal的一个BigInteger类型的属性</span></span><br><span class="line">    BigInteger snd =(augend.intCompact !=INFLATED) ?<span class="keyword">null</span> : augend.intVal;</span><br><span class="line">    <span class="keyword">int</span> rscale =<span class="keyword">this</span>.scale;<span class="comment">//小数位数</span></span><br><span class="line">     </span><br><span class="line">    <span class="keyword">long</span> sdiff = (<span class="keyword">long</span>)rscale - augend.scale;<span class="comment">//小数位数之差</span></span><br><span class="line">    <span class="keyword">if</span>(sdiff != <span class="number">0</span>) &#123;<span class="comment">//取小数位数多的为结果的小数位数</span></span><br><span class="line">        <span class="keyword">if</span> (sdiff &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> raise =checkScale(-sdiff);</span><br><span class="line">            rscale =augend.scale;</span><br><span class="line">            <span class="keyword">if</span> (xs ==INFLATED ||</span><br><span class="line">                (xs =longMultiplyPowerTen(xs,raise)) ==INFLATED)</span><br><span class="line">                fst =bigMultiplyPowerTen(raise);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">int</span> raise =augend.checkScale(sdiff);</span><br><span class="line">            <span class="keyword">if</span> (ys == INFLATED ||(ys =longMultiplyPowerTen(ys,raise)) == INFLATED)</span><br><span class="line">                snd = augend.bigMultiplyPowerTen(raise);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">      <span class="keyword">if</span> (xs != INFLATED &amp;&amp; ys != INFLATED) &#123;</span><br><span class="line">          <span class="keyword">long</span> sum = xs + ys;</span><br><span class="line">          <span class="keyword">if</span> ( (((sum ^ xs) &amp; (sum ^ ys))) &gt;= <span class="number">0L</span>)<span class="comment">//判断有无溢出</span></span><br><span class="line">              <span class="keyword">return</span> BigDecimal.valueOf(sum,rscale);<span class="comment">//返回使用BigDecimal的静态工厂方法得到的BigDecimal实例</span></span><br><span class="line">       &#125;</span><br><span class="line">    <span class="keyword">if</span> (fst == <span class="keyword">null</span>)</span><br><span class="line">        fst = BigInteger.valueOf(xs);<span class="comment">//BigInteger的静态工厂方法</span></span><br><span class="line">    <span class="keyword">if</span> (snd == <span class="keyword">null</span>)</span><br><span class="line">        snd = BigInteger.valueOf(ys);</span><br><span class="line">    BigInteger sum =fst.add(snd);</span><br><span class="line">    <span class="keyword">return</span>(fst.signum == snd.signum) ? <span class="keyword">new</span> BigDecimal(sum,INFLATED, rscale, <span class="number">0</span>) :<span class="keyword">new</span> BigDecimal(sum, compactValFor(sum),rscale, <span class="number">0</span>);<span class="comment">//返回通过其他构造方法得到的BigDecimal对象</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>以上只是对加法源码的分析，减乘除其实最终都返回的是一个新的BigDecimal对象，因为BigInteger与BigDecimal都是不可变的（immutable）的，在进行每一步运算时，都会产生一个新的对象，所以a.add(b);虽然做了加法操作，但是a并没有保存加操作后的值，正确的用法应该是a=a.add(b);</p>
+<h1 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h1><p> (1)商业计算使用BigDecimal。<br> (2)尽量使用参数类型为String的构造函数。<br> (3) BigDecimal都是不可变的（immutable）的，在进行每一步运算时，都会产生一个新的对象，所以在做加减乘除运算时千万要保存操作后的值。<br> (4)我们往往容易忽略JDK底层的一些实现细节，导致出现错误，需要多加注意。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/Java基础/">Java基础</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/17/Java-BigDecimal详解/&title=《Java BigDecimal详解》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/17/Java-BigDecimal详解/&title=《Java BigDecimal详解》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/07/17/Java-BigDecimal详解/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java BigDecimal详解》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/17/Java-BigDecimal详解/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/17/Java-BigDecimal详解/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计(二)/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">MySQL性能管理及架构设计(二)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/17/Java-BigDecimal详解/&title=《Java BigDecimal详解》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/17/Java-BigDecimal详解/&title=《Java BigDecimal详解》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/07/17/Java-BigDecimal详解/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java BigDecimal详解》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/17/Java-BigDecimal详解/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/17/Java-BigDecimal详解/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrklEQVR42u3aQW7DMAwEwP7/0+21QGpnSYpJCoxPheMqGh0sZcmvr/j6/nVd3Xl8/n605O+rTw9feHh4eIOpP14J5v6ZBHD1vcni3v8vHh4e3h6v+vpOpnK/WPnU7+fzxIKHh4f38bwDr/J4NDw8PLz/wst/9d9/S3Jwf8PGgIeHhxfz8kNwcqcX++YLtJK14OHh4fVPsKOS1Wv+Xqnv4eHh4Y2r6kkxrPdk7zheni0eHh7eAm8SNOTRQLW4NWm6wsPDw9vmJWFBHivk0eqploInh288PDy8ZV7+iu+1DiQBR7WEVkhQ8PDw8BZ4eaBQbR3IkWc3Ejw8PLw9Xg8zaajqNRaUG8Lw8PDwFnjVs2ges/aWptq21duK8PDw8PZ4vXaBs8uUL1xhM8PDw8Mb8/Imp/lxNl+IKv7yGTw8PLyjvF4TwHxL6EUP5agCDw8Pb4FX3Qaqhfx8mXpH8Gi7wsPDw1vgnR26V76qtnCtJ9N4eHh4t2/LHFPdDPLYt9pSED2Jh4eH9yZec59ZCGfLI+Ph4eEt8HrtU70Yd9Kg0PsUDw8Pb4NXbWCqBq+TUDgvyz3ZEvDw8PCO8nohQn6Ynl89WKEAhoeHh1fk9doCktgiPzT3mgyi2eLh4eEt8CZxQx465EHtBPwka8HDw8Nb5pWLTPFhelJO65XK8PDw8F7Jm3zaazLoBR/N3w14eHh4a7w85K0eeRNMdW5/3MHDw8M7yuuVo3qv8nkYUZ0PHh4e3gYvv/JYYTJC3kDQCzLw8PDwTvEmQ9+PVv3GPD7O2xfw8PDw9ngbUWz11T/ZtMpZCx4eHt6beIUXdHzKncS7f9zHw8PD+zDe2faCalgczRAPDw9vjZc3BFQ3hl7U2ztGX24MeHh4eEd51R/8vQ0jaQvIxzlQ08PDw8Pr8H4AbhzFOkrafjoAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

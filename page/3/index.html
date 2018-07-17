@@ -157,6 +157,61 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-volatile关键字"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018年05月03日 23:01:24" datetime="2018-05-03T15:01:24.000Z"  itemprop="datePublished">2018年05月03日</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/Java/">Java</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/BameirilyoBlog/2018/05/03/volatile关键字/">volatile关键字</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        volatile 关键字的作用
+保证内存的可见性 
+防止指令重排 
+
+注意：volatile 并不保证原子性 
+如何保证内存可见性volatile保证可见性的原理是在每次访问变量时都会进行一次刷新，因此每次访问都是主内存中最新的版本。所以volatile关键字的作用之一就是保证变量修改的实时可见性。 
+当且仅当满足以下所有条件时，才应该使用volatile变量： 
+
+对变量的写入操作不依赖变...
+    
+
+        <a href="/BameirilyoBlog/2018/05/03/volatile关键字/" class="post-more waves-effect waves-button">
+            全文阅读
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/Java基础/">Java基础</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-哈希冲突"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -593,56 +648,6 @@ HTTP的这两种报文都由三部分组成：开始行、首部行、实体主�
     
 
         <a href="/BameirilyoBlog/2018/05/01/HTTP的报文结构/" class="post-more waves-effect waves-button">
-            全文阅读
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/网络/">网络</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-TCP的拥塞控制"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018年05月01日 22:25:48" datetime="2018-05-01T14:25:48.000Z"  itemprop="datePublished">2018年05月01日</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/网络/">网络</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/BameirilyoBlog/2018/05/01/TCP的拥塞控制/">TCP的拥塞控制</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        一般原理：发生拥塞控制的原因：资源(带宽、交换节点的缓存、处理机)的需求&gt;可用资源。
-作用：拥塞控制就是为了防止过多的数据注入到网络中，这样可以使网络中的路由器或者链路不至于过载。拥塞控制要做的都有一个前提：就是网络能够承受现有的网络负荷。
-对比流量控制：拥塞控制是一个全局的过程，涉及到所有的主机、路由器、以及降低网络相关的所有因素。流量控制往往指点对点通信量的控制。是端对端的问题。
-...
-    
-
-        <a href="/BameirilyoBlog/2018/05/01/TCP的拥塞控制/" class="post-more waves-effect waves-button">
             全文阅读
         </a>
     </div>
