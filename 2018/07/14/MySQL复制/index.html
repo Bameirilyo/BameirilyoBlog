@@ -28,10 +28,14 @@
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="一、复制解决了什么 实现在不同服务器上的数据分布 利用二进制日志增量进行，不需要太多的带宽，但是使用基于行的复制在进行大批量的更改时，会对带宽带来一定的压力，特别是跨IDC环境下进行复制，应该分批进行  实现数据读取的负载均衡 需要其他组件配合完成 利用DNS轮询的方式把程序的读连接到不同的备份数据库 利用LVS,haproxy这样的代理方式  增加了数据安全性（复制不能代替备份）  实现数据库高">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-16T12:51:08.971Z">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/14/MySQL复制/复制工作方式.png">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/14/MySQL复制/基于日志的复制.png">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/14/MySQL复制/基于GTID的复制.png">
+<meta property="og:updated_time" content="2018-07-18T12:43:33.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL复制">
 <meta name="twitter:description" content="一、复制解决了什么 实现在不同服务器上的数据分布 利用二进制日志增量进行，不需要太多的带宽，但是使用基于行的复制在进行大批量的更改时，会对带宽带来一定的压力，特别是跨IDC环境下进行复制，应该分批进行  实现数据读取的负载均衡 需要其他组件配合完成 利用DNS轮询的方式把程序的读连接到不同的备份数据库 利用LVS,haproxy这样的代理方式  增加了数据安全性（复制不能代替备份）  实现数据库高">
+<meta name="twitter:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/14/MySQL复制/复制工作方式.png">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
     
@@ -260,7 +264,8 @@
 <li>要求主从数据库的表结构相同，否则可能会中断复制 </li>
 <li>无法在从上单独执行触发器</li>
 </ul>
-<h2 id="3-3-混合模式：根据实际内容在以上两者间切换"><a href="#3-3-混合模式：根据实际内容在以上两者间切换" class="headerlink" title="3.3 混合模式：根据实际内容在以上两者间切换"></a>3.3 混合模式：根据实际内容在以上两者间切换</h2><h1 id="四、-MySQL复制工作方式"><a href="#四、-MySQL复制工作方式" class="headerlink" title="四、 MySQL复制工作方式"></a>四、 MySQL复制工作方式</h1><ol>
+<h2 id="3-3-混合模式：根据实际内容在以上两者间切换"><a href="#3-3-混合模式：根据实际内容在以上两者间切换" class="headerlink" title="3.3 混合模式：根据实际内容在以上两者间切换"></a>3.3 混合模式：根据实际内容在以上两者间切换</h2><h1 id="四、-MySQL复制工作方式"><a href="#四、-MySQL复制工作方式" class="headerlink" title="四、 MySQL复制工作方式"></a>四、 MySQL复制工作方式</h1><p><img src="/BameirilyoBlog/2018/07/14/MySQL复制/复制工作方式.png" alt="img"></p>
+<ol>
 <li>主将变更写入二进制日志</li>
 <li>从读取主的二进制日志变更并写入到relay_log中</li>
 <li>在从上重放relay_log中的日志：<ul>
@@ -269,7 +274,8 @@
 </ul>
 </li>
 </ol>
-<h2 id="4-1-基于日志点的复制"><a href="#4-1-基于日志点的复制" class="headerlink" title="4.1 基于日志点的复制"></a>4.1 基于日志点的复制</h2><p>优点：</p>
+<h2 id="4-1-基于日志点的复制"><a href="#4-1-基于日志点的复制" class="headerlink" title="4.1 基于日志点的复制"></a>4.1 基于日志点的复制</h2><p><img src="/BameirilyoBlog/2018/07/14/MySQL复制/基于日志的复制.png" alt="img"></p>
+<p>优点：</p>
 <ul>
 <li>是MySQL最早的支持的复制技术，Bug相对较少</li>
 <li>对SQL查询没有任何限制</li>
@@ -279,7 +285,8 @@
 <ul>
 <li>故障转移时重新获取新主的日志点信息比较困难</li>
 </ul>
-<h2 id="4-2-基于GTID的复制"><a href="#4-2-基于GTID的复制" class="headerlink" title="4.2 基于GTID的复制"></a>4.2 基于GTID的复制</h2><p>GTID即全局事务ID，其保证为每一个在主上提交的事务在复制集群中可以生成一个唯一的ID</p>
+<h2 id="4-2-基于GTID的复制"><a href="#4-2-基于GTID的复制" class="headerlink" title="4.2 基于GTID的复制"></a>4.2 基于GTID的复制</h2><p><img src="/BameirilyoBlog/2018/07/14/MySQL复制/基于GTID的复制.png" alt="img"></p>
+<p>GTID即全局事务ID，其保证为每一个在主上提交的事务在复制集群中可以生成一个唯一的ID</p>
 <p>GTID=source_id:transaction_id</p>
 <p>优点：</p>
 <ul>

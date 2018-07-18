@@ -13,7 +13,7 @@
     
     
     
-    <title>MySQL性能管理及架构设计(二) | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <title>MySQL性能管理及架构设计二 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -23,12 +23,12 @@
     <meta name="description" content="一、数据库结构优化1.1 数据库结构优化目的​    1、减少数据冗余：（数据冗余是指在数据库中存在相同的数据，或者某些数据可以由其他数据计算得到），注意，尽量减少不代表完全避免数据冗余；   2、尽量避免数据维护中出现更新，插入和删除异常： ​    插入异常：如果表中某个实体随着另一个实体而存在 ​    更新异常：如果更改表中某个实体的单独属性时，需要多次进行更新 ​    删除异常：如果删">
 <meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL性能管理及架构设计(二)">
+<meta property="og:title" content="MySQL性能管理及架构设计二">
 <meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/index.html">
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="一、数据库结构优化1.1 数据库结构优化目的​    1、减少数据冗余：（数据冗余是指在数据库中存在相同的数据，或者某些数据可以由其他数据计算得到），注意，尽量减少不代表完全避免数据冗余；   2、尽量避免数据维护中出现更新，插入和删除异常： ​    插入异常：如果表中某个实体随着另一个实体而存在 ​    更新异常：如果更改表中某个实体的单独属性时，需要多次进行更新 ​    删除异常：如果删">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/MySQL性能管理及架构设计/存储引擎对比.png">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/MySQL性能管理及架构设计一/1.png">
 <meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
 <meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
 <meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
@@ -37,11 +37,11 @@
 <meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
 <meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
 <meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
-<meta property="og:updated_time" content="2018-07-16T15:44:27.623Z">
+<meta property="og:updated_time" content="2018-07-18T12:42:36.933Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL性能管理及架构设计(二)">
+<meta name="twitter:title" content="MySQL性能管理及架构设计二">
 <meta name="twitter:description" content="一、数据库结构优化1.1 数据库结构优化目的​    1、减少数据冗余：（数据冗余是指在数据库中存在相同的数据，或者某些数据可以由其他数据计算得到），注意，尽量减少不代表完全避免数据冗余；   2、尽量避免数据维护中出现更新，插入和删除异常： ​    插入异常：如果表中某个实体随着另一个实体而存在 ​    更新异常：如果更改表中某个实体的单独属性时，需要多次进行更新 ​    删除异常：如果删">
-<meta name="twitter:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/MySQL性能管理及架构设计/存储引擎对比.png">
+<meta name="twitter:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/MySQL性能管理及架构设计一/1.png">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
     
@@ -129,7 +129,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">MySQL性能管理及架构设计(二)</div>
+        <div class="flex-col header-title ellipsis">MySQL性能管理及架构设计二</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -151,7 +151,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">MySQL性能管理及架构设计(二)</h1>
+        <h1 class="title">MySQL性能管理及架构设计二</h1>
         <h5 class="subtitle">
             
                 <time datetime="2018-07-16T02:26:00.000Z" itemprop="datePublished" class="page-time">
@@ -185,7 +185,7 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">MySQL性能管理及架构设计(二)</h1>
+        <h1 class="post-card-title">MySQL性能管理及架构设计二</h1>
         <div class="post-meta">
             <time class="post-time" title="2018年07月16日 10:26:00" datetime="2018-07-16T02:26:00.000Z"  itemprop="datePublished">2018年07月16日</time>
 
@@ -238,10 +238,8 @@
 </ul>
 <h2 id="1-4-物理设计"><a href="#1-4-物理设计" class="headerlink" title="1.4 物理设计"></a>1.4 物理设计</h2><h3 id="1-4-1-物理设计设计的内容"><a href="#1-4-1-物理设计设计的内容" class="headerlink" title="1.4.1 物理设计设计的内容"></a>1.4.1 物理设计设计的内容</h3><ol>
 <li>定义数据库、表及字段的命名规范（可读性、表意性、长名原则）</li>
-<li>选择合适的存储引擎</li>
-</ol>
-<p><img src="/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/MySQL性能管理及架构设计/存储引擎对比.png" alt="img"></p>
-<ol start="3">
+<li><p>选择合适的存储引擎</p>
+</li>
 <li><p>为表中的字段选择合适的数据类型</p>
 <p>当一个列可以选择多种数据类型是，应优先选择数字类型，其次是日期或二进制类型，最后是字符类型。对于同级别的数据类型，应当优先选择占用空间小的数据类型。</p>
 </li>
@@ -269,6 +267,7 @@
 </li>
 </ol>
 <h2 id="2-3-MMM架构-Multi-Master-Replicatuion-Manage"><a href="#2-3-MMM架构-Multi-Master-Replicatuion-Manage" class="headerlink" title="2.3 MMM架构(Multi-Master Replicatuion Manage)"></a>2.3 MMM架构(Multi-Master Replicatuion Manage)</h2><h3 id="2-3-1-主要作用："><a href="#2-3-1-主要作用：" class="headerlink" title="2.3.1 主要作用："></a>2.3.1 主要作用：</h3><p>监控和管理MySQL的主主复制拓扑，并在当前的主服务器失效时，进行主和主备服务器之间的主从切换和故障转移等工作。</p>
+<p><img src="/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/MySQL性能管理及架构设计一/1.png" alt="img"></p>
 <h2 id="2-1-读写分离"><a href="#2-1-读写分离" class="headerlink" title="2.1 读写分离"></a>2.1 读写分离</h2><p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
 <p>​    <a href="http://dbaplus.cn/news-11-627-1.html" target="_blank" rel="noopener">MaxScale：实现MySQL读写分离与负载均衡的中间件利器</a></p>
 <h1 id="三、数据库索引优化（非常重要）"><a href="#三、数据库索引优化（非常重要）" class="headerlink" title="三、数据库索引优化（非常重要）"></a>三、数据库索引优化（<strong>非常重要</strong>）</h1><h2 id="3-1-两种主要数据结构：B-tree和Hash"><a href="#3-1-两种主要数据结构：B-tree和Hash" class="headerlink" title="3.1 两种主要数据结构：B-tree和Hash"></a>3.1 两种主要数据结构：B-tree和Hash</h2><h3 id="3-1-1-B-tree结构"><a href="#3-1-1-B-tree结构" class="headerlink" title="3.1.1 B-tree结构"></a>3.1.1 B-tree结构</h3><p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
@@ -354,7 +353,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/&title=《MySQL性能管理及架构设计(二)》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/&title=《MySQL性能管理及架构设计二》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -364,7 +363,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/&title=《MySQL性能管理及架构设计(二)》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/&title=《MySQL性能管理及架构设计二》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -374,7 +373,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL性能管理及架构设计(二)》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL性能管理及架构设计二》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -484,7 +483,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/&title=《MySQL性能管理及架构设计(二)》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/&title=《MySQL性能管理及架构设计二》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -494,7 +493,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/&title=《MySQL性能管理及架构设计(二)》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/&title=《MySQL性能管理及架构设计二》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -504,7 +503,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL性能管理及架构设计(二)》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL性能管理及架构设计二》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
