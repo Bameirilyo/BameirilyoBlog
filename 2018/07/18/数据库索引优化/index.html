@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>数据库索引优化 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="数据库">
+    <meta name="description" content="三、数据库索引优化（非常重要）一、数据库索引优化1.1 两种主要数据结构：B-tree和Hash1.1.1 B-tree结构​     B-tree索引的限制：​     1.1.2 Hash结构​     Hash索引的限制： Hash索引必须进行二次查找 Hash索引无法用于排序 Hash索引不支持部分索引查找也不支持范围查找  Hash索引中Hash码的计算可能存在Hash冲突，不适合重复值">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库索引优化">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/index.html">
+<meta property="og:site_name" content="Bameirilyo&#39;s Blog">
+<meta property="og:description" content="三、数据库索引优化（非常重要）一、数据库索引优化1.1 两种主要数据结构：B-tree和Hash1.1.1 B-tree结构​     B-tree索引的限制：​     1.1.2 Hash结构​     Hash索引的限制： Hash索引必须进行二次查找 Hash索引无法用于排序 Hash索引不支持部分索引查找也不支持范围查找  Hash索引中Hash码的计算可能存在Hash冲突，不适合重复值">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
+<meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
+<meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
+<meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
+<meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
+<meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
+<meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
+<meta property="og:updated_time" content="2018-07-18T13:26:19.854Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库索引优化">
+<meta name="twitter:description" content="三、数据库索引优化（非常重要）一、数据库索引优化1.1 两种主要数据结构：B-tree和Hash1.1.1 B-tree结构​     B-tree索引的限制：​     1.1.2 Hash结构​     Hash索引的限制： Hash索引必须进行二次查找 Hash索引无法用于排序 Hash索引不支持部分索引查找也不支持范围查找  Hash索引中Hash码的计算可能存在Hash冲突，不适合重复值">
+<meta name="twitter:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/BameirilyoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/BameirilyoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/BameirilyoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/BameirilyoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">豆腐小铭</h5>
+          <a href="mailto:1172277547@qq.com" title="1172277547@qq.com" class="mail">1172277547@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/BameirilyoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Bameirilyo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/3287259165/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">数据库索引优化</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">数据库索引优化</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-18T13:24:44.000Z" itemprop="datePublished" class="page-time">
+  2018年07月18日
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据库/">数据库</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三、数据库索引优化（非常重要）"><span class="post-toc-text">三、数据库索引优化（非常重要）</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、数据库索引优化"><span class="post-toc-text">一、数据库索引优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-1-两种主要数据结构：B-tree和Hash"><span class="post-toc-text">1.1 两种主要数据结构：B-tree和Hash</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-1-B-tree结构"><span class="post-toc-text">1.1.1 B-tree结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#B-tree索引的限制："><span class="post-toc-text">B-tree索引的限制：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-2-Hash结构"><span class="post-toc-text">1.1.2 Hash结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Hash索引的限制："><span class="post-toc-text">Hash索引的限制：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-3-MySQL常见索引和各种索引区别"><span class="post-toc-text">1.1.3 MySQL常见索引和各种索引区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-2-使用索引好处和索引缺陷"><span class="post-toc-text">1.2 使用索引好处和索引缺陷</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-1-为什么要使用索引"><span class="post-toc-text">1.2.1 为什么要使用索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-2-索引不是越多越好"><span class="post-toc-text">1.2.2 索引不是越多越好</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-3-索引优化策略"><span class="post-toc-text">1.3 索引优化策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-1-索引列上不能使用表达式和函数"><span class="post-toc-text">1.3.1 索引列上不能使用表达式和函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-2-前缀索引和索引列的选择性"><span class="post-toc-text">1.3.2 前缀索引和索引列的选择性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#如何选择索引列的顺序："><span class="post-toc-text">如何选择索引列的顺序：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-3-组合-联合索引策略"><span class="post-toc-text">1.3.3 组合/联合索引策略</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-4-覆盖索引策略"><span class="post-toc-text">1.3.4 覆盖索引策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#优点"><span class="post-toc-text">优点:</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#无法使用覆盖索引的情况："><span class="post-toc-text">无法使用覆盖索引的情况：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-5-SQL索引优化总结口诀（套路重点）"><span class="post-toc-text">1.3.5 SQL索引优化总结口诀（套路重点）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-4-使用索引来优化查询"><span class="post-toc-text">1.4 使用索引来优化查询</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-4-1-利用索引排序"><span class="post-toc-text">1.4.1 利用索引排序</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-5-索引的维护和优化"><span class="post-toc-text">1.5 索引的维护和优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-5-1-删除重复索引"><span class="post-toc-text">1.5.1 删除重复索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-5-2-删除冗余索引"><span class="post-toc-text">1.5.2 删除冗余索引</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-数据库索引优化"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">数据库索引优化</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018年07月18日 21:24:44" datetime="2018-07-18T13:24:44.000Z"  itemprop="datePublished">2018年07月18日</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据库/">数据库</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="三、数据库索引优化（非常重要）"><a href="#三、数据库索引优化（非常重要）" class="headerlink" title="三、数据库索引优化（非常重要）"></a>三、数据库索引优化（<strong>非常重要</strong>）</h1><h1 id="一、数据库索引优化"><a href="#一、数据库索引优化" class="headerlink" title="一、数据库索引优化"></a>一、数据库索引优化</h1><h2 id="1-1-两种主要数据结构：B-tree和Hash"><a href="#1-1-两种主要数据结构：B-tree和Hash" class="headerlink" title="1.1 两种主要数据结构：B-tree和Hash"></a>1.1 两种主要数据结构：B-tree和Hash</h2><h3 id="1-1-1-B-tree结构"><a href="#1-1-1-B-tree结构" class="headerlink" title="1.1.1 B-tree结构"></a>1.1.1 B-tree结构</h3><p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
+<h4 id="B-tree索引的限制："><a href="#B-tree索引的限制：" class="headerlink" title="B-tree索引的限制："></a><strong>B-tree索引的限制：</strong></h4><p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
+<h3 id="1-1-2-Hash结构"><a href="#1-1-2-Hash结构" class="headerlink" title="1.1.2 Hash结构"></a>1.1.2 Hash结构</h3><p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
+<h4 id="Hash索引的限制："><a href="#Hash索引的限制：" class="headerlink" title="Hash索引的限制："></a><strong>Hash索引的限制：</strong></h4><ul>
+<li>Hash索引必须进行二次查找</li>
+<li>Hash索引无法用于排序</li>
+<li>Hash索引<strong>不支持部分索引查找也不支持范围查找</strong> </li>
+<li>Hash索引中Hash码的计算<strong>可能存在Hash冲突，不适合重复值很高的列，如性别</strong>，身份证比较合适。</li>
+</ul>
+<h3 id="1-1-3-MySQL常见索引和各种索引区别"><a href="#1-1-3-MySQL常见索引和各种索引区别" class="headerlink" title="1.1.3 MySQL常见索引和各种索引区别"></a>1.1.3 MySQL常见索引和各种索引区别</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PRIMARY KEY（主键索引）  ALTER TABLE `table_name` ADD PRIMARY KEY ( `column` ) </span><br><span class="line">UNIQUE(唯一索引)     ALTER TABLE `table_name` ADD UNIQUE (`column`)</span><br><span class="line">INDEX(普通索引)     ALTER TABLE `table_name` ADD INDEX index_name ( `column` ) </span><br><span class="line">FULLTEXT(全文索引)      ALTER TABLE `table_name` ADD FULLTEXT ( `column` )</span><br><span class="line">组合索引   ALTER TABLE `table_name` ADD INDEX index_name ( `column1`, `column2`, `column3` )</span><br></pre></td></tr></table></figure>
+<ol>
+<li>普通索引：最基本的索引，没有任何限制</li>
+<li>唯一索引：与”普通索引”类似，不同的就是：索引列的值必须唯一，但允许有空值。</li>
+<li>主键索引：它 是一种特殊的唯一索引，不允许有空值。</li>
+<li>全文索引：仅可用于 MyISAM 表，针对较大的数据，生成全文索引很耗时好空间。</li>
+<li>组合索引：为了更多的提高mysql效率可建立组合索引，遵循”最左前缀“原则。</li>
+</ol>
+<h2 id="1-2-使用索引好处和索引缺陷"><a href="#1-2-使用索引好处和索引缺陷" class="headerlink" title="1.2 使用索引好处和索引缺陷"></a>1.2 使用索引好处和索引缺陷</h2><h3 id="1-2-1-为什么要使用索引"><a href="#1-2-1-为什么要使用索引" class="headerlink" title="1.2.1 为什么要使用索引"></a>1.2.1 为什么要使用索引</h3><p>​    <strong>1、索引大大减少了存储引擎需要扫描的数据量；</strong></p>
+<p>​    <strong>2、索引可以帮助我们进行排序以避免使用临时表；</strong></p>
+<p>​    <strong>3、索引可以把随机I/O变为顺序I/O。</strong></p>
+<h3 id="1-2-2-索引不是越多越好"><a href="#1-2-2-索引不是越多越好" class="headerlink" title="1.2.2 索引不是越多越好"></a>1.2.2 索引不是越多越好</h3><p>​    <strong>1、索引会增加写操作的成本；</strong></p>
+<p>​    <strong>2、太多的索引会增加查询优化器的选择时间。</strong></p>
+<blockquote>
+<p>索引就好比一本书的目录，它会让你更快的找到内容，显然目录（索引）并不是越多越好，假如这本书1000页，而有500页是目录，它当然效率低，目录是要占纸张的,而索引是要占磁盘空间的。</p>
+</blockquote>
+<h2 id="1-3-索引优化策略"><a href="#1-3-索引优化策略" class="headerlink" title="1.3 索引优化策略"></a>1.3 索引优化策略</h2><h3 id="1-3-1-索引列上不能使用表达式和函数"><a href="#1-3-1-索引列上不能使用表达式和函数" class="headerlink" title="1.3.1 索引列上不能使用表达式和函数"></a>1.3.1 索引列上不能使用表达式和函数</h3><p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
+<h3 id="1-3-2-前缀索引和索引列的选择性"><a href="#1-3-2-前缀索引和索引列的选择性" class="headerlink" title="1.3.2 前缀索引和索引列的选择性"></a>1.3.2 前缀索引和索引列的选择性</h3><blockquote>
+<p><code>Innodb</code>索引列最大宽度为<code>667</code>个字节(<code>utf-8</code> 差不多<code>255</code>个字符),<code>MyIsam</code>索引类宽度最大为<code>1000</code>个字节，于是出现前缀索引，索引的选择性。</p>
+</blockquote>
+<p>​    对于列的值较长，比如<code>BLOB、TEXT、VARCHAR</code>，就必须建立前缀索引，即将值的前一部分作为索引。这样既可以节约空间，又可以提高查询效率。但无法使用前缀索引做 <code>ORDER BY</code> 和 <code>GROUP BY</code>，也无法使用前缀索引做覆盖扫描。</p>
+<p>​    <strong>语法：</strong> <code>ALTER TABLE table_name ADD KEY(column_name(prefix_length))</code></p>
+<p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
+<h4 id="如何选择索引列的顺序："><a href="#如何选择索引列的顺序：" class="headerlink" title="如何选择索引列的顺序："></a><strong>如何选择索引列的顺序：</strong></h4><p>​    1、经常会被使用到的列优先（<strong>选择性</strong>差的列不适合，如性别，<strong>查询优化器</strong>可能会认为全表扫描性能更好）；</p>
+<p>​    2、<strong>选择性高</strong>的列优先；</p>
+<p>​    3、宽度小的列优先（一页中存储的索引越多，降低<code>I/O</code>，查找越快）；</p>
+<h3 id="1-3-3-组合-联合索引策略"><a href="#1-3-3-组合-联合索引策略" class="headerlink" title="1.3.3 组合/联合索引策略"></a>1.3.3 组合/联合索引策略</h3><p>​    如果索引了多列，要遵守<strong>最左前缀</strong>法则。指的是查询从索引的最左前列开始并且<strong>不跳过索引中的列</strong>。<br><a href="http://www.uml.org.cn/sjjm/201107145.asp#nav-4-2" target="_blank" rel="noopener"><strong>深入理解请移步：</strong>最左前缀原理与相关优化</a></p>
+<h3 id="1-3-4-覆盖索引策略"><a href="#1-3-4-覆盖索引策略" class="headerlink" title="1.3.4 覆盖索引策略"></a>1.3.4 覆盖索引策略</h3><p>​    跟组合索引有点类似，如果<strong>索引包含所有满足查询需要的数据的索引则成为覆盖索引</strong>(Covering Index)，也就是平时所说的不需要回表操作。即<strong>索引的叶子节点上面包含了他们索引的数据(hash索引不可以)</strong>。</p>
+<p>​    判断标准：使用<code>explain</code>，可以通过输出的<code>extra</code>列来判断，对于一个索引覆盖查询，显示为<code>using index</code>,<code>MySQL</code>查询优化器在执行查询前会决定是否有索引覆盖查询。</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点:"></a><strong>优点:</strong></h4><p>​    1、可以优化缓存,减少磁盘IO操作；<br>    2、可以减少随机IO,变随机IO操作变为顺序IO操作；<br>    3、可以避免对InnoDB主键索引的二次查询；<br>    4、可以避免MyISAM表进行系统调用；</p>
+<h4 id="无法使用覆盖索引的情况："><a href="#无法使用覆盖索引的情况：" class="headerlink" title="无法使用覆盖索引的情况："></a><strong>无法使用覆盖索引的情况：</strong></h4><p>​    1、存储引擎不支持覆盖索引；<br>    2、<strong>查询中使用了太多的列</strong>（如<code>SELECT *</code> ）；<br>    3、使用了双<code>%</code>号的<code>like</code>查询（底层API所限制）；</p>
+<p>​    <a href="https://www.cnblogs.com/chenpingzhao/p/4776981.html" target="_blank" rel="noopener">mysql高效索引之覆盖索引</a></p>
+<h3 id="1-3-5-SQL索引优化总结口诀（套路重点）"><a href="#1-3-5-SQL索引优化总结口诀（套路重点）" class="headerlink" title="1.3.5 SQL索引优化总结口诀（套路重点）"></a>1.3.5 SQL索引优化总结口诀（<strong>套路重点</strong>）</h3><blockquote>
+<p><strong>全值匹配我最爱，最左前缀要遵守；</strong><br><strong>带头大哥不能死，中间兄弟不能断；</strong><br><strong>索引列上不计算，范围之后全失效；</strong><br><strong>LIKE百分写最右，覆盖索引不写 *；</strong><br><strong>不等空值还有or，索引失效要少用；</strong><br><strong>字符单引不可丢，SQL高级也不难 ；</strong> </p>
+</blockquote>
+<p>​    <a href="https://www.cnblogs.com/zhaobingqing/p/7071331.html" target="_blank" rel="noopener">MySQL高级-索引优化</a></p>
+<h2 id="1-4-使用索引来优化查询"><a href="#1-4-使用索引来优化查询" class="headerlink" title="1.4 使用索引来优化查询"></a>1.4 使用索引来优化查询</h2><h3 id="1-4-1-利用索引排序"><a href="#1-4-1-利用索引排序" class="headerlink" title="1.4.1 利用索引排序"></a>1.4.1 利用索引排序</h3><p>​    1、<code>group by</code> <strong>实质是先排序后分组</strong>，遵照索引的最佳左前缀。；</p>
+<p>​    2、索引中所有列的方向(<strong>升序、降序</strong>)和Order By子句完全一致；</p>
+<p>​    3、当无法使用索引列，增大<code>max_length_for_sort_data</code>参数的设置+增大<code>sort_buffer_size</code>参数的设置；</p>
+<p>​    4、如果最左列使用了范围，则排序会失效；</p>
+<p>​    5、<code>where</code> <strong>高于</strong><code>having</code>，能写在<code>where</code>限定的条件就不要去<code>having</code>去限定了</p>
+<h2 id="1-5-索引的维护和优化"><a href="#1-5-索引的维护和优化" class="headerlink" title="1.5 索引的维护和优化"></a>1.5 索引的维护和优化</h2><h3 id="1-5-1-删除重复索引"><a href="#1-5-1-删除重复索引" class="headerlink" title="1.5.1 删除重复索引"></a>1.5.1 删除重复索引</h3><p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
+<p>​    <strong>注：</strong>主键约束相当于(唯一约束 + 非空约束)</p>
+<p>​    一张表中最多有一个主键约束,如果设置多个主键,就会出现如下提示：<code>Multiple primary key defined!!!</code></p>
+<h3 id="1-5-2-删除冗余索引"><a href="#1-5-2-删除冗余索引" class="headerlink" title="1.5.2 删除冗余索引"></a>1.5.2 删除冗余索引</h3><p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
+<p>​    <strong>检查工具：**</strong>pt-duplicate-key-checker**</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <footer>
+        <a href="https://bameirilyo.github.io/BameirilyoBlog">
+            <img src="/BameirilyoBlog/img/avatar.jpg" alt="豆腐小铭">
+            豆腐小铭
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/数据库/">数据库</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/&title=《数据库索引优化》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/&title=《数据库索引优化》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据库索引优化》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/BameirilyoBlog/2018/07/18/MyBatis-PageHelper总结/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">MyBatis PageHelper总结</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+  
+    </div>
+    <div class="bottom">
+	<!--  config.author  -->
+        <p><span>个人专属 &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by —— Bameirilyo
+			<!-- <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+		<p>
+          
+                <span><a href=" " target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+           
+            <span>博客 —— 豆腐小铭</span>   
+        </p> 
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/&title=《数据库索引优化》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/&title=《数据库索引优化》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+<!--      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据库索引优化》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>     -->
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrUlEQVR42u3awW4bMQwE0Pz/T6fXAmnsGdJM3eLtyYjtXT0ZkJihPj7i6/O367t3v75+fLfkdXvn4YWHh4e3GPrXK+c9/m7yyeTz+Zjx8PDwrnnt8t1Sk6c83hKSTQIPDw/vX+TlS3yCx8PDw/s/eLPYIn9KHlXg4eHh/V3eLFBol/KkEN9vM3h4eHjXvHy5f5/XJ/09PDw8vHVXvW0+te2utpiuR4uHh4d3wGuPSeVNr9mgk7/X48TDw8N7Ka898NRuEjlpUw9/W3zj4eHhHfMujlLt331BGIGHh4d3xts0rvJhPX5iOylPxomHh4d3xtsHAfk07SexaIzh4eHhnfFmpXY7oP1CX/8YeHh4eGe8x8tu26wqSt54oU+2gaikxsPDw3sRbx/v7oPjWQDx5DN4eHh4B7x2gW4L7rx0breHPKrAw8PDu+C1x5vyjSEvzfOJrttseHh4eAe8vIWfD242BbMQJCru8fDw8F7Emx0bnTWx8s1gFtoWKTUeHh7eMW8W77bUIi+JC248PDy8C96mxbU5CjAbaDJBeHh4eNe8TaxwUSLvQ43id8PDw8Nb8NqGU3tcILlD3dBKJhEPDw/vmLdaguNoNQ8j2ii52Enw8PDwtiejigMEm2A3n458EqOsBQ8PD++A10axbZwatfnjNlgyTfXuh4eHhzfi5Y/My+t9+DuLmPHw8PB+kte2vmZxwywazmF1lw8PDw8v5n2W1yywaAv3Nob49l08PDy8A15+5fhZoZxvJ+3BAjw8PLwLXr4Z5HFqGze8att48h8DHh4e3kt5eQOsXfrzNthsN4uyFjw8PLy35CXfmpXOebz7h7/j4eHhvRlv06CabTZtfIyHh4d3x8ubXvlEbALfTRCMh4eHd83bF8rtt9pBFNvApr+Hh4eH9/wOvwAej6ZLa15e2gAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/BameirilyoBlog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bameirilyo's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Bameirilyo's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

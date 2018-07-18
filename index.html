@@ -157,6 +157,60 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-数据库索引优化"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018年07月18日 21:24:44" datetime="2018-07-18T13:24:44.000Z"  itemprop="datePublished">2018年07月18日</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据库/">数据库</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/BameirilyoBlog/2018/07/18/数据库索引优化/">数据库索引优化</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        三、数据库索引优化（非常重要）一、数据库索引优化1.1 两种主要数据结构：B-tree和Hash1.1.1 B-tree结构​    
+B-tree索引的限制：​    
+1.1.2 Hash结构​    
+Hash索引的限制：
+Hash索引必须进行二次查找
+Hash索引无法用于排序
+Hash索引不支持部分索引查找也不支持范围查找 
+Hash索引中Hash码的计算可能存在Hash冲突，不适合...
+    
+
+        <a href="/BameirilyoBlog/2018/07/18/数据库索引优化/" class="post-more waves-effect waves-button">
+            全文阅读
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/数据库/">数据库</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-MyBatis-PageHelper总结"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -351,6 +405,63 @@ TPS：是TransactionsPerSecond的缩写，也就是事务数/秒。它是软...
         </li>
     
         <li class="post-list-item fade">
+            <article id="post-VARCHAR和CHAR对比"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018年07月14日 15:08:19" datetime="2018-07-14T07:08:19.000Z"  itemprop="datePublished">2018年07月14日</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据库/">数据库</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/BameirilyoBlog/2018/07/14/VARCHAR和CHAR对比/">VARCHAR和CHAR对比</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        一、VARCHAR类型1.存储特点
+varchar用于存储变长字符串，只占用必要的存储空间
+列的最大长度小于255则只占用一个额外字节用于记录字符串长度
+列的最大长度大于255则要占用两个额外字节用于记录字符串长度
+
+2.VARCHAR长度的选择问题
+使用最小的符合需求的长度
+varchar(5)和varchar(200)存储“MySQL”字符串性能不同
+
+3.VARCHAR的适用场景
+字符...
+    
+
+        <a href="/BameirilyoBlog/2018/07/14/VARCHAR和CHAR对比/" class="post-more waves-effect waves-button">
+            全文阅读
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/数据库/">数据库</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-MySQL复制"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -394,63 +505,6 @@ TPS：是TransactionsPerSecond的缩写，也就是事务数/秒。它是软...
     
 
         <a href="/BameirilyoBlog/2018/07/14/MySQL复制/" class="post-more waves-effect waves-button">
-            全文阅读
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/数据库/">数据库</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-VARCHAR和CHAR对比"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018年07月14日 15:08:19" datetime="2018-07-14T07:08:19.000Z"  itemprop="datePublished">2018年07月14日</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据库/">数据库</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/BameirilyoBlog/2018/07/14/VARCHAR和CHAR对比/">VARCHAR和CHAR对比</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        一、VARCHAR类型1.存储特点
-varchar用于存储变长字符串，只占用必要的存储空间
-列的最大长度小于255则只占用一个额外字节用于记录字符串长度
-列的最大长度大于255则要占用两个额外字节用于记录字符串长度
-
-2.VARCHAR长度的选择问题
-使用最小的符合需求的长度
-varchar(5)和varchar(200)存储“MySQL”字符串性能不同
-
-3.VARCHAR的适用场景
-字符...
-    
-
-        <a href="/BameirilyoBlog/2018/07/14/VARCHAR和CHAR对比/" class="post-more waves-effect waves-button">
             全文阅读
         </a>
     </div>
@@ -596,57 +650,6 @@ varchar(5)和varchar(200)存储“MySQL”字符串性能不同
     
 
         <a href="/BameirilyoBlog/2018/05/22/E20表示数值的字符串/" class="post-more waves-effect waves-button">
-            全文阅读
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/BameirilyoBlog/tags/数据结构与算法/">数据结构与算法</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-E19正则表达式匹配"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018年05月22日 21:30:29" datetime="2018-05-22T13:30:29.000Z"  itemprop="datePublished">2018年05月22日</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/BameirilyoBlog/categories/数据结构与算法/">数据结构与算法</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/BameirilyoBlog/2018/05/22/E19正则表达式匹配/">E19正则表达式匹配</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        题目：
-请实现一个函数用来匹配包括’.’和’‘的正则表达式。模式中的字符’.’表示任意一个字符，而’‘表示它前面的字符可以出现任意次（包含0次）。      在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串”aaa”与模式”a.a”和”abaca”匹配，但是与”aa.a”和”ab*a”均不匹配 
-思路：
-当模式中的第二个字符不是“*”时： 
-   1、如果字符串第一个字符和模式中...
-    
-
-        <a href="/BameirilyoBlog/2018/05/22/E19正则表达式匹配/" class="post-more waves-effect waves-button">
             全文阅读
         </a>
     </div>
