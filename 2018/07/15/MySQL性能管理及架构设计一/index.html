@@ -13,7 +13,7 @@
     
     
     
-    <title>MySQL性能管理及架构设计 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
+    <title>MySQL性能管理及架构设计一 | Bameirilyo&#39;s Blog | 纵有疾风起，人生不言弃</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -23,19 +23,19 @@
     <meta name="description" content="一、什么影响了数据库查询速度1.1 影响数据库查询速度的四个因素​    sql查询速度、服务器硬件、网卡流量、磁盘IO 1.2 风险分析 QPS：Queries Per Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。   TPS：是TransactionsPerSecond的缩写，也就是事务数/秒。它是软件测试">
 <meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL性能管理及架构设计">
-<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/index.html">
+<meta property="og:title" content="MySQL性能管理及架构设计一">
+<meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/index.html">
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="一、什么影响了数据库查询速度1.1 影响数据库查询速度的四个因素​    sql查询速度、服务器硬件、网卡流量、磁盘IO 1.2 风险分析 QPS：Queries Per Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。   TPS：是TransactionsPerSecond的缩写，也就是事务数/秒。它是软件测试">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/MySQL性能管理及架构设计/1.png">
-<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/MySQL性能管理及架构设计/InnoDB.png">
-<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/MySQL性能管理及架构设计/存储引擎对比.png">
-<meta property="og:updated_time" content="2018-07-18T08:11:33.228Z">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/MySQL性能管理及架构设计/1.png">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/MySQL性能管理及架构设计/InnoDB.png">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/MySQL性能管理及架构设计/存储引擎对比.png">
+<meta property="og:updated_time" content="2018-07-18T12:25:16.086Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL性能管理及架构设计">
+<meta name="twitter:title" content="MySQL性能管理及架构设计一">
 <meta name="twitter:description" content="一、什么影响了数据库查询速度1.1 影响数据库查询速度的四个因素​    sql查询速度、服务器硬件、网卡流量、磁盘IO 1.2 风险分析 QPS：Queries Per Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。   TPS：是TransactionsPerSecond的缩写，也就是事务数/秒。它是软件测试">
-<meta name="twitter:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/MySQL性能管理及架构设计/1.png">
+<meta name="twitter:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/MySQL性能管理及架构设计/1.png">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
     
@@ -123,7 +123,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">MySQL性能管理及架构设计</div>
+        <div class="flex-col header-title ellipsis">MySQL性能管理及架构设计一</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -145,7 +145,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">MySQL性能管理及架构设计</h1>
+        <h1 class="title">MySQL性能管理及架构设计一</h1>
         <h5 class="subtitle">
             
                 <time datetime="2018-07-15T12:35:20.000Z" itemprop="datePublished" class="page-time">
@@ -175,11 +175,11 @@
     </aside>
 
 
-<article id="post-MySQL性能管理及架构设计(一)"
+<article id="post-MySQL性能管理及架构设计一"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">MySQL性能管理及架构设计</h1>
+        <h1 class="post-card-title">MySQL性能管理及架构设计一</h1>
         <div class="post-meta">
             <time class="post-time" title="2018年07月15日 20:35:20" datetime="2018-07-15T12:35:20.000Z"  itemprop="datePublished">2018年07月15日</time>
 
@@ -296,7 +296,7 @@
 </li>
 </ol>
 <h2 id="2-2-MySQL体系结构"><a href="#2-2-MySQL体系结构" class="headerlink" title="2.2 MySQL体系结构"></a>2.2 MySQL体系结构</h2><p>​    分三层：客户端 -&gt; 服务层 -&gt; 存储引擎</p>
-<p><img src="/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/MySQL性能管理及架构设计/1.png" alt="img"></p>
+<p><img src="/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/MySQL性能管理及架构设计/1.png" alt="img"></p>
 <p>​   </p>
 <ol>
 <li><code>MySQL</code>是<code>插件式的存储引擎</code>，其中存储引擎分很多种。只要实现符合mysql存储引擎的接口，可以开发自己的存储引擎!</li>
@@ -304,7 +304,7 @@
 <li>MySQL的存储引擎是针对表的，不是针对库的。也就是说在一个数据库中可以使用不同的存储引擎。但是不建议这样做。</li>
 </ol>
 <h2 id="2-3-InnoDB存储引擎"><a href="#2-3-InnoDB存储引擎" class="headerlink" title="2.3 InnoDB存储引擎"></a>2.3 InnoDB存储引擎</h2><p>​    <code>MySQL5.5</code>及之后版本默认的存储引擎：<code>InnoDB</code>。</p>
-<p><img src="/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/MySQL性能管理及架构设计/InnoDB.png" alt="img"></p>
+<p><img src="/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/MySQL性能管理及架构设计/InnoDB.png" alt="img"></p>
 <h3 id="2-3-1-InnoDB使用表空间进行数据存储。"><a href="#2-3-1-InnoDB使用表空间进行数据存储。" class="headerlink" title="2.3.1 InnoDB使用表空间进行数据存储。"></a>2.3.1 InnoDB使用表空间进行数据存储。</h3><p><code>show variables like &#39;innodb_file_per_table</code></p>
 <p>  如果innodb_file_per_table 为 ON 将建立独立的表空间，文件为tablename.ibd；</p>
 <p>  如果innodb_file_per_table 为 OFF 将数据存储到系统的共享表空间，文件为ibdataX（X为从1开始的整数）；</p>
@@ -430,7 +430,7 @@
 </ol>
 <p>​    总结:<code>Innodb</code>大法好。</p>
 <p><code>注意:</code>尽量别使用混合存储引擎，比如回滚会出问题、在线热备问题。</p>
-<p><img src="/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/MySQL性能管理及架构设计/存储引擎对比.png" alt="img"></p>
+<p><img src="/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/MySQL性能管理及架构设计/存储引擎对比.png" alt="img"></p>
 <h2 id="2-11-配置参数"><a href="#2-11-配置参数" class="headerlink" title="2.11 配置参数"></a>2.11 配置参数</h2><h3 id="2-11-1-MySQL获取配置信息路径"><a href="#2-11-1-MySQL获取配置信息路径" class="headerlink" title="2.11.1 MySQL获取配置信息路径"></a>2.11.1 MySQL获取配置信息路径</h3><ul>
 <li><p>命令行参数</p>
 <p>mysqld_safe –datadir=/data/sql_data</p>
@@ -509,7 +509,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/&title=《MySQL性能管理及架构设计》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/&title=《MySQL性能管理及架构设计一》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -519,22 +519,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/&title=《MySQL性能管理及架构设计》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/&title=《MySQL性能管理及架构设计一》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
 <!--      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL性能管理及架构设计》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL性能管理及架构设计一》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>     -->
@@ -566,9 +566,9 @@
 
   
     <div class="waves-block waves-effect next">
-      <a href="/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计/" id="post-next" class="post-nav-link">
+      <a href="/BameirilyoBlog/2018/07/14/MySQL复制/" id="post-next" class="post-nav-link">
         <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">MySQL性能管理及架构设计</h4>
+        <h4 class="title">MySQL复制</h4>
       </a>
     </div>
   
@@ -639,7 +639,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/&title=《MySQL性能管理及架构设计》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/&title=《MySQL性能管理及架构设计一》 — Bameirilyo's Blog&pic=https://bameirilyo.github.io/BameirilyoBlog/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -649,22 +649,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/&title=《MySQL性能管理及架构设计》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/&title=《MySQL性能管理及架构设计一》 — Bameirilyo's Blog&source=个人博客" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
 <!--      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL性能管理及架构设计》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL性能管理及架构设计一》 — Bameirilyo's Blog&url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/&via=https://bameirilyo.github.io/BameirilyoBlog" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计(一)/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>     -->
@@ -675,7 +675,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADLUlEQVR42u3aQW7jMAwF0N7/0h1gVrNo3P9JFxOrT6vAcW09CShDUh8f8fj8O15d/3dcf9s+5/r+63tuGNjY2NgPYX9ejvz1yeSur+TXX80tsWBjY2Ofym6DRB6Qrt81nPTlUkbbg42Njf0r2XnIaUPXDJynJdjY2NjY7RK0haqckSwfNjY29u9kJ0Wl9s59A6Bd+h+ppWFjY2O/Pfsngs3/+vyD/W1sbGzst2R/LkZS9G9LUck826bCF3PAxsbGPojdvn5W7s+XJi8kbQpM2NjY2Cex2/LQvjC0Wej8+jc6bGxs7IPYdz30rsZwXtC/oQmBjY2NfRC7rZznk95/mxewVokWNjY29sPZ9b/7sg3cJjP50sw2ABsbG/tUdl7QaaeSpDotNUlasLGxsX8nu31cG5baZd0Xnoqoi42Njf1Ydv6v/zrNuCsc5htzb0KFjY2N/Vx2HrTyAzF5m6FNJ9o7vzmyg42Njf1w9mZa+yM17WGg9srLZ2JjY2MfxG6n2/6e35eH2rZum2tgY2Njn8Fuy0b7ZvCsSDQLci/niY2NjX0EexZONpNrWxH75sEXn7GxsbEPYuel/9mxmDZRaRsDs+YENjY29kns2fGXJHXJJ9QGvHyGL69gY2NjH8ROxl2t2faQzaypUHRCsLGxsY9g7w/W5ElFDphdL9IqbGxs7EPZm0M5m0nsW8v1sR5sbGzsg9h3/Upv27RtCrEpRUWBFhsbG/vh7FmRPT9Mk49Zsam9ExsbG/s8dpsktI9uG8NtS2CWqGBjY2Ofys5fc1frt12+djO+mTM2Njb2cey8DJT8Vd64Td6ybyF/tABsbGzsx7Lbn/6zA5d5+MzDUrIB2NjY2Key2zFrr7at3NkG3EzFxsbGfmP2rBF7b6qQ78ks8fjiW2xsbOyD2LMwkAPyNkPeTsjn1qZJ2NjY2M9l5wci8wZt2zCYhbRVAMPGxsY+jr0JDJtyUp7ezFIXbGxsbOxZA7U9+rPpY+RNBWxsbGzsWTkpD0554ak9jvOy3YuNjY19EDsp8cyO6bQLlzcb2kOc2NjY2KeyZ43eFpY/Id+MVXsAGxsb+wT2H7VItalbPu0JAAAAAElFTkSuQmCC" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADKUlEQVR42u3aW46rQAwFwOx/07m/I11Bjm0iBVP9NSKEdDXSWH68XvF6/1lHn57ff3TP+ZV8b69vLGxsbOybsN+n6/9H54Cj5xxdyQ8ref7RPdjY2Nhb2eeBIT+O803nT8tDXe8J2NjY2E9mJ8nJtenHVQeNjY2NjV3d6LVH0ytdYWNjYz+HnRdrqkEubzbkpaJqiQobGxt7N7vaTP3lv7/S38bGxsb+Yfa7tZLjuKrxUA1R0f6xsbGxF7GrQWLSoO0lOb30I0qNsLGxsVewey3epIjfK/Hnha38lUQdCWxsbOxF7OTLyVaSlkAvwcgD6uGrwsbGxl7NriITzDxA5uEzCXXY2NjYm9j5TZPAk6dAvdZyr+CFjY2NvYN9VSt3cnDzpKWaSmFjY2NvYufpQSEexu3YJMglv1vdCTY2NvYm9qSxOmm+5s9M3li5wISNjY39MHY1IeklLb3pmuYEDjY2NvYidtKO/V65vxrGqqHuw66wsbGxV7OrpZw8CakmElE9LD4mbGxs7H3s3raqm66GnyQQVsPYYVEJGxsbexG72kx9F1f1W1V83q7AxsbG3se+Kg3Im7Lz1GVS3sLGxsbex67+2OSHJ8M9k+vY2NjYT2Dnpf9CqBgHnq+8DGxsbOx17PKwy6SrPAb39nZYVMLGxsa+OTv5f95LHvIAM0kzejvHxsbG3sTupRZJSzgfrOmN3VSb0x/iNjY2NvZt2XkhKWnc9pKZapoxH+vBxsbG3sTOA1jeSMiHe5Kjrw4VJWESGxsbezc7L/pUU5TkCKqpRRJQC1U0bGxs7Buyk4LOtUnLZWM3rWYGNjY29j52Nf3Im7K9oNJrIZRLXdjY2NiL2NXBmupITTV1mYMLqQs2Njb2Cva7uObs6oHmr6RwNNjY2NiL2NVhmkmAqV6ZHNzrqoWNjY19E3avyN4Lab1UZ54aYWNjYz+BXW3o9qJDtWE8j8kfSkvY2NjYD2Mn4WE+WDMPotE4ETY2NvYj2flAZK9sdFWj4iupCDY2NvbPsycB5vxQ5s2D8ySkNySEjY2NvYk9Kc1MEo9eCam69VHHGxsbG/vX2f8AIY8cX2MG/BMAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
