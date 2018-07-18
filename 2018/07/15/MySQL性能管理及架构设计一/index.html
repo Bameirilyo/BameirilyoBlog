@@ -30,9 +30,10 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/1.png">
 <meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/MyISAM.png">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/MyISAM适用场景.png">
 <meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/InnoDB.png">
 <meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/存储引擎对比.png">
-<meta property="og:updated_time" content="2018-07-18T12:31:53.252Z">
+<meta property="og:updated_time" content="2018-07-18T12:36:30.332Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL性能管理及架构设计一">
 <meta name="twitter:description" content="一、什么影响了数据库查询速度1.1 影响数据库查询速度的四个因素​    sql查询速度、服务器硬件、网卡流量、磁盘IO 1.2 风险分析 QPS：Queries Per Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。   TPS：是TransactionsPerSecond的缩写，也就是事务数/秒。它是软件测试">
@@ -305,6 +306,7 @@
 <li>MySQL的存储引擎是针对表的，不是针对库的。也就是说在一个数据库中可以使用不同的存储引擎。但是不建议这样做。</li>
 </ol>
 <h2 id="2-3-InnoDB存储引擎"><a href="#2-3-InnoDB存储引擎" class="headerlink" title="2.3 InnoDB存储引擎"></a>2.3 InnoDB存储引擎</h2><p><img src="/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/MyISAM.png" alt="img"></p>
+<p><img src="/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/MyISAM适用场景.png" alt="img"></p>
 <p>​    <code>MySQL5.5</code>及之后版本默认的存储引擎：<code>InnoDB</code>。</p>
 <p><img src="/BameirilyoBlog/2018/07/15/MySQL性能管理及架构设计一/InnoDB.png" alt="img"></p>
 <h3 id="2-3-1-InnoDB使用表空间进行数据存储。"><a href="#2-3-1-InnoDB使用表空间进行数据存储。" class="headerlink" title="2.3.1 InnoDB使用表空间进行数据存储。"></a>2.3.1 InnoDB使用表空间进行数据存储。</h3><p><code>show variables like &#39;innodb_file_per_table</code></p>
@@ -559,7 +561,7 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计(二)/" id="post-prev" class="post-nav-link">
+      <a href="/BameirilyoBlog/2018/07/16/MySQL性能管理及架构设计二/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 上一篇</div>
         <h4 class="title">MySQL性能管理及架构设计(二)</h4>
       </a>
