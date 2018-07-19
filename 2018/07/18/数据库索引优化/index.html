@@ -20,26 +20,23 @@
     
     
     <meta name="keywords" content="数据库">
-    <meta name="description" content="三、数据库索引优化（非常重要）一、数据库索引优化1.1 两种主要数据结构：B-tree和Hash1.1.1 B-tree结构​     B-tree索引的限制：​     1.1.2 Hash结构​     Hash索引的限制： Hash索引必须进行二次查找 Hash索引无法用于排序 Hash索引不支持部分索引查找也不支持范围查找  Hash索引中Hash码的计算可能存在Hash冲突，不适合重复值">
+    <meta name="description" content="一、数据库索引优化1.1 两种主要数据结构：B-tree和Hash1.1.1 B-tree结构 以B+树的结构存储数据    B-tree索引能够加快数据的查询速度 B-tree索引更适合进行范围查找  在什么情况下可以用的B树索引 全值匹配的查询 order_sn=’9876432119900’  匹配最左前缀的查询  匹配列前缀查询 order_sn like ‘9876%’  匹配范围值的查">
 <meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库索引优化">
 <meta property="og:url" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/index.html">
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
-<meta property="og:description" content="三、数据库索引优化（非常重要）一、数据库索引优化1.1 两种主要数据结构：B-tree和Hash1.1.1 B-tree结构​     B-tree索引的限制：​     1.1.2 Hash结构​     Hash索引的限制： Hash索引必须进行二次查找 Hash索引无法用于排序 Hash索引不支持部分索引查找也不支持范围查找  Hash索引中Hash码的计算可能存在Hash冲突，不适合重复值">
+<meta property="og:description" content="一、数据库索引优化1.1 两种主要数据结构：B-tree和Hash1.1.1 B-tree结构 以B+树的结构存储数据    B-tree索引能够加快数据的查询速度 B-tree索引更适合进行范围查找  在什么情况下可以用的B树索引 全值匹配的查询 order_sn=’9876432119900’  匹配最左前缀的查询  匹配列前缀查询 order_sn like ‘9876%’  匹配范围值的查">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
-<meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
-<meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
-<meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
-<meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
-<meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
-<meta property="og:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
-<meta property="og:updated_time" content="2018-07-18T13:26:19.854Z">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/B+树.png">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/策略1.png">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/12.png">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/123.png">
+<meta property="og:updated_time" content="2018-07-19T02:35:40.504Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库索引优化">
-<meta name="twitter:description" content="三、数据库索引优化（非常重要）一、数据库索引优化1.1 两种主要数据结构：B-tree和Hash1.1.1 B-tree结构​     B-tree索引的限制：​     1.1.2 Hash结构​     Hash索引的限制： Hash索引必须进行二次查找 Hash索引无法用于排序 Hash索引不支持部分索引查找也不支持范围查找  Hash索引中Hash码的计算可能存在Hash冲突，不适合重复值">
-<meta name="twitter:image" content="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg">
+<meta name="twitter:description" content="一、数据库索引优化1.1 两种主要数据结构：B-tree和Hash1.1.1 B-tree结构 以B+树的结构存储数据    B-tree索引能够加快数据的查询速度 B-tree索引更适合进行范围查找  在什么情况下可以用的B树索引 全值匹配的查询 order_sn=’9876432119900’  匹配最左前缀的查询  匹配列前缀查询 order_sn like ‘9876%’  匹配范围值的查">
+<meta name="twitter:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/07/18/数据库索引优化/B+树.png">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
     
@@ -174,7 +171,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三、数据库索引优化（非常重要）"><span class="post-toc-text">三、数据库索引优化（非常重要）</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、数据库索引优化"><span class="post-toc-text">一、数据库索引优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-1-两种主要数据结构：B-tree和Hash"><span class="post-toc-text">1.1 两种主要数据结构：B-tree和Hash</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-1-B-tree结构"><span class="post-toc-text">1.1.1 B-tree结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#B-tree索引的限制："><span class="post-toc-text">B-tree索引的限制：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-2-Hash结构"><span class="post-toc-text">1.1.2 Hash结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Hash索引的限制："><span class="post-toc-text">Hash索引的限制：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-3-MySQL常见索引和各种索引区别"><span class="post-toc-text">1.1.3 MySQL常见索引和各种索引区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-2-使用索引好处和索引缺陷"><span class="post-toc-text">1.2 使用索引好处和索引缺陷</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-1-为什么要使用索引"><span class="post-toc-text">1.2.1 为什么要使用索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-2-索引不是越多越好"><span class="post-toc-text">1.2.2 索引不是越多越好</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-3-索引优化策略"><span class="post-toc-text">1.3 索引优化策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-1-索引列上不能使用表达式和函数"><span class="post-toc-text">1.3.1 索引列上不能使用表达式和函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-2-前缀索引和索引列的选择性"><span class="post-toc-text">1.3.2 前缀索引和索引列的选择性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#如何选择索引列的顺序："><span class="post-toc-text">如何选择索引列的顺序：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-3-组合-联合索引策略"><span class="post-toc-text">1.3.3 组合/联合索引策略</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-4-覆盖索引策略"><span class="post-toc-text">1.3.4 覆盖索引策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#优点"><span class="post-toc-text">优点:</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#无法使用覆盖索引的情况："><span class="post-toc-text">无法使用覆盖索引的情况：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-5-SQL索引优化总结口诀（套路重点）"><span class="post-toc-text">1.3.5 SQL索引优化总结口诀（套路重点）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-4-使用索引来优化查询"><span class="post-toc-text">1.4 使用索引来优化查询</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-4-1-利用索引排序"><span class="post-toc-text">1.4.1 利用索引排序</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-5-索引的维护和优化"><span class="post-toc-text">1.5 索引的维护和优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-5-1-删除重复索引"><span class="post-toc-text">1.5.1 删除重复索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-5-2-删除冗余索引"><span class="post-toc-text">1.5.2 删除冗余索引</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、数据库索引优化"><span class="post-toc-text">一、数据库索引优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-1-两种主要数据结构：B-tree和Hash"><span class="post-toc-text">1.1 两种主要数据结构：B-tree和Hash</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-1-B-tree结构"><span class="post-toc-text">1.1.1 B-tree结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#在什么情况下可以用的B树索引"><span class="post-toc-text">在什么情况下可以用的B树索引</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#B-tree索引的使用限制："><span class="post-toc-text">B-tree索引的使用限制：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-2-Hash结构"><span class="post-toc-text">1.1.2 Hash结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Hash索引的特点："><span class="post-toc-text">Hash索引的特点：</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Hash索引的限制："><span class="post-toc-text">Hash索引的限制：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-3-MySQL常见索引和各种索引区别"><span class="post-toc-text">1.1.3 MySQL常见索引和各种索引区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-2-使用索引好处和索引缺陷"><span class="post-toc-text">1.2 使用索引好处和索引缺陷</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-1-为什么要使用索引"><span class="post-toc-text">1.2.1 为什么要使用索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-2-索引不是越多越好"><span class="post-toc-text">1.2.2 索引不是越多越好</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-3-索引优化策略"><span class="post-toc-text">1.3 索引优化策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-1-索引列上不能使用表达式和函数"><span class="post-toc-text">1.3.1 索引列上不能使用表达式和函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-2-前缀索引和索引列的选择性"><span class="post-toc-text">1.3.2 前缀索引和索引列的选择性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#如何选择索引列的顺序："><span class="post-toc-text">如何选择索引列的顺序：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-3-组合-联合索引策略"><span class="post-toc-text">1.3.3 组合/联合索引策略</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-4-覆盖索引策略"><span class="post-toc-text">1.3.4 覆盖索引策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#优点"><span class="post-toc-text">优点:</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#无法使用覆盖索引的情况："><span class="post-toc-text">无法使用覆盖索引的情况：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-5-SQL索引优化总结口诀（套路重点）"><span class="post-toc-text">1.3.5 SQL索引优化总结口诀（套路重点）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-4-使用索引来优化查询"><span class="post-toc-text">1.4 使用索引来优化查询</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-4-1-利用索引排序"><span class="post-toc-text">1.4.1 利用索引排序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-4-2-利用索引优化锁"><span class="post-toc-text">1.4.2 利用索引优化锁</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-5-索引的维护和优化"><span class="post-toc-text">1.5 索引的维护和优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-5-1-删除重复索引"><span class="post-toc-text">1.5.1 删除重复索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-5-2-删除冗余索引"><span class="post-toc-text">1.5.2 删除冗余索引</span></a></li></ol></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -200,10 +197,43 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="三、数据库索引优化（非常重要）"><a href="#三、数据库索引优化（非常重要）" class="headerlink" title="三、数据库索引优化（非常重要）"></a>三、数据库索引优化（<strong>非常重要</strong>）</h1><h1 id="一、数据库索引优化"><a href="#一、数据库索引优化" class="headerlink" title="一、数据库索引优化"></a>一、数据库索引优化</h1><h2 id="1-1-两种主要数据结构：B-tree和Hash"><a href="#1-1-两种主要数据结构：B-tree和Hash" class="headerlink" title="1.1 两种主要数据结构：B-tree和Hash"></a>1.1 两种主要数据结构：B-tree和Hash</h2><h3 id="1-1-1-B-tree结构"><a href="#1-1-1-B-tree结构" class="headerlink" title="1.1.1 B-tree结构"></a>1.1.1 B-tree结构</h3><p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
-<h4 id="B-tree索引的限制："><a href="#B-tree索引的限制：" class="headerlink" title="B-tree索引的限制："></a><strong>B-tree索引的限制：</strong></h4><p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
-<h3 id="1-1-2-Hash结构"><a href="#1-1-2-Hash结构" class="headerlink" title="1.1.2 Hash结构"></a>1.1.2 Hash结构</h3><p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
-<h4 id="Hash索引的限制："><a href="#Hash索引的限制：" class="headerlink" title="Hash索引的限制："></a><strong>Hash索引的限制：</strong></h4><ul>
+            <h1 id="一、数据库索引优化"><a href="#一、数据库索引优化" class="headerlink" title="一、数据库索引优化"></a>一、数据库索引优化</h1><h2 id="1-1-两种主要数据结构：B-tree和Hash"><a href="#1-1-两种主要数据结构：B-tree和Hash" class="headerlink" title="1.1 两种主要数据结构：B-tree和Hash"></a>1.1 两种主要数据结构：B-tree和Hash</h2><h3 id="1-1-1-B-tree结构"><a href="#1-1-1-B-tree结构" class="headerlink" title="1.1.1 B-tree结构"></a>1.1.1 B-tree结构</h3><ul>
+<li>以B+树的结构存储数据</li>
+</ul>
+<p><img src="/BameirilyoBlog/2018/07/18/数据库索引优化/B+树.png" alt="img"></p>
+<ul>
+<li>B-tree索引能够加快数据的查询速度</li>
+<li>B-tree索引更适合进行范围查找</li>
+</ul>
+<h4 id="在什么情况下可以用的B树索引"><a href="#在什么情况下可以用的B树索引" class="headerlink" title="在什么情况下可以用的B树索引"></a>在什么情况下可以用的B树索引</h4><ul>
+<li><p>全值匹配的查询</p>
+<p>order_sn=’9876432119900’</p>
+</li>
+<li><p>匹配最左前缀的查询</p>
+</li>
+<li><p>匹配列前缀查询</p>
+<p>order_sn like ‘9876%’</p>
+</li>
+<li><p>匹配范围值的查询</p>
+<p>order_sn &gt; ‘9876432119900’ </p>
+<p>and order_sn &lt; ‘9876432119999’</p>
+</li>
+<li><p>精确匹配左前列并范围匹配另外一列</p>
+</li>
+<li><p>只访问索引的查询</p>
+</li>
+</ul>
+<h4 id="B-tree索引的使用限制："><a href="#B-tree索引的使用限制：" class="headerlink" title="B-tree索引的使用限制："></a><strong>B-tree索引的使用限制：</strong></h4><ul>
+<li>如果不是按照索引最左列开始查找，则无法使用索引</li>
+<li>使用索引时不能跳过索引中的列</li>
+<li>Not in 和 &lt; &gt;操作无法使用索引</li>
+<li>如果查询中由某个列的范围查询，则其右边所有列无法使用索引</li>
+</ul>
+<h3 id="1-1-2-Hash结构"><a href="#1-1-2-Hash结构" class="headerlink" title="1.1.2 Hash结构"></a>1.1.2 Hash结构</h3><h5 id="Hash索引的特点："><a href="#Hash索引的特点：" class="headerlink" title="Hash索引的特点："></a>Hash索引的特点：</h5><ul>
+<li>Hash索引是基于Hash表实现的，只有查询条件精确匹配Hash索引中的所有列时，才能够使用到hash索引。</li>
+<li>对于Hash所以中的所有列，存储引擎都会为每一行计算一个Hash码，Hash所以中存储的就是Hash码。</li>
+</ul>
+<h4 id="Hash索引的限制："><a href="#Hash索引的限制：" class="headerlink" title="Hash索引的限制："></a>Hash索引的限制：</h4><ul>
 <li>Hash索引必须进行二次查找</li>
 <li>Hash索引无法用于排序</li>
 <li>Hash索引<strong>不支持部分索引查找也不支持范围查找</strong> </li>
@@ -225,13 +255,12 @@
 <blockquote>
 <p>索引就好比一本书的目录，它会让你更快的找到内容，显然目录（索引）并不是越多越好，假如这本书1000页，而有500页是目录，它当然效率低，目录是要占纸张的,而索引是要占磁盘空间的。</p>
 </blockquote>
-<h2 id="1-3-索引优化策略"><a href="#1-3-索引优化策略" class="headerlink" title="1.3 索引优化策略"></a>1.3 索引优化策略</h2><h3 id="1-3-1-索引列上不能使用表达式和函数"><a href="#1-3-1-索引列上不能使用表达式和函数" class="headerlink" title="1.3.1 索引列上不能使用表达式和函数"></a>1.3.1 索引列上不能使用表达式和函数</h3><p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
+<h2 id="1-3-索引优化策略"><a href="#1-3-索引优化策略" class="headerlink" title="1.3 索引优化策略"></a>1.3 索引优化策略</h2><h3 id="1-3-1-索引列上不能使用表达式和函数"><a href="#1-3-1-索引列上不能使用表达式和函数" class="headerlink" title="1.3.1 索引列上不能使用表达式和函数"></a>1.3.1 索引列上不能使用表达式和函数</h3><p>​    <img src="/BameirilyoBlog/2018/07/18/数据库索引优化/策略1.png" alt="img"></p>
 <h3 id="1-3-2-前缀索引和索引列的选择性"><a href="#1-3-2-前缀索引和索引列的选择性" class="headerlink" title="1.3.2 前缀索引和索引列的选择性"></a>1.3.2 前缀索引和索引列的选择性</h3><blockquote>
 <p><code>Innodb</code>索引列最大宽度为<code>667</code>个字节(<code>utf-8</code> 差不多<code>255</code>个字符),<code>MyIsam</code>索引类宽度最大为<code>1000</code>个字节，于是出现前缀索引，索引的选择性。</p>
 </blockquote>
 <p>​    对于列的值较长，比如<code>BLOB、TEXT、VARCHAR</code>，就必须建立前缀索引，即将值的前一部分作为索引。这样既可以节约空间，又可以提高查询效率。但无法使用前缀索引做 <code>ORDER BY</code> 和 <code>GROUP BY</code>，也无法使用前缀索引做覆盖扫描。</p>
-<p>​    <strong>语法：</strong> <code>ALTER TABLE table_name ADD KEY(column_name(prefix_length))</code></p>
-<p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
+<p>​    <strong>语法：</strong> <code>CREATE INDEX index_name ON table_name (column_name(n))</code></p>
 <h4 id="如何选择索引列的顺序："><a href="#如何选择索引列的顺序：" class="headerlink" title="如何选择索引列的顺序："></a><strong>如何选择索引列的顺序：</strong></h4><p>​    1、经常会被使用到的列优先（<strong>选择性</strong>差的列不适合，如性别，<strong>查询优化器</strong>可能会认为全表扫描性能更好）；</p>
 <p>​    2、<strong>选择性高</strong>的列优先；</p>
 <p>​    3、宽度小的列优先（一页中存储的索引越多，降低<code>I/O</code>，查找越快）；</p>
@@ -250,11 +279,15 @@
 <p>​    3、当无法使用索引列，增大<code>max_length_for_sort_data</code>参数的设置+增大<code>sort_buffer_size</code>参数的设置；</p>
 <p>​    4、如果最左列使用了范围，则排序会失效；</p>
 <p>​    5、<code>where</code> <strong>高于</strong><code>having</code>，能写在<code>where</code>限定的条件就不要去<code>having</code>去限定了</p>
-<h2 id="1-5-索引的维护和优化"><a href="#1-5-索引的维护和优化" class="headerlink" title="1.5 索引的维护和优化"></a>1.5 索引的维护和优化</h2><h3 id="1-5-1-删除重复索引"><a href="#1-5-1-删除重复索引" class="headerlink" title="1.5.1 删除重复索引"></a>1.5.1 删除重复索引</h3><p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
+<h3 id="1-4-2-利用索引优化锁"><a href="#1-4-2-利用索引优化锁" class="headerlink" title="1.4.2 利用索引优化锁"></a>1.4.2 利用索引优化锁</h3><ul>
+<li>索引可以减少锁定的行数</li>
+<li>索引可以加快处理速度，同时加快锁的释放</li>
+</ul>
+<h2 id="1-5-索引的维护和优化"><a href="#1-5-索引的维护和优化" class="headerlink" title="1.5 索引的维护和优化"></a>1.5 索引的维护和优化</h2><h3 id="1-5-1-删除重复索引"><a href="#1-5-1-删除重复索引" class="headerlink" title="1.5.1 删除重复索引"></a>1.5.1 删除重复索引</h3><p><img src="/BameirilyoBlog/2018/07/18/数据库索引优化/12.png" alt="img"></p>
 <p>​    <strong>注：</strong>主键约束相当于(唯一约束 + 非空约束)</p>
 <p>​    一张表中最多有一个主键约束,如果设置多个主键,就会出现如下提示：<code>Multiple primary key defined!!!</code></p>
-<h3 id="1-5-2-删除冗余索引"><a href="#1-5-2-删除冗余索引" class="headerlink" title="1.5.2 删除冗余索引"></a>1.5.2 删除冗余索引</h3><p>​    <img src="https://static.segmentfault.com/v-5b484b1e/global/img/squares.svg" alt="clipboard.png"></p>
-<p>​    <strong>检查工具：**</strong>pt-duplicate-key-checker**</p>
+<h3 id="1-5-2-删除冗余索引"><a href="#1-5-2-删除冗余索引" class="headerlink" title="1.5.2 删除冗余索引"></a>1.5.2 删除冗余索引</h3><p>​    <img src="/BameirilyoBlog/2018/07/18/数据库索引优化/123.png" alt="img"></p>
+<p>​    <strong>检查工具：</strong>pt-duplicate-key-checker</p>
 
         </div>
 
