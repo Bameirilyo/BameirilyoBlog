@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-07-28T02:23:08.491Z</updated>
+  <updated>2018-07-28T02:27:27.119Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL-184部门工资最高的员工</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/07/28/SQL-184%E9%83%A8%E9%97%A8%E5%B7%A5%E8%B5%84%E6%9C%80%E9%AB%98%E7%9A%84%E5%91%98%E5%B7%A5/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/07/28/SQL-184部门工资最高的员工/</id>
+    <published>2018-07-28T02:24:32.000Z</published>
+    <updated>2018-07-28T02:27:27.119Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>Employee</code> 表包含所有员工信息，每个员工有其对应的 Id, salary 和 department Id。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+----+-------+--------+--------------+</span><br><span class="line">| Id | Name  | Salary | DepartmentId |</span><br><span class="line">+----+-------+--------+--------------+</span><br><span class="line">| 1  | Joe   | 70000  | 1            |</span><br><span class="line">| 2  | Henry | 80000  | 2            |</span><br><span class="line">| 3  | Sam   | 60000  | 2            |</span><br><span class="line">| 4  | Max   | 90000  | 1            |</span><br><span class="line">+----+-------+--------+--------------+</span><br></pre></td></tr></table></figure><p><code>Department</code> 表包含公司所有部门的信息。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+----+----------+</span><br><span class="line">| Id | Name     |</span><br><span class="line">+----+----------+</span><br><span class="line">| 1  | IT       |</span><br><span class="line">| 2  | Sales    |</span><br><span class="line">+----+----------+</span><br></pre></td></tr></table></figure><p>编写一个 SQL 查询，找出每个部门工资最高的员工。例如，根据上述给定的表格，Max 在 IT 部门有最高工资，Henry 在 Sales 部门有最高工资。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+------------+----------+--------+</span><br><span class="line">| Department | Employee | Salary |</span><br><span class="line">+------------+----------+--------+</span><br><span class="line">| IT         | Max      | 90000  |</span><br><span class="line">| Sales      | Henry    | 80000  |</span><br><span class="line">+------------+----------+--------+</span><br></pre></td></tr></table></figure><hr><p>解法一：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> d.Name <span class="keyword">AS</span> Department,</span><br><span class="line">       e.Name   <span class="keyword">AS</span> Employee,</span><br><span class="line">       e.Salary <span class="keyword">AS</span> Salary</span><br><span class="line"><span class="keyword">FROM</span> employee e, department d</span><br><span class="line"><span class="keyword">WHERE</span> e.DepartmentId = d.Id</span><br><span class="line"><span class="keyword">AND</span> (e.DepartmentId, e.Salary) <span class="keyword">IN</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> e2.DepartmentId,<span class="keyword">max</span>(e2.Salary)</span><br><span class="line">    <span class="keyword">FROM</span> employee e2</span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> e2.DepartmentId)</span><br></pre></td></tr></table></figure><p>解法二：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> d.Name <span class="keyword">AS</span> Department,e.Name <span class="keyword">AS</span> Employee ,e.Salary </span><br><span class="line"><span class="keyword">FROM</span> Employee <span class="keyword">AS</span> e</span><br><span class="line"><span class="keyword">JOIN</span> Department <span class="keyword">AS</span> d</span><br><span class="line"><span class="keyword">ON</span> e.DepartmentId  = d.Id </span><br><span class="line"><span class="keyword">WHERE</span> e.Salary = (<span class="keyword">SELECT</span> <span class="keyword">MAX</span>(Salary) <span class="keyword">FROM</span> Employee <span class="keyword">where</span> DepartmentId=d.Id)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;code&gt;Employee&lt;/code&gt; 表包含所有员工信息，每个员工有其对应的 Id, salary 和 department Id。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title>SQL-178分数排名</title>
@@ -184,31 +208,6 @@
   </entry>
   
   <entry>
-    <title>VARCHAR和CHAR对比</title>
-    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/07/14/VARCHAR%E5%92%8CCHAR%E5%AF%B9%E6%AF%94/"/>
-    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/07/14/VARCHAR和CHAR对比/</id>
-    <published>2018-07-14T07:08:19.000Z</published>
-    <updated>2018-07-16T08:45:03.064Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="一、VARCHAR类型"><a href="#一、VARCHAR类型" class="headerlink" title="一、VARCHAR类型"></a>一、VARCHAR类型</h1><h2 id="1-存储特点"><a href="#1-存储特点" class="headerlink" title="1.存储特点"></a>1.存储特点</h2><ol><li>varchar用于存储变长字符串，只占用必要的存储空间</li><li>列的最大长度小于255则只占用一个额外字节用于记录字符串长度</li><li>列的最大长度大于255则要占用两个额外字节用于记录字符串长度</li></ol><h2 id="2-VARCHAR长度的选择问题"><a href="#2-VARCHAR长度的选择问题" class="headerlink" title="2.VARCHAR长度的选择问题"></a>2.VARCHAR长度的选择问题</h2><ol><li>使用最小的符合需求的长度</li><li>varchar(5)和varchar(200)存储“MySQL”字符串性能不同</li></ol><h2 id="3-VARCHAR的适用场景"><a href="#3-VARCHAR的适用场景" class="headerlink" title="3.VARCHAR的适用场景"></a>3.VARCHAR的适用场景</h2><ol><li>字符串列的最大长度比平均长度大很多</li><li>字符串列很少被更新</li><li>使用了多字节字符集存储字符串</li></ol><h1 id="二、CHAR类型"><a href="#二、CHAR类型" class="headerlink" title="二、CHAR类型"></a>二、CHAR类型</h1><h2 id="1-存储特点-1"><a href="#1-存储特点-1" class="headerlink" title="1. 存储特点"></a>1. 存储特点</h2><ol><li>CHAR类型是定长的</li><li>字符串存储在CHAR类型的列中会删除末尾的空格</li><li>CHAR类型的最大宽度为255</li></ol><h2 id="2-CHAR的适用场景"><a href="#2-CHAR的适用场景" class="headerlink" title="2. CHAR的适用场景"></a>2. CHAR的适用场景</h2><ol><li>CHAR类型是和存储数据长度近似的值（MD5值、手机号、身份证号）</li><li>CHAR类型适合存储短字符串</li><li>存储经常更新的字符串列</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;一、VARCHAR类型&quot;&gt;&lt;a href=&quot;#一、VARCHAR类型&quot; class=&quot;headerlink&quot; title=&quot;一、VARCHAR类型&quot;&gt;&lt;/a&gt;一、VARCHAR类型&lt;/h1&gt;&lt;h2 id=&quot;1-存储特点&quot;&gt;&lt;a href=&quot;#1-存储特点&quot; cla
-      
-    
-    </summary>
-    
-      <category term="数据库" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="数据库" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
     <title>MySQL复制</title>
     <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/07/14/MySQL%E5%A4%8D%E5%88%B6/"/>
     <id>https://bameirilyo.github.io/BameirilyoBlog/2018/07/14/MySQL复制/</id>
@@ -224,6 +223,31 @@
         &lt;h1 id=&quot;一、复制解决了什么&quot;&gt;&lt;a href=&quot;#一、复制解决了什么&quot; class=&quot;headerlink&quot; title=&quot;一、复制解决了什么&quot;&gt;&lt;/a&gt;一、复制解决了什么&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;实现在不同服务器上的数据分布&lt;/p&gt;
 &lt;p&gt;利用二进制日志增量进行
+      
+    
+    </summary>
+    
+      <category term="数据库" scheme="https://bameirilyo.github.io/BameirilyoBlog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="数据库" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VARCHAR和CHAR对比</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/07/14/VARCHAR%E5%92%8CCHAR%E5%AF%B9%E6%AF%94/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/07/14/VARCHAR和CHAR对比/</id>
+    <published>2018-07-14T07:08:19.000Z</published>
+    <updated>2018-07-16T08:45:03.064Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一、VARCHAR类型"><a href="#一、VARCHAR类型" class="headerlink" title="一、VARCHAR类型"></a>一、VARCHAR类型</h1><h2 id="1-存储特点"><a href="#1-存储特点" class="headerlink" title="1.存储特点"></a>1.存储特点</h2><ol><li>varchar用于存储变长字符串，只占用必要的存储空间</li><li>列的最大长度小于255则只占用一个额外字节用于记录字符串长度</li><li>列的最大长度大于255则要占用两个额外字节用于记录字符串长度</li></ol><h2 id="2-VARCHAR长度的选择问题"><a href="#2-VARCHAR长度的选择问题" class="headerlink" title="2.VARCHAR长度的选择问题"></a>2.VARCHAR长度的选择问题</h2><ol><li>使用最小的符合需求的长度</li><li>varchar(5)和varchar(200)存储“MySQL”字符串性能不同</li></ol><h2 id="3-VARCHAR的适用场景"><a href="#3-VARCHAR的适用场景" class="headerlink" title="3.VARCHAR的适用场景"></a>3.VARCHAR的适用场景</h2><ol><li>字符串列的最大长度比平均长度大很多</li><li>字符串列很少被更新</li><li>使用了多字节字符集存储字符串</li></ol><h1 id="二、CHAR类型"><a href="#二、CHAR类型" class="headerlink" title="二、CHAR类型"></a>二、CHAR类型</h1><h2 id="1-存储特点-1"><a href="#1-存储特点-1" class="headerlink" title="1. 存储特点"></a>1. 存储特点</h2><ol><li>CHAR类型是定长的</li><li>字符串存储在CHAR类型的列中会删除末尾的空格</li><li>CHAR类型的最大宽度为255</li></ol><h2 id="2-CHAR的适用场景"><a href="#2-CHAR的适用场景" class="headerlink" title="2. CHAR的适用场景"></a>2. CHAR的适用场景</h2><ol><li>CHAR类型是和存储数据长度近似的值（MD5值、手机号、身份证号）</li><li>CHAR类型适合存储短字符串</li><li>存储经常更新的字符串列</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;一、VARCHAR类型&quot;&gt;&lt;a href=&quot;#一、VARCHAR类型&quot; class=&quot;headerlink&quot; title=&quot;一、VARCHAR类型&quot;&gt;&lt;/a&gt;一、VARCHAR类型&lt;/h1&gt;&lt;h2 id=&quot;1-存储特点&quot;&gt;&lt;a href=&quot;#1-存储特点&quot; cla
       
     
     </summary>
