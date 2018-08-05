@@ -28,14 +28,14 @@
 <meta property="og:site_name" content="Bameirilyo&#39;s Blog">
 <meta property="og:description" content="一般原理：发生拥塞控制的原因：资源(带宽、交换节点的缓存、处理机)的需求&amp;gt;可用资源。 作用：拥塞控制就是为了防止过多的数据注入到网络中，这样可以使网络中的路由器或者链路不至于过载。拥塞控制要做的都有一个前提：就是网络能够承受现有的网络负荷。 对比流量控制：拥塞控制是一个全局的过程，涉及到所有的主机、路由器、以及降低网络相关的所有因素。流量控制往往指点对点通信量的控制。是端对端的问题。 ​">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://img-blog.csdn.net/20160909153411895?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
-<meta property="og:image" content="https://img-blog.csdn.net/20160909153345254?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
-<meta property="og:image" content="https://img-blog.csdn.net/20160909153222894?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
-<meta property="og:updated_time" content="2018-05-01T14:40:00.390Z">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/01/TCP的拥塞控制/慢开始和拥塞避免算法的实现举例.png">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/01/TCP的拥塞控制/快重传示意图.png">
+<meta property="og:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/01/TCP的拥塞控制/从连续收到三个重复的确认转入拥塞避免.png">
+<meta property="og:updated_time" content="2018-08-05T02:22:25.618Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP的拥塞控制">
 <meta name="twitter:description" content="一般原理：发生拥塞控制的原因：资源(带宽、交换节点的缓存、处理机)的需求&amp;gt;可用资源。 作用：拥塞控制就是为了防止过多的数据注入到网络中，这样可以使网络中的路由器或者链路不至于过载。拥塞控制要做的都有一个前提：就是网络能够承受现有的网络负荷。 对比流量控制：拥塞控制是一个全局的过程，涉及到所有的主机、路由器、以及降低网络相关的所有因素。流量控制往往指点对点通信量的控制。是端对端的问题。 ​">
-<meta name="twitter:image" content="https://img-blog.csdn.net/20160909153411895?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta name="twitter:image" content="https://bameirilyo.github.io/BameirilyoBlog/2018/05/01/TCP的拥塞控制/慢开始和拥塞避免算法的实现举例.png">
     
         <link rel="alternate" type="application/atom+xml" title="Bameirilyo&#39;s Blog" href="/BameirilyoBlog/atom.xml">
     
@@ -208,7 +208,7 @@
 <p>  实例：1.TCP连接进行初始化的时候，cwnd=1,ssthresh=16。</p>
 <p>​             2.在慢启动算法开始时，cwnd的初始值是1，每次发送方收到一个ACK拥塞窗口就增加1，当ssthresh =cwnd时，就启动拥塞控制算法，拥塞窗口按照规律增长，</p>
 <p>​             3.当cwnd=24时，网络出现超时，发送方收不到确认ACK，此时设置ssthresh=12,(二分之一cwnd),设置cwnd=1,然后开始慢启动算法，当cwnd=ssthresh=12,慢启动算法变为拥塞控制算法，cwnd按照线性的速度进行增长。 </p>
-<p><img src="https://img-blog.csdn.net/20160909153411895?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img">     </p>
+<p><img src="/BameirilyoBlog/2018/05/01/TCP的拥塞控制/慢开始和拥塞避免算法的实现举例.png" alt="img">     </p>
 <p>AIMD(加法增大乘法减小)</p>
 <ol>
 <li>乘法减小：无论在慢启动阶段还是在拥塞控制阶段，只要网络出现超时，就是将cwnd置为1，ssthresh置为cwnd的一半，然后开始执行慢启动算法（cwnd&lt;ssthresh）。</li>
@@ -217,7 +217,7 @@
 <p>​       这两个结合起来就是AIMD算法，是使用最广泛的算法。拥塞避免算法不能够完全的避免网络拥塞，通过控制拥塞窗口的大小只能使网络不易出现拥塞。</p>
 <p>快重传：</p>
 <p>​      快重传算法要求首先接收方收到一个失序的报文段后就立刻发出重复确认，而不要等待自己发送数据时才进行捎带确认。接收方成功的接受了发送方发送来的M1、M2并且分别给发送了ACK，现在接收方没有收到M3，而接收到了M4，显然接收方不能确认M4，因为M4是失序的报文段。如果根据可靠性传输原理接收方什么都不做，但是按照快速重传算法，在收到M4、M5等报文段的时候，不断重复的向发送方发送M2的ACK,如果接收方一连收到三个重复的ACK,那么发送方不必等待重传计时器到期，由于发送方尽早重传未被确认的报文段。</p>
-<p>!<img src="https://img-blog.csdn.net/20160909153345254?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"> </p>
+<p>!<img src="/BameirilyoBlog/2018/05/01/TCP的拥塞控制/快重传示意图.png" alt="img"> </p>
 <p>​      <strong>快恢复：</strong></p>
 <ol>
 <li>当发送发连续接收到三个重复确认时，就执行乘法减小算法，把慢启动开始门限（ssthresh）减半，但是接下来并不执行慢开始算法。</li>
@@ -225,7 +225,7 @@
 <ol start="2">
 <li>此时不执行慢启动算法，而是把cwnd设置为ssthresh减半后的数值， 然后执行拥塞避免算法，使拥塞窗口缓慢地线性增大。</li>
 </ol>
-<p><img src="https://img-blog.csdn.net/20160909153222894?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img">      </p>
+<p><img src="/BameirilyoBlog/2018/05/01/TCP的拥塞控制/从连续收到三个重复的确认转入拥塞避免.png" alt="img">      </p>
 <p>摘抄自：计算机网络(谢希仁第五版)。</p>
 
         </div>
