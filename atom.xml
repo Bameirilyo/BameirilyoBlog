@@ -6,7 +6,7 @@
   <link href="/BameirilyoBlog/atom.xml" rel="self"/>
   
   <link href="https://bameirilyo.github.io/BameirilyoBlog/"/>
-  <updated>2018-08-24T14:49:35.820Z</updated>
+  <updated>2018-09-08T06:32:00.356Z</updated>
   <id>https://bameirilyo.github.io/BameirilyoBlog/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数组循环右移k位</title>
+    <link href="https://bameirilyo.github.io/BameirilyoBlog/2018/09/08/%E6%95%B0%E7%BB%84%E5%BE%AA%E7%8E%AF%E5%8F%B3%E7%A7%BBk%E4%BD%8D/"/>
+    <id>https://bameirilyo.github.io/BameirilyoBlog/2018/09/08/数组循环右移k位/</id>
+    <published>2018-09-08T06:24:04.000Z</published>
+    <updated>2018-09-08T06:32:00.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>循环右移K位</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">xunhuanyouyi</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">shift_method</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = arr.length-<span class="number">1</span>;</span><br><span class="line">        k = k % n; <span class="comment">//为了防止k&gt;n ,右移K位和右移k%n的结果是一样的</span></span><br><span class="line">        shift_method(arr, <span class="number">0</span>, n-k);</span><br><span class="line">        shift_method(arr, n-k+<span class="number">1</span>, n);</span><br><span class="line">        shift_method(arr, <span class="number">0</span>, n);</span><br><span class="line">        System.out.println(<span class="string">"右移"</span>+ k +<span class="string">"位的结果为："</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : arr) &#123;</span><br><span class="line">            System.out.print(i + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">shift_method</span><span class="params">(<span class="keyword">int</span> array[],<span class="keyword">int</span> begin,<span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp;</span><br><span class="line">        <span class="keyword">while</span> (begin &lt; end) &#123;</span><br><span class="line">            temp = array[begin];</span><br><span class="line">            array[begin] = array[end];</span><br><span class="line">            array[end] = temp;</span><br><span class="line">            begin++;</span><br><span class="line">            end--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;循环右移K位&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;b
+      
+    
+    </summary>
+    
+    
+      <category term="数据结构与算法" scheme="https://bameirilyo.github.io/BameirilyoBlog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>最大不相交区间</title>
